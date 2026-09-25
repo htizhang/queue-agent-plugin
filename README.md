@@ -18,12 +18,25 @@ determines where to start; not every request needs to run both Stages.
 ## Development status
 
 This is a private, standalone repository under incremental design. We will discuss
-and confirm each workflow step before implementing it. The initial repository
-contains the agreed overview and reference material, not an installable Plugin.
+and confirm each workflow step before implementing it. The repository currently
+contains the agreed overview, reference material, and the first shared skill,
+not an installable Plugin.
 
-Detailed workflows, host packaging, and tool integrations are not implemented yet.
+Host packaging and tool integrations are not implemented yet.
 No implementation, experiment data, or credentials from the earlier research
 repository are included.
+
+## Shared skills
+
+- [queue-literature](skills/queue-literature/SKILL.md): source-grounded literature
+  work for Stage 1 modeling and Stage 2 policy design. It adapts selected
+  open-source review guidance, adds queue-specific questions, and uses available
+  host tools rather than requiring a particular search provider.
+
+The skill is source content in this repository. Nothing is installed or
+configured on the user's machine by adding it. See its
+[attribution](skills/queue-literature/NOTICE.md) and
+[behavioral checks](tests/queue-literature/scenarios.md).
 
 ## Documentation
 
