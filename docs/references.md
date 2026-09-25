@@ -22,6 +22,16 @@ The Plugin first gives the agent this task map: **data → queue model → polic
 
 Research direction remains with the user and host agent. The Plugin supplies reusable domain knowledge, methods, tools, and cases rather than a separate, fixed agent framework. The queueing community can contribute additional capabilities and knowledge.
 
+### Shared literature capability
+
+- Implement [queue-literature](../skills/queue-literature/SKILL.md) as one shared skill for both Stages, not a separate literature agent.
+- Adapt the useful search, synthesis, and citation guidance from existing open-source skills; preserve upstream attribution and licensing. Add queue-specific guidance about model assumptions, observations, policies, objectives, baseline applicability, and theoretical results.
+- Use the host's available search and reading tools. Paper Search MCP is an optional candidate when academic retrieval is missing; Zotero is optional for an existing library. These are not fixed dependencies.
+- Scale the work to the question; do not require figures, a complete report, a fixed backend, or running both Stages.
+- This step adds source files only. Do not install the skill or alter local agent/MCP configuration. Existing CC and Kiro sessions may be used for temporary behavioral tests without installing the Plugin.
+
+Implementation sources, adaptation details, and the upstream MIT notice are recorded in the skill's [attribution](../skills/queue-literature/NOTICE.md). See [optional tool references](../skills/queue-literature/references/tool-options.md) and [test scenarios](../tests/queue-literature/scenarios.md).
+
 ## 2. Official standards
 
 | Layer | Purpose | Primary reference |
