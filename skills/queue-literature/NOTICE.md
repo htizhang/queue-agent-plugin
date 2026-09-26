@@ -22,6 +22,16 @@ made the depth depend on the user's question; removed mandatory figures, fixed
 database counts, backend-specific commands, and a compulsory report pipeline.
 No upstream scripts, model services, or additional skills are bundled or required.
 
+## Local knowledge
+
+The bundled knowledge cards are new, source-checked summaries seeded by the
+earlier QueueResearcher topic inventory. They do not copy textbook or paper text,
+and they import no legacy runtime code. Original scientific sources and inspected
+versions are listed in [the source registry](references/sources.json); the
+[migration record](../../docs/knowledge-base-migration.md) maps legacy origins.
+The MIT notice below covers the adapted K-Dense guidance, not the cited papers
+or the rest of this repository.
+
 ## Upstream MIT License
 
 Copyright (c) 2025 K-Dense Inc.

@@ -1,0 +1,49 @@
+{
+  "sources": [
+    {
+      "id": "scully_harchol_balter_2021_gittins",
+      "title": "The Gittins Policy in the M/G/1 Queue",
+      "authors": [
+        "Ziv Scully",
+        "Mor Harchol-Balter"
+      ],
+      "year": 2021,
+      "url": "https://arxiv.org/pdf/2111.10703v1",
+      "doi": "10.23919/WiOpt52861.2021.9589051",
+      "reading_depth": "relevant-full-text",
+      "locators": [
+        "arXiv v1, PDF p. 1, abstract and Section I",
+        "arXiv v1, PDF pp. 4-5, Section III.A-III.F, Examples III.1-III.2",
+        "arXiv v1, PDF pp. 5-6, Definition IV.2, Example IV.3, and Section IV.B",
+        "arXiv v1, PDF p. 6, Theorem V.1"
+      ],
+      "reviewed_on": "2026-09-25",
+      "legacy_keys": [
+        "scully_harchol_balter_2021_gittins"
+      ],
+      "note": "Inspected the 10-page arXiv v1 PDF dated 21 November 2021, labeled Extended and Revised Version. Crossref identity-checked the DOI of the related 8-page 2021 WiOpt publication. Claims and locators here refer to arXiv v1, not an assertion that the two versions are identical."
+    },
+    {
+      "id": "van_mieghem_1995_gc_mu",
+      "title": "Dynamic Scheduling with Convex Delay Costs: The Generalized c-mu Rule",
+      "authors": [
+        "Jan A. Van Mieghem"
+      ],
+      "year": 1995,
+      "url": "https://www.kellogg.northwestern.edu/faculty/VanMieghem/htm/gcmu0.pdf",
+      "doi": "10.1214/aoap/1177004706",
+      "reading_depth": "relevant-full-text",
+      "locators": [
+        "Author manuscript dated 1994-10-25, Sections 1-2 and Proposition 1",
+        "Author manuscript Section 3, Assumptions 1-2",
+        "Author manuscript Section 4.2, Assumption 3, Proposition 7, equation (54) and subsequent discussion",
+        "Author manuscript Section 4.3, Proposition 8"
+      ],
+      "reviewed_on": "2026-09-25",
+      "legacy_keys": [
+        "van_mieghem_1995_gc_mu"
+      ],
+      "note": "Read the relevant model, convergence assumptions, and optimality statements in the author manuscript labeled Final version of MS #0494-007 Rev. 1. The journal publication identity/year/DOI were checked against Crossref and the author university page; the journal typeset full text was not inspected. Locators refer to the author manuscript, not journal numbering."
+    }
+  ]
+}

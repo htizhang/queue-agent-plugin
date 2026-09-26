@@ -22,7 +22,33 @@ missing detail would materially change the search or conclusion; otherwise state
 the working assumption and proceed. A proposed alternative family or objective
 is a suggestion for the user, not an automatic change to the research task.
 
-## Find and read evidence
+## Use the local knowledge first when it fits
+
+After reading supplied material, use this topic map for established knowledge.
+Read only the relevant card, then its entry in the [source registry](references/sources.json).
+The cards carry assumptions, claim locators, reading depth, and review dates;
+they are not substitutes for checking applicability to the user's system.
+
+| Topic or alias | Read |
+| --- | --- |
+| Model assumptions, observations, Kendall notation, M/M/1, M/G/1, baseline fit | [Model and policy fit](references/knowledge-foundations.md) |
+| c-mu, cμ, cµ, linear class holding cost | [c-mu priority](references/policy-c-mu.md) |
+| Generalized c-mu, convex delay cost, waiting age | [Generalized c-mu](references/policy-generalized-c-mu.md) |
+| SRPT, known size, remaining processing time | [SRPT](references/policy-srpt.md) |
+| Gittins, unknown size, attained service, service distribution | [Gittins](references/policy-gittins.md) |
+
+Use the host's file-reading or keyword-search tools; no database or custom
+retrieval service is needed. If the local evidence answers an established question,
+answer with its original sources without a redundant web search. Distinguish what
+the bundled card reports from any primary text you inspect in this session.
+
+This first slice covers classical single-server policy results and shared model-fit
+guidance. It does not supply Stage 1 estimation procedures, a full network-policy
+catalog, or current prior-art coverage. For missing or disputed evidence, new work,
+or a requested novelty/landscape review, continue with external research below.
+If retrieval is unavailable, identify that gap rather than inventing a local answer.
+
+## Find and read external evidence when needed
 
 - Read supplied papers or excerpts first. For wider searches, combine queueing
   terminology with neighboring terminology used in scheduling, service systems,

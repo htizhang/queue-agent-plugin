@@ -23,15 +23,18 @@ contains the agreed overview, reference material, and the first shared skill,
 not an installable Plugin.
 
 Host packaging and tool integrations are not implemented yet.
-No implementation, experiment data, or credentials from the earlier research
-repository are included.
+No runtime implementation, experiment data, or credentials from the earlier
+research repository are included. Selected knowledge is migrated as reviewed,
+simulator-neutral reference cards, not as framework code.
 
 ## Shared skills
 
 - [queue-literature](skills/queue-literature/SKILL.md): source-grounded literature
   work for Stage 1 modeling and Stage 2 policy design. It adapts selected
   open-source review guidance, adds queue-specific questions, and uses available
-  host tools rather than requiring a particular search provider.
+  host tools rather than requiring a particular search provider. Its local
+  references cover c-mu, generalized c-mu, SRPT, Gittins, and model-policy fit;
+  established questions can be answered without repeating an online search.
 
 The skill is source content in this repository. Nothing is installed or
 configured on the user's machine by adding it. See its
@@ -42,3 +45,14 @@ configured on the user's machine by adding it. See its
 
 - [References and confirmed design decisions](docs/references.md)
 - [Contributor instructions](AGENTS.md)
+- [Knowledge migration and provenance](docs/knowledge-base-migration.md)
+
+## Checks
+
+Run the dependency-free content checks from the repository root:
+
+```sh
+python3 -m unittest discover -s tests/queue-literature -p 'test_*.py'
+```
+
+These check reference integrity, not theorem correctness or installed-host compatibility.
