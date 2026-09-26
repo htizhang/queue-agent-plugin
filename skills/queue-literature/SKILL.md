@@ -36,6 +36,7 @@ user's system.
 
 | Topic or alias | Read |
 | --- | --- |
+| System description, jobs, resource pools, classes, boundary, feasible controls | [From system description to queue primitives](references/modeling-system-description-primitives.md) |
 | State sufficiency, Markov state, ages, event calendar, feasible actions | [Queue state and dynamics](references/modeling-state-and-dynamics.md) |
 | Model adequacy, output validation, observation maps, structural uncertainty | [Queue model validation](references/modeling-model-adequacy-validation.md) |
 | Event semantics, offered/admitted arrivals, finite-window accounting, PASTA | [Reading queue logs](references/modeling-event-log-semantics.md) |

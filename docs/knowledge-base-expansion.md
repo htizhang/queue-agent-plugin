@@ -1,13 +1,14 @@
 # Local Knowledge Collection
 
-The `queue-literature` skill contains **20 handbook notes and 46 source records**.
+The `queue-literature` skill contains **21 handbook notes and 48 source records**.
 Its [topic map](../skills/queue-literature/SKILL.md) separates Stage 1, Stage 2,
 and shared material so the agent can read only what the current question needs.
 
 ## Coverage
 
-- **Stage 1 — nine notes:** queue state and event dynamics; model adequacy and
-  validation; event semantics and finite-window accounting; what logs identify;
+- **Stage 1 — ten notes:** system descriptions and queue primitives; queue state
+  and event dynamics; model adequacy and validation; event semantics and
+  finite-window accounting; what logs identify;
   inference from partial logs; arrival, service and patience primitives;
   time-varying arrivals; censoring and truncation; fitted-distribution tests.
 - **Stage 2 — nine notes:** c-mu, generalized c-mu, SRPT, Gittins, load balancing,
@@ -32,8 +33,9 @@ scientific correctness.
 
 The collection is simulator-neutral and imports no legacy runtime code. It
 contains no full-text papers, research transcripts, experiment data, or credentials.
-Incomplete drafts remain outside this repository. Further literature collection
-is stopped for this update.
+The final system-description draft was completed using existing source material.
+This literature batch is closed; unused working material remains outside the
+repository, and no further literature collection is in progress.
 
 No Plugin installation or host configuration was performed. Earlier direct-load
 smoke checks apply to the versions they tested, not to automatic host activation
