@@ -48,7 +48,9 @@
       "version": "Claims and locators use the arXiv v3 electronic reprint; its pagination differs from the journal version.",
       "locators": [
         "arXiv v3 electronic reprint, Sections 2.4 and 3.1-3.2",
-        "Sections 6-8: exponential-service experimental models"
+        "Sections 6-8: exponential-service experimental models",
+        "arXiv v3 electronic reprint, Section 2, equation (1), pp. 5-6; Section 2.1, equations (2)-(3), pp. 6-7",
+        "Section 2.3, equation (7), pp. 7-8"
       ]
     },
     {
@@ -483,8 +485,294 @@
       "locators": [
         "Section 2.1, equation (1)-(3), p. 1032",
         "Section 2.2, Theorems 1-2 and equations (4)-(7), pp. 1033-1034",
-        "Section 2.3, p. 1034"
+        "Section 2.3, p. 1034",
+        "Section 2.1, equations (1)-(3), p. 1032",
+        "Section 2.2, equations (4)-(7) and Theorems 1-2, pp. 1033-1034",
+        "Section 2.3, equations (8)-(9), Theorem 3, and interpretation of clipped waits, p. 1034"
       ]
+    },
+    {
+      "id": "tfpm_xes_lifecycle_extension",
+      "title": "Standard lifecycle transition model (XES Lifecycle extension)",
+      "authors": [
+        "IEEE Task Force on Process Mining"
+      ],
+      "year": null,
+      "url": "https://www.tf-pm.org/resources/xes-standard/about-xes/standard-extensions/lifecycle/standard",
+      "doi": null,
+      "locators": [
+        "Standard lifecycle transition model page: definitions of assign, complete, reassign, resume, schedule, start, suspend, withdraw, abort, skip, and unknown transitions"
+      ]
+    },
+    {
+      "id": "wolff_1982_pasta",
+      "title": "Poisson Arrivals See Time Averages",
+      "authors": [
+        "Ronald W. Wolff"
+      ],
+      "year": 1982,
+      "url": "https://www.math.purdue.edu/~peterson/Teaching/532/PASTA.pdf",
+      "doi": "10.1287/opre.30.2.223",
+      "locators": [
+        "Lack of Anticipation Assumption and Theorem 1, p. 225",
+        "Equation (3) and Remark 4, p. 226",
+        "Section 3 and Theorem 2 on nonstationary Poisson arrivals, pp. 227-228"
+      ]
+    },
+    {
+      "id": "larson_1990_queue_inference",
+      "title": "The Queue Inference Engine: Deducing Queue Statistics from Transactional Data",
+      "authors": [
+        "Richard C. Larson"
+      ],
+      "year": 1990,
+      "url": "https://www.researchgate.net/profile/Richard-Larson-9/publication/227446197_The_Queue_Inference_Engine_Deducing_Queue_Statistics_from_Transactional_Data/links/0deec538f89daadf77000000/The-Queue-Inference-Engine-Deducing-Queue-Statistics-from-Transactional-Data.pdf",
+      "doi": "10.1287/mnsc.36.5.586",
+      "locators": [
+        "Abstract and Section 1: transactional records, Poisson assumption, and congestion-period signature",
+        "Sections 4.3-4.7: conditional mean queue length, time and arrival averages, aggregate waiting time, and arrival-seen distribution",
+        "Section 5: rate cancellation and slowly varying-rate approximation"
+      ]
+    },
+    {
+      "id": "bertsimas_servi_1992_queue_inference_revisited",
+      "title": "Deducing Queueing from Transactional Data: The Queue Inference Engine, Revisited",
+      "authors": [
+        "Dimitris J. Bertsimas",
+        "L. D. Servi"
+      ],
+      "year": 1992,
+      "url": "https://www.mit.edu/~dbertsim/papers/Statistics/Deducing%20queuing%20from%20transactional%20data-%20the%20queue%20inference%20engine,%20revisited.pdf",
+      "doi": "10.1287/opre.40.3.S217",
+      "locators": [
+        "Abstract and introduction, p. S217",
+        "Section 1 and Section 1.1, pp. S218-S219",
+        "Theorem 2 and proof, including the kth-arrival/kth-start waiting-time pairing, pp. S222-S223",
+        "Theorem 4 and following remark, p. S224"
+      ]
+    },
+    {
+      "id": "brown_1970_mginf_estimation",
+      "title": "An M/G/infinity Estimation Problem",
+      "authors": [
+        "Mark Brown"
+      ],
+      "year": 1970,
+      "url": "https://projecteuclid.org/journals/annals-of-mathematical-statistics/volume-41/issue-2/An-MGinfty-Estimation-Problem/10.1214/aoms/1177697107.pdf",
+      "doi": "10.1214/aoms/1177697107",
+      "locators": [
+        "Section 0, p. 651",
+        "Section 1, Lemmas 1-2, p. 652",
+        "Theorem 1 and comments, p. 653"
+      ]
+    },
+    {
+      "id": "weber_1978_optimal_assignment",
+      "title": "On the optimal assignment of customers to parallel servers",
+      "authors": [
+        "Richard R. Weber"
+      ],
+      "year": 1978,
+      "url": "http://www.statslab.cam.ac.uk/~rrw1/publications/Weber%20%201978%20On%20the%20optimal%20assignment%20of%20customers%20to%20parallel%20servers",
+      "doi": "10.2307/3213411",
+      "locators": [
+        "Journal pagination in the author-hosted scan: Section 1, pp. 406-407",
+        "Section 2, Theorem 1, p. 407",
+        "Section 3 continuous-time model and Theorem 2, pp. 408-409",
+        "Section 4, remark (i), p. 412"
+      ],
+      "version": "Author-hosted scan of Journal of Applied Probability 15(2):406-413."
+    },
+    {
+      "id": "whitt_1986_which_queue_counterexamples",
+      "title": "Deciding Which Queue to Join: Some Counterexamples",
+      "authors": [
+        "Ward Whitt"
+      ],
+      "year": 1986,
+      "url": "https://www.columbia.edu/~ww2040/DecidingWhichQ1986.pdf",
+      "doi": "10.1287/opre.34.1.55",
+      "locators": [
+        "Operations Research 34(1):55-62, Abstract and Introduction, pp. 55-56",
+        "Section 1, The Shortest-Line Rule, pp. 56-58",
+        "Section 2, Breaking Ties, pp. 58-59",
+        "Section 3, The Shortest-Expected-Delay Rule, pp. 59-60"
+      ]
+    },
+    {
+      "id": "harchol_balter_crovella_murta_1998_task_assignment",
+      "title": "On Choosing a Task Assignment Policy for a Distributed Server System",
+      "authors": [
+        "Mor Harchol-Balter",
+        "Mark E. Crovella",
+        "Cristina D. Murta"
+      ],
+      "year": 1998,
+      "url": "https://dspace.mit.edu/server/api/core/bitstreams/5bae138f-bfeb-4c37-981f-f6641c66edb4/content",
+      "doi": null,
+      "locators": [
+        "MIT-LCS-TR-757, Section 3, distributed-server model",
+        "MIT-LCS-TR-757, Section 5.1, Theorem 2, report pp. 14-15",
+        "MIT-LCS-TR-757, Section 7.2, proof of Theorem 2, report p. 26"
+      ],
+      "version": "MIT-LCS-TR-757 technical report; this version contains the pathwise coupling proof."
+    },
+    {
+      "id": "vvedenskaya_dobrushin_karpelevich_1996_two_queues",
+      "title": "Queueing System with Selection of the Shortest of Two Queues: An Asymptotic Approach",
+      "authors": [
+        "N. D. Vvedenskaya",
+        "R. L. Dobrushin",
+        "F. I. Karpelevich"
+      ],
+      "year": 1996,
+      "url": "https://www.mathnet.ru/rus/ppi298",
+      "doi": null,
+      "locators": [
+        "Russian original, Problemy Peredachi Informatsii 32(1):20-34, Section 1, equation (1.3), pp. 20-22",
+        "Russian original, Section 2, Theorems 1-2 and Theorem 5, pp. 22-24",
+        "Russian original, Section 2, equation (2.12), p. 24",
+        "Russian original, Section 5, proof of Theorem 5"
+      ],
+      "version": "Locators use the Russian original; the English translation has different pagination."
+    },
+    {
+      "id": "mitzenmacher_2001_power_of_two",
+      "title": "The Power of Two Choices in Randomized Load Balancing",
+      "authors": [
+        "Michael Mitzenmacher"
+      ],
+      "year": 2001,
+      "url": "https://www.eecs.harvard.edu/~michaelm/postscripts/tpds2001.pdf",
+      "doi": "10.1109/71.963420",
+      "locators": [
+        "IEEE Transactions on Parallel and Distributed Systems 12(10), Section 1, pp. 1094-1095",
+        "Section 2.2, Lemma 2 and the general-d fixed point",
+        "Section 3, Theorems 5-6, fixed-horizon finite-system bounds from an empty initial state"
+      ],
+      "version": "Author-hosted journal version."
+    },
+    {
+      "id": "gast_2017_mean_field_1_over_n",
+      "title": "Expected Values Estimated via Mean-Field Approximation are 1/N-Accurate",
+      "authors": [
+        "Nicolas Gast"
+      ],
+      "year": 2017,
+      "url": "https://inria.hal.science/hal-01553133/document",
+      "doi": "10.1145/3084454",
+      "locators": [
+        "HAL hal-01553133v1, Introduction and Table 1, pp. 2-3",
+        "Section 3, Theorems 3.1-3.2 and assumptions (A1)-(A3)",
+        "Section 5, Theorem 5.1 and Corollary 1",
+        "Section 5.3, numerical evaluation of the finite-size coefficient"
+      ],
+      "version": "POMACS 1(1), Article 16; locators use HAL hal-01553133v1."
+    },
+    {
+      "id": "mukherjee_borst_van_leeuwaarden_whiting_2018_universality",
+      "title": "Universality of Power-of-d Load Balancing in Many-Server Systems",
+      "authors": [
+        "Debankur Mukherjee",
+        "Sem C. Borst",
+        "Johan S. H. van Leeuwaarden",
+        "Philip A. Whiting"
+      ],
+      "year": 2018,
+      "url": "https://arxiv.org/pdf/1612.00723v2",
+      "doi": "10.1287/stsy.2018.0016",
+      "locators": [
+        "arXiv v2, Section 2, Theorem 2.1, fluid-limit universality",
+        "arXiv v2, Section 2, Proposition 2.2, stationary fluid-scale interchange",
+        "arXiv v2, Section 2, Theorems 2.4-2.5, finite-horizon diffusion universality and threshold"
+      ],
+      "version": "Stochastic Systems 8(4):265-292; theorem numbering and locators use arXiv v2."
+    },
+    {
+      "id": "braverman_2020_jsq_halfin_whitt_steady_state",
+      "title": "Steady-State Analysis of the Join-the-Shortest-Queue Model in the Halfin-Whitt Regime",
+      "authors": [
+        "Anton Braverman"
+      ],
+      "year": 2020,
+      "url": "https://arxiv.org/pdf/1801.05121v2",
+      "doi": "10.1287/moor.2019.1023",
+      "locators": [
+        "arXiv v2, Abstract and Section 1 model",
+        "arXiv v2, Section 2, Theorems 2-3 and Proposition 1"
+      ],
+      "version": "Mathematics of Operations Research 45(3):1069-1103; locators use arXiv v2."
+    },
+    {
+      "id": "hellemans_van_houdt_2018_least_loaded",
+      "title": "On the Power-of-d-choices with Least Loaded Server Selection",
+      "authors": [
+        "Tim Hellemans",
+        "Benny Van Houdt"
+      ],
+      "year": 2018,
+      "url": "https://arxiv.org/pdf/1802.05420v1",
+      "doi": "10.1145/3224422",
+      "locators": [
+        "arXiv v1, Abstract and Section 1, LL(d), late binding, and footnote 1",
+        "arXiv v1, Section 2, homogeneous-cluster model",
+        "arXiv v1, Section 7.1, Theorems 7.1-7.2",
+        "arXiv v1, Section 7.3, late-binding overhead"
+      ],
+      "version": "POMACS 2(2); locators use arXiv v1."
+    },
+    {
+      "id": "mukhopadhyay_mazumdar_2016_heterogeneous_jsq",
+      "title": "Analysis of Randomized Join-The-Shortest-Queue (JSQ) Schemes in Large Heterogeneous Processor Sharing Systems",
+      "authors": [
+        "Arpan Mukhopadhyay",
+        "Ravi R. Mazumdar"
+      ],
+      "year": 2016,
+      "url": "https://wrap.warwick.ac.uk/id/eprint/116198/1/WRAP-analysis-randomized-join-shortest-queue-large-sharing-Mukhopadhyay-2016.pdf",
+      "doi": "10.1109/TCNS.2015.2428331",
+      "locators": [
+        "Accepted manuscript, Section II, Schemes 2-3",
+        "Section III-B, Proposition 1",
+        "Section III-C, Proposition 8 and Remark 7",
+        "Section IV, unequal-capacity examples, pp. 14-15"
+      ],
+      "version": "IEEE Transactions on Control of Network Systems 3(2):116-126; locators use the accepted manuscript."
+    },
+    {
+      "id": "mitzenmacher_2000_old_information",
+      "title": "How Useful Is Old Information?",
+      "authors": [
+        "Michael Mitzenmacher"
+      ],
+      "year": 2000,
+      "url": "https://www.eecs.harvard.edu/~michaelm/postscripts/tpds2000.pdf",
+      "doi": "10.1109/71.824633",
+      "locators": [
+        "IEEE Transactions on Parallel and Distributed Systems 11(1), Abstract",
+        "Section 2, periodic bulletin-board model",
+        "Section 3.4, periodic-update numerical comparisons",
+        "Sections 4-5, continuous and individual updates"
+      ],
+      "version": "Author-hosted scan of the journal article."
+    },
+    {
+      "id": "mitzenmacher_dellamico_2022_predicted_sizes",
+      "title": "The Supermarket Model with Known and Predicted Service Times",
+      "authors": [
+        "Michael Mitzenmacher",
+        "Matteo Dell'Amico"
+      ],
+      "year": 2022,
+      "url": "https://arxiv.org/pdf/1905.12155v4",
+      "doi": "10.1109/TPDS.2022.3146195",
+      "locators": [
+        "arXiv v4, Abstract",
+        "arXiv v4, Section 4.1, queue selection with predictions",
+        "arXiv v4, Section 5, trace-driven experiments",
+        "arXiv v4, Appendix A.2 and Figure 16, Least Loaded Updated versus Least Loaded Total"
+      ],
+      "version": "IEEE Transactions on Parallel and Distributed Systems article; locators use arXiv v4."
     }
   ]
 }

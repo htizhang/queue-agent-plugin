@@ -41,10 +41,13 @@ user's system.
 | Gittins, unknown size, attained service, service distribution | [Gittins](references/policy-gittins.md) |
 | State sufficiency, Markov state, ages, event calendar, feasible actions | [Queue state and dynamics](references/modeling-state-and-dynamics.md) |
 | Model adequacy, output validation, observation maps, structural uncertainty | [Queue model validation](references/modeling-model-adequacy-validation.md) |
+| Event semantics, offered/admitted arrivals, finite-window accounting, PASTA | [Reading queue logs](references/modeling-event-log-semantics.md) |
+| Identifiability, reconstruction, QIE, transactional logs, unlinked events | [What queue logs identify](references/modeling-log-identifiability.md) |
 | Partial event logs, latent service, missing tasks | [Queue inference from partial logs](references/modeling-partial-event-logs.md) |
 | NHPP diagnostics, arrival blocks, service fit, censored patience | [Arrival, service, and patience inference](references/modeling-call-center-primitives.md) |
 | Time-varying arrivals, NHPP checks, Cox process, one sample path | [Time-varying arrival models](references/modeling-time-varying-arrivals.md) |
 | Censoring, truncation, completion-only logs, patience bounds | [Censoring and truncation](references/modeling-censoring-truncation.md) |
+| JSQ, SED, JSW, power-of-d, routing, stale or predicted load | [Load-balancing dispatch](references/policy-load-balancing.md) |
 | Maximum pressure, MaxWeight, backpressure, network stability | [Maximum pressure](references/policy-maximum-pressure.md) |
 | EASY, conservative backfilling, rigid parallel jobs, reservations | [Backfilling](references/policy-backfilling.md) |
 | Fitted parameters, KS calibration, parametric bootstrap | [Fitted-distribution tests](references/modeling-fitted-distribution-tests.md) |

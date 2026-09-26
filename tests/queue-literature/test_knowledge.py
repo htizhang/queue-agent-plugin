@@ -218,7 +218,8 @@ class KnowledgeTests(unittest.TestCase):
                 ),
                 f"{record['id']}: bad authors",
             )
-            self.assertIsInstance(record["year"], int)
+            if record["year"] is not None:
+                self.assertIsInstance(record["year"], int)
             self.assertIsInstance(record["url"], str)
             self.assertTrue(record["url"])
             locators = record["locators"]
@@ -295,6 +296,12 @@ class KnowledgeTests(unittest.TestCase):
                 root,
                 expected_note_filenames=FIXTURE_NOTE_FILENAMES,
             )
+
+    def test_undated_reference(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory) / "repo"
+            write_fixture(root, sources=[source(year=None)])
+            self.assert_knowledge(root, expected_note_filenames=FIXTURE_NOTE_FILENAMES)
 
     def test_duplicate_source_ids_and_dois(self):
         self.assert_bad(

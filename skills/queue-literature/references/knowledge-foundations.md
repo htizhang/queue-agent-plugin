@@ -38,8 +38,9 @@ Keep these information models apart:
 | [Gittins](policy-gittins.md) | job state such as attained service; known job model and holding costs | exact; mean holding cost |
 
 All four concern one station, each job using one server at a time; the linked
-notes give full models. No Stage 1 estimation, censoring,
-nonhomogeneous-Poisson, or model-validation procedure is included.
+notes give full models. This note concerns result transfer; use the separate
+[model-validation](modeling-model-adequacy-validation.md) and
+[observation/inference](modeling-partial-event-logs.md) notes for Stage 1 methods.
 
 ## Evidence
 

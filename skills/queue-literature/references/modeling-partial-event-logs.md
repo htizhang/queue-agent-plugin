@@ -26,3 +26,5 @@ No universal identifiability claim is made here.
 
 Identify the observation mechanism before choosing an estimator. Keep inferred
 service and waiting times labelled as posterior/model-dependent quantities.
+
+For other record configurations, see [what queue logs identify](modeling-log-identifiability.md).
