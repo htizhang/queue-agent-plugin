@@ -19,6 +19,9 @@ EXPECTED_CARDS = {
     "modeling-call-center-primitives.md": "modeling.call_center_primitives",
     "policy-maximum-pressure.md": "policy.maximum_pressure_network",
     "policy-backfilling.md": "policy.easy_conservative_backfilling",
+    "modeling-fitted-distribution-tests.md": "modeling.fitted_distribution_tests",
+    "policy-reentrant-stage-priority.md": "policy.reentrant_stage_priority_fbfs_lbfs",
+    "policy-reentrant-wipload-release.md": "policy.reentrant_wipload_release",
 }
 CARD_FIELDS = {
     "ID",

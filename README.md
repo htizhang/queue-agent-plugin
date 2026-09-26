@@ -34,7 +34,8 @@ simulator-neutral reference cards, not as framework code.
   open-source review guidance, adds queue-specific questions, and uses available
   host tools rather than requiring a particular search provider. Its local
   references cover c-mu, generalized c-mu, SRPT, Gittins, model-policy fit,
-  selected inference methods, maximum pressure, and backfilling;
+  selected inference methods, fitted-model testing, maximum pressure, backfilling,
+  and reentrant dispatch and release control;
   established questions can be answered without repeating an online search.
 
 The skill is source content in this repository. Nothing is installed or

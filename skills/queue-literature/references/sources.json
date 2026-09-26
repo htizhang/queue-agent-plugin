@@ -123,6 +123,67 @@
       "reviewed_on": "2026-09-25",
       "legacy_keys": [],
       "note": "Read the journal text uploaded by Ahuva Mu'alem on ResearchGate and the 25-page author-hosted manuscript linked from Feitelson's publication list. Both identify the 2001 work that supersedes the 1998 predecessor."
+    },
+    {
+      "id": "dai_weiss_1996_reentrant_stability",
+      "title": "Stability and Instability of Fluid Models for Reentrant Lines",
+      "authors": [
+        "J. G. Dai",
+        "G. Weiss"
+      ],
+      "year": 1996,
+      "url": "https://www2.isye.gatech.edu/~dai/publications/daiWeiss96.pdf",
+      "doi": "10.1287/moor.21.1.115",
+      "reading_depth": "relevant-full-text",
+      "locators": [
+        "Journal pp. 115-119, Section 1, Definitions 1.1-1.3 and Theorem 1.1",
+        "Journal pp. 122-125, Section 4, Proposition 4.1, Definition 4.1, and Theorems 4.3-4.4",
+        "Journal pp. 125-128, Section 5, equations (5.1)-(5.2) and Theorem 5.1"
+      ],
+      "reviewed_on": "2026-09-25",
+      "legacy_keys": [],
+      "note": "Author-hosted journal PDF inspected. Theorem 1.1 reproduces and attributes the fluid-stability-to-positive-Harris-recurrence implication to Dai (1995); the FBFS/LBFS fluid-stability theorems and Lu-Kumar characterization are original results of this paper."
+    },
+    {
+      "id": "qi_et_al_2007_wipload_release",
+      "title": "Simulation Experimental Investigation on Job Release Control in Semiconductor Wafer Fabrication",
+      "authors": [
+        "Chao Qi",
+        "Appa Iyer Sivakumar",
+        "Stanley B. Gershwin"
+      ],
+      "year": 2007,
+      "url": "https://informs-sim.org/wsc07papers/216.pdf",
+      "doi": "10.1109/WSC.2007.4419797",
+      "reading_depth": "relevant-full-text",
+      "locators": [
+        "Proceedings p. 1738, Section 2, equations (1)-(2), Figures 1-2",
+        "Proceedings pp. 1739-1743, Sections 3.1 and 3.3-3.7, Tables 1-5",
+        "Proceedings pp. 1743-1744, Sections 4.1-4.3, Tables 6-7",
+        "Proceedings p. 1744, Section 5"
+      ],
+      "reviewed_on": "2026-09-25",
+      "legacy_keys": [],
+      "note": "Official Winter Simulation Conference PDF inspected. The paper supplies an implementable WIPLOAD release gate and replicated simulation evidence, not a stability or optimality theorem."
+    },
+    {
+      "id": "babu_rao_2004_fitted_gof",
+      "title": "Goodness-of-fit Tests When Parameters are Estimated",
+      "authors": [
+        "G. Jogesh Babu",
+        "C. R. Rao"
+      ],
+      "year": 2004,
+      "url": "https://repository.ias.ac.in/71910/1/116_PUB.pdf",
+      "doi": null,
+      "reading_depth": "relevant-full-text",
+      "locators": [
+        "Sections 1-2.2, journal pp. 63-68, equations (2.2)-(2.3)",
+        "Section 4, Theorems 4.1-4.2"
+      ],
+      "reviewed_on": "2026-09-25",
+      "legacy_keys": [],
+      "note": "Publisher-version PDF and bibliographic identity checked through the Indian Academy of Sciences repository, item 71910. No DOI asserted."
     }
   ]
 }

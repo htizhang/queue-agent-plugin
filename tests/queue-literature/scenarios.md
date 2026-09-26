@@ -196,7 +196,49 @@ without changing reservation guarantees?
 - Distinguishes the finish-before-start condition from the spare-capacity case.
 - Identifies missing runtime-bound enforcement instead of certifying predictions.
 
-The revised F and added H-J are pending live-agent checks. Historical records
+## K. Fitted-model checking
+
+### Request
+
+I fitted an exponential mean on these same observations. Can I use ordinary
+fixed-parameter KS cutoffs? Explain the bundled bootstrap alternative and whether
+it applies unchanged to censored, dependent event records.
+
+### Reviewer checks
+
+- Finds the fitted-distribution card; refits on each simulated sample.
+- States the iid continuous-family and asymptotic regularity scope, rather than
+  promising an exact test for dependent or censored records.
+
+## L. Reentrant stage-priority scope
+
+### Request
+
+Our fab is nonpreemptive, has finite buffers and sequence-dependent setups.
+Does the bundled FBFS/LBFS result prove its stability and minimum cycle time?
+
+### Reviewer checks
+
+- Distinguishes a feasible heuristic adaptation from the paper's preemptive,
+  infinite-buffer single-route theorem.
+- Separates positive Harris recurrence from cycle-time optimality and does not
+  reverse the fluid-to-stochastic stability implication.
+
+## M. Release versus dispatch
+
+### Request
+
+For WIPLOAD, the remaining-work allowance exactly equals an external lot's
+nominal full-route work. Does the recorded gate admit it? Does the policy also
+specify how stations dispatch jobs?
+
+### Reviewer checks
+
+- Includes equality in the release condition.
+- Separates the release gate and external priority from station dispatch.
+- Describes the cited comparisons as simulation evidence, not universal dominance.
+
+The revised F and added H-M are pending live-agent checks. Historical records
 below describe the earlier card collection and earlier version of F.
 
 ## Verification record: original skill, 2026-09-25

@@ -40,6 +40,9 @@ they are not substitutes for checking applicability to the user's system.
 | NHPP diagnostics, arrival blocks, service fit, censored patience | [Arrival, service, and patience inference](references/modeling-call-center-primitives.md) |
 | Maximum pressure, MaxWeight, backpressure, network stability | [Maximum pressure](references/policy-maximum-pressure.md) |
 | EASY, conservative backfilling, rigid parallel jobs, reservations | [Backfilling](references/policy-backfilling.md) |
+| Fitted parameters, KS calibration, parametric bootstrap | [Fitted-distribution tests](references/modeling-fitted-distribution-tests.md) |
+| Reentrant lines, FBFS, LBFS, stage-index priority | [Reentrant stage-priority dispatch](references/policy-reentrant-stage-priority.md) |
+| WIPLOAD, WIPLCtrl, remaining work, lot release | [WIPLOAD release control](references/policy-reentrant-wipload-release.md) |
 
 Use the host's file-reading or keyword-search tools; no database or custom
 retrieval service is needed. If the local evidence answers an established question,
@@ -47,7 +50,8 @@ answer with its original sources without a redundant web search. Distinguish wha
 the bundled card reports from any primary text you inspect in this session.
 
 The collection covers classical single-server policies, selected observation-aware
-inference methods, maximum pressure, backfilling, and shared model-fit guidance.
+inference methods, maximum pressure, backfilling, reentrant control, and shared
+model-fit guidance.
 It is not a complete estimation or network-policy catalog, nor current prior-art
 coverage. For missing or disputed evidence, new work,
 or a requested novelty/landscape review, continue with external research below.
