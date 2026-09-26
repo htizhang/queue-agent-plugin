@@ -1,16 +1,5 @@
 # EASY and Conservative Backfilling
 
-| Field | Value |
-| --- | --- |
-| ID | policy.easy_conservative_backfilling |
-| Kind | policy |
-| Stage relevance | Stage 1, Stage 2 |
-| Aliases | rigid parallel jobs, processor reservations, shadow time, HPC |
-| Sources | mualem_feitelson_2001_backfilling |
-| Review | source-checked |
-| Reviewed on | 2026-09-25 |
-| Legacy origin | New contribution |
-
 ## Mechanism and applicability
 
 Jobs occupy fixed-size processor partitions and supply runtime estimates.
@@ -28,7 +17,6 @@ on workload and metric, not a universal ordering of the policies.
 ## Evidence
 
 [mualem_feitelson_2001_backfilling](sources.json), Sections 2.1-2.2, 3.3 and 4.
-Relevant journal text inspected through the author's public upload.
 
 ## Use in this Plugin
 

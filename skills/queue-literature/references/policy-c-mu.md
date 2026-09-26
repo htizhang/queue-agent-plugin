@@ -1,16 +1,5 @@
 # c-mu Priority for Linear Class Holding Costs
 
-| Field | Value |
-| --- | --- |
-| ID | policy.c_mu_linear_priority |
-| Kind | policy |
-| Stage relevance | Stage 1, Stage 2 |
-| Aliases | c-mu, cμ, cµ, linear holding cost, class priority, M/M/1 |
-| Sources | scully_harchol_balter_2021_gittins |
-| Review | source-checked |
-| Reviewed on | 2026-09-25 |
-| Legacy origin | queue-research a0dc5cc: policy.c_mu_linear_priority |
-
 ## Mechanism
 
 For class $i$, let $c_i>0$ be the cost per unit time of keeping a job in the

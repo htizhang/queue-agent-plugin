@@ -1,15 +1,8 @@
 # Descriptive title
 
-| Field | Value |
-| --- | --- |
-| ID | kind.stable_identifier |
-| Kind | policy, foundations, modeling-method, or negative-result |
-| Stage relevance | Stage 1, Stage 2, or both |
-| Aliases | Search terms and alternate notation |
-| Sources | Stable IDs in references/sources.json |
-| Review | State what has actually been checked |
-| Reviewed on | YYYY-MM-DD, only after review |
-| Legacy origin | Original card ID or new contribution |
+Write a focused handbook note. Use headings that fit the subject rather than a
+metadata header. The topic map in `SKILL.md` carries discovery terms and Stage
+context; the note body carries assumptions, limitations, and citations.
 
 ## Mechanism
 
@@ -23,14 +16,17 @@ material exclusions. Distinguish theorem assumptions from proposed adaptations.
 
 ## Evidence
 
-Link each source key to the registry from the final card, for example
+Link each source ID to the registry from the final note, for example
 `[source_id](sources.json)`, and give its section, theorem, or other locator.
-Use one canonical source record per work/version used; reconcile legacy aliases.
-Say whether relevant full text, only an abstract, or only metadata was inspected.
+Use one canonical source record per work/version used. Keep bibliographic identity
+and useful locators in the registry, with a concise version qualifier only when
+the citation would otherwise be ambiguous. State secondhand or unverified limits
+in the prose when they constrain the claim. Do not add construction history,
+review dates, reading-depth labels, or legacy identifiers to the delivered note.
 Do not upgrade a metadata check into a verified theorem, copy long passages, or
 bundle copyrighted papers. Identify new interpretations as such.
 
 ## Use in this Plugin
 
 Explain which question this helps answer. Keep project-specific findings in the
-user's workspace; submit reusable additions as reviewed repository contributions.
+user's workspace; propose reusable additions through repository review.

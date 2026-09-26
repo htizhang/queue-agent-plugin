@@ -1,16 +1,5 @@
 # WIPLOAD Release Control for Reentrant Fabs
 
-| Field | Value |
-| --- | --- |
-| ID | policy.reentrant_wipload_release |
-| Kind | policy |
-| Stage relevance | Stage 1, Stage 2 |
-| Aliases | WIPLCtrl, system WIPLOAD, shop-load-limited release, closed-loop lot release |
-| Sources | qi_et_al_2007_wipload_release |
-| Review | source-checked |
-| Reviewed on | 2026-09-25 |
-| Legacy origin | New contribution |
-
 ## Mechanism and applicability
 
 This is release control, not station dispatch. For product `m` at step `j`,
@@ -37,7 +26,7 @@ regulation. `L_bar` needs output-level calibration; no universal default exists.
 
 [qi_et_al_2007_wipload_release](sources.json), proceedings p. 1738, Section 2,
 Equations (1)-(2) and Figures 1-2, defines the state, update events, and release
-gate. Relevant full text inspected.
+gate.
 
 At matched throughput, Sections 3-4 and Tables 5-7 report replicated simulations
 on simplified and real-fab-derived models. Results vary by scenario; no

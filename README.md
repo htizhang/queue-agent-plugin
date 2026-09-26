@@ -25,7 +25,7 @@ not an installable Plugin.
 Host packaging and tool integrations are not implemented yet.
 No runtime implementation, experiment data, or credentials from the earlier
 research repository are included. Selected knowledge is migrated as reviewed,
-simulator-neutral reference cards, not as framework code.
+simulator-neutral reference notes, not as framework code.
 
 ## Shared skills
 
@@ -57,4 +57,5 @@ Run the dependency-free content checks from the repository root:
 python3 -m unittest discover -s tests/queue-literature -p 'test_*.py'
 ```
 
-These check reference integrity, not theorem correctness or installed-host compatibility.
+These check the plain-note contract and reference integrity, not theorem
+correctness or installed-host compatibility.

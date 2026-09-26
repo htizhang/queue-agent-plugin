@@ -1,16 +1,5 @@
 # Gittins Policy for Unknown Job Sizes
 
-| Field | Value |
-| --- | --- |
-| ID | policy.gittins_unknown_size |
-| Kind | policy |
-| Stage relevance | Stage 1, Stage 2 |
-| Aliases | Gittins index, Gittins rank, attained-service index, unknown-size scheduling |
-| Sources | scully_harchol_balter_2021_gittins |
-| Review | source-checked |
-| Reviewed on | 2026-09-25 |
-| Legacy origin | queue-research a0dc5cc: policy.gittins_unknown_size |
-
 ## Mechanism
 
 For the classical unknown-size, mean-response-time case, let $S$ be the service-time random variable and let $x$ be a job's attained service. Its Gittins index is
@@ -27,7 +16,7 @@ The numerator is the conditional probability of completion before attained servi
 
 This formula applies when actual job sizes are unknown, attained service is observable, and the service-time law used in the index is known. The exact specialization recorded here is a stable single-server M/G/1-like queue, unit holding cost, all states preemptible, and zero-cost, zero-delay preempt-resume. In the source's model, arrivals occur at Poisson batch epochs and $\rho<1$. Job states evolve only during service, independently of arrivals and other jobs' evolution; the scheduler knows these dynamics ([scully_harchol_balter_2021_gittins](sources.json), Section III.A–III.C and III.F).
 
-A noisy point estimate of total size is a different information structure. It may define predicted-SRPT, or enter a richer posterior state if that state and its dynamics are modeled. Different known class-conditional size laws can yield different indices even for jobs with attained service zero. A nonpreemptive approximation or multiserver index policy is outside this card's guarantee; weighted holding cost and slowdown require the corresponding cost model and index.
+A noisy point estimate of total size is a different information structure. It may define predicted-SRPT, or enter a richer posterior state if that state and its dynamics are modeled. Different known class-conditional size laws can yield different indices even for jobs with attained service zero. A nonpreemptive approximation or multiserver index policy is outside this note's guarantee; weighted holding cost and slowdown require the corresponding cost model and index.
 
 ## Evidence
 

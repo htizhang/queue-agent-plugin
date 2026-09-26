@@ -1,16 +1,5 @@
 # Maximum Pressure in Processing Networks
 
-| Field | Value |
-| --- | --- |
-| ID | policy.maximum_pressure_network |
-| Kind | policy |
-| Stage relevance | Stage 1, Stage 2 |
-| Aliases | MaxWeight, backpressure, downstream congestion, EAA |
-| Sources | dai_lin_2005_maximum_pressure |
-| Review | source-checked |
-| Reviewed on | 2026-09-25 |
-| Legacy origin | New contribution |
-
 ## Mechanism and applicability
 
 With buffer vector `z` and net-consumption matrix `R`, maximize `z' R a` over
@@ -30,7 +19,7 @@ it does not cover arbitrary simultaneous-multiprocessor jobs.
 ## Evidence
 
 [dai_lin_2005_maximum_pressure](sources.json), Sections 2-4, Definitions 1-2,
-Theorem 2; Sections 7-8, Theorems 8-9. Relevant full text inspected.
+Theorem 2; Sections 7-8, Theorems 8-9.
 
 ## Use in this Plugin
 

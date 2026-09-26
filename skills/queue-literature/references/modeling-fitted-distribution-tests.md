@@ -1,16 +1,5 @@
 # Goodness-of-Fit After Parameter Estimation
 
-| Field | Value |
-| --- | --- |
-| ID | modeling.fitted_distribution_tests |
-| Kind | modeling-method |
-| Stage relevance | Stage 1 |
-| Aliases | fitted parameters, KS test, parametric bootstrap, goodness of fit |
-| Sources | babu_rao_2004_fitted_gof |
-| Review | source-checked |
-| Reviewed on | 2026-09-25 |
-| Legacy origin | New contribution |
-
 ## Method and applicability
 
 Estimating distribution parameters from the tested sample changes the null
@@ -31,7 +20,7 @@ result licenses ordinary resampling of dependent or censored queue records.
 
 [babu_rao_2004_fitted_gof](sources.json), Sections 1-2.2, Equations (2.2)-(2.3)
 and Theorems 4.1-4.2: composite-null problem, refitted bootstrap construction,
-assumptions and asymptotic justification. Relevant full text read.
+assumptions and asymptotic justification.
 
 ## Use in this Plugin
 

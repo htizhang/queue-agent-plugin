@@ -1,16 +1,5 @@
 # Arrival, Service, and Patience Inference
 
-| Field | Value |
-| --- | --- |
-| ID | modeling.call_center_primitives |
-| Kind | modeling-method |
-| Stage relevance | Stage 1 |
-| Aliases | NHPP, arrival blocks, censored patience, Kaplan-Meier, lognormal service |
-| Sources | brown_et_al_2005_call_center |
-| Review | source-checked |
-| Reviewed on | 2026-09-25 |
-| Legacy origin | New contribution |
-
 ## Method and applicability
 
 Brown et al. analyze three primitives separately:
@@ -27,8 +16,7 @@ Brown et al. analyze three primitives separately:
 
 ## Evidence
 
-[brown_et_al_2005_call_center](sources.json), journal Sections 3.1, 4.3 and 5.1;
-relevant full text inspected.
+[brown_et_al_2005_call_center](sources.json), journal Sections 3.1, 4.3 and 5.1.
 
 ## Use in this Plugin
 

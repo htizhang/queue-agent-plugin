@@ -3,6 +3,12 @@
 Prepared on 2026-09-25. These additions extend the original migration rather than
 porting more legacy runtime code.
 
+> Current delivery format, 2026-09-26: the additions are plain handbook notes.
+> Per-note audit headers and source-review process fields have been removed while
+> stable paths, scientific content, citation targets, and source locators remain.
+> The construction and review record below is retained as history, not runtime
+> knowledge metadata.
+
 ## Additions
 
 | Card | Stage |

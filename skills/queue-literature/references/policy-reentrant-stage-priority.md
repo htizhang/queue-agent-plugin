@@ -1,16 +1,5 @@
 # FBFS and LBFS Stage-Priority Dispatch in Reentrant Lines
 
-| Field | Value |
-| --- | --- |
-| ID | policy.reentrant_stage_priority_fbfs_lbfs |
-| Kind | policy |
-| Stage relevance | Stage 1, Stage 2 |
-| Aliases | FBFS, LBFS, First-Buffer-First-Served, Last-Buffer-First-Served, stage-index priority |
-| Sources | dai_weiss_1996_reentrant_stability |
-| Review | source-checked |
-| Reviewed on | 2026-09-25 |
-| Legacy origin | New contribution |
-
 ## Mechanism and applicability
 
 Dai and Weiss study an open single-route reentrant line with one buffer per
@@ -40,7 +29,10 @@ routes.
 
 [dai_weiss_1996_reentrant_stability](sources.json), journal pp. 115-119,
 Definitions 1.1-1.3 and Theorem 1.1; pp. 122-125, Definition 4.1 and Theorems
-4.3-4.4; pp. 125-128, Theorem 5.1. Relevant full text inspected.
+4.3-4.4; pp. 125-128, Theorem 5.1. Theorem 1.1 reproduces and attributes the
+fluid-stability-to-positive-Harris-recurrence implication to Dai (1995); the
+FBFS/LBFS fluid-stability theorems and Lu-Kumar characterization are original
+results of this paper.
 
 ## Use in this Plugin
 

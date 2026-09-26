@@ -25,9 +25,12 @@ is a suggestion for the user, not an automatic change to the research task.
 ## Use the local knowledge first when it fits
 
 After reading supplied material, use this topic map for established knowledge.
-Read only the relevant card, then its entry in the [source registry](references/sources.json).
-The cards carry assumptions, claim locators, reading depth, and review dates;
-they are not substitutes for checking applicability to the user's system.
+Read only the relevant note, then its cited entries in the
+[source registry](references/sources.json). The notes present assumptions,
+results, limitations, and claim-specific citations as handbook prose. The
+registry provides bibliographic identity, version distinctions when needed,
+and source locators. Neither substitutes for checking applicability to the
+user's system.
 
 | Topic or alias | Read |
 | --- | --- |
@@ -47,7 +50,7 @@ they are not substitutes for checking applicability to the user's system.
 Use the host's file-reading or keyword-search tools; no database or custom
 retrieval service is needed. If the local evidence answers an established question,
 answer with its original sources without a redundant web search. Distinguish what
-the bundled card reports from any primary text you inspect in this session.
+the bundled note reports from any primary text you inspect in this session.
 
 The collection covers classical single-server policies, selected observation-aware
 inference methods, maximum pressure, backfilling, reentrant control, and shared
