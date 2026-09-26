@@ -1,19 +1,21 @@
 # Reusing the Legacy Knowledge Base
 
-Review date: 2026-09-25. **Research and proposal only; no knowledge or runtime code has been migrated.**
+Review and migration date: 2026-09-25. **The first reviewed knowledge slice is
+implemented under `queue-literature`; no legacy runtime code is imported.**
 
-## Recommendation
+## Implemented approach
 
-Reuse the scientific content, not the QueueResearcher runtime. Start with a small,
+Reuse the scientific content, not the QueueResearcher runtime. The first slice is a small,
 shared collection of readable local files: a short topic index, focused knowledge
 cards, and a source registry. Both Stages can consult it through the host agent.
 No vector database, embeddings, always-on server, or new agent framework is needed.
 
-Start under the existing `queue-literature` skill, which already serves both
-Stages. Add local knowledge lookup to its evidence-reading guidance rather than
-introducing another skill just to hold files. It would not run another agent or
-require an online literature search for every question. The layout and card
-format below are recommendations, not confirmed implementation choices.
+The existing `queue-literature` skill serves both Stages. Its topic map directs
+the host to relevant local references before searching externally. It does not
+run another agent or require an online search for every established question.
+The user approved this migration after reviewing the proposal. The legacy audit
+below remains useful context; it is not a claim that the entire old corpus has
+been migrated or scientifically verified.
 
 ## 1. What the old repository actually contains
 
@@ -85,7 +87,7 @@ Plugin. The packaging problem is reaching outside the distributed package, or
 assuming another skill has been installed when a skill is distributed alone.
 Host compatibility still needs testing; documentation is not an installation test.
 
-## 3. Proposed organization
+## 3. Implemented organization
 
 For the first slice, keep the knowledge with the existing shared skill:
 
@@ -97,18 +99,19 @@ skills/
       tool-options.md        # Already present
       knowledge-foundations.md
       policy-c-mu.md
+      policy-generalized-c-mu.md
       policy-srpt.md
-      negative-priority-instability.md
-      ...                    # Focused cards, directly linked from the topic map
+      policy-gittins.md
+      sources.json           # One canonical bibliographic registry
     assets/
-      sources.yaml           # One canonical bibliographic registry
-      card-template.md
+      card-template.md       # Starting point for reviewed contributions
 ```
 
-The filenames illustrate organization, not approved scientific content. In this
-proposal, Markdown cards hold the substantive knowledge; structured source records
-retain citation metadata. There is no second manually maintained YAML copy of
-every card. The short topic map lives in `SKILL.md` and uses tags/aliases such as
+Markdown cards hold substantive knowledge; JSON source records retain citation
+metadata, inspected versions, reading depth, and claim locators. JSON replaces
+the proposal's illustrative YAML registry so checks use only Python's standard
+library. There is no second manually maintained copy of every card.
+The short topic map lives in `SKILL.md` and uses tags/aliases such as
 `c-mu`, `cμ`, `SRPT`, and `M/M/1` to help the host find relevant files.
 
 Other options remain viable as the Plugin grows:
@@ -195,7 +198,7 @@ belong in the user's chosen workspace, when saving them is requested. Useful
 findings can later be proposed as reviewed repository contributions; do not
 silently append agent-generated claims to the installed KB.
 
-## 6. Smallest useful migration, after the design is confirmed
+## 6. Migration procedure and expansion boundary
 
 1. Start with one classical policy card, such as c-mu, and verify its exact
    assumptions and result against the primary source. Then add a size/preemption-
@@ -225,6 +228,43 @@ For community contributions, the initial unit can simply be a focused card plus
 its source records and a reviewable explanation of assumptions. No new database
 service or agent framework is required to contribute useful queueing knowledge.
 
+## 7. First-slice provenance
+
+The migration uses the local legacy commit identified in Section 1. These SHA-256
+digests identify the inspected files even where that commit is not available online:
+
+| Legacy file under `docs/policy_science_kb/` | SHA-256 |
+| --- | --- |
+| `cards/policy_cards.yaml` | `5a44b3cf029652a4c67852ad08987f473ac038fa52bfd491b002f25d2e4d408f` |
+| `sources/source_inventory.yaml` | `8378fc6f5acf60d166375a20eb791d39beb99883f591d3dbabe0467a599243cf` |
+
+| Legacy card or guide | Migrated reference | Main change |
+| --- | --- | --- |
+| `policy.c_mu_linear_priority` | [c-mu](../skills/queue-literature/references/policy-c-mu.md) | Separate a verified single-server exponential-service guarantee from a heuristic ranking in other systems. |
+| `policy.generalized_c_mu_age_delay` | [Generalized c-mu](../skills/queue-literature/references/policy-generalized-c-mu.md) | Attach the heavy-traffic, cost-regularity, and information assumptions; do not imply exact finite-load optimality. |
+| `policy.srpt_size_based` | [SRPT](../skills/queue-literature/references/policy-srpt.md) | Distinguish exact remaining service from estimates and remove automatic multiserver/slowdown guarantees. |
+| `policy.gittins_unknown_size` | [Gittins](../skills/queue-literature/references/policy-gittins.md) | State a concrete unknown-size, attained-service setting instead of loosely combining distinct cost objectives. |
+| `sources/textbook_foundations.md` (reading-list role) | [Model and policy fit](../skills/queue-literature/references/knowledge-foundations.md) | New shared interpretation guidance, not copied textbook content or an implemented Stage 1 estimator. |
+
+Stable policy IDs are preserved. The registry records legacy source-key aliases
+where applicable and the exact version used for each new claim. Earlier source
+keys not supporting the rewritten slice are not silently promoted into verified
+references. The source repository is unchanged.
+
+The cards are original paraphrases of the inspected primary sources, using the
+legacy collection as a topic and provenance index. No full papers, textbook
+passages, old Python models, or generated experimental results are bundled.
+The existing K-Dense notice applies to the adapted literature-workflow guidance;
+it does not assign a license to the cited scientific works.
+
+The remaining 41 legacy cards are deferred, including network-instability,
+admission, and reservation results requiring their own source review. This slice
+also does not implement service-distribution estimation, censoring methods, or
+time-varying arrival fitting for Stage 1. Shared access is not full topic coverage.
+
+For checks and temporary host-agent test outcomes, see
+[behavioral checks](../tests/queue-literature/scenarios.md).
+
 ## Review boundary
 
 The evidence combines direct inspection of legacy files, read-only consistency
@@ -240,5 +280,7 @@ The code review favored a verbatim YAML reference import for minimal change;
 the content review favored reviewed Markdown rewrites. The recommendation here
 keeps the minimal existing-skill location but adopts a small, source-checked
 rewrite because preserving old wording unchanged would also preserve its errors.
-External standards support the file-based pattern; the particular content layout,
-card format, and migration sequence remain proposals.
+External standards support the file-based pattern. The first-slice layout and
+migration are now implemented; broader coverage and host packaging remain future
+steps. Format checks establish content integrity, not mathematical correctness;
+source review and host behavior are checked separately.

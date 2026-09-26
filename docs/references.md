@@ -9,7 +9,7 @@ Reference review: 2026-09-25. Confirmed decisions, external references, and open
 - Develop incrementally in the standalone, private [queue-agent-plugin repository](https://github.com/htizhang/queue-agent-plugin).
 - Use English for all repository content.
 - Discuss one workflow step at a time. Once confirmed, record it here and implement the agreed scope.
-- The initial repository contains the overview and references, not an installable Plugin. No implementation or experiment data from the earlier research repository is included.
+- The repository contains the overview, references, and shared skill content, not an installable Plugin. No legacy runtime implementation or experiment data is included.
 
 ### Two-Stage overview
 
@@ -34,14 +34,22 @@ Implementation sources, adaptation details, and the upstream MIT notice are reco
 
 ### Knowledge reuse: current scope
 
-- Investigate reusing the earlier QueueResearcher knowledge base for this Plugin.
-- Do not introduce a vector knowledge base.
-- This step is research and design documentation only: no corpus migration,
-  runtime imports, Plugin installation, or local agent/MCP configuration changes.
+- Migrate a small, source-checked slice of the earlier knowledge base under the
+  existing `queue-literature` skill, shared by Stage 1 and Stage 2.
+- Store scientific content in focused Markdown cards, with a short topic map and
+  one JSON source registry. JSON keeps integrity checks dependency-free; there
+  is no duplicate YAML copy of the cards.
+- Use ordinary host file reading and keyword search. Do not introduce a vector
+  knowledge base, embeddings, or a new retrieval service.
+- Preserve source identity, relevant claim locators, assumptions, review scope,
+  and legacy origin. Rewrite overbroad claims rather than treating old confidence
+  labels as verification. Do not import the old runtime, experiments, or agent framework.
+- Do not install the Plugin or change local agent/MCP configuration. Use existing
+  local CC and codex-x for source-loaded checks and independent review.
 
-See [legacy KB findings and migration proposal](knowledge-base-migration.md) for
-the inspected content, external templates, and a suggested shared file-based
-layout. The knowledge layout, card format, and migration sequence are not yet confirmed.
+See [migration and provenance](knowledge-base-migration.md) for the implemented
+slice, legacy audit findings, and deferred material. Host packaging remains a
+separate step.
 
 ## 2. Official standards
 

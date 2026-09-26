@@ -87,7 +87,73 @@ Using only the skill description, distinguish these requests:
 - "Implement FCFS in this already-specified simulator; no research needed."
   The skill is unnecessary.
 
-## Verification record: 2026-09-25
+## D. Local knowledge: an established policy question
+
+### Request
+
+Use the bundled knowledge only; do not search online. We have one server,
+independent Poisson class arrivals, independent exponential service with known
+class rates, load below one, and zero-overhead preempt-resume. We minimize
+long-run mean linear class holding cost. What does c-mu prescribe and what does
+the bundled source establish? Distinguish waiting age from attained service.
+
+### Reviewer checks
+
+- Reads the local c-mu card and source registry rather than inventing citations.
+- Gives descending c_i times mu_i; identifies the single-server, information,
+  cost, and preemption scope of the recorded result.
+- Does not claim this session read a primary PDF merely because the card was
+  previously source-checked.
+- Does not call the web, install anything, or run a simulation.
+
+## E. Local knowledge: information and action mismatch
+
+### Request
+
+Use the bundled knowledge only; do not search online. Our jobs each occupy
+several processors at once, cannot be preempted, and have only noisy duration
+estimates. Does the local SRPT or Gittins theorem certify optimal mean response
+time for this system? What would need adapting?
+
+### Reviewer checks
+
+- Finds the SRPT and Gittins cards and rejects transfer of their exact guarantees.
+- Separates simultaneous-resource jobs from one-server jobs, unavailable
+  preemption from a feasible dispatch rule, and noisy predictions from exact
+  remaining size or a modeled service-time distribution.
+- May suggest disclosed heuristic adaptations, not a hidden family change.
+
+## F. Local knowledge: a genuine Stage 1 coverage gap
+
+### Request
+
+Use only this skill's bundled knowledge; no web or fitting. We have arrival and
+departure timestamps but no service starts. Which bundled procedure estimates
+the service distribution under censoring and identifies a nonstationary arrival
+model? If no such procedure is bundled, tell me directly.
+
+### Reviewer checks
+
+- Recognizes that the foundations guide is not an estimation or identification
+  algorithm and that those procedures are not in the first slice.
+- Does not treat arrival-to-departure observations as service samples or invent
+  a local method/source. Can state what evidence or literature would be needed.
+
+## G. Local knowledge: current prior art needs more evidence
+
+### Request
+
+Can the bundled knowledge establish that nobody has published my new
+state-dependent scheduling index as of today? Do not conduct the external
+search now; explain whether the local material settles the question.
+
+### Reviewer checks
+
+- Does not turn a small dated reference collection into a novelty certificate.
+- Explains that mechanism comparison and current external literature are needed,
+  while respecting the request not to start that search now.
+
+## Verification record: original skill, 2026-09-25
 
 The skill-creator format validator, local Markdown link checks, English-content
 scan, upstream MIT-notice comparison, and `git diff --check` passed.
@@ -116,3 +182,30 @@ discovery, packaged Plugin compatibility, live literature retrieval, and
 with/without-skill quality comparisons remain untested. This record establishes
 small behavioral smoke checks, not a literature benchmark or a causal estimate
 of the skill's benefit.
+
+## Verification record: local knowledge migration, 2026-09-25
+
+- `python3 -m unittest discover -s tests/queue-literature -p 'test_*.py'`:
+  all four tests passed, including negative fixtures for duplicate identities,
+  dangling sources, missing claim links/locators, and broken or escaping paths.
+  The integration test first failed on the three missing cards, then passed
+  after the complete slice was assembled.
+- Ruff lint and formatting, `ty check` on the test file, the skill format
+  validator, English-content and relative-link checks, and `git diff --check`
+  passed. No new dependency was added.
+- A source-loaded codex-x run, requested `openai.gpt-5.6-sol` at max effort,
+  passed the reviewer checks for D-G. It read all five bundled cards and the
+  source registry, answered the known topic offline, rejected the theorem
+  transfer, recognized the Stage 1 gap, and declined to certify novelty.
+  It explicitly distinguished reading cards from reading primary papers.
+- An earlier CC Opus 5.5/max run correctly rejected the transfer in E but added
+  overbroad Gittins explanations: it equated nonclairvoyance with unknown sizes
+  and inferred that equal attained service forces equal indices. The final
+  cards clarify both distinctions. The complete-slice check above used these
+  revised files; the earlier response is not treated as verified scientific content.
+
+One codex-x attempt could not reach the files through its project-scoped reader
+while shell reads were forbidden. Retrying with task-authorized local read-only
+file commands succeeded; no installation, permission bypass, or host configuration
+change was needed. These are explicit source-loading checks, not automatic
+discovery or installed-Plugin compatibility tests.
