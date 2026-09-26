@@ -33,9 +33,9 @@ simulator-neutral reference notes, not as framework code.
   work for Stage 1 modeling and Stage 2 policy design. It adapts selected
   open-source review guidance, adds queue-specific questions, and uses available
   host tools rather than requiring a particular search provider. Its local
-  references cover queue state and event dynamics, model validation, arrival and
-  service inference, incomplete logs, and censoring, alongside classical
-  scheduling, network control, backfilling, and paired simulation evaluation;
+  references cover system-to-model abstraction, queue state and event dynamics,
+  model validation, arrival and service inference, incomplete logs, and censoring,
+  alongside classical scheduling, network control, backfilling, and paired simulation evaluation;
   established questions can be answered without repeating an online search.
 
 The skill is source content in this repository. Nothing is installed or

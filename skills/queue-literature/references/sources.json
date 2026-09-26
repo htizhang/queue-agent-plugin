@@ -773,6 +773,40 @@
         "arXiv v4, Appendix A.2 and Figure 16, Least Loaded Updated versus Least Loaded Total"
       ],
       "version": "IEEE Transactions on Parallel and Distributed Systems article; locators use arXiv v4."
+    },
+    {
+      "id": "adan_resing_2015_queueing_systems",
+      "title": "Queueing Systems",
+      "authors": [
+        "Ivo Adan",
+        "Jacques Resing"
+      ],
+      "year": 2015,
+      "url": "https://www.win.tue.nl/~iadan/queueing.pdf",
+      "doi": null,
+      "version": "Lecture notes dated March 26, 2015.",
+      "locators": [
+        "Section 2.6, p. 19: merging and splitting independent Poisson streams",
+        "Section 3.1, pp. 23-25: queue model components and Kendall notation",
+        "Section 3.2, p. 25: offered work and multi-server capacity"
+      ]
+    },
+    {
+      "id": "gans_koole_mandelbaum_2003_call_centers",
+      "title": "Telephone Call Centers: Tutorial, Review, and Research Prospects",
+      "authors": [
+        "Noah Gans",
+        "Ger Koole",
+        "Avishai Mandelbaum"
+      ],
+      "year": 2003,
+      "url": "https://faculty.wharton.upenn.edu/wp-content/uploads/2012/04/Gans-Koole-Mandelbaum-CCReview.pdf",
+      "doi": "10.1287/msom.5.2.79.16071",
+      "locators": [
+        "Section 2.2, pp. 83-85: call lifecycle, after-call work, retrials, and returns",
+        "Section 2.3, p. 87: handle time includes talk, hold, and wrap-up",
+        "Section 2.4, pp. 88-89: trunk lines, agent capacity, blocking, and queueing structure"
+      ]
     }
   ]
 }

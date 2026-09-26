@@ -18,6 +18,7 @@ EXPECTED_NOTE_FILENAMES = {
     "modeling-model-adequacy-validation.md",
     "modeling-partial-event-logs.md",
     "modeling-state-and-dynamics.md",
+    "modeling-system-description-primitives.md",
     "modeling-time-varying-arrivals.md",
     "policy-backfilling.md",
     "policy-c-mu.md",
