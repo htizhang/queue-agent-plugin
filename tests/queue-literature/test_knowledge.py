@@ -15,6 +15,10 @@ EXPECTED_CARDS = {
     "policy-generalized-c-mu.md": "policy.generalized_c_mu_age_delay",
     "policy-gittins.md": "policy.gittins_unknown_size",
     "policy-srpt.md": "policy.srpt_size_based",
+    "modeling-partial-event-logs.md": "modeling.partial_event_logs",
+    "modeling-call-center-primitives.md": "modeling.call_center_primitives",
+    "policy-maximum-pressure.md": "policy.maximum_pressure_network",
+    "policy-backfilling.md": "policy.easy_conservative_backfilling",
 }
 CARD_FIELDS = {
     "ID",

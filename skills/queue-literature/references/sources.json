@@ -44,6 +44,85 @@
         "van_mieghem_1995_gc_mu"
       ],
       "note": "Read the relevant model, convergence assumptions, and optimality statements in the author manuscript labeled Final version of MS #0494-007 Rev. 1. The journal publication identity/year/DOI were checked against Crossref and the author university page; the journal typeset full text was not inspected. Locators refer to the author manuscript, not journal numbering."
+    },
+    {
+      "id": "sutton_jordan_2011_queue_inference",
+      "title": "Bayesian inference for queueing networks and modeling of internet services",
+      "authors": [
+        "Charles Sutton",
+        "Michael I. Jordan"
+      ],
+      "year": 2011,
+      "url": "https://arxiv.org/pdf/1001.3355v3",
+      "doi": "10.1214/10-AOAS392",
+      "reading_depth": "relevant-full-text",
+      "locators": [
+        "arXiv v3 electronic reprint, Sections 2.4 and 3.1-3.2",
+        "Sections 6-8: exponential-service experimental models"
+      ],
+      "reviewed_on": "2026-09-25",
+      "legacy_keys": [],
+      "note": "Inspected electronic reprint; its pagination differs from the journal."
+    },
+    {
+      "id": "brown_et_al_2005_call_center",
+      "title": "Statistical Analysis of a Telephone Call Center: A Queueing-Science Perspective",
+      "authors": [
+        "Lawrence Brown",
+        "Noah Gans",
+        "Avishai Mandelbaum",
+        "Anat Sakov",
+        "Haipeng Shen",
+        "Sergey Zeltyn",
+        "Linda Zhao"
+      ],
+      "year": 2005,
+      "url": "https://www.columbia.edu/~ww2040/4615S13/Brown2005.pdf",
+      "doi": "10.1198/016214504000001808",
+      "reading_depth": "relevant-full-text",
+      "locators": [
+        "Journal Sections 3.1, 4.3 and 5.1"
+      ],
+      "reviewed_on": "2026-09-25",
+      "legacy_keys": [],
+      "note": "Journal PDF inspected, including title-page identity; not the earlier longer manuscript."
+    },
+    {
+      "id": "dai_lin_2005_maximum_pressure",
+      "title": "Maximum Pressure Policies in Stochastic Processing Networks",
+      "authors": [
+        "J. G. Dai",
+        "Wuqin Lin"
+      ],
+      "year": 2005,
+      "url": "https://www2.isye.gatech.edu/~dai/publications/daiLin05.pdf",
+      "doi": "10.1287/opre.1040.0170",
+      "reading_depth": "relevant-full-text",
+      "locators": [
+        "Sections 2-4, Definitions 1-2, Theorem 2",
+        "Sections 7-8, Theorems 8-9"
+      ],
+      "reviewed_on": "2026-09-25",
+      "legacy_keys": [],
+      "note": "Author-hosted journal PDF inspected."
+    },
+    {
+      "id": "mualem_feitelson_2001_backfilling",
+      "title": "Utilization, Predictability, Workloads, and User Runtime Estimates in Scheduling the IBM SP2 with Backfilling",
+      "authors": [
+        "Ahuva W. Mu'alem",
+        "Dror G. Feitelson"
+      ],
+      "year": 2001,
+      "url": "https://www.cs.huji.ac.il/w~feit/papers/SP2backfil01TPDS.pdf",
+      "doi": "10.1109/71.932708",
+      "reading_depth": "relevant-full-text",
+      "locators": [
+        "Sections 2.1-2.2, 3.3 and 4; journal pp. 529-543; author manuscript pagination differs"
+      ],
+      "reviewed_on": "2026-09-25",
+      "legacy_keys": [],
+      "note": "Read the journal text uploaded by Ahuva Mu'alem on ResearchGate and the 25-page author-hosted manuscript linked from Feitelson's publication list. Both identify the 2001 work that supersedes the 1998 predecessor."
     }
   ]
 }

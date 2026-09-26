@@ -51,6 +51,13 @@ See [migration and provenance](knowledge-base-migration.md) for the implemented
 slice, legacy audit findings, and deferred material. Host packaging remains a
 separate step.
 
+The user also approved knowledge construction through multiple local CC research
+leads using `research` and `research-deep`, with parent interaction, external
+source supplementation, and codex-x review when available. These are development
+tools, not required dependencies of the delivered skill. See the
+[first expansion](knowledge-base-expansion.md) for the prepared additions and
+remaining verification scope.
+
 ## 2. Official standards
 
 | Layer | Purpose | Primary reference |

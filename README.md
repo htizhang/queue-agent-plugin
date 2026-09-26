@@ -33,7 +33,8 @@ simulator-neutral reference cards, not as framework code.
   work for Stage 1 modeling and Stage 2 policy design. It adapts selected
   open-source review guidance, adds queue-specific questions, and uses available
   host tools rather than requiring a particular search provider. Its local
-  references cover c-mu, generalized c-mu, SRPT, Gittins, and model-policy fit;
+  references cover c-mu, generalized c-mu, SRPT, Gittins, model-policy fit,
+  selected inference methods, maximum pressure, and backfilling;
   established questions can be answered without repeating an online search.
 
 The skill is source content in this repository. Nothing is installed or
