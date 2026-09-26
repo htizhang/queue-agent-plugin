@@ -11,18 +11,38 @@ implementation plan.
 - Develop incrementally in the standalone, private [queue-agent-plugin repository](https://github.com/htizhang/queue-agent-plugin).
 - Use English for all repository content.
 - Discuss one workflow step at a time. Once confirmed, record it here and implement the agreed scope.
-- The repository contains the overview, references, and shared skill content, not an installable Plugin. No legacy runtime implementation or experiment data is included.
+- The repository contains the overview, references, and skill source files, not an installable Plugin. No legacy runtime implementation or experiment data is included.
 
 ### Two-Stage overview
 
 Users interact with their own coding agent, with Claude Code and Codex as the intended hosts:
 
-- **Stage 1 — Queue modeling:** build and check a queue model from data and a system description.
+- **Stage 1 — Queue modeling:** build and check an executable queue simulator from data and a system description, with replaceable policies.
 - **Stage 2 — Policy design:** design, evaluate, and improve queue policies for a model or model family.
 
 The Plugin first gives the agent this task map: **data → queue model → policy**. The user's current task determines where to start; not every request must run both Stages.
 
 Research direction remains with the user and host agent. The Plugin supplies reusable domain knowledge, methods, tools, and cases rather than a separate, fixed agent framework. The queueing community can contribute additional capabilities and knowledge.
+
+### Stage 1 modeling capability
+
+- Implement [queue-modeling](../skills/queue-modeling/SKILL.md) as guidance for
+  building, calibrating, and validating an executable queue simulator from data
+  and a system description.
+- The simulator generates trajectories and accepts policy decisions, so it can
+  support subsequent policy evaluation. Its handoff includes the fitted
+  configuration, execution instructions, and concise modeling and validation
+  notes.
+- Encourage a separate validation subagent, where the host supports it, to work
+  from the original evidence and run checks. Feedback should identify concrete
+  discrepancies and supporting results; the main agent integrates the feedback
+  and revises the model.
+- Leave the representation, simulation tools, agent allocation, and iteration
+  schedule to the host agent and the user's task.
+- Reuse the existing queue-literature skill and its local knowledge. Keep runtime
+  instructions focused on the modeling task and useful resources.
+- Add skill source content and behavioral checks; host packaging and installation
+  remain separate steps.
 
 ### Shared literature capability
 
