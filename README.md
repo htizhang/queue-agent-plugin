@@ -25,7 +25,7 @@ not an installable Plugin.
 Host packaging and tool integrations are not implemented yet.
 No runtime implementation, experiment data, or credentials from the earlier
 research repository are included. Selected knowledge is migrated as reviewed,
-simulator-neutral reference cards, not as framework code.
+simulator-neutral reference notes, not as framework code.
 
 ## Shared skills
 
@@ -33,7 +33,9 @@ simulator-neutral reference cards, not as framework code.
   work for Stage 1 modeling and Stage 2 policy design. It adapts selected
   open-source review guidance, adds queue-specific questions, and uses available
   host tools rather than requiring a particular search provider. Its local
-  references cover c-mu, generalized c-mu, SRPT, Gittins, and model-policy fit;
+  references cover queue state and event dynamics, model validation, arrival and
+  service inference, incomplete logs, and censoring, alongside classical
+  scheduling, network control, backfilling, and paired simulation evaluation;
   established questions can be answered without repeating an online search.
 
 The skill is source content in this repository. Nothing is installed or
@@ -55,4 +57,5 @@ Run the dependency-free content checks from the repository root:
 python3 -m unittest discover -s tests/queue-literature -p 'test_*.py'
 ```
 
-These check reference integrity, not theorem correctness or installed-host compatibility.
+These check the plain-note contract and reference integrity, not theorem
+correctness or installed-host compatibility.

@@ -1,16 +1,5 @@
 # Model-Policy Fit
 
-| Field | Value |
-| --- | --- |
-| ID | foundations.model-policy-fit |
-| Kind | foundations |
-| Stage relevance | Stage 1, Stage 2 |
-| Aliases | model fit, policy fit, result transfer, Kendall notation, information model, exact size, size estimate, attained service, waiting age |
-| Sources | scully_harchol_balter_2021_gittins, van_mieghem_1995_gc_mu |
-| Review | source-checked |
-| Reviewed on | 2026-09-25 |
-| Legacy origin | queue-research a0dc5cc: adapted from docs/policy_science_kb/sources/textbook_foundations.md and new synthesis |
-
 ## Mechanism
 
 A source's guarantee applies only when the target meets its assumptions on
@@ -41,16 +30,17 @@ Keep these information models apart:
   job's service so far.
 - **Waiting age:** time spent waiting, not service received.
 
-| Card | Decision-time information | Reviewed result |
+| Note | Decision-time information | Result |
 | --- | --- | --- |
 | [c-mu](policy-c-mu.md) | class service rates and linear cost rates | exact; class-weighted mean response time |
 | [Generalized c-mu](policy-generalized-c-mu.md) | class service rates, marginal delay cost, each class's oldest waiting age | heavy-traffic asymptotic; finite-horizon convex delay cost |
 | [SRPT](policy-srpt.md) | exact remaining sizes | exact; mean response time |
 | [Gittins](policy-gittins.md) | job state such as attained service; known job model and holding costs | exact; mean holding cost |
 
-All four concern one station, each job using one server at a time; the cards
-give full models. No Stage 1 estimation, censoring, nonhomogeneous-Poisson, or
-model-validation procedure is included.
+All four concern one station, each job using one server at a time; the linked
+notes give full models. This note concerns result transfer; use the separate
+[model-validation](modeling-model-adequacy-validation.md) and
+[observation/inference](modeling-partial-event-logs.md) notes for Stage 1 methods.
 
 ## Evidence
 

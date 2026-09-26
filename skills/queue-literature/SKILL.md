@@ -25,27 +25,56 @@ is a suggestion for the user, not an automatic change to the research task.
 ## Use the local knowledge first when it fits
 
 After reading supplied material, use this topic map for established knowledge.
-Read only the relevant card, then its entry in the [source registry](references/sources.json).
-The cards carry assumptions, claim locators, reading depth, and review dates;
-they are not substitutes for checking applicability to the user's system.
+Read only the relevant note, then its cited entries in the
+[source registry](references/sources.json). The notes present assumptions,
+results, limitations, and claim-specific citations as handbook prose. The
+registry provides bibliographic identity, version distinctions when needed,
+and source locators. Neither substitutes for checking applicability to the
+user's system.
+
+### Stage 1: queue modeling
 
 | Topic or alias | Read |
 | --- | --- |
-| Model assumptions, observations, Kendall notation, M/M/1, M/G/1, baseline fit | [Model and policy fit](references/knowledge-foundations.md) |
+| State sufficiency, Markov state, ages, event calendar, feasible actions | [Queue state and dynamics](references/modeling-state-and-dynamics.md) |
+| Model adequacy, output validation, observation maps, structural uncertainty | [Queue model validation](references/modeling-model-adequacy-validation.md) |
+| Event semantics, offered/admitted arrivals, finite-window accounting, PASTA | [Reading queue logs](references/modeling-event-log-semantics.md) |
+| Identifiability, reconstruction, QIE, transactional logs, unlinked events | [What queue logs identify](references/modeling-log-identifiability.md) |
+| Partial event logs, latent service, missing tasks | [Queue inference from partial logs](references/modeling-partial-event-logs.md) |
+| NHPP diagnostics, arrival blocks, service fit, censored patience | [Arrival, service, and patience inference](references/modeling-call-center-primitives.md) |
+| Time-varying arrivals, NHPP checks, Cox process, one sample path | [Time-varying arrival models](references/modeling-time-varying-arrivals.md) |
+| Censoring, truncation, completion-only logs, patience bounds | [Censoring and truncation](references/modeling-censoring-truncation.md) |
+| Fitted parameters, KS calibration, parametric bootstrap | [Fitted-distribution tests](references/modeling-fitted-distribution-tests.md) |
+
+### Stage 2: policy design
+
+| Topic or alias | Read |
+| --- | --- |
 | c-mu, cμ, cµ, linear class holding cost | [c-mu priority](references/policy-c-mu.md) |
 | Generalized c-mu, convex delay cost, waiting age | [Generalized c-mu](references/policy-generalized-c-mu.md) |
 | SRPT, known size, remaining processing time | [SRPT](references/policy-srpt.md) |
 | Gittins, unknown size, attained service, service distribution | [Gittins](references/policy-gittins.md) |
+| JSQ, SED, JSW, power-of-d, routing, stale or predicted load | [Load-balancing dispatch](references/policy-load-balancing.md) |
+| Maximum pressure, MaxWeight, backpressure, network stability | [Maximum pressure](references/policy-maximum-pressure.md) |
+| EASY, conservative backfilling, rigid parallel jobs, reservations | [Backfilling](references/policy-backfilling.md) |
+| Reentrant lines, FBFS, LBFS, stage-index priority | [Reentrant stage-priority dispatch](references/policy-reentrant-stage-priority.md) |
+| WIPLOAD, WIPLCtrl, remaining work, lot release | [WIPLOAD release control](references/policy-reentrant-wipload-release.md) |
+
+### Shared: model fit and evaluation
+
+| Topic or alias | Read |
+| --- | --- |
+| Model assumptions, observations, Kendall notation, M/M/1, M/G/1, baseline fit | [Model and policy fit](references/knowledge-foundations.md) |
+| Paired policy evaluation, common random numbers, random streams, warm-up | [Paired CRN evaluation](references/policy-evaluation-paired-crn.md) |
 
 Use the host's file-reading or keyword-search tools; no database or custom
 retrieval service is needed. If the local evidence answers an established question,
 answer with its original sources without a redundant web search. Distinguish what
-the bundled card reports from any primary text you inspect in this session.
+the bundled note reports from any primary text you inspect in this session.
 
-This first slice covers classical single-server policy results and shared model-fit
-guidance. It does not supply Stage 1 estimation procedures, a full network-policy
-catalog, or current prior-art coverage. For missing or disputed evidence, new work,
-or a requested novelty/landscape review, continue with external research below.
+For missing or disputed evidence, new work, or a requested novelty/landscape
+review, continue with external research below. The local collection is a
+reusable starting point, not a claim of complete or current prior-art coverage.
 If retrieval is unavailable, identify that gap rather than inventing a local answer.
 
 ## Find and read external evidence when needed

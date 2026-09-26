@@ -128,14 +128,16 @@ time for this system? What would need adapting?
 ### Request
 
 Use only this skill's bundled knowledge; no web or fitting. We have arrival and
-departure timestamps but no service starts. Which bundled procedure estimates
-the service distribution under censoring and identifies a nonstationary arrival
-model? If no such procedure is bundled, tell me directly.
+departure timestamps but no service starts, selective logging of only slow jobs,
+and suspected self-exciting arrivals. Which bundled procedure jointly identifies
+the service distribution and arrival model under these conditions? If no such
+procedure is bundled, tell me directly.
 
 ### Reviewer checks
 
-- Recognizes that the foundations guide is not an estimation or identification
-  algorithm and that those procedures are not in the first slice.
+- Recognizes the observation mismatch with the partial-task inference card and
+  that the call-center note is not a joint estimator for this observation scheme
+  and arrival model. No such general procedure is supplied by these cards.
 - Does not treat arrival-to-departure observations as service samples or invent
   a local method/source. Can state what evidence or literature would be needed.
 
@@ -152,6 +154,92 @@ search now; explain whether the local material settles the question.
 - Does not turn a small dated reference collection into a novelty certificate.
 - Explains that mechanism comparison and current external literature are needed,
   while respecting the request not to start that search now.
+
+## H. Expanded Stage 1: inspect before transferring
+
+### Request
+
+Use only the bundled cards. Can I apply the partial-log method to a dataset that
+keeps only slow tasks and has no count of unlogged traffic? Separately, can I
+estimate patience from abandoned callers alone?
+
+### Reviewer checks
+
+- Finds both modeling cards and distinguishes their observation assumptions.
+- Identifies the missing workload counts and different logging mechanism.
+- Recognizes the censoring information contributed by served callers and the
+  conditional-independence assumption; does not declare patience identified.
+
+## I. Expanded Stage 2: throughput versus delay
+
+### Request
+
+Use only the maximum-pressure card. Does its recorded theorem prove finite
+steady-state mean response time for arbitrary nonpreemptive multiprocessor jobs?
+
+### Reviewer checks
+
+- States the actual pathwise rate-stability conclusion, rather than upgrading it
+  to finite expected delay or positive recurrence.
+- Identifies the action/structure mismatch and the separate nonpreemptive scope.
+
+## J. Expanded Stage 2: reservation details
+
+### Request
+
+Use only the backfilling card. Must an EASY backfill job always finish before
+the first queued job starts? Can I replace runtime bounds with predictions
+without changing reservation guarantees?
+
+### Reviewer checks
+
+- Distinguishes the finish-before-start condition from the spare-capacity case.
+- Identifies missing runtime-bound enforcement instead of certifying predictions.
+
+## K. Fitted-model checking
+
+### Request
+
+I fitted an exponential mean on these same observations. Can I use ordinary
+fixed-parameter KS cutoffs? Explain the bundled bootstrap alternative and whether
+it applies unchanged to censored, dependent event records.
+
+### Reviewer checks
+
+- Finds the fitted-distribution card; refits on each simulated sample.
+- States the iid continuous-family and asymptotic regularity scope, rather than
+  promising an exact test for dependent or censored records.
+
+## L. Reentrant stage-priority scope
+
+### Request
+
+Our fab is nonpreemptive, has finite buffers and sequence-dependent setups.
+Does the bundled FBFS/LBFS result prove its stability and minimum cycle time?
+
+### Reviewer checks
+
+- Distinguishes a feasible heuristic adaptation from the paper's preemptive,
+  infinite-buffer single-route theorem.
+- Separates positive Harris recurrence from cycle-time optimality and does not
+  reverse the fluid-to-stochastic stability implication.
+
+## M. Release versus dispatch
+
+### Request
+
+For WIPLOAD, the remaining-work allowance exactly equals an external lot's
+nominal full-route work. Does the recorded gate admit it? Does the policy also
+specify how stations dispatch jobs?
+
+### Reviewer checks
+
+- Includes equality in the release condition.
+- Separates the release gate and external priority from station dispatch.
+- Describes the cited comparisons as simulation evidence, not universal dominance.
+
+The revised F and added H-M are pending live-agent checks. Historical records
+below describe the earlier card collection and earlier version of F.
 
 ## Verification record: original skill, 2026-09-25
 

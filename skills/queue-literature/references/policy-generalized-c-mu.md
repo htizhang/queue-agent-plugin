@@ -1,16 +1,5 @@
 # Generalized c-mu for Convex Delay Costs
 
-| Field | Value |
-| --- | --- |
-| ID | policy.generalized_c_mu_age_delay |
-| Kind | policy |
-| Stage relevance | Stage 1, Stage 2 |
-| Aliases | generalized c-mu, generalized cμ, convex delay cost, oldest waiting age, heavy traffic |
-| Sources | van_mieghem_1995_gc_mu |
-| Review | source-checked |
-| Reviewed on | 2026-09-25 |
-| Legacy origin | queue-research a0dc5cc: policy.generalized_c_mu_age_delay |
-
 ## Mechanism
 
 For each nonempty class $i$, let $a_i(t)$ be the age of its oldest waiting job,
@@ -21,18 +10,18 @@ With linear $C_i$, the score reduces to [c-mu](policy-c-mu.md).
 
 ## Applicability
 
-The reviewed core model is a multiclass single-server system with nondecreasing
+The source's core model is a multiclass single-server system with nondecreasing
 convex delay costs. The controller observes arrivals and queue contents, not
 the actual service requirements of waiting jobs. The objective aggregates
 per-job delay costs over a finite horizon; it is not an arbitrary tail-risk or
 deadline objective.
 
 The result is **heavy-traffic asymptotic optimality along a scaled sequence of
-systems**, not exact optimality at a particular finite load. In the inspected
-author manuscript, Assumption 1 specifies input-process convergence,
+systems**, not exact optimality at a particular finite load. In the author
+manuscript, Assumption 1 specifies input-process convergence,
 Assumption 2 cost scaling, and Assumption 3 smooth strictly convex limiting
 costs with an interior optimizer. The paper also discusses boundary cases;
-this card does not replace those conditions by merely saying the load is high.
+this note does not replace those conditions by merely saying the load is high.
 
 ## Evidence
 

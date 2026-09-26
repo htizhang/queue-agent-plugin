@@ -1,6 +1,8 @@
 # Queue Agent Plugin: References and Design Decisions
 
-Reference review: 2026-09-25. Confirmed decisions, external references, and open questions are kept separate. Upstream examples are not automatically our implementation plan.
+Last updated: 2026-09-26. Confirmed decisions, external references, and open
+questions are kept separate. Upstream examples are not automatically our
+implementation plan.
 
 ## 1. Confirmed decisions
 
@@ -36,20 +38,33 @@ Implementation sources, adaptation details, and the upstream MIT notice are reco
 
 - Migrate a small, source-checked slice of the earlier knowledge base under the
   existing `queue-literature` skill, shared by Stage 1 and Stage 2.
-- Store scientific content in focused Markdown cards, with a short topic map and
-  one JSON source registry. JSON keeps integrity checks dependency-free; there
-  is no duplicate YAML copy of the cards.
+- Store scientific content as focused Markdown handbook notes, with a short topic
+  map and one JSON source registry. JSON keeps integrity checks dependency-free;
+  there is no duplicate YAML copy of the notes.
 - Use ordinary host file reading and keyword search. Do not introduce a vector
   knowledge base, embeddings, or a new retrieval service.
-- Preserve source identity, relevant claim locators, assumptions, review scope,
-  and legacy origin. Rewrite overbroad claims rather than treating old confidence
-  labels as verification. Do not import the old runtime, experiments, or agent framework.
+- Keep Stage and topic discovery in the skill's topic map. Notes use handbook
+  prose for assumptions, results, limitations, and citations rather than
+  per-note IDs, aliases, review status, dates, or migration origin.
+- Keep stable note paths and source IDs. Limit runtime source records to
+  bibliographic identity, useful claim locators, and a concise version qualifier
+  when citation identity requires it. Preserve scientifically meaningful
+  unverified or secondhand scope in the note prose.
+- Rewrite overbroad claims rather than treating old confidence labels as
+  verification. Do not import the old runtime, experiments, or agent framework.
 - Do not install the Plugin or change local agent/MCP configuration. Use existing
   local CC and codex-x for source-loaded checks and independent review.
 
 See [migration and provenance](knowledge-base-migration.md) for the implemented
 slice, legacy audit findings, and deferred material. Host packaging remains a
 separate step.
+
+The user also approved knowledge construction through multiple local CC research
+leads using `research` and `research-deep`, with parent interaction, external
+source supplementation, and codex-x review when available. These are development
+tools, not required dependencies of the delivered skill. See the
+[first expansion](knowledge-base-expansion.md) for the prepared additions and
+remaining verification scope.
 
 ## 2. Official standards
 

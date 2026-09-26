@@ -10,18 +10,13 @@
       "year": 2021,
       "url": "https://arxiv.org/pdf/2111.10703v1",
       "doi": "10.23919/WiOpt52861.2021.9589051",
-      "reading_depth": "relevant-full-text",
+      "version": "Claims and locators use arXiv v1, labeled Extended and Revised Version, rather than assuming equivalence with the related WiOpt publication identified by the DOI.",
       "locators": [
         "arXiv v1, PDF p. 1, abstract and Section I",
         "arXiv v1, PDF pp. 4-5, Section III.A-III.G, Examples III.1-III.2",
         "arXiv v1, PDF pp. 5-6, Definition IV.2, Example IV.3, and Section IV.B",
         "arXiv v1, PDF p. 6, Theorem V.1"
-      ],
-      "reviewed_on": "2026-09-25",
-      "legacy_keys": [
-        "scully_harchol_balter_2021_gittins"
-      ],
-      "note": "Inspected the 10-page arXiv v1 PDF dated 21 November 2021, labeled Extended and Revised Version. Crossref identity-checked the DOI of the related 8-page 2021 WiOpt publication. Claims and locators here refer to arXiv v1, not an assertion that the two versions are identical."
+      ]
     },
     {
       "id": "van_mieghem_1995_gc_mu",
@@ -32,18 +27,752 @@
       "year": 1995,
       "url": "https://www.kellogg.northwestern.edu/faculty/VanMieghem/htm/gcmu0.pdf",
       "doi": "10.1214/aoap/1177004706",
-      "reading_depth": "relevant-full-text",
+      "version": "Claims and locators use the author manuscript dated 1994-10-25; numbering is not asserted to match the journal version identified by the DOI.",
       "locators": [
         "Author manuscript dated 1994-10-25, Sections 1-2 and Proposition 1",
         "Author manuscript Section 3, Assumptions 1-2",
         "Author manuscript Section 4.2, Assumption 3, Proposition 7, equation (54) and subsequent discussion",
         "Author manuscript Section 4.3, Proposition 8"
+      ]
+    },
+    {
+      "id": "sutton_jordan_2011_queue_inference",
+      "title": "Bayesian inference for queueing networks and modeling of internet services",
+      "authors": [
+        "Charles Sutton",
+        "Michael I. Jordan"
       ],
-      "reviewed_on": "2026-09-25",
-      "legacy_keys": [
-        "van_mieghem_1995_gc_mu"
+      "year": 2011,
+      "url": "https://arxiv.org/pdf/1001.3355v3",
+      "doi": "10.1214/10-AOAS392",
+      "version": "Claims and locators use the arXiv v3 electronic reprint; its pagination differs from the journal version.",
+      "locators": [
+        "arXiv v3 electronic reprint, Sections 2.4 and 3.1-3.2",
+        "Sections 6-8: exponential-service experimental models",
+        "arXiv v3 electronic reprint, Section 2, equation (1), pp. 5-6; Section 2.1, equations (2)-(3), pp. 6-7",
+        "Section 2.3, equation (7), pp. 7-8"
+      ]
+    },
+    {
+      "id": "brown_et_al_2005_call_center",
+      "title": "Statistical Analysis of a Telephone Call Center: A Queueing-Science Perspective",
+      "authors": [
+        "Lawrence Brown",
+        "Noah Gans",
+        "Avishai Mandelbaum",
+        "Anat Sakov",
+        "Haipeng Shen",
+        "Sergey Zeltyn",
+        "Linda Zhao"
       ],
-      "note": "Read the relevant model, convergence assumptions, and optimality statements in the author manuscript labeled Final version of MS #0494-007 Rev. 1. The journal publication identity/year/DOI were checked against Crossref and the author university page; the journal typeset full text was not inspected. Locators refer to the author manuscript, not journal numbering."
+      "year": 2005,
+      "url": "https://www.columbia.edu/~ww2040/4615S13/Brown2005.pdf",
+      "doi": "10.1198/016214504000001808",
+      "locators": [
+        "Journal Sections 3.1, 4.3 and 5.1",
+        "Journal Section 5.3"
+      ]
+    },
+    {
+      "id": "dai_lin_2005_maximum_pressure",
+      "title": "Maximum Pressure Policies in Stochastic Processing Networks",
+      "authors": [
+        "J. G. Dai",
+        "Wuqin Lin"
+      ],
+      "year": 2005,
+      "url": "https://www2.isye.gatech.edu/~dai/publications/daiLin05.pdf",
+      "doi": "10.1287/opre.1040.0170",
+      "locators": [
+        "Sections 2-4, Definitions 1-2, Theorem 2",
+        "Sections 7-8, Theorems 8-9"
+      ]
+    },
+    {
+      "id": "mualem_feitelson_2001_backfilling",
+      "title": "Utilization, Predictability, Workloads, and User Runtime Estimates in Scheduling the IBM SP2 with Backfilling",
+      "authors": [
+        "Ahuva W. Mu'alem",
+        "Dror G. Feitelson"
+      ],
+      "year": 2001,
+      "url": "https://www.cs.huji.ac.il/w~feit/papers/SP2backfil01TPDS.pdf",
+      "doi": "10.1109/71.932708",
+      "version": "Claims use the 2001 journal work, which supersedes the 1998 predecessor; the linked author manuscript has different pagination.",
+      "locators": [
+        "Sections 2.1-2.2, 3.3 and 4; journal pp. 529-543; author manuscript pagination differs"
+      ]
+    },
+    {
+      "id": "dai_weiss_1996_reentrant_stability",
+      "title": "Stability and Instability of Fluid Models for Reentrant Lines",
+      "authors": [
+        "J. G. Dai",
+        "G. Weiss"
+      ],
+      "year": 1996,
+      "url": "https://www2.isye.gatech.edu/~dai/publications/daiWeiss96.pdf",
+      "doi": "10.1287/moor.21.1.115",
+      "locators": [
+        "Journal pp. 115-119, Section 1, Definitions 1.1-1.3 and Theorem 1.1",
+        "Journal pp. 122-125, Section 4, Proposition 4.1, Definition 4.1, and Theorems 4.3-4.4",
+        "Journal pp. 125-128, Section 5, equations (5.1)-(5.2) and Theorem 5.1"
+      ]
+    },
+    {
+      "id": "qi_et_al_2007_wipload_release",
+      "title": "Simulation Experimental Investigation on Job Release Control in Semiconductor Wafer Fabrication",
+      "authors": [
+        "Chao Qi",
+        "Appa Iyer Sivakumar",
+        "Stanley B. Gershwin"
+      ],
+      "year": 2007,
+      "url": "https://informs-sim.org/wsc07papers/216.pdf",
+      "doi": "10.1109/WSC.2007.4419797",
+      "locators": [
+        "Proceedings p. 1738, Section 2, equations (1)-(2), Figures 1-2",
+        "Proceedings pp. 1739-1743, Sections 3.1 and 3.3-3.7, Tables 1-5",
+        "Proceedings pp. 1743-1744, Sections 4.1-4.3, Tables 6-7",
+        "Proceedings p. 1744, Section 5"
+      ]
+    },
+    {
+      "id": "babu_rao_2004_fitted_gof",
+      "title": "Goodness-of-fit Tests When Parameters are Estimated",
+      "authors": [
+        "G. Jogesh Babu",
+        "C. R. Rao"
+      ],
+      "year": 2004,
+      "url": "https://repository.ias.ac.in/71910/1/116_PUB.pdf",
+      "doi": null,
+      "locators": [
+        "Sections 1-2.2, journal pp. 63-68, equations (2.2)-(2.3)",
+        "Section 4, Theorems 4.1-4.2"
+      ]
+    },
+    {
+      "id": "kim_whitt_2014_nhpp_tests",
+      "title": "Choosing arrival process models for service systems: Tests of a nonhomogeneous Poisson process",
+      "authors": [
+        "Song-Hee Kim",
+        "Ward Whitt"
+      ],
+      "year": 2014,
+      "url": "https://www.columbia.edu/~ww2040/4615S15/Kim_Whitt_NRL_2014.pdf",
+      "doi": "10.1002/nav.21568",
+      "locators": [
+        "Early-view PDF pp. 1-2, Section 1.1: CU transformation; per-day application tests a Cox process",
+        "Early-view PDF pp. 2-5, Sections 1.3-1.7: low CU power, Lewis transform, dependence detection, subintervals",
+        "Early-view PDF pp. 10-11, Section 4.4 and Table 1: G/M/s+M performance under non-Poisson arrivals",
+        "Early-view PDF pp. 11-12, Section 5.1 and Tables 2-3: power at expected n = 200",
+        "Early-view PDF pp. 13-14, Section 5.3 and Table 4: KS with estimated mean versus Lilliefors",
+        "Early-view PDF pp. 15-16, Section 5.5 and Table 7: combining subintervals",
+        "Early-view PDF pp. 16-19, Section 6 and Table 11: many-server departure process",
+        "Early-view PDF pp. 23-24, Section 9.2: interpreting rejection and non-rejection"
+      ],
+      "version": "Wiley early-view PDF; locators use pp. 1-25, not journal pp. 66-90."
+    },
+    {
+      "id": "kim_whitt_2014_call_center_hospital_nhpp",
+      "title": "Are Call Center and Hospital Arrivals Well Modeled by Nonhomogeneous Poisson Processes?",
+      "authors": [
+        "Song-Hee Kim",
+        "Ward Whitt"
+      ],
+      "year": 2014,
+      "url": "https://www.columbia.edu/~ww2040/Kim_W_MSOM_2014.pdf",
+      "doi": "10.1287/msom.2014.0490",
+      "locators": [
+        "Journal pp. 464-466, Sections 1-1.4: arrival mechanisms; random rate and Cox process; three causes of false rejection",
+        "Journal pp. 466-469, Section 2: rounding and unrounding",
+        "Journal pp. 469-474, Section 3: Table 3; Theorem 1; Corollary 1; Sections 3.4 and 3.6 ratio rule; Theorem 6",
+        "Journal pp. 474-475, Sections 4.1-4.2: dispersion test; per-day versus pooled KS",
+        "Journal pp. 476-478, Sections 5.1-5.4 and Tables 6-8: banking call center",
+        "Journal pp. 478-479, Section 6 and Table 9: hospital emergency department"
+      ]
+    },
+    {
+      "id": "nelson_leemis_2020_nspp_one_sample_path",
+      "title": "The Ease of Fitting but Futility of Testing a Nonstationary Poisson Processes from One Sample Path",
+      "authors": [
+        "Barry L. Nelson",
+        "Lawrence M. Leemis"
+      ],
+      "year": 2020,
+      "url": "https://informs-sim.org/wsc20papers/022.pdf",
+      "doi": "10.1109/WSC48552.2020.9383930",
+      "locators": [
+        "Proceedings p. 267, Section 2: four NSPP properties; single-path tests assume a piecewise-constant rate with known breakpoints",
+        "Proceedings pp. 267-272, Section 3: fitting one path; step-function estimator not consistent on one path",
+        "Proceedings pp. 272-273, Sections 4-4.2: unknown rate; candidate splitting tests fail; count-distribution and variance checks use repeated paths",
+        "Proceedings pp. 273-274, Section 5: test against a pre-specified rate",
+        "Proceedings p. 275, Section 6 and abstract: justify by mechanism; sensitivity analysis"
+      ]
+    },
+    {
+      "id": "woodroofe_1985_truncated_data",
+      "title": "Estimating a Distribution Function with Truncated Data",
+      "authors": [
+        "Michael Woodroofe"
+      ],
+      "year": 1985,
+      "url": "https://projecteuclid.org/journalArticle/Download?urlId=10.1214%2Faos%2F1176346584",
+      "doi": "10.1214/aos/1176346584",
+      "locators": [
+        "Journal p. 163, abstract: X and Y independent; a pair is observed only if Y <= X; consistency conditions",
+        "Journal p. 164, Section 1: Kaplan-Meier would need min(X, Y) and its indicator for every unit, whereas nothing is observed for a truncated pair; Section 2 and Lemma 1",
+        "Journal pp. 165-166, Theorem 1 and Corollary 1: only the distribution of X conditional on X >= a_G is identified",
+        "Journal pp. 166-167, Section 3, equations (5)-(10): Lynden-Bell product-limit estimator with risk set nC_n(z); degenerate case (10) and ad hoc repair",
+        "Journal p. 168, Example 1 and Table 1: selection-bias correction with increased variability",
+        "Journal p. 170, Section 4, Lemma 2 (risk-set count) and Theorem 2 (consistency to the conditional distribution F_0)",
+        "Journal p. 172, Remark 4: the support conditions cannot be tested from the truncated data"
+      ]
+    },
+    {
+      "id": "tse_2003_ltrc_product_limit",
+      "title": "Strong Gaussian Approximations in the Left Truncated and Right Censored Model",
+      "authors": [
+        "SzeMan Tse"
+      ],
+      "year": 2003,
+      "url": "https://www3.stat.sinica.edu.tw/statistica/oldpdf/A13n117.pdf",
+      "doi": null,
+      "locators": [
+        "Journal pp. 275-276, Section 1, equations (1.1)-(1.2): left-truncated, right-censored model with X, T and S independent, (Y, T, delta) observed only if Y >= T, and the Tsai-Jewell-Wang product-limit estimator",
+        "Journal p. 277, end of Section 1: truncation hides an item's existence; Section 2: support assumption and condition (2.1)"
+      ]
+    },
+    {
+      "id": "kalbfleisch_lawless_1991_right_truncation",
+      "title": "Regression Models for Right Truncated Data with Applications to AIDS Incubation Times and Reporting Lags",
+      "authors": [
+        "J. D. Kalbfleisch",
+        "J. F. Lawless"
+      ],
+      "year": 1991,
+      "url": "https://www3.stat.sinica.edu.tw/statistica/oldpdf/A1n12.pdf",
+      "doi": null,
+      "locators": [
+        "Journal pp. 19-20, Section 1, equation (1) and Figure 1: a lag is observed only if its consequent event precedes calendar time T; truncation time tau = T - t",
+        "Journal pp. 21-23, Section 2, equations (2)-(10): reverse-time hazards; only these are identifiable, up to tau* = max tau; risk set n_j; equivalence with left truncation in reverse time",
+        "Journal p. 27, Section 5, equation (23): only quasi-stationarity over initiating times is testable",
+        "Journal pp. 28-29, Examples 1-2 and Table 1: non-stationary reporting lags undermine the stationarity assumption of the incubation analysis"
+      ]
+    },
+    {
+      "id": "tsiatis_1975_competing_risks",
+      "title": "A Nonidentifiability Aspect of the Problem of Competing Risks",
+      "authors": [
+        "Anastasios Tsiatis"
+      ],
+      "year": 1975,
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC432231/pdf/pnas00044-0026.pdf",
+      "doi": "10.1073/pnas.72.1.20",
+      "locators": [
+        "Journal p. 20, abstract and Theorem 1: crude and net survival probabilities",
+        "Journal p. 21, Theorem 2 and following remark: any crude survival functions are reproduced by an independent-risks model, so agreement with them does not confirm independence",
+        "Journal pp. 21-22, illustrative example and Figure 1"
+      ]
+    },
+    {
+      "id": "peterson_1976_competing_risk_bounds",
+      "title": "Bounds for a Joint Distribution Function with Fixed Sub-Distribution Functions: Application to Competing Risks",
+      "authors": [
+        "Arthur V. Peterson, Jr."
+      ],
+      "year": 1976,
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC335828/pdf/pnas00670-0017.pdf",
+      "doi": "10.1073/pnas.73.1.11",
+      "locators": [
+        "Journal p. 11, Section 1, and Theorem 1, equations (2.1)-(2.3): without an independence assumption the data give only bounds; sharp joint and marginal bounds",
+        "Journal p. 12, remarks on the marginal bounds, Theorem 2, and Section 4 Theorem 3: consistent empirical bounds from n independent (Y, delta) observations",
+        "Journal p. 13, Section 5 and Figures 1-3: bounds far apart when p_1 is small; Section 6"
+      ]
+    },
+    {
+      "id": "glasserman_yao_1992_crn",
+      "title": "Some Guidelines and Guarantees for Common Random Numbers",
+      "authors": [
+        "Paul Glasserman",
+        "David D. Yao"
+      ],
+      "year": 1992,
+      "url": "https://drupalgsb-dev.cc.columbia.edu/sites/default/files-efs/pubfiles/4261/glasserman_yao_guidelines.pdf",
+      "doi": "10.1287/mnsc.38.6.884",
+      "locators": [
+        "Journal pp. 884-885, Section 1: variance-of-difference identity and CRN as induced positive dependence",
+        "Journal pp. 887-892, Sections 2.1-2.3 and Proposition 2.3: seeds are not the definition of CRN; corresponding-variable synchronization",
+        "Journal pp. 895-901, Sections 4.1-4.4, Theorem 4.12 and Example 4.8: finite- and steady-state conditions, per-event streams, and negative-covariance risk",
+        "Journal pp. 904-905, Section 7: event-order guideline and multiclass/preemptive caveat"
+      ]
+    },
+    {
+      "id": "lecuyer_simard_chen_kelton_2002_streams",
+      "title": "An Object-Oriented Random-Number Package with Many Long Streams and Substreams",
+      "authors": [
+        "Pierre L'Ecuyer",
+        "Richard Simard",
+        "E. Jack Chen",
+        "W. David Kelton"
+      ],
+      "year": 2002,
+      "url": "https://www-labs.iro.umontreal.ca/~lecuyer/myftp/streams00/c++/streams4.pdf",
+      "doi": "10.1287/opre.50.6.1073.358",
+      "locators": [
+        "Expanded report pp. 3-5, Sections 1-1.2: independent pairs, different generator-call counts, and disjoint streams/substreams",
+        "Expanded report pp. 12-13, Section 3: assign distinct streams to stochastic sources and run j to substream j",
+        "Expanded report pp. 15-16, Section 4, Example 2: reset streams across systems and advance substreams across replications"
+      ],
+      "version": "Expanded author report; locators are not the short journal article pagination."
+    },
+    {
+      "id": "nakayama_2006_output_analysis",
+      "title": "Output Analysis for Simulations",
+      "authors": [
+        "Marvin K. Nakayama"
+      ],
+      "year": 2006,
+      "url": "https://informs-sim.org/wsc06papers/004.pdf",
+      "doi": "10.1109/WSC.2006.323036",
+      "locators": [
+        "Proceedings pp. 36-38, Sections 1-2 and equations (1)-(2): performance-measure choice, finite-horizon versus steady-state estimands, and initial conditions",
+        "Proceedings pp. 38-39, Section 3 and equations (4)-(9): i.i.d. replications, nonoverlapping streams, and confidence intervals",
+        "Proceedings pp. 40-42, Sections 4-4.2 and equations (13)-(16): long-run estimands, multiple replications, initialization bias, and initial-data deletion",
+        "Proceedings p. 44, Section 6: CRN-induced correlation for estimating differences"
+      ]
+    },
+    {
+      "id": "garnett_mandelbaum_reiman_2002_erlang_a",
+      "title": "Designing a Call Center with Impatient Customers",
+      "authors": [
+        "O. Garnett",
+        "Avishai Mandelbaum",
+        "Martin Reiman"
+      ],
+      "year": 2002,
+      "url": "https://aviman.technion.ac.il/files/References/Garnett.pdf",
+      "doi": "10.1287/msom.4.3.208.7753",
+      "locators": [
+        "Section 1, pp. 208-211",
+        "Appendix B, pp. 221-222"
+      ]
+    },
+    {
+      "id": "kang_ramanan_2010_many_server_reneging",
+      "title": "Fluid Limits of Many-Server Queues with Reneging",
+      "authors": [
+        "Weining Kang",
+        "Kavita Ramanan"
+      ],
+      "year": 2010,
+      "url": "https://arxiv.org/abs/1011.2921v1",
+      "doi": "10.1214/10-AAP683",
+      "locators": [
+        "Section 1.1, electronic-reprint pp. 2-4",
+        "Sections 2.1-2.2.4, electronic-reprint pp. 7-15, especially equations (2.1) and (2.12)-(2.16)",
+        "Appendix B, Lemma B.1, electronic-reprint pp. 56-57"
+      ],
+      "version": "arXiv:1011.2921v1; locators use the electronic-reprint pagination"
+    },
+    {
+      "id": "choi_kang_2014_discrete_event_simulators",
+      "title": "How to Develop Your Own Simulators for Discrete-Event Systems",
+      "authors": [
+        "Byoung K. Choi",
+        "Donghun Kang"
+      ],
+      "year": 2014,
+      "url": "https://informs-sim.org/wsc14papers/includes/files/015.pdf",
+      "doi": "10.1109/WSC.2014.7019885",
+      "locators": [
+        "Section 1.1, pp. 147-148",
+        "Sections 2.1-2.4, pp. 148-150"
+      ]
+    },
+    {
+      "id": "sargent_2013_simulation_vv",
+      "title": "Verification and Validation of Simulation Models",
+      "authors": [
+        "Robert G. Sargent"
+      ],
+      "year": 2013,
+      "url": "https://ics-websites.science.uu.nl/docs/vakken/msosi/VerificationValidationSargent.pdf",
+      "doi": "10.1057/jos.2012.20",
+      "locators": [
+        "Section 1, pp. 12-13",
+        "Section 3, pp. 14-15",
+        "Section 4, pp. 16-17",
+        "Section 6, pp. 17-18",
+        "Sections 8-8.2, pp. 18-21"
+      ]
+    },
+    {
+      "id": "law_2022_valid_credible_simulation",
+      "title": "How to Build Valid and Credible Simulation Models",
+      "authors": [
+        "Averill M. Law"
+      ],
+      "year": 2022,
+      "url": "https://informs-sim.org/wsc22papers/128.pdf",
+      "doi": "10.1109/WSC57314.2022.10015411",
+      "locators": [
+        "Sections 1-1.1, pp. 1283-1286",
+        "Section 2.1, p. 1287",
+        "Section 2.4, pp. 1288-1289",
+        "Section 2.7, p. 1290",
+        "Section 2.8, pp. 1291-1292"
+      ]
+    },
+    {
+      "id": "kennedy_ohagan_2001_calibration",
+      "title": "Bayesian Calibration of Computer Models",
+      "authors": [
+        "Marc C. Kennedy",
+        "Anthony O'Hagan"
+      ],
+      "year": 2001,
+      "url": "https://www.asc.ohio-state.edu/statistics/comp_exp/jour.club/kennedy01.pdf",
+      "doi": "10.1111/1467-9868.00294",
+      "locators": [
+        "Summary and Section 2.1, PDF pp. 1-3",
+        "Sections 4.2-4.3, PDF pp. 11-13, especially equations (5)-(6)"
+      ]
+    },
+    {
+      "id": "gelman_meng_stern_1996_posterior_predictive",
+      "title": "Posterior Predictive Assessment of Model Fitness via Realized Discrepancies",
+      "authors": [
+        "Andrew Gelman",
+        "Xiao-Li Meng",
+        "Hal Stern"
+      ],
+      "year": 1996,
+      "url": "https://www.stat.columbia.edu/~gelman/research/published/A6n41.pdf",
+      "doi": null,
+      "locators": [
+        "Sections 2.1-2.3, pp. 737-742, especially equations (2)-(5)",
+        "Section 4.3, pp. 757-758"
+      ]
+    },
+    {
+      "id": "whitt_zhang_2017_ed_model",
+      "title": "A Data-Driven Model of an Emergency Department",
+      "authors": [
+        "Ward Whitt",
+        "Xiaopei Zhang"
+      ],
+      "year": 2017,
+      "url": "https://www.columbia.edu/~ww2040/ED_ORHC_2017.pdf",
+      "doi": "10.1016/j.orhc.2016.11.001",
+      "locators": [
+        "Section 2, pp. 2-3",
+        "Sections 4.1-4.2, pp. 8-9",
+        "Sections 6.1 and 6.3, pp. 11-12"
+      ]
+    },
+    {
+      "id": "kim_whitt_2013_littles_law_statistics",
+      "title": "Statistical Analysis with Little's Law",
+      "authors": [
+        "Song-Hee Kim",
+        "Ward Whitt"
+      ],
+      "year": 2013,
+      "url": "https://www.columbia.edu/~ww2040/LL_OR.pdf",
+      "doi": "10.1287/opre.2013.1193",
+      "locators": [
+        "Section 2.1, equation (1)-(3), p. 1032",
+        "Section 2.2, Theorems 1-2 and equations (4)-(7), pp. 1033-1034",
+        "Section 2.3, p. 1034",
+        "Section 2.1, equations (1)-(3), p. 1032",
+        "Section 2.2, equations (4)-(7) and Theorems 1-2, pp. 1033-1034",
+        "Section 2.3, equations (8)-(9), Theorem 3, and interpretation of clipped waits, p. 1034"
+      ]
+    },
+    {
+      "id": "tfpm_xes_lifecycle_extension",
+      "title": "Standard lifecycle transition model (XES Lifecycle extension)",
+      "authors": [
+        "IEEE Task Force on Process Mining"
+      ],
+      "year": null,
+      "url": "https://www.tf-pm.org/resources/xes-standard/about-xes/standard-extensions/lifecycle/standard",
+      "doi": null,
+      "locators": [
+        "Standard lifecycle transition model page: definitions of assign, complete, reassign, resume, schedule, start, suspend, withdraw, abort, skip, and unknown transitions"
+      ]
+    },
+    {
+      "id": "wolff_1982_pasta",
+      "title": "Poisson Arrivals See Time Averages",
+      "authors": [
+        "Ronald W. Wolff"
+      ],
+      "year": 1982,
+      "url": "https://www.math.purdue.edu/~peterson/Teaching/532/PASTA.pdf",
+      "doi": "10.1287/opre.30.2.223",
+      "locators": [
+        "Lack of Anticipation Assumption and Theorem 1, p. 225",
+        "Equation (3) and Remark 4, p. 226",
+        "Section 3 and Theorem 2 on nonstationary Poisson arrivals, pp. 227-228"
+      ]
+    },
+    {
+      "id": "larson_1990_queue_inference",
+      "title": "The Queue Inference Engine: Deducing Queue Statistics from Transactional Data",
+      "authors": [
+        "Richard C. Larson"
+      ],
+      "year": 1990,
+      "url": "https://www.researchgate.net/profile/Richard-Larson-9/publication/227446197_The_Queue_Inference_Engine_Deducing_Queue_Statistics_from_Transactional_Data/links/0deec538f89daadf77000000/The-Queue-Inference-Engine-Deducing-Queue-Statistics-from-Transactional-Data.pdf",
+      "doi": "10.1287/mnsc.36.5.586",
+      "locators": [
+        "Abstract and Section 1: transactional records, Poisson assumption, and congestion-period signature",
+        "Sections 4.3-4.7: conditional mean queue length, time and arrival averages, aggregate waiting time, and arrival-seen distribution",
+        "Section 5: rate cancellation and slowly varying-rate approximation"
+      ]
+    },
+    {
+      "id": "bertsimas_servi_1992_queue_inference_revisited",
+      "title": "Deducing Queueing from Transactional Data: The Queue Inference Engine, Revisited",
+      "authors": [
+        "Dimitris J. Bertsimas",
+        "L. D. Servi"
+      ],
+      "year": 1992,
+      "url": "https://www.mit.edu/~dbertsim/papers/Statistics/Deducing%20queuing%20from%20transactional%20data-%20the%20queue%20inference%20engine,%20revisited.pdf",
+      "doi": "10.1287/opre.40.3.S217",
+      "locators": [
+        "Abstract and introduction, p. S217",
+        "Section 1 and Section 1.1, pp. S218-S219",
+        "Theorem 2 and proof, including the kth-arrival/kth-start waiting-time pairing, pp. S222-S223",
+        "Theorem 4 and following remark, p. S224"
+      ]
+    },
+    {
+      "id": "brown_1970_mginf_estimation",
+      "title": "An M/G/infinity Estimation Problem",
+      "authors": [
+        "Mark Brown"
+      ],
+      "year": 1970,
+      "url": "https://projecteuclid.org/journals/annals-of-mathematical-statistics/volume-41/issue-2/An-MGinfty-Estimation-Problem/10.1214/aoms/1177697107.pdf",
+      "doi": "10.1214/aoms/1177697107",
+      "locators": [
+        "Section 0, p. 651",
+        "Section 1, Lemmas 1-2, p. 652",
+        "Theorem 1 and comments, p. 653"
+      ]
+    },
+    {
+      "id": "weber_1978_optimal_assignment",
+      "title": "On the optimal assignment of customers to parallel servers",
+      "authors": [
+        "Richard R. Weber"
+      ],
+      "year": 1978,
+      "url": "http://www.statslab.cam.ac.uk/~rrw1/publications/Weber%20%201978%20On%20the%20optimal%20assignment%20of%20customers%20to%20parallel%20servers",
+      "doi": "10.2307/3213411",
+      "locators": [
+        "Journal pagination in the author-hosted scan: Section 1, pp. 406-407",
+        "Section 2, Theorem 1, p. 407",
+        "Section 3 continuous-time model and Theorem 2, pp. 408-409",
+        "Section 4, remark (i), p. 412"
+      ],
+      "version": "Author-hosted scan of Journal of Applied Probability 15(2):406-413."
+    },
+    {
+      "id": "whitt_1986_which_queue_counterexamples",
+      "title": "Deciding Which Queue to Join: Some Counterexamples",
+      "authors": [
+        "Ward Whitt"
+      ],
+      "year": 1986,
+      "url": "https://www.columbia.edu/~ww2040/DecidingWhichQ1986.pdf",
+      "doi": "10.1287/opre.34.1.55",
+      "locators": [
+        "Operations Research 34(1):55-62, Abstract and Introduction, pp. 55-56",
+        "Section 1, The Shortest-Line Rule, pp. 56-58",
+        "Section 2, Breaking Ties, pp. 58-59",
+        "Section 3, The Shortest-Expected-Delay Rule, pp. 59-60"
+      ]
+    },
+    {
+      "id": "harchol_balter_crovella_murta_1998_task_assignment",
+      "title": "On Choosing a Task Assignment Policy for a Distributed Server System",
+      "authors": [
+        "Mor Harchol-Balter",
+        "Mark E. Crovella",
+        "Cristina D. Murta"
+      ],
+      "year": 1998,
+      "url": "https://dspace.mit.edu/server/api/core/bitstreams/5bae138f-bfeb-4c37-981f-f6641c66edb4/content",
+      "doi": null,
+      "locators": [
+        "MIT-LCS-TR-757, Section 3, distributed-server model",
+        "MIT-LCS-TR-757, Section 5.1, Theorem 2, report pp. 14-15",
+        "MIT-LCS-TR-757, Section 7.2, proof of Theorem 2, report p. 26"
+      ],
+      "version": "MIT-LCS-TR-757 technical report; this version contains the pathwise coupling proof."
+    },
+    {
+      "id": "vvedenskaya_dobrushin_karpelevich_1996_two_queues",
+      "title": "Queueing System with Selection of the Shortest of Two Queues: An Asymptotic Approach",
+      "authors": [
+        "N. D. Vvedenskaya",
+        "R. L. Dobrushin",
+        "F. I. Karpelevich"
+      ],
+      "year": 1996,
+      "url": "https://www.mathnet.ru/rus/ppi298",
+      "doi": null,
+      "locators": [
+        "Russian original, Problemy Peredachi Informatsii 32(1):20-34, Section 1, equation (1.3), pp. 20-22",
+        "Russian original, Section 2, Theorems 1-2 and Theorem 5, pp. 22-24",
+        "Russian original, Section 2, equation (2.12), p. 24",
+        "Russian original, Section 5, proof of Theorem 5"
+      ],
+      "version": "Locators use the Russian original; the English translation has different pagination."
+    },
+    {
+      "id": "mitzenmacher_2001_power_of_two",
+      "title": "The Power of Two Choices in Randomized Load Balancing",
+      "authors": [
+        "Michael Mitzenmacher"
+      ],
+      "year": 2001,
+      "url": "https://www.eecs.harvard.edu/~michaelm/postscripts/tpds2001.pdf",
+      "doi": "10.1109/71.963420",
+      "locators": [
+        "IEEE Transactions on Parallel and Distributed Systems 12(10), Section 1, pp. 1094-1095",
+        "Section 2.2, Lemma 2 and the general-d fixed point",
+        "Section 3, Theorems 5-6, fixed-horizon finite-system bounds from an empty initial state"
+      ],
+      "version": "Author-hosted journal version."
+    },
+    {
+      "id": "gast_2017_mean_field_1_over_n",
+      "title": "Expected Values Estimated via Mean-Field Approximation are 1/N-Accurate",
+      "authors": [
+        "Nicolas Gast"
+      ],
+      "year": 2017,
+      "url": "https://inria.hal.science/hal-01553133/document",
+      "doi": "10.1145/3084454",
+      "locators": [
+        "HAL hal-01553133v1, Introduction and Table 1, pp. 2-3",
+        "Section 3, Theorems 3.1-3.2 and assumptions (A1)-(A3)",
+        "Section 5, Theorem 5.1 and Corollary 1",
+        "Section 5.3, numerical evaluation of the finite-size coefficient"
+      ],
+      "version": "POMACS 1(1), Article 16; locators use HAL hal-01553133v1."
+    },
+    {
+      "id": "mukherjee_borst_van_leeuwaarden_whiting_2018_universality",
+      "title": "Universality of Power-of-d Load Balancing in Many-Server Systems",
+      "authors": [
+        "Debankur Mukherjee",
+        "Sem C. Borst",
+        "Johan S. H. van Leeuwaarden",
+        "Philip A. Whiting"
+      ],
+      "year": 2018,
+      "url": "https://arxiv.org/pdf/1612.00723v2",
+      "doi": "10.1287/stsy.2018.0016",
+      "locators": [
+        "arXiv v2, Section 2, Theorem 2.1, fluid-limit universality",
+        "arXiv v2, Section 2, Proposition 2.2, stationary fluid-scale interchange",
+        "arXiv v2, Section 2, Theorems 2.4-2.5, finite-horizon diffusion universality and threshold"
+      ],
+      "version": "Stochastic Systems 8(4):265-292; theorem numbering and locators use arXiv v2."
+    },
+    {
+      "id": "braverman_2020_jsq_halfin_whitt_steady_state",
+      "title": "Steady-State Analysis of the Join-the-Shortest-Queue Model in the Halfin-Whitt Regime",
+      "authors": [
+        "Anton Braverman"
+      ],
+      "year": 2020,
+      "url": "https://arxiv.org/pdf/1801.05121v2",
+      "doi": "10.1287/moor.2019.1023",
+      "locators": [
+        "arXiv v2, Abstract and Section 1 model",
+        "arXiv v2, Section 2, Theorems 2-3 and Proposition 1"
+      ],
+      "version": "Mathematics of Operations Research 45(3):1069-1103; locators use arXiv v2."
+    },
+    {
+      "id": "hellemans_van_houdt_2018_least_loaded",
+      "title": "On the Power-of-d-choices with Least Loaded Server Selection",
+      "authors": [
+        "Tim Hellemans",
+        "Benny Van Houdt"
+      ],
+      "year": 2018,
+      "url": "https://arxiv.org/pdf/1802.05420v1",
+      "doi": "10.1145/3224422",
+      "locators": [
+        "arXiv v1, Abstract and Section 1, LL(d), late binding, and footnote 1",
+        "arXiv v1, Section 2, homogeneous-cluster model",
+        "arXiv v1, Section 7.1, Theorems 7.1-7.2",
+        "arXiv v1, Section 7.3, late-binding overhead"
+      ],
+      "version": "POMACS 2(2); locators use arXiv v1."
+    },
+    {
+      "id": "mukhopadhyay_mazumdar_2016_heterogeneous_jsq",
+      "title": "Analysis of Randomized Join-The-Shortest-Queue (JSQ) Schemes in Large Heterogeneous Processor Sharing Systems",
+      "authors": [
+        "Arpan Mukhopadhyay",
+        "Ravi R. Mazumdar"
+      ],
+      "year": 2016,
+      "url": "https://wrap.warwick.ac.uk/id/eprint/116198/1/WRAP-analysis-randomized-join-shortest-queue-large-sharing-Mukhopadhyay-2016.pdf",
+      "doi": "10.1109/TCNS.2015.2428331",
+      "locators": [
+        "Accepted manuscript, Section II, Schemes 2-3",
+        "Section III-B, Proposition 1",
+        "Section III-C, Proposition 8 and Remark 7",
+        "Section IV, unequal-capacity examples, pp. 14-15"
+      ],
+      "version": "IEEE Transactions on Control of Network Systems 3(2):116-126; locators use the accepted manuscript."
+    },
+    {
+      "id": "mitzenmacher_2000_old_information",
+      "title": "How Useful Is Old Information?",
+      "authors": [
+        "Michael Mitzenmacher"
+      ],
+      "year": 2000,
+      "url": "https://www.eecs.harvard.edu/~michaelm/postscripts/tpds2000.pdf",
+      "doi": "10.1109/71.824633",
+      "locators": [
+        "IEEE Transactions on Parallel and Distributed Systems 11(1), Abstract",
+        "Section 2, periodic bulletin-board model",
+        "Section 3.4, periodic-update numerical comparisons",
+        "Sections 4-5, continuous and individual updates"
+      ],
+      "version": "Author-hosted scan of the journal article."
+    },
+    {
+      "id": "mitzenmacher_dellamico_2022_predicted_sizes",
+      "title": "The Supermarket Model with Known and Predicted Service Times",
+      "authors": [
+        "Michael Mitzenmacher",
+        "Matteo Dell'Amico"
+      ],
+      "year": 2022,
+      "url": "https://arxiv.org/pdf/1905.12155v4",
+      "doi": "10.1109/TPDS.2022.3146195",
+      "locators": [
+        "arXiv v4, Abstract",
+        "arXiv v4, Section 4.1, queue selection with predictions",
+        "arXiv v4, Section 5, trace-driven experiments",
+        "arXiv v4, Appendix A.2 and Figure 16, Least Loaded Updated versus Least Loaded Total"
+      ],
+      "version": "IEEE Transactions on Parallel and Distributed Systems article; locators use arXiv v4."
     }
   ]
 }

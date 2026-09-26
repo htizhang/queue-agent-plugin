@@ -1,6 +1,5 @@
-"""Small structural checks for the queue-literature knowledge cards."""
+"""Structural checks for the queue-literature knowledge notes."""
 
-import datetime
 import json
 import re
 import tempfile
@@ -9,14 +8,31 @@ from pathlib import Path
 from urllib.parse import unquote, urlsplit
 
 
-EXPECTED_CARDS = {
-    "knowledge-foundations.md": "foundations.model-policy-fit",
-    "policy-c-mu.md": "policy.c_mu_linear_priority",
-    "policy-generalized-c-mu.md": "policy.generalized_c_mu_age_delay",
-    "policy-gittins.md": "policy.gittins_unknown_size",
-    "policy-srpt.md": "policy.srpt_size_based",
+EXPECTED_NOTE_FILENAMES = {
+    "knowledge-foundations.md",
+    "modeling-call-center-primitives.md",
+    "modeling-censoring-truncation.md",
+    "modeling-event-log-semantics.md",
+    "modeling-fitted-distribution-tests.md",
+    "modeling-log-identifiability.md",
+    "modeling-model-adequacy-validation.md",
+    "modeling-partial-event-logs.md",
+    "modeling-state-and-dynamics.md",
+    "modeling-time-varying-arrivals.md",
+    "policy-backfilling.md",
+    "policy-c-mu.md",
+    "policy-evaluation-paired-crn.md",
+    "policy-generalized-c-mu.md",
+    "policy-gittins.md",
+    "policy-load-balancing.md",
+    "policy-maximum-pressure.md",
+    "policy-reentrant-stage-priority.md",
+    "policy-reentrant-wipload-release.md",
+    "policy-srpt.md",
 }
-CARD_FIELDS = {
+FIXTURE_NOTE_NAME = "modeling-fixture.md"
+FIXTURE_NOTE_FILENAMES = {FIXTURE_NOTE_NAME}
+AUDIT_NOTE_FIELDS = {
     "ID",
     "Kind",
     "Stage relevance",
@@ -26,39 +42,27 @@ CARD_FIELDS = {
     "Reviewed on",
     "Legacy origin",
 }
-SOURCE_FIELDS = {
+REQUIRED_SOURCE_FIELDS = {
     "id",
     "title",
     "authors",
     "year",
     "url",
     "doi",
-    "reading_depth",
     "locators",
-    "reviewed_on",
-    "legacy_keys",
-    "note",
 }
-DEPTHS = {"relevant-full-text", "abstract-only", "metadata-only"}
-ROW = re.compile(r"^\|\s*([^|]+?)\s*\|\s*([^|]*?)\s*\|\s*$")
+OPTIONAL_SOURCE_FIELDS = {"version"}
+AUDIT_SOURCE_FIELDS = {"reading_depth", "reviewed_on", "legacy_keys", "note"}
+NOTE_FILENAME = re.compile(r"(?:knowledge|modeling|policy)-.+\.md")
+TITLE = re.compile(r"\A#\s+\S[^\n]*\r?\n")
+SUBHEADING = re.compile(r"^#{2,6}\s+.*$", re.M)
+AUDIT_NOTE_ROW = re.compile(
+    rf"^\|\s*(?:{'|'.join(re.escape(field) for field in AUDIT_NOTE_FIELDS)})\s*\|",
+    re.M,
+)
 LINK = re.compile(r"!?\[[^\]\n]*\]\(([^)\n]+)\)")
 SOURCE_LINK = re.compile(r"\[([^\]\n]+)\]\(sources\.json\)")
-
-
-def card_fields(text):
-    rows = []
-    for line in text.split("\n## ", 1)[0].splitlines():
-        match = ROW.match(line)
-        if match and match.group(1) not in {"Field", "---"}:
-            rows.append((match.group(1).strip(), match.group(2).strip()))
-    return rows, dict(rows)
-
-
-def valid_date(value):
-    try:
-        return datetime.date.fromisoformat(value).isoformat() == value
-    except (TypeError, ValueError):
-        return False
+PROSE_WORD = re.compile(r"[A-Za-z][A-Za-z'-]+")
 
 
 def local_links(path, repo_root):
@@ -93,101 +97,139 @@ def source(source_id="source.one", doi="10.1000/example", **changes):
         "year": 2020,
         "url": "https://example.test/paper",
         "doi": doi,
-        "reading_depth": "relevant-full-text",
         "locators": ["Section 1"],
-        "reviewed_on": "2026-09-25",
-        "legacy_keys": ["legacy.source"],
-        "note": "Inspected fixture version 1.",
     }
     record.update(changes)
     return record
 
 
-def card(card_id="policy.test", source_ids=("source.one",), extra=""):
+def note(source_ids=("source.one",), extra=""):
     citations = " ".join(f"[{item}](sources.json)" for item in source_ids)
-    return f"""# Fixture Card
+    return f"""# Fixture Note
 
-| Field | Value |
-| --- | --- |
-| ID | {card_id} |
-| Kind | policy |
-| Stage relevance | Stage 1, Stage 2 |
-| Aliases | fixture |
-| Sources | {", ".join(source_ids)} |
-| Review | source-checked |
-| Reviewed on | 2026-09-25 |
-| Legacy origin | synthetic fixture |
+## Mechanism
+
+Fixture mechanism.
 
 ## Evidence
 
 Fixture claim {citations}. {extra}
+
+## Use in this Plugin
+
+Fixture use.
 """
 
 
-def write_fixture(root, cards=None, sources=None, skill_links=None):
-    cards = {"card.md": card()} if cards is None else cards
+def write_fixture(root, notes=None, sources=None, skill_links=None):
+    notes = {FIXTURE_NOTE_NAME: note()} if notes is None else notes
     sources = [source()] if sources is None else sources
     references = root / "skills" / "queue-literature" / "references"
     references.mkdir(parents=True)
-    for name, text in cards.items():
+    for name, text in notes.items():
         (references / name).write_text(text, encoding="utf-8")
     (references / "sources.json").write_text(
         json.dumps({"sources": sources}), encoding="utf-8"
     )
     if skill_links is None:
-        skill_links = [f"references/{name}" for name in cards]
-    links = "\n".join(f"- [card]({item})" for item in skill_links)
+        skill_links = [f"references/{name}" for name in notes]
+    links = "\n".join(f"- [note]({item})" for item in skill_links)
     (root / "skills" / "queue-literature" / "SKILL.md").write_text(
         f"# Queue Literature\n\n{links}\n", encoding="utf-8"
     )
 
 
 class KnowledgeTests(unittest.TestCase):
-    def assert_knowledge(self, repo_root, expected=EXPECTED_CARDS):
+    def assert_knowledge(
+        self,
+        repo_root,
+        expected_note_filenames=EXPECTED_NOTE_FILENAMES,
+    ):
         repo_root = repo_root.resolve()
         skill = repo_root / "skills" / "queue-literature" / "SKILL.md"
         references = skill.parent / "references"
-        missing = sorted(name for name in expected if not (references / name).is_file())
-        self.assertFalse(missing, f"missing expected cards: {', '.join(missing)}")
-
-        card_paths = sorted(
+        note_paths = sorted(
             path
             for path in references.glob("*.md")
-            if re.search(r"^\|\s*ID\s*\|", path.read_text(encoding="utf-8"), re.M)
+            if NOTE_FILENAME.fullmatch(path.name)
         )
-        cards = {}
-        ids = []
-        for path in card_paths:
+        note_names = {path.name for path in note_paths}
+        missing = sorted(expected_note_filenames - note_names)
+        self.assertFalse(missing, f"missing expected notes: {', '.join(missing)}")
+        self.assertTrue(note_paths, "no knowledge notes discovered")
+
+        notes = []
+        cited_source_ids = set()
+        for path in note_paths:
             text = path.read_text(encoding="utf-8")
-            rows, fields = card_fields(text)
-            self.assertEqual(len(rows), len(fields), f"{path.name}: duplicate fields")
-            self.assertEqual(CARD_FIELDS, set(fields), f"{path.name}: bad card fields")
-            self.assertTrue(all(fields.values()), f"{path.name}: empty card field")
-            self.assertEqual("source-checked", fields["Review"], path.name)
-            self.assertTrue(valid_date(fields["Reviewed on"]), f"{path.name}: bad date")
-            stages = {item.strip() for item in fields["Stage relevance"].split(",")}
-            self.assertTrue(
-                stages <= {"Stage 1", "Stage 2"}, f"{path.name}: bad stages"
+            title = TITLE.match(text)
+            self.assertIsNotNone(title, f"{path.name}: missing plain-note title")
+            body = text[title.end() :].strip() if title else ""
+            prose = SUBHEADING.sub("", body)
+            prose = SOURCE_LINK.sub("", prose)
+            self.assertGreaterEqual(
+                len(PROSE_WORD.findall(prose)),
+                5,
+                f"{path.name}: missing substantive body",
             )
-            cards[path.name] = (path, text, fields)
-            ids.append(fields["ID"])
-        self.assertEqual(len(ids), len(set(ids)), f"duplicate card IDs: {ids}")
-        self.assertTrue(set(expected) <= set(cards), "expected card lacks ID metadata")
-        for name, expected_id in expected.items():
-            self.assertEqual(expected_id, cards[name][2]["ID"], f"{name}: changed ID")
+            audit_fields = AUDIT_NOTE_ROW.findall(text)
+            self.assertFalse(
+                audit_fields,
+                f"{path.name}: audit fields are not part of a plain knowledge note",
+            )
+            cited = set(SOURCE_LINK.findall(text))
+            self.assertTrue(cited, f"{path.name}: missing bibliography citation")
+            cited_source_ids.update(cited)
+            notes.append((path, cited))
 
         payload = json.loads((references / "sources.json").read_text(encoding="utf-8"))
         self.assertEqual({"sources"}, set(payload), "sources.json: bad top-level shape")
         records = payload["sources"]
+        self.assertIsInstance(records, list, "sources.json: sources must be a list")
+        self.assertTrue(
+            all(isinstance(record, dict) for record in records),
+            "sources.json: source records must be objects",
+        )
         source_ids = [record.get("id") for record in records]
         self.assertTrue(all(isinstance(item, str) and item for item in source_ids))
         self.assertEqual(
             len(source_ids), len(set(source_ids)), f"duplicate source IDs: {source_ids}"
         )
+
         dois = []
         for record in records:
-            self.assertTrue(SOURCE_FIELDS <= set(record), f"bad source: {record}")
-            self.assertIn(record["reading_depth"], DEPTHS, "bad reading_depth")
+            fields = set(record)
+            missing_fields = sorted(REQUIRED_SOURCE_FIELDS - fields)
+            self.assertFalse(
+                missing_fields,
+                f"{record.get('id')}: missing source fields: {missing_fields}",
+            )
+            audit_fields = sorted(AUDIT_SOURCE_FIELDS & fields)
+            self.assertFalse(
+                audit_fields,
+                f"{record['id']}: audit source fields: {audit_fields}",
+            )
+            unsupported = sorted(
+                fields - REQUIRED_SOURCE_FIELDS - OPTIONAL_SOURCE_FIELDS
+            )
+            self.assertFalse(
+                unsupported,
+                f"{record['id']}: unsupported source fields: {unsupported}",
+            )
+            self.assertIsInstance(record["title"], str)
+            self.assertTrue(record["title"])
+            self.assertTrue(
+                isinstance(record["authors"], list)
+                and record["authors"]
+                and all(
+                    isinstance(author, str) and author for author in record["authors"]
+                ),
+                f"{record['id']}: bad authors",
+            )
+            if record["year"] is not None:
+                self.assertIsInstance(record["year"], int)
+            self.assertIsInstance(record["url"], str)
+            self.assertTrue(record["url"])
             locators = record["locators"]
             self.assertTrue(
                 isinstance(locators, list)
@@ -195,9 +237,16 @@ class KnowledgeTests(unittest.TestCase):
                 and all(isinstance(item, str) and item for item in locators),
                 f"{record['id']}: missing locators",
             )
-            self.assertTrue(valid_date(record["reviewed_on"]), "bad source review date")
+            if "version" in record:
+                self.assertTrue(
+                    isinstance(record["version"], str) and record["version"],
+                    f"{record['id']}: empty version qualifier",
+                )
             if record["doi"] is not None:
-                self.assertIsInstance(record["doi"], str)
+                self.assertTrue(
+                    isinstance(record["doi"], str) and record["doi"],
+                    f"{record['id']}: bad DOI",
+                )
                 doi = re.sub(r"^doi:\s*", "", record["doi"].strip().lower())
                 dois.append(
                     re.sub(r"^https?://(?:dx\.)?doi\.org/", "", doi).rstrip("/")
@@ -205,26 +254,17 @@ class KnowledgeTests(unittest.TestCase):
         self.assertEqual(len(dois), len(set(dois)), f"duplicate DOIs: {dois}")
         registry_ids = set(source_ids)
 
-        for path, text, fields in cards.values():
-            listed = {
-                item.strip() for item in fields["Sources"].split(",") if item.strip()
-            }
-            cited = set(SOURCE_LINK.findall(text))
-            for source_id in listed | cited:
+        for path, cited in notes:
+            for source_id in cited:
                 self.assertIn(
                     source_id, registry_ids, f"{path.name}: unknown source {source_id}"
                 )
-            for source_id in listed:
-                self.assertIn(
-                    f"[{source_id}](sources.json)",
-                    text,
-                    f"{path.name}: source {source_id} lacks an exact claim link",
-                )
-            self.assertTrue(
-                cited <= listed, f"{path.name}: citation absent from header"
-            )
+        uncited = sorted(registry_ids - cited_source_ids)
+        self.assertFalse(
+            uncited, f"sources.json: uncited sources: {', '.join(uncited)}"
+        )
 
-        documents = [skill] + [item[0] for item in cards.values()]
+        documents = [skill] + [path for path, _ in notes]
         skill_targets = set()
         for document in documents:
             try:
@@ -235,32 +275,43 @@ class KnowledgeTests(unittest.TestCase):
                 self.assertTrue(target.exists(), f"{document.name}: broken link {raw}")
             if document == skill:
                 skill_targets = {target for _, target in links}
-        for path, _, _ in cards.values():
+        for path, _ in notes:
             self.assertIn(
                 path.resolve(), skill_targets, f"topic map does not link {path.name}"
             )
 
-    def assert_bad(self, pattern, *, expected=None, **fixture):
+    def assert_bad(
+        self,
+        pattern,
+        *,
+        expected_note_filenames=FIXTURE_NOTE_FILENAMES,
+        **fixture,
+    ):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory) / "repo"
             write_fixture(root, **fixture)
             with self.assertRaisesRegex(AssertionError, pattern):
-                expected = {"card.md": "policy.test"} if expected is None else expected
-                self.assert_knowledge(root, expected)
+                self.assert_knowledge(
+                    root,
+                    expected_note_filenames=expected_note_filenames,
+                )
 
     def test_valid_fixtures(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory) / "repo"
-            cards = {name: card(card_id) for name, card_id in EXPECTED_CARDS.items()}
-            write_fixture(root, cards=cards)
-            self.assert_knowledge(root)
+            write_fixture(root)
+            self.assert_knowledge(
+                root,
+                expected_note_filenames=FIXTURE_NOTE_FILENAMES,
+            )
 
-    def test_duplicate_ids_and_dois(self):
-        self.assert_bad(
-            "duplicate card IDs",
-            cards={"a.md": card(), "b.md": card()},
-            expected={"a.md": "policy.test", "b.md": "policy.test"},
-        )
+    def test_undated_reference(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory) / "repo"
+            write_fixture(root, sources=[source(year=None)])
+            self.assert_knowledge(root, expected_note_filenames=FIXTURE_NOTE_FILENAMES)
+
+    def test_duplicate_source_ids_and_dois(self):
         self.assert_bad(
             "duplicate source IDs",
             sources=[source(), source(doi="10.1000/other")],
@@ -273,27 +324,84 @@ class KnowledgeTests(unittest.TestCase):
             ],
         )
 
-    def test_content_and_link_regressions(self):
+    def test_plain_notes_reject_audit_metadata(self):
+        audit_table = """| Field | Value |
+| --- | --- |
+| Review | source-checked |"""
         self.assert_bad(
-            "unknown source", cards={"card.md": card(source_ids=("missing",))}
+            "audit fields",
+            notes={
+                FIXTURE_NOTE_NAME: note().replace(
+                    "## Mechanism", f"{audit_table}\n\n## Mechanism"
+                )
+            },
         )
         self.assert_bad(
-            "lacks an exact claim link",
-            cards={
-                "card.md": card().replace("[source.one](sources.json)", "source.one")
+            "audit source fields",
+            sources=[source(reviewed_on="2026-09-25")],
+        )
+
+    def test_newly_discovered_notes_are_validated(self):
+        self.assert_bad(
+            "unknown source",
+            notes={
+                FIXTURE_NOTE_NAME: note(),
+                "policy-new.md": note(source_ids=("missing",)),
+            },
+        )
+        self.assert_bad(
+            "topic map does not link modeling-new.md",
+            notes={
+                FIXTURE_NOTE_NAME: note(),
+                "modeling-new.md": note(),
+            },
+            skill_links=[f"references/{FIXTURE_NOTE_NAME}"],
+        )
+
+    def test_content_and_link_regressions(self):
+        self.assert_bad(
+            "unknown source",
+            notes={FIXTURE_NOTE_NAME: note(source_ids=("missing",))},
+        )
+        self.assert_bad(
+            "missing bibliography citation",
+            notes={
+                FIXTURE_NOTE_NAME: note().replace(
+                    "[source.one](sources.json)", "source.one"
+                )
+            },
+        )
+        self.assert_bad(
+            "missing plain-note title",
+            notes={FIXTURE_NOTE_NAME: note().replace("# Fixture Note", "Fixture Note")},
+        )
+        self.assert_bad(
+            "missing substantive body",
+            notes={
+                FIXTURE_NOTE_NAME: "# Empty Note\n\n[source.one](sources.json)\n",
             },
         )
         self.assert_bad("missing locators", sources=[source(locators=[])])
         self.assert_bad(
-            "bad reading_depth", sources=[source(reading_depth="full-text")]
+            "uncited sources",
+            sources=[
+                source(),
+                source("source.two", "10.1000/other"),
+            ],
         )
-        self.assert_bad("broken link", cards={"card.md": card(extra="[x](missing.md)")})
+        self.assert_bad(
+            "broken link",
+            notes={FIXTURE_NOTE_NAME: note(extra="[x](missing.md)")},
+        )
         self.assert_bad(
             "escapes repository",
-            cards={"card.md": card(extra="[x](../../../../outside.md)")},
+            notes={FIXTURE_NOTE_NAME: note(extra="[x](../../../../outside.md)")},
         )
         self.assert_bad("topic map does not link", skill_links=[])
-        self.assert_bad("missing expected cards", expected=EXPECTED_CARDS)
+        self.assert_bad(
+            "missing expected notes",
+            expected_note_filenames=EXPECTED_NOTE_FILENAMES,
+        )
 
     def test_repository(self):
         self.assert_knowledge(Path(__file__).resolve().parents[2])

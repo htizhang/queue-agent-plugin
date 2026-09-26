@@ -1,5 +1,11 @@
 # Reusing the Legacy Knowledge Base
 
+> Historical migration record: this document preserves the 2026-09-25 design and
+> review history. The delivered knowledge now follows the plain-note contract in
+> [the current design decisions](references.md): discovery stays in the topic map,
+> notes use handbook prose, and the source registry contains bibliographic identity
+> and useful locators rather than construction-audit fields.
+
 Review and migration date: 2026-09-25. **The first reviewed knowledge slice is
 implemented under `queue-literature`; no legacy runtime code is imported.**
 

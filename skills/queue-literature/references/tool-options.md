@@ -22,5 +22,5 @@ mutations, and uploads outside the literature task unless separately authorized.
 If tools are missing, explain the missing capability and offer an optional setup
 route; do not silently install a backend.
 
-Tool capabilities were reviewed on 2026-09-25 from the linked upstream sources.
 These projects are references only: none is vendored or configured by this skill.
+Inspect their current interfaces and terms before relying on them.
