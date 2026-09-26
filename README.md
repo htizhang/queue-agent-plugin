@@ -7,8 +7,8 @@ and Codex as the intended hosts.
 
 ## Confirmed overview
 
-- **Stage 1 — Queue modeling:** build and check a queue model from data and a
-  system description.
+- **Stage 1 — Queue modeling:** build and check an executable queue simulator
+  from data and a system description, with replaceable policies.
 - **Stage 2 — Policy design:** design, evaluate, and improve queue policies for
   a queue model or model family.
 
@@ -19,7 +19,7 @@ determines where to start; not every request needs to run both Stages.
 
 This is a private, standalone repository under incremental design. We will discuss
 and confirm each workflow step before implementing it. The repository currently
-contains the agreed overview, reference material, and the first shared skill,
+contains the agreed overview, reference material, and skill source files,
 not an installable Plugin.
 
 Host packaging and tool integrations are not implemented yet.
@@ -27,7 +27,13 @@ No runtime implementation, experiment data, or credentials from the earlier
 research repository are included. Selected knowledge is migrated as reviewed,
 simulator-neutral reference notes, not as framework code.
 
-## Shared skills
+## Skills
+
+- [queue-modeling](skills/queue-modeling/SKILL.md): Stage 1 simulator construction,
+  calibration, and validation. It guides the host agent to use independent
+  validation subagents when available and iterate on executable feedback. The
+  agent chooses the representation, simulation tools, and task-specific checks.
+  See the [behavioral checks](tests/queue-modeling/scenarios.md).
 
 - [queue-literature](skills/queue-literature/SKILL.md): source-grounded literature
   work for Stage 1 modeling and Stage 2 policy design. It adapts selected
@@ -38,8 +44,8 @@ simulator-neutral reference notes, not as framework code.
   alongside classical scheduling, network control, backfilling, and paired simulation evaluation;
   established questions can be answered without repeating an online search.
 
-The skill is source content in this repository. Nothing is installed or
-configured on the user's machine by adding it. See its
+These skills are source content in this repository. Nothing is installed or
+configured on the user's machine by adding them. For queue-literature, see its
 [attribution](skills/queue-literature/NOTICE.md) and
 [behavioral checks](tests/queue-literature/scenarios.md).
 
