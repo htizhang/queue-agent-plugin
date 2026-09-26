@@ -39,6 +39,8 @@ user's system.
 | Generalized c-mu, convex delay cost, waiting age | [Generalized c-mu](references/policy-generalized-c-mu.md) |
 | SRPT, known size, remaining processing time | [SRPT](references/policy-srpt.md) |
 | Gittins, unknown size, attained service, service distribution | [Gittins](references/policy-gittins.md) |
+| State sufficiency, Markov state, ages, event calendar, feasible actions | [Queue state and dynamics](references/modeling-state-and-dynamics.md) |
+| Model adequacy, output validation, observation maps, structural uncertainty | [Queue model validation](references/modeling-model-adequacy-validation.md) |
 | Partial event logs, latent service, missing tasks | [Queue inference from partial logs](references/modeling-partial-event-logs.md) |
 | NHPP diagnostics, arrival blocks, service fit, censored patience | [Arrival, service, and patience inference](references/modeling-call-center-primitives.md) |
 | Time-varying arrivals, NHPP checks, Cox process, one sample path | [Time-varying arrival models](references/modeling-time-varying-arrivals.md) |
@@ -56,7 +58,8 @@ answer with its original sources without a redundant web search. Distinguish wha
 the bundled note reports from any primary text you inspect in this session.
 
 The collection covers classical single-server policies, selected observation-aware
-inference methods, time-varying arrivals, censoring and truncation, paired
+inference methods, state/event formulations, model adequacy, time-varying
+arrivals, censoring and truncation, paired
 simulation evaluation, maximum pressure, backfilling, reentrant control, and
 shared model-fit guidance.
 It is not a complete estimation or network-policy catalog, nor current prior-art

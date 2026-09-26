@@ -340,6 +340,151 @@
         "Proceedings pp. 40-42, Sections 4-4.2 and equations (13)-(16): long-run estimands, multiple replications, initialization bias, and initial-data deletion",
         "Proceedings p. 44, Section 6: CRN-induced correlation for estimating differences"
       ]
+    },
+    {
+      "id": "garnett_mandelbaum_reiman_2002_erlang_a",
+      "title": "Designing a Call Center with Impatient Customers",
+      "authors": [
+        "O. Garnett",
+        "Avishai Mandelbaum",
+        "Martin Reiman"
+      ],
+      "year": 2002,
+      "url": "https://aviman.technion.ac.il/files/References/Garnett.pdf",
+      "doi": "10.1287/msom.4.3.208.7753",
+      "locators": [
+        "Section 1, pp. 208-211",
+        "Appendix B, pp. 221-222"
+      ]
+    },
+    {
+      "id": "kang_ramanan_2010_many_server_reneging",
+      "title": "Fluid Limits of Many-Server Queues with Reneging",
+      "authors": [
+        "Weining Kang",
+        "Kavita Ramanan"
+      ],
+      "year": 2010,
+      "url": "https://arxiv.org/abs/1011.2921v1",
+      "doi": "10.1214/10-AAP683",
+      "locators": [
+        "Section 1.1, electronic-reprint pp. 2-4",
+        "Sections 2.1-2.2.4, electronic-reprint pp. 7-15, especially equations (2.1) and (2.12)-(2.16)",
+        "Appendix B, Lemma B.1, electronic-reprint pp. 56-57"
+      ],
+      "version": "arXiv:1011.2921v1; locators use the electronic-reprint pagination"
+    },
+    {
+      "id": "choi_kang_2014_discrete_event_simulators",
+      "title": "How to Develop Your Own Simulators for Discrete-Event Systems",
+      "authors": [
+        "Byoung K. Choi",
+        "Donghun Kang"
+      ],
+      "year": 2014,
+      "url": "https://informs-sim.org/wsc14papers/includes/files/015.pdf",
+      "doi": "10.1109/WSC.2014.7019885",
+      "locators": [
+        "Section 1.1, pp. 147-148",
+        "Sections 2.1-2.4, pp. 148-150"
+      ]
+    },
+    {
+      "id": "sargent_2013_simulation_vv",
+      "title": "Verification and Validation of Simulation Models",
+      "authors": [
+        "Robert G. Sargent"
+      ],
+      "year": 2013,
+      "url": "https://ics-websites.science.uu.nl/docs/vakken/msosi/VerificationValidationSargent.pdf",
+      "doi": "10.1057/jos.2012.20",
+      "locators": [
+        "Section 1, pp. 12-13",
+        "Section 3, pp. 14-15",
+        "Section 4, pp. 16-17",
+        "Section 6, pp. 17-18",
+        "Sections 8-8.2, pp. 18-21"
+      ]
+    },
+    {
+      "id": "law_2022_valid_credible_simulation",
+      "title": "How to Build Valid and Credible Simulation Models",
+      "authors": [
+        "Averill M. Law"
+      ],
+      "year": 2022,
+      "url": "https://informs-sim.org/wsc22papers/128.pdf",
+      "doi": "10.1109/WSC57314.2022.10015411",
+      "locators": [
+        "Sections 1-1.1, pp. 1283-1286",
+        "Section 2.1, p. 1287",
+        "Section 2.4, pp. 1288-1289",
+        "Section 2.7, p. 1290",
+        "Section 2.8, pp. 1291-1292"
+      ]
+    },
+    {
+      "id": "kennedy_ohagan_2001_calibration",
+      "title": "Bayesian Calibration of Computer Models",
+      "authors": [
+        "Marc C. Kennedy",
+        "Anthony O'Hagan"
+      ],
+      "year": 2001,
+      "url": "https://www.asc.ohio-state.edu/statistics/comp_exp/jour.club/kennedy01.pdf",
+      "doi": "10.1111/1467-9868.00294",
+      "locators": [
+        "Summary and Section 2.1, PDF pp. 1-3",
+        "Sections 4.2-4.3, PDF pp. 11-13, especially equations (5)-(6)"
+      ]
+    },
+    {
+      "id": "gelman_meng_stern_1996_posterior_predictive",
+      "title": "Posterior Predictive Assessment of Model Fitness via Realized Discrepancies",
+      "authors": [
+        "Andrew Gelman",
+        "Xiao-Li Meng",
+        "Hal Stern"
+      ],
+      "year": 1996,
+      "url": "https://www.stat.columbia.edu/~gelman/research/published/A6n41.pdf",
+      "doi": null,
+      "locators": [
+        "Sections 2.1-2.3, pp. 737-742, especially equations (2)-(5)",
+        "Section 4.3, pp. 757-758"
+      ]
+    },
+    {
+      "id": "whitt_zhang_2017_ed_model",
+      "title": "A Data-Driven Model of an Emergency Department",
+      "authors": [
+        "Ward Whitt",
+        "Xiaopei Zhang"
+      ],
+      "year": 2017,
+      "url": "https://www.columbia.edu/~ww2040/ED_ORHC_2017.pdf",
+      "doi": "10.1016/j.orhc.2016.11.001",
+      "locators": [
+        "Section 2, pp. 2-3",
+        "Sections 4.1-4.2, pp. 8-9",
+        "Sections 6.1 and 6.3, pp. 11-12"
+      ]
+    },
+    {
+      "id": "kim_whitt_2013_littles_law_statistics",
+      "title": "Statistical Analysis with Little's Law",
+      "authors": [
+        "Song-Hee Kim",
+        "Ward Whitt"
+      ],
+      "year": 2013,
+      "url": "https://www.columbia.edu/~ww2040/LL_OR.pdf",
+      "doi": "10.1287/opre.2013.1193",
+      "locators": [
+        "Section 2.1, equation (1)-(3), p. 1032",
+        "Section 2.2, Theorems 1-2 and equations (4)-(7), pp. 1033-1034",
+        "Section 2.3, p. 1034"
+      ]
     }
   ]
 }
