@@ -32,6 +32,17 @@ Research direction remains with the user and host agent. The Plugin supplies reu
 
 Implementation sources, adaptation details, and the upstream MIT notice are recorded in the skill's [attribution](../skills/queue-literature/NOTICE.md). See [optional tool references](../skills/queue-literature/references/tool-options.md) and [test scenarios](../tests/queue-literature/scenarios.md).
 
+### Knowledge reuse: current scope
+
+- Investigate reusing the earlier QueueResearcher knowledge base for this Plugin.
+- Do not introduce a vector knowledge base.
+- This step is research and design documentation only: no corpus migration,
+  runtime imports, Plugin installation, or local agent/MCP configuration changes.
+
+See [legacy KB findings and migration proposal](knowledge-base-migration.md) for
+the inspected content, external templates, and a suggested shared file-based
+layout. The knowledge layout, card format, and migration sequence are not yet confirmed.
+
 ## 2. Official standards
 
 | Layer | Purpose | Primary reference |
