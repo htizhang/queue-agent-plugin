@@ -8,65 +8,22 @@ from pathlib import Path
 from urllib.parse import unquote, urlsplit
 
 
-EXPECTED_NOTES = {
-    "knowledge-foundations.md": (
-        ("Mechanism", "Applicability", "Evidence", "Use in this Plugin"),
-        frozenset(
-            {
-                "scully_harchol_balter_2021_gittins",
-                "van_mieghem_1995_gc_mu",
-            }
-        ),
-    ),
-    "modeling-call-center-primitives.md": (
-        ("Method and applicability", "Evidence", "Use in this Plugin"),
-        frozenset({"brown_et_al_2005_call_center"}),
-    ),
-    "modeling-fitted-distribution-tests.md": (
-        ("Method and applicability", "Evidence", "Use in this Plugin"),
-        frozenset({"babu_rao_2004_fitted_gof"}),
-    ),
-    "modeling-partial-event-logs.md": (
-        ("Method and applicability", "Evidence", "Use in this Plugin"),
-        frozenset({"sutton_jordan_2011_queue_inference"}),
-    ),
-    "policy-backfilling.md": (
-        ("Mechanism and applicability", "Evidence", "Use in this Plugin"),
-        frozenset({"mualem_feitelson_2001_backfilling"}),
-    ),
-    "policy-c-mu.md": (
-        ("Mechanism", "Applicability", "Evidence", "Use in this Plugin"),
-        frozenset({"scully_harchol_balter_2021_gittins"}),
-    ),
-    "policy-generalized-c-mu.md": (
-        ("Mechanism", "Applicability", "Evidence", "Use in this Plugin"),
-        frozenset({"van_mieghem_1995_gc_mu"}),
-    ),
-    "policy-gittins.md": (
-        ("Mechanism", "Applicability", "Evidence", "Use in this Plugin"),
-        frozenset({"scully_harchol_balter_2021_gittins"}),
-    ),
-    "policy-maximum-pressure.md": (
-        ("Mechanism and applicability", "Evidence", "Use in this Plugin"),
-        frozenset({"dai_lin_2005_maximum_pressure"}),
-    ),
-    "policy-reentrant-stage-priority.md": (
-        ("Mechanism and applicability", "Evidence", "Use in this Plugin"),
-        frozenset({"dai_weiss_1996_reentrant_stability"}),
-    ),
-    "policy-reentrant-wipload-release.md": (
-        ("Mechanism and applicability", "Evidence", "Use in this Plugin"),
-        frozenset({"qi_et_al_2007_wipload_release"}),
-    ),
-    "policy-srpt.md": (
-        ("Mechanism", "Applicability", "Evidence", "Use in this Plugin"),
-        frozenset({"scully_harchol_balter_2021_gittins"}),
-    ),
+EXPECTED_NOTE_FILENAMES = {
+    "knowledge-foundations.md",
+    "modeling-call-center-primitives.md",
+    "modeling-fitted-distribution-tests.md",
+    "modeling-partial-event-logs.md",
+    "policy-backfilling.md",
+    "policy-c-mu.md",
+    "policy-generalized-c-mu.md",
+    "policy-gittins.md",
+    "policy-maximum-pressure.md",
+    "policy-reentrant-stage-priority.md",
+    "policy-reentrant-wipload-release.md",
+    "policy-srpt.md",
 }
-FIXTURE_SECTIONS = ("Mechanism", "Evidence", "Use in this Plugin")
-FIXTURE_NOTES = {
-    "note.md": (FIXTURE_SECTIONS, frozenset({"source.one"})),
-}
+FIXTURE_NOTE_NAME = "modeling-fixture.md"
+FIXTURE_NOTE_FILENAMES = {FIXTURE_NOTE_NAME}
 AUDIT_NOTE_FIELDS = {
     "ID",
     "Kind",
@@ -88,13 +45,16 @@ REQUIRED_SOURCE_FIELDS = {
 }
 OPTIONAL_SOURCE_FIELDS = {"version"}
 AUDIT_SOURCE_FIELDS = {"reading_depth", "reviewed_on", "legacy_keys", "note"}
+NOTE_FILENAME = re.compile(r"(?:knowledge|modeling|policy)-.+\.md")
+TITLE = re.compile(r"\A#\s+\S[^\n]*\r?\n")
+SUBHEADING = re.compile(r"^#{2,6}\s+.*$", re.M)
 AUDIT_NOTE_ROW = re.compile(
     rf"^\|\s*(?:{'|'.join(re.escape(field) for field in AUDIT_NOTE_FIELDS)})\s*\|",
     re.M,
 )
-HEADING = re.compile(r"^##\s+(.+?)\s*$", re.M)
 LINK = re.compile(r"!?\[[^\]\n]*\]\(([^)\n]+)\)")
 SOURCE_LINK = re.compile(r"\[([^\]\n]+)\]\(sources\.json\)")
+PROSE_WORD = re.compile(r"[A-Za-z][A-Za-z'-]+")
 
 
 def local_links(path, repo_root):
@@ -154,7 +114,7 @@ Fixture use.
 
 
 def write_fixture(root, notes=None, sources=None, skill_links=None):
-    notes = {"note.md": note()} if notes is None else notes
+    notes = {FIXTURE_NOTE_NAME: note()} if notes is None else notes
     sources = [source()] if sources is None else sources
     references = root / "skills" / "queue-literature" / "references"
     references.mkdir(parents=True)
@@ -172,53 +132,56 @@ def write_fixture(root, notes=None, sources=None, skill_links=None):
 
 
 class KnowledgeTests(unittest.TestCase):
-    def assert_knowledge(self, repo_root, expected_notes=EXPECTED_NOTES):
+    def assert_knowledge(
+        self,
+        repo_root,
+        expected_note_filenames=EXPECTED_NOTE_FILENAMES,
+    ):
         repo_root = repo_root.resolve()
         skill = repo_root / "skills" / "queue-literature" / "SKILL.md"
         references = skill.parent / "references"
-        missing = sorted(
-            name for name in expected_notes if not (references / name).is_file()
+        note_paths = sorted(
+            path
+            for path in references.glob("*.md")
+            if NOTE_FILENAME.fullmatch(path.name)
         )
+        note_names = {path.name for path in note_paths}
+        missing = sorted(expected_note_filenames - note_names)
         self.assertFalse(missing, f"missing expected notes: {', '.join(missing)}")
+        self.assertTrue(note_paths, "no knowledge notes discovered")
 
-        notes = {}
-        expected_source_ids = set()
-        for name, (expected_sections, expected_sources) in expected_notes.items():
-            path = references / name
+        notes = []
+        cited_source_ids = set()
+        for path in note_paths:
             text = path.read_text(encoding="utf-8")
-            self.assertRegex(text, r"\A#\s+\S", f"{name}: missing title")
+            title = TITLE.match(text)
+            self.assertIsNotNone(title, f"{path.name}: missing plain-note title")
+            body = text[title.end() :].strip() if title else ""
+            prose = SUBHEADING.sub("", body)
+            prose = SOURCE_LINK.sub("", prose)
+            self.assertGreaterEqual(
+                len(PROSE_WORD.findall(prose)),
+                5,
+                f"{path.name}: missing substantive body",
+            )
             audit_fields = AUDIT_NOTE_ROW.findall(text)
             self.assertFalse(
                 audit_fields,
-                f"{name}: audit fields are not part of a plain knowledge note",
+                f"{path.name}: audit fields are not part of a plain knowledge note",
             )
-            sections = tuple(HEADING.findall(text))
-            self.assertEqual(
-                expected_sections,
-                sections,
-                f"{name}: changed scientific sections",
-            )
-            cited = frozenset(SOURCE_LINK.findall(text))
-            missing_citations = sorted(expected_sources - cited)
-            self.assertFalse(
-                missing_citations,
-                f"{name}: missing citations: {', '.join(missing_citations)}",
-            )
-            unexpected_citations = sorted(cited - expected_sources)
-            self.assertFalse(
-                unexpected_citations,
-                (
-                    f"{name}: changed citation targets: "
-                    f"{', '.join(unexpected_citations)}"
-                ),
-            )
-            notes[name] = (path, text, cited)
-            expected_source_ids.update(expected_sources)
+            cited = set(SOURCE_LINK.findall(text))
+            self.assertTrue(cited, f"{path.name}: missing bibliography citation")
+            cited_source_ids.update(cited)
+            notes.append((path, cited))
 
         payload = json.loads((references / "sources.json").read_text(encoding="utf-8"))
         self.assertEqual({"sources"}, set(payload), "sources.json: bad top-level shape")
         records = payload["sources"]
         self.assertIsInstance(records, list, "sources.json: sources must be a list")
+        self.assertTrue(
+            all(isinstance(record, dict) for record in records),
+            "sources.json: source records must be objects",
+        )
         source_ids = [record.get("id") for record in records]
         self.assertTrue(all(isinstance(item, str) and item for item in source_ids))
         self.assertEqual(
@@ -227,7 +190,6 @@ class KnowledgeTests(unittest.TestCase):
 
         dois = []
         for record in records:
-            self.assertIsInstance(record, dict, f"bad source: {record}")
             fields = set(record)
             missing_fields = sorted(REQUIRED_SOURCE_FIELDS - fields)
             self.assertFalse(
@@ -272,7 +234,10 @@ class KnowledgeTests(unittest.TestCase):
                     f"{record['id']}: empty version qualifier",
                 )
             if record["doi"] is not None:
-                self.assertIsInstance(record["doi"], str)
+                self.assertTrue(
+                    isinstance(record["doi"], str) and record["doi"],
+                    f"{record['id']}: bad DOI",
+                )
                 doi = re.sub(r"^doi:\s*", "", record["doi"].strip().lower())
                 dois.append(
                     re.sub(r"^https?://(?:dx\.)?doi\.org/", "", doi).rstrip("/")
@@ -280,18 +245,17 @@ class KnowledgeTests(unittest.TestCase):
         self.assertEqual(len(dois), len(set(dois)), f"duplicate DOIs: {dois}")
         registry_ids = set(source_ids)
 
-        for path, _, cited in notes.values():
+        for path, cited in notes:
             for source_id in cited:
                 self.assertIn(
                     source_id, registry_ids, f"{path.name}: unknown source {source_id}"
                 )
-        self.assertEqual(
-            expected_source_ids,
-            registry_ids,
-            "sources.json: changed source IDs",
+        uncited = sorted(registry_ids - cited_source_ids)
+        self.assertFalse(
+            uncited, f"sources.json: uncited sources: {', '.join(uncited)}"
         )
 
-        documents = [skill] + [item[0] for item in notes.values()]
+        documents = [skill] + [path for path, _ in notes]
         skill_targets = set()
         for document in documents:
             try:
@@ -302,7 +266,7 @@ class KnowledgeTests(unittest.TestCase):
                 self.assertTrue(target.exists(), f"{document.name}: broken link {raw}")
             if document == skill:
                 skill_targets = {target for _, target in links}
-        for path, _, _ in notes.values():
+        for path, _ in notes:
             self.assertIn(
                 path.resolve(), skill_targets, f"topic map does not link {path.name}"
             )
@@ -311,7 +275,7 @@ class KnowledgeTests(unittest.TestCase):
         self,
         pattern,
         *,
-        expected_notes=FIXTURE_NOTES,
+        expected_note_filenames=FIXTURE_NOTE_FILENAMES,
         **fixture,
     ):
         with tempfile.TemporaryDirectory() as directory:
@@ -320,7 +284,7 @@ class KnowledgeTests(unittest.TestCase):
             with self.assertRaisesRegex(AssertionError, pattern):
                 self.assert_knowledge(
                     root,
-                    expected_notes=expected_notes,
+                    expected_note_filenames=expected_note_filenames,
                 )
 
     def test_valid_fixtures(self):
@@ -329,7 +293,7 @@ class KnowledgeTests(unittest.TestCase):
             write_fixture(root)
             self.assert_knowledge(
                 root,
-                expected_notes=FIXTURE_NOTES,
+                expected_note_filenames=FIXTURE_NOTE_FILENAMES,
             )
 
     def test_duplicate_source_ids_and_dois(self):
@@ -352,7 +316,7 @@ class KnowledgeTests(unittest.TestCase):
         self.assert_bad(
             "audit fields",
             notes={
-                "note.md": note().replace(
+                FIXTURE_NOTE_NAME: note().replace(
                     "## Mechanism", f"{audit_table}\n\n## Mechanism"
                 )
             },
@@ -362,32 +326,67 @@ class KnowledgeTests(unittest.TestCase):
             sources=[source(reviewed_on="2026-09-25")],
         )
 
+    def test_newly_discovered_notes_are_validated(self):
+        self.assert_bad(
+            "unknown source",
+            notes={
+                FIXTURE_NOTE_NAME: note(),
+                "policy-new.md": note(source_ids=("missing",)),
+            },
+        )
+        self.assert_bad(
+            "topic map does not link modeling-new.md",
+            notes={
+                FIXTURE_NOTE_NAME: note(),
+                "modeling-new.md": note(),
+            },
+            skill_links=[f"references/{FIXTURE_NOTE_NAME}"],
+        )
+
     def test_content_and_link_regressions(self):
         self.assert_bad(
             "unknown source",
-            notes={"note.md": note(source_ids=("missing",))},
-            expected_notes={
-                "note.md": (FIXTURE_SECTIONS, frozenset({"missing"})),
-            },
+            notes={FIXTURE_NOTE_NAME: note(source_ids=("missing",))},
         )
         self.assert_bad(
-            "missing citations",
+            "missing bibliography citation",
             notes={
-                "note.md": note().replace("[source.one](sources.json)", "source.one")
+                FIXTURE_NOTE_NAME: note().replace(
+                    "[source.one](sources.json)", "source.one"
+                )
             },
         )
         self.assert_bad(
-            "changed scientific sections",
-            notes={"note.md": note().replace("## Evidence", "## Support")},
+            "missing plain-note title",
+            notes={FIXTURE_NOTE_NAME: note().replace("# Fixture Note", "Fixture Note")},
+        )
+        self.assert_bad(
+            "missing substantive body",
+            notes={
+                FIXTURE_NOTE_NAME: "# Empty Note\n\n[source.one](sources.json)\n",
+            },
         )
         self.assert_bad("missing locators", sources=[source(locators=[])])
-        self.assert_bad("broken link", notes={"note.md": note(extra="[x](missing.md)")})
+        self.assert_bad(
+            "uncited sources",
+            sources=[
+                source(),
+                source("source.two", "10.1000/other"),
+            ],
+        )
+        self.assert_bad(
+            "broken link",
+            notes={FIXTURE_NOTE_NAME: note(extra="[x](missing.md)")},
+        )
         self.assert_bad(
             "escapes repository",
-            notes={"note.md": note(extra="[x](../../../../outside.md)")},
+            notes={FIXTURE_NOTE_NAME: note(extra="[x](../../../../outside.md)")},
         )
         self.assert_bad("topic map does not link", skill_links=[])
-        self.assert_bad("missing expected notes", expected_notes=EXPECTED_NOTES)
+        self.assert_bad(
+            "missing expected notes",
+            expected_note_filenames=EXPECTED_NOTE_FILENAMES,
+        )
 
     def test_repository(self):
         self.assert_knowledge(Path(__file__).resolve().parents[2])

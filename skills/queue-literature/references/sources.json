@@ -67,7 +67,8 @@
       "url": "https://www.columbia.edu/~ww2040/4615S13/Brown2005.pdf",
       "doi": "10.1198/016214504000001808",
       "locators": [
-        "Journal Sections 3.1, 4.3 and 5.1"
+        "Journal Sections 3.1, 4.3 and 5.1",
+        "Journal Section 5.3"
       ]
     },
     {
@@ -147,6 +148,197 @@
       "locators": [
         "Sections 1-2.2, journal pp. 63-68, equations (2.2)-(2.3)",
         "Section 4, Theorems 4.1-4.2"
+      ]
+    },
+    {
+      "id": "kim_whitt_2014_nhpp_tests",
+      "title": "Choosing arrival process models for service systems: Tests of a nonhomogeneous Poisson process",
+      "authors": [
+        "Song-Hee Kim",
+        "Ward Whitt"
+      ],
+      "year": 2014,
+      "url": "https://www.columbia.edu/~ww2040/4615S15/Kim_Whitt_NRL_2014.pdf",
+      "doi": "10.1002/nav.21568",
+      "locators": [
+        "Early-view PDF pp. 1-2, Section 1.1: CU transformation; per-day application tests a Cox process",
+        "Early-view PDF pp. 2-5, Sections 1.3-1.7: low CU power, Lewis transform, dependence detection, subintervals",
+        "Early-view PDF pp. 10-11, Section 4.4 and Table 1: G/M/s+M performance under non-Poisson arrivals",
+        "Early-view PDF pp. 11-12, Section 5.1 and Tables 2-3: power at expected n = 200",
+        "Early-view PDF pp. 13-14, Section 5.3 and Table 4: KS with estimated mean versus Lilliefors",
+        "Early-view PDF pp. 15-16, Section 5.5 and Table 7: combining subintervals",
+        "Early-view PDF pp. 16-19, Section 6 and Table 11: many-server departure process",
+        "Early-view PDF pp. 23-24, Section 9.2: interpreting rejection and non-rejection"
+      ],
+      "version": "Wiley early-view PDF; locators use pp. 1-25, not journal pp. 66-90."
+    },
+    {
+      "id": "kim_whitt_2014_call_center_hospital_nhpp",
+      "title": "Are Call Center and Hospital Arrivals Well Modeled by Nonhomogeneous Poisson Processes?",
+      "authors": [
+        "Song-Hee Kim",
+        "Ward Whitt"
+      ],
+      "year": 2014,
+      "url": "https://www.columbia.edu/~ww2040/Kim_W_MSOM_2014.pdf",
+      "doi": "10.1287/msom.2014.0490",
+      "locators": [
+        "Journal pp. 464-466, Sections 1-1.4: arrival mechanisms; random rate and Cox process; three causes of false rejection",
+        "Journal pp. 466-469, Section 2: rounding and unrounding",
+        "Journal pp. 469-474, Section 3: Table 3; Theorem 1; Corollary 1; Sections 3.4 and 3.6 ratio rule; Theorem 6",
+        "Journal pp. 474-475, Sections 4.1-4.2: dispersion test; per-day versus pooled KS",
+        "Journal pp. 476-478, Sections 5.1-5.4 and Tables 6-8: banking call center",
+        "Journal pp. 478-479, Section 6 and Table 9: hospital emergency department"
+      ]
+    },
+    {
+      "id": "nelson_leemis_2020_nspp_one_sample_path",
+      "title": "The Ease of Fitting but Futility of Testing a Nonstationary Poisson Processes from One Sample Path",
+      "authors": [
+        "Barry L. Nelson",
+        "Lawrence M. Leemis"
+      ],
+      "year": 2020,
+      "url": "https://informs-sim.org/wsc20papers/022.pdf",
+      "doi": "10.1109/WSC48552.2020.9383930",
+      "locators": [
+        "Proceedings p. 267, Section 2: four NSPP properties; single-path tests assume a piecewise-constant rate with known breakpoints",
+        "Proceedings pp. 267-272, Section 3: fitting one path; step-function estimator not consistent on one path",
+        "Proceedings pp. 272-273, Sections 4-4.2: unknown rate; candidate splitting tests fail; count-distribution and variance checks use repeated paths",
+        "Proceedings pp. 273-274, Section 5: test against a pre-specified rate",
+        "Proceedings p. 275, Section 6 and abstract: justify by mechanism; sensitivity analysis"
+      ]
+    },
+    {
+      "id": "woodroofe_1985_truncated_data",
+      "title": "Estimating a Distribution Function with Truncated Data",
+      "authors": [
+        "Michael Woodroofe"
+      ],
+      "year": 1985,
+      "url": "https://projecteuclid.org/journalArticle/Download?urlId=10.1214%2Faos%2F1176346584",
+      "doi": "10.1214/aos/1176346584",
+      "locators": [
+        "Journal p. 163, abstract: X and Y independent; a pair is observed only if Y <= X; consistency conditions",
+        "Journal p. 164, Section 1: Kaplan-Meier would need min(X, Y) and its indicator for every unit, whereas nothing is observed for a truncated pair; Section 2 and Lemma 1",
+        "Journal pp. 165-166, Theorem 1 and Corollary 1: only the distribution of X conditional on X >= a_G is identified",
+        "Journal pp. 166-167, Section 3, equations (5)-(10): Lynden-Bell product-limit estimator with risk set nC_n(z); degenerate case (10) and ad hoc repair",
+        "Journal p. 168, Example 1 and Table 1: selection-bias correction with increased variability",
+        "Journal p. 170, Section 4, Lemma 2 (risk-set count) and Theorem 2 (consistency to the conditional distribution F_0)",
+        "Journal p. 172, Remark 4: the support conditions cannot be tested from the truncated data"
+      ]
+    },
+    {
+      "id": "tse_2003_ltrc_product_limit",
+      "title": "Strong Gaussian Approximations in the Left Truncated and Right Censored Model",
+      "authors": [
+        "SzeMan Tse"
+      ],
+      "year": 2003,
+      "url": "https://www3.stat.sinica.edu.tw/statistica/oldpdf/A13n117.pdf",
+      "doi": null,
+      "locators": [
+        "Journal pp. 275-276, Section 1, equations (1.1)-(1.2): left-truncated, right-censored model with X, T and S independent, (Y, T, delta) observed only if Y >= T, and the Tsai-Jewell-Wang product-limit estimator",
+        "Journal p. 277, end of Section 1: truncation hides an item's existence; Section 2: support assumption and condition (2.1)"
+      ]
+    },
+    {
+      "id": "kalbfleisch_lawless_1991_right_truncation",
+      "title": "Regression Models for Right Truncated Data with Applications to AIDS Incubation Times and Reporting Lags",
+      "authors": [
+        "J. D. Kalbfleisch",
+        "J. F. Lawless"
+      ],
+      "year": 1991,
+      "url": "https://www3.stat.sinica.edu.tw/statistica/oldpdf/A1n12.pdf",
+      "doi": null,
+      "locators": [
+        "Journal pp. 19-20, Section 1, equation (1) and Figure 1: a lag is observed only if its consequent event precedes calendar time T; truncation time tau = T - t",
+        "Journal pp. 21-23, Section 2, equations (2)-(10): reverse-time hazards; only these are identifiable, up to tau* = max tau; risk set n_j; equivalence with left truncation in reverse time",
+        "Journal p. 27, Section 5, equation (23): only quasi-stationarity over initiating times is testable",
+        "Journal pp. 28-29, Examples 1-2 and Table 1: non-stationary reporting lags undermine the stationarity assumption of the incubation analysis"
+      ]
+    },
+    {
+      "id": "tsiatis_1975_competing_risks",
+      "title": "A Nonidentifiability Aspect of the Problem of Competing Risks",
+      "authors": [
+        "Anastasios Tsiatis"
+      ],
+      "year": 1975,
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC432231/pdf/pnas00044-0026.pdf",
+      "doi": "10.1073/pnas.72.1.20",
+      "locators": [
+        "Journal p. 20, abstract and Theorem 1: crude and net survival probabilities",
+        "Journal p. 21, Theorem 2 and following remark: any crude survival functions are reproduced by an independent-risks model, so agreement with them does not confirm independence",
+        "Journal pp. 21-22, illustrative example and Figure 1"
+      ]
+    },
+    {
+      "id": "peterson_1976_competing_risk_bounds",
+      "title": "Bounds for a Joint Distribution Function with Fixed Sub-Distribution Functions: Application to Competing Risks",
+      "authors": [
+        "Arthur V. Peterson, Jr."
+      ],
+      "year": 1976,
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC335828/pdf/pnas00670-0017.pdf",
+      "doi": "10.1073/pnas.73.1.11",
+      "locators": [
+        "Journal p. 11, Section 1, and Theorem 1, equations (2.1)-(2.3): without an independence assumption the data give only bounds; sharp joint and marginal bounds",
+        "Journal p. 12, remarks on the marginal bounds, Theorem 2, and Section 4 Theorem 3: consistent empirical bounds from n independent (Y, delta) observations",
+        "Journal p. 13, Section 5 and Figures 1-3: bounds far apart when p_1 is small; Section 6"
+      ]
+    },
+    {
+      "id": "glasserman_yao_1992_crn",
+      "title": "Some Guidelines and Guarantees for Common Random Numbers",
+      "authors": [
+        "Paul Glasserman",
+        "David D. Yao"
+      ],
+      "year": 1992,
+      "url": "https://drupalgsb-dev.cc.columbia.edu/sites/default/files-efs/pubfiles/4261/glasserman_yao_guidelines.pdf",
+      "doi": "10.1287/mnsc.38.6.884",
+      "locators": [
+        "Journal pp. 884-885, Section 1: variance-of-difference identity and CRN as induced positive dependence",
+        "Journal pp. 887-892, Sections 2.1-2.3 and Proposition 2.3: seeds are not the definition of CRN; corresponding-variable synchronization",
+        "Journal pp. 895-901, Sections 4.1-4.4, Theorem 4.12 and Example 4.8: finite- and steady-state conditions, per-event streams, and negative-covariance risk",
+        "Journal pp. 904-905, Section 7: event-order guideline and multiclass/preemptive caveat"
+      ]
+    },
+    {
+      "id": "lecuyer_simard_chen_kelton_2002_streams",
+      "title": "An Object-Oriented Random-Number Package with Many Long Streams and Substreams",
+      "authors": [
+        "Pierre L'Ecuyer",
+        "Richard Simard",
+        "E. Jack Chen",
+        "W. David Kelton"
+      ],
+      "year": 2002,
+      "url": "https://www-labs.iro.umontreal.ca/~lecuyer/myftp/streams00/c++/streams4.pdf",
+      "doi": "10.1287/opre.50.6.1073.358",
+      "locators": [
+        "Expanded report pp. 3-5, Sections 1-1.2: independent pairs, different generator-call counts, and disjoint streams/substreams",
+        "Expanded report pp. 12-13, Section 3: assign distinct streams to stochastic sources and run j to substream j",
+        "Expanded report pp. 15-16, Section 4, Example 2: reset streams across systems and advance substreams across replications"
+      ],
+      "version": "Expanded author report; locators are not the short journal article pagination."
+    },
+    {
+      "id": "nakayama_2006_output_analysis",
+      "title": "Output Analysis for Simulations",
+      "authors": [
+        "Marvin K. Nakayama"
+      ],
+      "year": 2006,
+      "url": "https://informs-sim.org/wsc06papers/004.pdf",
+      "doi": "10.1109/WSC.2006.323036",
+      "locators": [
+        "Proceedings pp. 36-38, Sections 1-2 and equations (1)-(2): performance-measure choice, finite-horizon versus steady-state estimands, and initial conditions",
+        "Proceedings pp. 38-39, Section 3 and equations (4)-(9): i.i.d. replications, nonoverlapping streams, and confidence intervals",
+        "Proceedings pp. 40-42, Sections 4-4.2 and equations (13)-(16): long-run estimands, multiple replications, initialization bias, and initial-data deletion",
+        "Proceedings p. 44, Section 6: CRN-induced correlation for estimating differences"
       ]
     }
   ]
