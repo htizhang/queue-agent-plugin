@@ -24,6 +24,21 @@ The Plugin first gives the agent this task map: **data → queue model → polic
 
 Research direction remains with the user and host agent. The Plugin supplies reusable domain knowledge, methods, tools, and cases rather than a separate, fixed agent framework. The queueing community can contribute additional capabilities and knowledge.
 
+### Overall entry and task routing
+
+- Implement [queue-agent](../skills/queue-agent/SKILL.md) as the overall entry
+  skill. Select the current task from the latest request and available artifacts,
+  rather than storing one Stage for the whole session.
+- A usable model, simulator, or specified model family can start directly at
+  Stage 2. Building its evaluator does not itself require Stage 1 inference from
+  historical data. Requests to assess or revise model-data agreement use Stage 1.
+- Literature questions and discussion are valid standalone tasks; the overview
+  does not automatically start implementation or experiments.
+- Add a short SessionStart orientation that points to the entry skill. Keep
+  detailed guidance in skills, with no fixed workflow engine or persistent Stage
+  state. This is source content only: packaging, installation, and host hook
+  approval remain separate.
+
 ### Stage 1 modeling capability
 
 - Implement [queue-modeling](../skills/queue-modeling/SKILL.md) as guidance for
@@ -119,6 +134,27 @@ Two details to retain:
 
 - Root `extensions.com.openai`, when present, replaces the OpenAI-specific compatibility overlay rather than merging with it. Portable skills and MCP still use fixed paths. [Precedence rules](https://developers.openai.com/plugins/build/plugins#add-openai-specific-metadata)
 - Claude does not load a Plugin-root `CLAUDE.md` as instruction context. Put runtime guidance in skills, and keep experiment outputs outside the versioned installation directory. [Claude reference](https://code.claude.com/docs/en/plugins/manifest-reference)
+
+### Entry guidance and session context
+
+Skill names and descriptions are available for selection, but full instructions
+are loaded when a skill is selected. An entry skill alone is not an always-loaded
+system prompt. [OpenAI skill activation](https://developers.openai.com/plugins/concepts/skills)
+
+Claude Code and Codex both document SessionStart command hooks returning
+`hookSpecificOutput` with `hookEventName: "SessionStart"` and
+`additionalContext`. This is the shared output shape used by the orientation
+source. It adds task guidance, not authority to override the host or the user.
+[Claude hooks](https://code.claude.com/docs/en/hooks#sessionstart),
+[Codex hooks](https://learn.chatgpt.com/docs/hooks#sessionstart)
+
+The source command accepts `CLAUDE_PLUGIN_ROOT` or `PLUGIN_ROOT`, quotes the
+resolved path, and requires `python3`. Claude documents the former; Codex
+documents its own root variable and the Claude-compatible alias. This checks a
+portable source path, not automatic activation: packaging, platform support, and
+hook trust still need host-level verification.
+[Claude Plugin reference](https://code.claude.com/docs/en/plugins-reference),
+[OpenAI Plugin packaging](https://developers.openai.com/plugins/build/plugins)
 
 ## 4. Creation, testing, and distribution references
 

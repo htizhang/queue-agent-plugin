@@ -19,7 +19,8 @@ determines where to start; not every request needs to run both Stages.
 
 This is a private, standalone repository under incremental design. We will discuss
 and confirm each workflow step before implementing it. The repository currently
-contains the agreed overview, reference material, and skill source files,
+contains the agreed overview, reference material, skill source files, and a
+startup-orientation hook source,
 not an installable Plugin.
 
 Host packaging and tool integrations are not implemented yet.
@@ -28,6 +29,11 @@ research repository are included. Selected knowledge is migrated as reviewed,
 simulator-neutral reference notes, not as framework code.
 
 ## Skills
+
+- [queue-agent](skills/queue-agent/SKILL.md): the overall entry point. Choose
+  Stage 1, Stage 2, or shared literature/discussion from the current request and
+  available artifacts. An existing model or specified family can go directly to
+  Stage 2. See the [routing checks](tests/queue-agent/scenarios.md).
 
 - [queue-modeling](skills/queue-modeling/SKILL.md): Stage 1 simulator construction,
   calibration, and validation. It guides the host agent to use independent
@@ -49,6 +55,17 @@ configured on the user's machine by adding them. For queue-literature, see its
 [attribution](skills/queue-literature/NOTICE.md) and
 [behavioral checks](tests/queue-literature/scenarios.md).
 
+## Startup orientation
+
+The source in [hooks/hooks.json](hooks/hooks.json) provides a short SessionStart
+orientation and points to the queue-agent skill. It does not assign or persist
+the current Stage; the agent determines that from the conversation. The helper
+uses Python 3's standard library, with no network access or state files.
+
+The hook uses the documented context-output shape shared by Claude Code and
+Codex. Host packaging, hook enablement/trust, and installed-host testing remain
+separate steps. Adding these files does not enable a hook on this machine.
+
 ## Documentation
 
 - [References and confirmed design decisions](docs/references.md)
@@ -61,7 +78,8 @@ Run the dependency-free content checks from the repository root:
 
 ```sh
 python3 -m unittest discover -s tests/queue-literature -p 'test_*.py'
+python3 -m unittest discover -s tests/queue-agent -p 'test_*.py'
 ```
 
-These check the plain-note contract and reference integrity, not theorem
-correctness or installed-host compatibility.
+These check the plain-note contract, reference integrity, and source-level hook
+execution, not theorem correctness or installed-host compatibility.
