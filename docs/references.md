@@ -17,7 +17,7 @@ implementation plan.
 
 Users interact with their own coding agent, with Claude Code and Codex as the intended hosts:
 
-- **Stage 1 — Queue modeling:** build and check an executable queue simulator from data and a system description, with replaceable policies.
+- **Stage 1 — Queue modeling:** deliver a documented queue model and its corresponding executable simulator from data and a system description, with replaceable policies and checks that the implementation matches the model.
 - **Stage 2 — Policy design:** design, evaluate, and improve queue policies for a model or model family.
 
 The Plugin first gives the agent this task map: **data → queue model → policy**. The user's current task determines where to start; not every request must run both Stages.
@@ -42,12 +42,17 @@ Research direction remains with the user and host agent. The Plugin supplies reu
 ### Stage 1 modeling capability
 
 - Implement [queue-modeling](../skills/queue-modeling/SKILL.md) as guidance for
-  building, calibrating, and validating an executable queue simulator from data
-  and a system description.
+  building, calibrating, and validating a queue model and its corresponding
+  executable simulator from data and a system description.
+- Deliver both a self-contained model description and a runnable implementation.
+  The description states the structure, dynamics, stochastic mechanisms,
+  parameters, assumptions, and policy decision interface. Keep it consistent
+  with the simulator and configuration, and validate that correspondence.
+  The representation and file layout remain task-dependent.
 - The simulator generates trajectories and accepts policy decisions, so it can
   support subsequent policy evaluation. Its handoff includes the fitted
-  configuration, execution instructions, and concise modeling and validation
-  notes.
+  configuration, execution instructions, and concise validation results alongside
+  the model description.
 - Encourage a separate validation subagent, where the host supports it, to work
   from the original evidence and run checks. Feedback should identify concrete
   discrepancies and supporting results; the main agent integrates the feedback

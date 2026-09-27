@@ -8,8 +8,8 @@ def main() -> None:
     entry = Path(__file__).resolve().parents[1] / "skills/queue-agent/SKILL.md"
     context = (
         "Queue Agent supports data -> queue model -> policy. "
-        "Stage 1 builds and checks executable queue models from data and a "
-        "system description; Stage 2 develops "
+        "Stage 1 delivers a documented queue model and its corresponding "
+        "simulator from data and a system description; Stage 2 develops "
         "and evaluates policies for a model or model family. "
         "For a queueing task, read the entry skill at "
         f"{json.dumps(str(entry))}. "

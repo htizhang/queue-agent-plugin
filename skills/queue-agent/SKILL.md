@@ -7,8 +7,9 @@ description: Orient queueing research around data, executable queue models, and 
 
 Support interactive queueing research: **data → queue model → policy**.
 
-- **Stage 1 — Queue modeling:** build and check an executable simulator from
-  data and a system description, with replaceable policies.
+- **Stage 1 — Queue modeling:** deliver a documented queue model and its
+  corresponding executable simulator from data and a system description,
+  with replaceable policies and checks that the implementation matches the model.
 - **Stage 2 — Policy design:** design, evaluate, and improve policies for a queue
   model or model family.
 

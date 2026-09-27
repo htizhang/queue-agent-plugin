@@ -19,12 +19,18 @@ you actually checked. Work locally with available tools.
 
 - Uses service-start to departure durations for service observations and fits or
   resamples arrivals separately.
+- Delivers a self-contained queue model description covering the system,
+  dynamics, distributions and parameters, assumptions, and policy interface.
+  A reader can understand the model without inspecting the simulator code.
 - Delivers executable code, configuration, and a working run command.
+- Checks that the implementation and configuration match the model description,
+  and keeps all three consistent when revising them.
 - Keeps dispatch replaceable and limits policy observations to available
   information; does not automatically launch a policy-search campaign.
 - Runs checks of resource capacity, event order, and agreement with the data.
-- When delegation is available, gives a validator the original inputs and
-  executable candidate and integrates its evidence rather than just its verdict.
+- When delegation is available, gives a validator the original inputs, model
+  description, and executable candidate and integrates its evidence rather than
+  just its verdict.
 
 ## B. Review a candidate against an observed trace
 

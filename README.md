@@ -7,8 +7,9 @@ and Codex as the intended hosts.
 
 ## Confirmed overview
 
-- **Stage 1 — Queue modeling:** build and check an executable queue simulator
-  from data and a system description, with replaceable policies.
+- **Stage 1 — Queue modeling:** deliver a documented queue model and its
+  corresponding executable simulator from data and a system description,
+  with replaceable policies and checks that the implementation matches the model.
 - **Stage 2 — Policy design:** design, evaluate, and improve queue policies for
   a queue model or model family.
 
@@ -35,10 +36,11 @@ simulator-neutral reference notes, not as framework code.
   available artifacts. An existing model or specified family can go directly to
   Stage 2. See the [routing checks](tests/queue-agent/scenarios.md).
 
-- [queue-modeling](skills/queue-modeling/SKILL.md): Stage 1 simulator construction,
-  calibration, and validation. It guides the host agent to use independent
-  validation subagents when available and iterate on executable feedback. The
-  agent chooses the representation, simulation tools, and task-specific checks.
+- [queue-modeling](skills/queue-modeling/SKILL.md): Stage 1 model specification,
+  simulator construction, calibration, and validation. It guides the host agent
+  to use independent validation subagents when available and iterate on
+  executable feedback. The agent chooses the representation, simulation tools,
+  and task-specific checks.
   See the [behavioral checks](tests/queue-modeling/scenarios.md).
 
 - [queue-literature](skills/queue-literature/SKILL.md): source-grounded literature
