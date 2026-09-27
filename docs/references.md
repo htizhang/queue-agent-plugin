@@ -1,6 +1,6 @@
 # Queue Agent Plugin: References and Design Decisions
 
-Last updated: 2026-09-26. Confirmed decisions, external references, and open
+Last updated: 2026-09-27. Confirmed decisions, external references, and open
 questions are kept separate. Upstream examples are not automatically our
 implementation plan.
 
@@ -11,7 +11,7 @@ implementation plan.
 - Develop incrementally in the standalone, private [queue-agent-plugin repository](https://github.com/htizhang/queue-agent-plugin).
 - Use English for all repository content.
 - Discuss one workflow step at a time. Once confirmed, record it here and implement the agreed scope.
-- The repository contains the overview, references, and skill source files, not an installable Plugin. No legacy runtime implementation or experiment data is included.
+- The repository contains the overview, references, skill source files, and compact Discovery Lab cases, not an installable Plugin. It does not import the earlier agent framework or full experiment archives.
 
 ### Two-Stage overview
 
@@ -154,6 +154,62 @@ tools, not required dependencies of the delivered skill. See the
 [first expansion](knowledge-base-expansion.md) for the prepared additions and
 remaining verification scope.
 
+### Community contributions and Discovery Lab
+
+Keep core skills focused on reusable research workflows. Community content has
+two contribution paths, rather than making each algorithm or topic a new skill:
+
+1. **Literature knowledge:** extend the content under `queue-literature` with
+   existing literature, classical algorithms, modeling methods, applicability
+   conditions, and practical knowledge supported by sources.
+2. **Agent-discovered policies:** contribute new methods discovered through LLM
+   agent research to a separate results component called
+   **Discovery Lab**. Entries explain the method, its relationship to prior work,
+   implementation, and evaluation evidence. This is not a general algorithm
+   catalog; classical methods belong in the literature knowledge base and may
+   be cited as references or baselines in discovery entries.
+
+#### Research access: explicit opt-in
+
+Discovery Lab is not part of the agent's default knowledge base. Keep its
+contents out of default literature retrieval and loading. Treat entries as
+exploratory research results; their experimental evidence does not substitute
+for scientific peer review.
+
+- Consult Discovery Lab only after the user explicitly requests the design of
+  a new algorithm. A generic request to improve performance is not sufficient.
+- Ordinary modeling, adoption or comparison of existing policies, and tuning
+  parameters of a fixed policy do not activate this resource.
+- Once enabled, explore relevant entries as research leads, mechanisms to adapt,
+  or ideas to combine. Evaluate their applicability and performance for the
+  current confirmed problem; previous experiments do not establish performance
+  in the user's setting.
+- Discovery provenance defines the collection, not publication status alone.
+  Later peer review of an entry does not automatically change this access rule.
+
+#### Optional contribution workflow
+
+A separate, optional `queue-contribute` skill is activated when the user asks
+to contribute. It helps the user's own agent choose one or both contribution
+paths, prepare the relevant material, check it, and submit a PR under the user's
+authorization. Maintainers decide whether to merge the contribution; repository
+review does not itself constitute scientific peer review.
+
+Contribution is separate from Stage 1 and Stage 2 execution. Completing research
+does not automatically publish user data, code, or findings. Preparing a requested
+contribution is not permission to use Discovery Lab as default research knowledge.
+
+**Implementation status:** the source tree includes a plain
+[`discovery-lab/`](../discovery-lab/index.md) resource directory with the two
+existing cases, their portable policy implementations, compact archived evidence,
+and executable checks. Each entry has `policy.md`, implementation, and evaluation
+material; no shared simulator interface or new runtime service is imposed.
+The research-time access rule lives in `queue-policy`; `queue-literature` searches
+its own references, and `queue-agent` routes requested contributions to
+[`queue-contribute`](../skills/queue-contribute/SKILL.md). Source-level and
+behavioral checks cover these boundaries. Host packaging, installation, and
+publication remain separate steps.
+
 ## 2. Official standards
 
 | Layer | Purpose | Primary reference |
@@ -264,7 +320,6 @@ Claude's official eval tool supplies a with/without-Plugin comparison by default
 - Validate both hosts initially, or start with one while preserving the other's adaptation boundary?
 - Which capabilities should be independently callable in each Stage, and what model and evidence should pass between them?
 - Which computations need local scripts, and which benefit from MCP?
-- Should community contributions be skills, model-family cases, tools, or a combination?
 
 We will discuss these individually. Shared content with host-specific adaptation is a supported direction, not a finalized layout, skill catalog, or execution workflow.
 

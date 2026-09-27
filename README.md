@@ -26,9 +26,10 @@ startup-orientation hook source,
 not an installable Plugin.
 
 Host packaging and tool integrations are not implemented yet.
-No runtime implementation, experiment data, or credentials from the earlier
-research repository are included. Selected knowledge is migrated as reviewed,
-simulator-neutral reference notes, not as framework code.
+Selected knowledge is migrated as reviewed, simulator-neutral reference notes.
+The separate Discovery Lab includes compact implementations and evaluation
+evidence for two agent-discovered methods; it does not import the earlier agent
+framework, full experiment archives, or credentials.
 
 ## Skills
 
@@ -62,10 +63,29 @@ simulator-neutral reference notes, not as framework code.
   alongside classical scheduling, network control, backfilling, and paired simulation evaluation;
   established questions can be answered without repeating an online search.
 
+- [queue-contribute](skills/queue-contribute/SKILL.md): when the user asks to
+  contribute, prepare literature additions, discovered methods, or both, and
+  submit a PR only within the requested scope. See its
+  [behavioral checks](tests/queue-contribute/scenarios.md).
+
 These skills are source content in this repository. Nothing is installed or
 configured on the user's machine by adding them. For queue-literature, see its
 [attribution](skills/queue-literature/NOTICE.md) and
 [behavioral checks](tests/queue-literature/scenarios.md).
+
+## Discovery Lab
+
+The [Discovery Lab](discovery-lab/index.md) collects agent-discovered policies,
+separately from established literature. Its first entries cover queue-aware
+optimistic backfilling and congestion-priced lookahead for reentrant networks.
+Each includes an algorithm description, portable code, and evaluation evidence.
+
+The Lab is excluded from default agent knowledge. Research-time exploration
+requires the user to explicitly request new algorithm design; ordinary modeling,
+policy comparison, or parameter tuning does not activate it. Entries are
+research leads to evaluate in the user's setting, not peer-reviewed authority.
+See the [access checks](tests/queue-policy/lab-access-scenarios.md) and
+[contribution guide](discovery-lab/CONTRIBUTING.md).
 
 ## Startup orientation
 
@@ -95,3 +115,8 @@ python3 -m unittest discover -s tests/queue-agent -p 'test_*.py'
 
 These check the plain-note contract, reference integrity, and source-level hook
 execution, not theorem correctness or installed-host compatibility.
+
+Each Discovery Lab entry also documents a dependency-free policy smoke test and
+an archived-evidence check in its evaluation note. Those checks verify the
+portable extraction and recompute the bundled comparisons; they do not rerun
+the original simulation campaigns.

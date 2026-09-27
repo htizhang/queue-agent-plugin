@@ -68,8 +68,10 @@ user's system.
 | Model assumptions, observations, Kendall notation, M/M/1, M/G/1, baseline fit | [Model and policy fit](references/knowledge-foundations.md) |
 | Paired policy evaluation, common random numbers, random streams, warm-up | [Paired CRN evaluation](references/policy-evaluation-paired-crn.md) |
 
-Use the host's file-reading or keyword-search tools; no database or custom
-retrieval service is needed. If the local evidence answers an established question,
+Scope bundled knowledge lookup to this skill's `references/` directory; the
+separate Discovery Lab is not part of literature retrieval. Use the host's
+file-reading or keyword-search tools; no database or custom retrieval service
+is needed. If the local evidence answers an established question,
 answer with its original sources without a redundant web search. Distinguish what
 the bundled note reports from any primary text you inspect in this session.
 
