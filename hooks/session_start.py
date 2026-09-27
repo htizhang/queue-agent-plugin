@@ -9,8 +9,8 @@ def main() -> None:
     context = (
         "Queue Agent supports data -> queue model -> policy. "
         "Stage 1 delivers a documented queue model and its corresponding "
-        "simulator from data and a system description; Stage 2 first establishes "
-        "the queue family, then selects, evaluates, tunes, or designs policies. "
+        "simulator from data and a system description; Stage 2 first confirms "
+        "the problem definition, then selects, evaluates, tunes, or designs policies. "
         "For a queueing task, read the entry skill at "
         f"{json.dumps(str(entry))}. "
         "Choose the next step from the user's current request and available "

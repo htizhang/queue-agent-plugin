@@ -10,9 +10,9 @@ and Codex as the intended hosts.
 - **Stage 1 — Queue modeling:** deliver a documented queue model and its
   corresponding executable simulator from data and a system description,
   with replaceable policies and checks that the implementation matches the model.
-- **Stage 2 — Policy design:** establish the queue family, then select, evaluate,
-  tune, or design policies for it. Keep the family fixed unless the user
-  explicitly requests a change.
+- **Stage 2 — Policy design:** confirm the queue family, objective, and constraints
+  with the user, then select, evaluate, tune, or design policies. Keep that problem
+  definition fixed unless the user explicitly authorizes a change.
 
 The Plugin first gives the agent this overall task map. The user's current task
 determines where to start; not every request needs to run both Stages.
@@ -45,9 +45,10 @@ simulator-neutral reference notes, not as framework code.
   See the [behavioral checks](tests/queue-modeling/scenarios.md).
 
 - [queue-policy](skills/queue-policy/SKILL.md): the Stage 2 workflow. Start from a
-  Stage 1 handoff or a user-supplied model, with or without a simulator. Match the
-  work to the user's needs and queue structure, using the fixed family for policy
-  discovery and allowing instance-specific parameter tuning. SimOpt is an
+  Stage 1 handoff or a user-supplied model, with or without a simulator. Confirm
+  the problem definition before execution, reusing prior explicit confirmation.
+  Match the work to the user's needs and queue structure, using the fixed family
+  for policy discovery and allowing instance-specific parameter tuning. SimOpt is an
   optional external resource for simulation optimization, not a bundled backend.
   Deriving new theoretical results and formal proofs is outside this skill's
   scope. See the [behavioral checks](tests/queue-policy/scenarios.md).

@@ -9,30 +9,43 @@ Find a policy suited to the user's queue and objective. New algorithm discovery
 is one possible task, not the default. Respect discussion-only requests; perform
 implementation and experiments when they are part of the requested work.
 
-## First establish and fix the queue family
+## Confirm the problem definition
 
-Start from the Stage 1 model and simulator, or the user's model or model-family
-specification. A simulator is optional at entry. Identify the family before
-selecting algorithms or starting experiments:
+Before Stage 2 execution, establish the user's confirmed problem definition.
+A simulator is optional at entry; start from the Stage 1 handoff or user input.
 
-- Shared system structure and mechanisms: jobs, resources, arrival and service
-  processes, routing, and relevant features such as abandonment or preemption.
-- Control boundaries: decision timing, information available to the policy,
-  feasible actions, and operational constraints.
-- Permitted variation: which model parameters or operating conditions may vary,
-  and their intended ranges. Distinguish these from tunable policy parameters.
+1. **Read and summarize.** Use the supplied artifacts and conversation to identify:
+   - **Queue family:** shared structure and mechanisms, permitted model or
+     operating-condition variation and ranges, and any target instance.
+     Distinguish these from policy parameters; one instance does not define an
+     arbitrary range of other systems.
+   - **Objective:** the performance measure to optimize and its direction,
+     including weights or aggregation when these affect what counts as better.
+   - **Constraints:** decision timing, observable information, feasible actions,
+     and operational requirements the policy must satisfy.
+2. **Clarify the gaps.** Ask short, focused questions about missing or ambiguous
+   decisions, building on what the user has already supplied. Offer alternatives
+   and a recommendation when helpful, marked as proposals for the user to choose.
+   Use the host's interactive question tool when available; otherwise ask in
+   ordinary conversation and wait for a reply.
+3. **Confirm, then proceed.** Present a concise family/objective/constraints
+   summary and ask whether to proceed under it. Completion means the user has
+   explicitly confirmed all three, not merely that the agent has filled them in.
+   An explicit selection and instruction to proceed already present in the
+   conversation counts; reuse it without asking again while the definition is
+   unchanged. An unanswered question remains pending, including in unattended
+   runs: return the pending question rather than starting implementation or
+   experiments. Discussion and input inspection can continue without starting
+   execution. Record the confirmed definition in the task's working notes, then
+   continue with the requested work.
 
-State this scope concisely alongside the objective and any supplied target
-instance. Use the supplied boundaries; a single instance does not establish an
-arbitrary range of other systems. Ask when an ambiguity would materially change
-the family or next action. Keep the agreed scope with the task's working notes.
-
-Once established, keep the family fixed unless the user explicitly requests a
-change. Poor results or a worker's suggestion do not authorize expanding,
-narrowing, or replacing it. Propose a scope change to the user if warranted;
-otherwise continue within the agreed family. Varying instances within its stated
-ranges or tuning a policy is not a family change. If the user changes the family,
-update affected evaluators and baseline choices before drawing new comparisons.
+Keep this confirmed problem definition fixed unless the user explicitly
+authorizes a change. Policy redesign and parameter tuning stay within it;
+poor results or worker suggestions do not authorize changing the family,
+objective, or constraints. Propose a change if warranted and wait for the user's
+decision. When the user authorizes a change, update that part of the working
+definition and affected evaluator mechanics, metrics, and baselines; clarify any
+unresolved consequences without reopening unchanged decisions.
 
 ## Choose the work the problem needs
 
@@ -65,10 +78,11 @@ An applicable analytical evaluation can suffice for a simpler request.
 
 ## Evaluate and improve policies
 
-For policy discovery, seek a decision rule that exploits the family's shared
-structure. Develop and evaluate it across representative instances within the
-agreed variation, rather than optimizing only one fixed configuration. Retain
-useful candidates and their results so subsequent iterations build on prior work.
+For new or improved policy development, read
+[Policy Discovery](references/policy-discovery.md) before delegating research or
+implementing candidates. It guides independent subagent development and the main
+agent's research iterations. Adoption, comparison, and fixed-policy tuning do
+not require this discovery workflow.
 
 Compare policies using the same objective, feasible actions, and information
 assumptions. Account for stochastic noise with repeated runs and shared random
@@ -90,8 +104,8 @@ information. SimOpt is an optional resource, not a bundled dependency or require
 backend. Its optimization solver is distinct from the queue policy being tuned.
 
 Let the host choose tools, delegation, and iteration schedules. Give any workers
-the same family boundary, objective, and requested scope; integrate their feedback
-without allowing an unrequested change of problem.
+the confirmed problem definition and requested scope, and integrate their
+feedback within that definition.
 
 ## Deliver the policy and performance evidence
 

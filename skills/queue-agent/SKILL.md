@@ -10,8 +10,8 @@ Support interactive queueing research: **data → queue model → policy**.
 - **Stage 1 — Queue modeling:** deliver a documented queue model and its
   corresponding executable simulator from data and a system description,
   with replaceable policies and checks that the implementation matches the model.
-- **Stage 2 — Policy design:** establish the queue family, then select, evaluate,
-  tune, or design policies for it according to the user's needs.
+- **Stage 2 — Policy design:** confirm the problem definition, then select,
+  evaluate, tune, or design policies according to the user's needs.
 
 These are capabilities, not a mandatory sequence. Use the user's latest request
 and the available artifacts to determine the current task.
@@ -21,7 +21,7 @@ and the available artifacts to determine the current task.
 | Current need | Starting point |
 | --- | --- |
 | Infer a queue model from observations, or revise its mechanisms or calibration against data | Stage 1: use [queue-modeling](../queue-modeling/SKILL.md). |
-| Select, evaluate, tune, or design policies for an existing model, simulator, or specified model family | Stage 2: use [queue-policy](../queue-policy/SKILL.md), first establishing the family and keeping it fixed unless the user explicitly changes it. |
+| Select, evaluate, tune, or design policies for an existing model, simulator, or specified model family | Stage 2: use [queue-policy](../queue-policy/SKILL.md), beginning with its problem-definition confirmation step. |
 | Answer a literature question, explain queueing concepts, or discuss a research direction | Address that question; use [queue-literature](../queue-literature/SKILL.md) when domain evidence is needed. |
 
 A specified mathematical model may still need an executable evaluator for
