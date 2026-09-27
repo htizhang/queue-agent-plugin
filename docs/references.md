@@ -18,7 +18,7 @@ implementation plan.
 Users interact with their own coding agent, with Claude Code and Codex as the intended hosts:
 
 - **Stage 1 — Queue modeling:** deliver a documented queue model and its corresponding executable simulator from data and a system description, with replaceable policies and checks that the implementation matches the model.
-- **Stage 2 — Policy design:** establish the queue family, then select, evaluate, tune, or design policies for it according to the user's needs. Keep the family fixed unless the user explicitly requests a change.
+- **Stage 2 — Policy design:** confirm the queue family, objective, and constraints with the user, then select, evaluate, tune, or design policies according to their needs. Keep that problem definition fixed unless the user explicitly authorizes a change.
 
 The Plugin first gives the agent this task map: **data → queue model → policy**. The user's current task determines where to start; not every request must run both Stages.
 
@@ -68,11 +68,20 @@ Research direction remains with the user and host agent. The Plugin supplies reu
 
 - Implement [queue-policy](../skills/queue-policy/SKILL.md) as the overall Stage 2
   skill, not a workflow limited to discovering new algorithms.
-- First establish the queue family from the Stage 1 handoff or user input:
-  shared mechanisms, control and information boundaries, and permitted parameter
-  or operating-condition variation. Keep it fixed unless the user explicitly
-  requests a change; disappointing results do not authorize silently narrowing
-  the problem. Update affected evaluators and baselines after an approved change.
+- Before execution, summarize the queue family, objective, and constraints from
+  the Stage 1 handoff, user input, and conversation. Ask only about unresolved
+  decisions, then obtain explicit user confirmation of the problem definition.
+  Reuse confirmation already given rather than asking again. An unanswered
+  question leaves execution pending, including in unattended runs.
+- Keep the confirmed definition in the task's working notes and pass it to any
+  workers. All three parts remain fixed unless the user explicitly authorizes a
+  change. Update the affected definition, evaluator, metrics, and baselines after
+  a change, without reopening decisions that remain unchanged.
+- This is an instruction-level workflow in queue-policy, not a new skill, MCP
+  service, or permission hook. Use a host question tool when available, with
+  ordinary conversation as the fallback. The approach follows the guidance to
+  define questions and stopping conditions in [OpenAI's skill documentation](https://developers.openai.com/plugins/build/skills#define-the-workflow-boundary)
+  and the interactive clarification pattern in [Claude Code's best practices](https://code.claude.com/docs/en/best-practices#let-claude-interview-you).
 - Combine the user's needs and queue structure to choose adoption, comparison,
   parameter tuning, or policy design. These approaches can be combined without
   making every task a broad discovery campaign.
@@ -82,6 +91,13 @@ Research direction remains with the user and host agent. The Plugin supplies reu
 - For policy discovery, target the fixed family's shared structure and evaluate
   representative allowed instances. Keep policy structure separate from parameter
   values, allowing tuning for a particular queue without changing the family.
+- Keep discovery guidance in the conditional
+  [Policy Discovery reference](../skills/queue-policy/references/policy-discovery.md),
+  reached from queue-policy, rather than a separate skill. Development subagents
+  own autonomous inner iterations; the main agent integrates evidence, adapts
+  research directions and support in outer iterations, and verifies results.
+  Reuse useful trials without fixing team sizes, round counts, tools, or a
+  historical experiment's workflow. Both loops retain the confirmed definition.
 - Use shared queue-literature knowledge and an optional external pointer to
   [SimOpt](https://github.com/simopt-admin/simopt) and its
   [solver documentation](https://simopt.readthedocs.io/en/latest/solvers.html) for

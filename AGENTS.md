@@ -4,9 +4,10 @@
 
 Queue Agent Plugin supports interactive queueing research in the user's coding
 agent: Stage 1 delivers a documented queue model and its corresponding simulator
-from data and a system description; Stage 2 first establishes the queue family,
-then selects, evaluates, tunes, or designs policies for it. Keep that family fixed
-unless the user explicitly requests a change.
+from data and a system description; Stage 2 confirms the queue family, objective,
+and constraints with the user, then selects, evaluates, tunes, or designs
+policies. Keep that problem definition fixed unless the user explicitly
+authorizes a change.
 
 ## Incremental development
 
