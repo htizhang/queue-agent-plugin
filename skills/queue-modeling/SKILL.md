@@ -111,5 +111,6 @@ artifacts in the user's task workspace.
 
 Completion means both deliverables are available, the simulator runs through its
 documented interface, and checks support model-implementation agreement and the
-intended modeling use. Report unresolved failures explicitly. The user can then
-use the model and simulator for Stage 2; policy search remains a separate task.
+intended modeling use. Report unresolved failures explicitly. For a requested
+Stage 2 task, hand the model and simulator to
+[queue-policy](../queue-policy/SKILL.md); policy work remains a separate task.

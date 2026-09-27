@@ -18,7 +18,7 @@ implementation plan.
 Users interact with their own coding agent, with Claude Code and Codex as the intended hosts:
 
 - **Stage 1 — Queue modeling:** deliver a documented queue model and its corresponding executable simulator from data and a system description, with replaceable policies and checks that the implementation matches the model.
-- **Stage 2 — Policy design:** design, evaluate, and improve queue policies for a model or model family.
+- **Stage 2 — Policy design:** establish the queue family, then select, evaluate, tune, or design policies for it according to the user's needs. Keep the family fixed unless the user explicitly requests a change.
 
 The Plugin first gives the agent this task map: **data → queue model → policy**. The user's current task determines where to start; not every request must run both Stages.
 
@@ -63,6 +63,38 @@ Research direction remains with the user and host agent. The Plugin supplies reu
   instructions focused on the modeling task and useful resources.
 - Add skill source content and behavioral checks; host packaging and installation
   remain separate steps.
+
+### Stage 2 policy capability
+
+- Implement [queue-policy](../skills/queue-policy/SKILL.md) as the overall Stage 2
+  skill, not a workflow limited to discovering new algorithms.
+- First establish the queue family from the Stage 1 handoff or user input:
+  shared mechanisms, control and information boundaries, and permitted parameter
+  or operating-condition variation. Keep it fixed unless the user explicitly
+  requests a change; disappointing results do not authorize silently narrowing
+  the problem. Update affected evaluators and baselines after an approved change.
+- Combine the user's needs and queue structure to choose adoption, comparison,
+  parameter tuning, or policy design. These approaches can be combined without
+  making every task a broad discovery campaign.
+- A missing simulator does not prevent direct Stage 2 entry. When simulation is
+  needed, build an evaluator for the specified model rather than requiring new
+  operational logs or repeating Stage 1 identification.
+- For policy discovery, target the fixed family's shared structure and evaluate
+  representative allowed instances. Keep policy structure separate from parameter
+  values, allowing tuning for a particular queue without changing the family.
+- Use shared queue-literature knowledge and an optional external pointer to
+  [SimOpt](https://github.com/simopt-admin/simopt) and its
+  [solver documentation](https://simopt.readthedocs.io/en/latest/solvers.html) for
+  simulation-based tuning. The host inspects current methods and decides what
+  fits; SimOpt is neither bundled nor a required backend.
+- Deliver the requested policy or recommendation, applicable family, parameters,
+  and performance evidence, plus implementation/evaluator artifacts when those
+  are part of the task. Host tools, delegation, and iteration remain flexible.
+- Derivation of new theoretical results and formal proofs belongs to the
+  paper's research showcases, not this Plugin capability. Reading published
+  guarantees to assess an existing method's applicability remains literature work.
+- Add source instructions and behavioral checks only; do not install the skill
+  or alter the user's agent or tool configuration.
 
 ### Shared literature capability
 

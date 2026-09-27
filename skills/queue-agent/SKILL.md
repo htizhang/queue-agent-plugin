@@ -10,8 +10,8 @@ Support interactive queueing research: **data → queue model → policy**.
 - **Stage 1 — Queue modeling:** deliver a documented queue model and its
   corresponding executable simulator from data and a system description,
   with replaceable policies and checks that the implementation matches the model.
-- **Stage 2 — Policy design:** design, evaluate, and improve policies for a queue
-  model or model family.
+- **Stage 2 — Policy design:** establish the queue family, then select, evaluate,
+  tune, or design policies for it according to the user's needs.
 
 These are capabilities, not a mandatory sequence. Use the user's latest request
 and the available artifacts to determine the current task.
@@ -21,7 +21,7 @@ and the available artifacts to determine the current task.
 | Current need | Starting point |
 | --- | --- |
 | Infer a queue model from observations, or revise its mechanisms or calibration against data | Stage 1: use [queue-modeling](../queue-modeling/SKILL.md). |
-| Develop or evaluate policies for an existing model, simulator, or specified model family | Stage 2: work directly from that model and the requested objective. |
+| Select, evaluate, tune, or design policies for an existing model, simulator, or specified model family | Stage 2: use [queue-policy](../queue-policy/SKILL.md), first establishing the family and keeping it fixed unless the user explicitly changes it. |
 | Answer a literature question, explain queueing concepts, or discuss a research direction | Address that question; use [queue-literature](../queue-literature/SKILL.md) when domain evidence is needed. |
 
 A specified mathematical model may still need an executable evaluator for
@@ -43,9 +43,8 @@ than keeping a fixed Stage label for the whole session. A discussion-only
 request stays a discussion; unrelated tasks do not need queueing workflows.
 
 Reuse the shared literature skill for relevant modeling assumptions, baseline
-policies, evaluation methods, or theoretical questions. Load the needed local
-notes first and seek external sources when they leave a material gap.
+policies, evaluation methods, or applicability of published results. Load the
+needed local notes first and seek external sources when they leave a material gap.
 
 Use the host agent's available tools and delegation. This overview does not
-prescribe a simulator, model schema, or separate orchestration framework. For
-Stage 2, work with those capabilities and the applicable shared knowledge.
+prescribe a simulator, model schema, or separate orchestration framework.
