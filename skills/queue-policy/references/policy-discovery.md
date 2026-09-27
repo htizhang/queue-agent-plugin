@@ -8,6 +8,8 @@ Use this guidance for the new or improved policy branch of Queue Policy, after
 its [problem confirmation](../SKILL.md#confirm-the-problem-definition) and any
 needed evaluator preparation. That confirmed definition governs both loops;
 the parent skill's change-authorization rule applies throughout.
+This workflow does not itself activate Discovery Lab; follow the parent skill's
+[Discovery Lab access rule](../SKILL.md#discovery-lab-access).
 
 ## Organize the research
 

@@ -63,6 +63,26 @@ knowledge first, extending the search when a material question remains open.
 Combine these approaches when useful. A family definition does not oblige an
 adoption or tuning request to become a broad policy-discovery campaign.
 
+## Discovery Lab access
+
+When and only when the user explicitly asks to design a new algorithm, read the
+[Discovery Lab index](../../discovery-lab/index.md) and then only relevant
+entries. Reuse that intent throughout the continuing new-design task rather than
+asking for authorization again.
+
+Until that intent is present, keep the Lab index and entries out of context and
+retrieval. Stage 1 work, adopting or comparing policies, fixed-policy tuning,
+generic performance improvement, adopting a specified candidate, and suggestions
+from the agent or its workers stay on their ordinary workflows. Continue normal
+policy improvement without asking the user to approve new-algorithm design. If
+the user later limits the task to established methods, stop accessing the Lab.
+
+When active, treat Lab policies as optional exploratory leads. Check their
+applicability and evaluate them under the confirmed family, objective, and
+constraints. Lab access requires neither using a Lab method nor running Stage 1,
+and it does not authorize writing results back; contribution requires a separate
+user request.
+
 ## Prepare an evaluator when needed
 
 Inspect an existing simulator's agreement with the model, policy interface,
