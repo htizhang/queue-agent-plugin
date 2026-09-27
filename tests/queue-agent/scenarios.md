@@ -40,6 +40,8 @@ execute the hypothetical research tasks or install anything.
 - 8 starts with Stage 1 and retains the requested policy comparison as the next
   task, rather than stopping permanently at modeling or pretending a model exists.
 - Missing details produce targeted questions, not a mandatory intake template.
+- Stage 2 requests use queue-policy and establish the family boundary before
+  proceeding; new policy design is not required for every request.
 
 ## Automated checks
 
