@@ -1,14 +1,16 @@
 ---
 name: queue-modeling
-description: Build, calibrate, and validate executable queue simulators from data and system descriptions. Use for Stage 1 queue modeling, including revising an existing simulator against observations and preparing it for policy evaluation.
+description: Build, calibrate, and validate queue models and their corresponding simulators from data and system descriptions. Use for Stage 1 queue modeling, including revising an existing model or simulator against observations and preparing it for policy evaluation.
 ---
 
 # Queue Modeling
 
-Turn the supplied data and system description into an executable queueing model
-that can generate trajectories and simulate the consequences of different
-policies. Work at the scope the user requests: discuss modeling choices when
-asked to discuss, and construct or revise the simulator when asked to implement.
+Turn the supplied data and system description into two corresponding
+deliverables: a documented queue model and an executable simulator implementing
+it. The simulator generates trajectories and evaluates the consequences of
+different policies. Work at the scope the user requests: discuss modeling
+choices when asked to discuss, and construct or revise the model and simulator
+when asked to implement.
 
 ## Establish what the model represents
 
@@ -27,7 +29,7 @@ explicit; ask the user when a missing detail would materially change the model.
 Where observations support several plausible explanations, retain the relevant
 alternatives or expose the uncertain component for sensitivity checks.
 
-## Construct an executable model
+## Implement the model as a simulator
 
 Choose a representation and simulation tool suited to the system and available
 environment. Reuse an existing simulator when it fits the required mechanisms.
@@ -54,14 +56,16 @@ representation or implementation before expanding the experiment.
 ## Obtain independent, executable feedback
 
 Prefer a separate validation subagent when the host supports delegation. Give it
-the original data and system description, observation definitions, candidate
-simulator, and execution instructions. Ask it to develop checks from that
-evidence, rather than merely confirm the builder's explanation.
+the original data and system description, observation definitions, model
+description, candidate simulator, and execution instructions. Ask it to develop
+checks from that evidence, rather than merely confirm the builder's explanation.
 
 The validator should run the simulator and report concrete discrepancies, their
 supporting observations or test outputs, and how to reproduce them. Useful checks
 depend on the system:
 
+- **Model-implementation agreement:** check that the simulator's dynamics,
+  parameters, and policy interface implement the documented queue model.
 - **Mechanics:** flow accounting, capacity, event ordering, routing, and action
   feasibility; hand-checkable cases or analytical special cases when applicable.
 - **Data agreement:** compare simulated and observed quantities under matching
@@ -86,14 +90,26 @@ system primitives, state and dynamics, log semantics, identification, statistica
 fitting, and model validation. Read the relevant local note first; use its
 literature workflow when the available evidence leaves a material question open.
 
-## Deliver a usable simulator
+## Deliver the queue model and its simulator
 
-Provide the executable model, fitted configuration, and concise instructions to
-run it, set randomness, and supply a policy. Include a short account of the
-modeled system, material assumptions, validation results, and remaining issues
-that affect its use. Keep generated artifacts in the user's task workspace.
+Provide both:
 
-Completion means the simulator runs through its documented interface and the
-checks support the intended modeling use. Report unresolved failures explicitly.
-The user can then use the model for Stage 2; policy search remains a separate
-task.
+1. **Queue model:** a self-contained mathematical or structured description of
+   the system boundary, jobs, resources, state and event dynamics, stochastic
+   mechanisms, parameters, and material assumptions. Specify the policy's
+   decision timing, observable information, and feasible actions so the model
+   can be understood without reading the simulator code.
+2. **Corresponding simulator:** executable code implementing that model, its
+   fitted configuration, and concise instructions to run it, set randomness, and
+   supply a replaceable policy. It should generate trajectories or event records
+   for validation and downstream policy evaluation.
+
+Keep the model description, configuration, and simulator consistent as they are
+revised. Choose a suitable representation and file layout for the task. Include
+concise validation results and remaining issues that affect use; keep generated
+artifacts in the user's task workspace.
+
+Completion means both deliverables are available, the simulator runs through its
+documented interface, and checks support model-implementation agreement and the
+intended modeling use. Report unresolved failures explicitly. The user can then
+use the model and simulator for Stage 2; policy search remains a separate task.
