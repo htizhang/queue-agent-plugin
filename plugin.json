@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "queue-agent",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Queueing research from data to executable models and policies, with shared literature and writing workflows.",
   "author": {
     "name": "htizhang"

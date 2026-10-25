@@ -26,7 +26,7 @@ Unless a request says otherwise:
   the user can push branches and open pull requests.
 - The checkout contains `skills/queue-literature/` and `discovery-lab/`, with
   the Lab's index, contribution guide, and two entries: queue-aware-backfilling
-  and congestion-priced-lookahead.
+  and bottleneck-work-block-planning.
 - A separate research workspace, `~/work/batch-study/`, holds a finished Stage 2
   study of a nonpreemptive rigid-job batch-queue family: a simulator, the policy
   code found by the user's agent, evaluation scripts, archived results, and notes.

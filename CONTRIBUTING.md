@@ -157,14 +157,15 @@ check in its evaluation note:
 ```sh
 python3 discovery-lab/queue-aware-backfilling/implementation/smoke_test.py
 python3 discovery-lab/queue-aware-backfilling/evaluation/verify_archived.py
-python3 discovery-lab/congestion-priced-lookahead/implementation/smoke_test.py
-python3 discovery-lab/congestion-priced-lookahead/evaluation/verify_archived.py
+python3 discovery-lab/bottleneck-work-block-planning/implementation/smoke_test.py
+python3 discovery-lab/bottleneck-work-block-planning/evaluation/verify_archived.py
 ```
 
-These checks test the portable extraction and recompute the bundled
-comparisons. They do not rerun the original simulation campaigns. Add
-`--bootstrap` to the queue-aware backfilling verifier to reproduce its reported
-intervals.
+These checks test the portable policies and recompute the bundled
+comparisons. They do not rerun the original simulation campaigns. The
+backfilling verifier also recomputes its Student-t intervals. With NumPy
+available, add `--bootstrap` to the block-planning verifier to recompute its
+bootstrap intervals.
 
 ## Open a pull request
 

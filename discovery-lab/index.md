@@ -13,8 +13,8 @@ the [contribution guide](CONTRIBUTING.md).
 
 | Method | Model family and objective | Mechanism |
 | --- | --- | --- |
-| [Queue-aware optimistic backfilling](queue-aware-backfilling/policy.md) | Nonpreemptive multiserver jobs with simultaneous resource requirements; mean response time | Combines queue ordering and packing repair with queue-dependent provisional planning durations. |
-| [Congestion-priced lookahead](congestion-priced-lookahead/policy.md) | Multiclass reentrant networks with sequence-dependent setups; mean flow time | Prices setup capacity and scores short sequences using remaining reentrant work and a closing cost. |
+| [Queue-aware optimistic backfilling](queue-aware-backfilling/policy.md) | Nonpreemptive multiserver jobs with simultaneous resource requirements; mean response time | Ranks jobs by runtime request, width, and queue counts; repairs poor packing; plans reservations using requests and public class means. Two parameters control the packing repair. |
+| [Bottleneck-work block planning](bottleneck-work-block-planning/policy.md) | Multiclass reentrant networks with sequence-dependent setups; mean flow time | Groups the whole waiting queue by job type, plans the group order using remaining bottleneck work and setup times, then dispatches one job. The evaluated policy fixes the setup weight at 8. |
 
 Each entry separates its method description, implementation, and evaluation.
 Start with the description; inspect code or results when they answer a concrete
