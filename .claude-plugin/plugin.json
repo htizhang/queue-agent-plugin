@@ -1,0 +1,18 @@
+{
+  "name": "queue-agent",
+  "version": "0.1.0",
+  "description": "Queueing research from data to executable models and policies, with shared literature and writing workflows.",
+  "author": {
+    "name": "htizhang"
+  },
+  "homepage": "https://github.com/htizhang/queue-agent-plugin#readme",
+  "repository": "https://github.com/htizhang/queue-agent-plugin",
+  "license": "MIT",
+  "keywords": [
+    "queueing",
+    "simulation",
+    "research",
+    "scheduling",
+    "policy-design"
+  ]
+}

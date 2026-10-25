@@ -1,0 +1,20 @@
+{
+  "name": "queue-agent",
+  "interface": {
+    "displayName": "Queue Agent"
+  },
+  "plugins": [
+    {
+      "name": "queue-agent",
+      "source": {
+        "source": "local",
+        "path": "./"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}

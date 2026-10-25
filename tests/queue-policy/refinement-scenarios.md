@@ -80,6 +80,8 @@ finish the comparison. What must happen before the handoff?
 - A gives workers room to test component removal, rule consolidation, and fixed
   parameters. It separates ablation from parameter-value sensitivity and checks
   representative allowed instances rather than prescribing a parameter count.
+  Worker briefings include the parent's comparison guidance and these
+  refinement checks, as instructions or references.
 - B treats local insensitivity as limited evidence. It compares fixed and tuned
   values across the intended scope before claiming a family-wide simplification.
 - C keeps the supported performance benefit and explains the complexity tradeoff;
@@ -98,22 +100,11 @@ finish the comparison. What must happen before the handoff?
   without relying on historical labels. Explanations, examples, and pseudocode
   agree with the evaluated implementation and parameter values.
   It distinguishes measured behavior from a proposed explanation of that behavior.
-- H evaluates the final code and parameter values, uses the parent's stochastic
-  comparison guidance, and ties the handoff to that version rather than reusing
-  results from materially different code.
+- H evaluates the final code and parameter values under the parent's full
+  comparison guidance, covering information boundaries, baseline fidelity and
+  tuning, and stochastic noise. It ties the handoff to that version rather than
+  reusing results from materially different code.
 
-## Verification: 2026-10-24
-
-- A source-loaded Codex-X check answered A-H without the reviewer checks, plus
-  existing-policy adoption and unauthorized family-change cases. One ambiguity
-  about relabeling a defective baseline was clarified in the skill and rechecked.
-- Independent CC review identified two wording gaps: final verification must
-  reach the full comparison guidance, and the whole explanation must agree with
-  the evaluated implementation. Both were corrected. Worker briefings also now
-  include the relevant comparison and refinement instructions.
-- A final targeted Codex-X review passed the integrated changes. Seventeen
-  existing automated tests, skill-format validation, local links and anchors,
-  and whitespace checks passed.
-- These are source-interpretation and document checks, not executed policy
-  experiments or installed-host tests. Local artifacts are under the ignored
-  `output/queue-policy-refinement/` directory. No Plugin was installed.
+Refinement guidance should leave other branches unchanged. When it changes,
+also rerun adoption (A) and the unauthorized family change (E) in
+[the main policy scenarios](scenarios.md).

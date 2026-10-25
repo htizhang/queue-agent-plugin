@@ -1,91 +1,75 @@
 # Getting started
 
-This guide explains how to use Queue Agent from a local copy of this
-repository. You ask your coding agent to read the skill files directly. This is
-a source preview, not an installation. The repository has no Plugin manifest or
-installation command yet, and these steps change no settings on your machine.
+Queue Agent is an installable plugin for Claude Code and Codex. Version `0.1.0`
+packages six skills and a startup hook. It adds no MCP server, app, or separate
+service.
 
 ## What you need
 
-- A coding agent that can read local files, such as Claude Code or Codex. For
-  implementation tasks, the agent must also edit files and run code in your
-  workspace.
-- A local copy of this repository.
+- Git for native installation or cloning. The [source-use fallback](#source-use-fallback)
+  also works from a downloaded ZIP without Git.
+- An installed Claude Code or Codex CLI. Configure its normal account login,
+  model, and tool permissions separately from plugin installation.
 - Your research material: for example, event logs, a system description, a
   model specification, an existing simulator, or papers.
 
-The skills require no particular simulator, programming language, search
-provider, or number of subagents. The agent uses the tools that your host makes
-available. Your host's file access, permission prompts, and tool settings stay
-under your control.
+The startup hook needs `python3`; the skills remain usable without it. The
+skills require no particular simulator, programming language, search provider,
+or number of subagents. The agent uses the tools that your host makes
+available.
 
-## 1. Get a local copy
+## 1. Install the plugin
 
-```sh
-git clone https://github.com/htizhang/queue-agent-plugin.git
-cd queue-agent-plugin
-pwd
-```
+These one-line examples are for macOS and Linux. PowerShell 7 also supports
+`&&`; in older shells, run the two commands separately.
 
-Note the absolute path that `pwd` prints. Without Git, use **Code → Download
-ZIP** on the GitHub repository page and extract the archive. The extracted
-folder has the name `queue-agent-plugin-main`.
-
-The skills change as development continues. To get updates, run `git pull` in
-the clone. To record which instructions you used, keep the commit identifier
-with your results:
+For Claude Code:
 
 ```sh
-git rev-parse --short HEAD
+claude plugin marketplace add htizhang/queue-agent-plugin && claude plugin install queue-agent@queue-agent
 ```
 
-## 2. Optional: view the diagrams and the guide
+For Codex:
 
-The SVG diagrams render directly on GitHub:
-[overview](assets/overview.svg), [Stage 1](assets/stage-1.svg), and
-[Stage 2](assets/stage-2.svg).
+```sh
+codex plugin marketplace add htizhang/queue-agent-plugin && codex plugin add queue-agent@queue-agent
+```
 
-The [visual guide](guide.html) is a static HTML page. GitHub shows its source
-code, not the page, and there is no hosted version. Open the file from your
-local copy. It needs no server, build step, or network connection.
+Each command adds the repository's `queue-agent` catalog and installs
+`queue-agent@queue-agent`. Both hosts use user scope by default.
 
-| System | Command from the clone |
-| --- | --- |
-| macOS | `open docs/guide.html` |
-| Linux | `xdg-open docs/guide.html` |
-| Windows | `start docs\guide.html` |
+## 2. Load the plugin and start a task
 
-You can also drag the file into a browser window.
+Start your coding agent in the directory that holds your research material.
+Keep task inputs and generated results in that workspace, not in the plugin
+installation cache, so that updates and removal do not affect your work.
 
-## 3. Start the agent in your research workspace
-
-Start your coding agent in the directory that holds your research material, not
-in the clone. The skills tell the agent to keep generated files in your task
-workspace. The clone supplies the instructions.
-
-The `AGENTS.md` file in the clone has rules for developing this repository, not
-for research use. Some hosts load that file automatically when they start in
-the clone.
-
-## 4. Name the entry skill in your first request
-
-Start the session with a request in this form. Replace the path with the
-absolute path of your clone.
+For Claude Code, start a new session or run `/reload-plugins` in the current
+session. Invoke the entry skill:
 
 ```text
-Read /absolute/path/to/queue-agent-plugin/skills/queue-agent/SKILL.md and
-follow it for this task. Resolve its relative links inside that clone, and read
-the linked files when you need them. Keep all outputs in this workspace.
-
-Task: <the result you want, the files to use, and any limits>
+/queue-agent:queue-agent
 ```
 
-The entry skill selects a starting point from your task and the available
-files. Then the agent follows the linked skill for Stage 1, Stage 2, literature,
-writing, or contribution. Some hosts ask for permission before they read files
-outside the workspace. Answer that request in your host as usual.
+For Codex, start a new session. Choose `queue-agent` in the skills menu, or ask:
 
-## 5. Describe the task
+```text
+Use the queue-agent skill to <describe the task>.
+```
+
+The entry skill selects a starting point from your request and the available
+files. Then the agent follows the linked skill for Stage 1, Stage 2, literature,
+writing, or contribution.
+
+The package also includes a SessionStart hook, `hooks/hooks.json`. At session
+start, it adds a short orientation and the local path of the entry skill to the
+agent's context. It does not choose or store a Stage. The hook needs `python3`,
+uses no network, and writes no state. In Codex, trusting the hook is a separate
+decision from installing the plugin; review the hook before you trust it. If
+the hook is not trusted or does not load, select the entry skill explicitly as
+shown above; the full workflow stays available.
+
+## 3. Describe the task
 
 State the result you want, the files to use, and any limits, such as
 "discussion only" or "do not install anything". The agent asks focused
@@ -198,16 +182,92 @@ The literature and contribution workflows include explicit checks on sharing
 private material. Review the data sent to external tools; your host's permission
 settings are the actual controls.
 
-## Limits of this mode
+**Results depend on your host and model.** The same request can play out
+differently with another host, model, or set of tools.
 
-- Reading skill files by path is a manual preview. It is not automatic skill
-  discovery or an installed Plugin.
-- The startup hook in `hooks/` does not run. Your first request names the entry
-  skill instead.
-- Results depend on your host, model, and tool access. The review cases in
-  `tests/` check how an agent interprets the instructions. They do not show host
-  compatibility or the quality of research results.
-- Host packaging and installation are separate future steps.
+## Update or remove the plugin
+
+For Claude Code, update the catalog and installed plugin:
+
+```sh
+claude plugin marketplace update queue-agent
+claude plugin update queue-agent@queue-agent
+```
+
+Uninstall the plugin, and optionally remove its catalog:
+
+```sh
+claude plugin uninstall queue-agent@queue-agent
+claude plugin marketplace remove queue-agent --scope user
+```
+
+For Codex, upgrade the catalog, then add the plugin again to refresh the
+installed version:
+
+```sh
+codex plugin marketplace upgrade queue-agent
+codex plugin add queue-agent@queue-agent
+```
+
+Remove the plugin, and optionally remove its catalog:
+
+```sh
+codex plugin remove queue-agent@queue-agent
+codex plugin marketplace remove queue-agent
+```
+
+After an update, start a new session. In Claude Code you can also use
+`/reload-plugins`.
+
+## Source-use fallback
+
+If native plugin installation is unavailable, clone the repository:
+
+```sh
+git clone https://github.com/htizhang/queue-agent-plugin.git
+cd queue-agent-plugin
+pwd
+```
+
+Note the absolute path that `pwd` prints. Without Git, use **Code → Download
+ZIP** on the GitHub repository page and extract the archive. To update a clone,
+run `git pull`. To record which instructions you used, save the output of
+`git rev-parse --short HEAD` with your results.
+
+Start the agent in your research workspace, not in the clone. Name the entry
+skill by its absolute path:
+
+```text
+Read /absolute/path/to/queue-agent-plugin/skills/queue-agent/SKILL.md and
+follow it for this task. Resolve its relative links inside that clone, and read
+the linked files when you need them. Keep all outputs in this workspace.
+
+Task: <the result you want, the files to use, and any limits>
+```
+
+This fallback reads the skills from source. It does not install the plugin or
+run the startup hook, and the agent reaches the other skills only through the
+entry skill's links. Some hosts ask for permission before they read files
+outside the workspace. Answer that request in your host as usual.
+
+## View the diagrams and the guide
+
+The SVG diagrams render directly on GitHub:
+[overview](assets/overview.svg), [Stage 1](assets/stage-1.svg), and
+[Stage 2](assets/stage-2.svg).
+
+The [visual guide](guide.html) is a static HTML page. GitHub shows its source
+code, not the page, and there is no hosted version. Open the file from a clone
+or ZIP download of this repository. It needs no server, build step, or network
+connection.
+
+| System | Command from the repository root |
+| --- | --- |
+| macOS | `open docs/guide.html` |
+| Linux | `xdg-open docs/guide.html` |
+| Windows | `start docs\guide.html` |
+
+You can also drag the file into a browser window.
 
 ## Next steps
 

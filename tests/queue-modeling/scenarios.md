@@ -45,15 +45,20 @@ Review only: do not edit the candidate, search online, or install anything.
 
 Use a three-job, one-server nonpreemptive case with arrivals `(0, 1, 2)`, known
 service requirements `(4, 3, 1)`, and observed FCFS starts `(0, 4, 7)` and departures
-`(4, 7, 8)`. The candidate mistakenly calibrates service as departure minus arrival.
+`(4, 7, 8)`. The candidate mistakenly calibrates service as departure minus arrival,
+so its FCFS run departs the jobs at `(4, 10, 16)`. The correct SJF schedule
+serves jobs 1, 3, 2, with departures `(4, 8, 5)` for jobs 1-3.
 Keep this paragraph out of the evaluation prompt; supply the raw CSV and code.
 
 - Runs the candidate, compares its trace with observations, and localizes the
   service-time error using records and code.
 - Separates this deterministic implementation check from a claim about fitted
   stochastic behavior or general model adequacy.
-- Exercises both policy paths, respects nonpreemption and the stated size
-  information, and provides reproducible feedback without editing the code.
+- Exercises both policy paths. Because the log records only FCFS, it checks the
+  SJF path against the schedule implied by the known service requirements. The
+  tool log, not only the response, shows both runs.
+- Respects nonpreemption and the stated size information, and provides
+  reproducible feedback without editing the code.
 
 ## C. Discuss an underdetermined model
 
@@ -71,16 +76,3 @@ do not implement anything yet.
   questions that change the model.
 - Respects discussion-only scope and consults relevant bundled knowledge when
   needed rather than launching an implementation or a broad literature review.
-
-## Verification record: 2026-09-26
-
-- Skill format, repository-local links, English content, and whitespace checks
-  passed. The seven existing queue-literature content tests also passed.
-- A source-loaded codex-x agent (`openai.gpt-5.6-sol`, requested max effort)
-  completed B. Its tool log confirms both policy executions. It identified the
-  calibration error, reported the incorrect FCFS departures `(4, 10, 16)`, and
-  derived the correct SJF order and timing from the supplied observations.
-  It respected the read-only scope and returned reproducible feedback.
-- A and C are defined scenarios, not completed live-agent tests. This check did
-  not exercise automatic skill discovery, host-managed validator spawning, or
-  end-to-end simulator construction. No Plugin was installed.

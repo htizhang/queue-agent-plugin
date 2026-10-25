@@ -1,8 +1,9 @@
 # Reusable Literature Tools
 
-These are optional routes, not dependencies or an installation checklist.
-Use the user's available tools and authorized access. Inspect their current
-interfaces rather than assuming a particular command or MCP tool name.
+These are optional routes, not dependencies or an installation checklist. This
+skill does not bundle or configure any of them. Use the user's available tools
+and authorized access. Inspect each tool's current interface and terms before
+relying on it, rather than assuming a particular command or MCP tool name.
 
 | Need | Reusable option | Scope |
 | --- | --- | --- |
@@ -21,6 +22,3 @@ credential-free. Keep installation, authentication, account changes, library
 mutations, and uploads outside the literature task unless separately authorized.
 If tools are missing, explain the missing capability and offer an optional setup
 route; do not silently install a backend.
-
-These projects are references only: none is vendored or configured by this skill.
-Inspect their current interfaces and terms before relying on them.

@@ -1,59 +1,100 @@
 # Queue Agent Plugin: References and Design Decisions
 
-Last updated: 2026-10-24. Confirmed decisions, external references, and open
-questions are kept separate. Upstream examples are not automatically our
-implementation plan.
+This document contains the confirmed design decisions and their reasons
+(Section 1), external standards, projects, and suggestions (Sections 2 to 6),
+and open questions (Section 7). Upstream projects inform the design; they are
+not adopted as a whole.
 
 ## 1. Confirmed decisions
 
-### Repository and development
+### Repository and documentation
 
-- Develop incrementally in the standalone [queue-agent-plugin repository](https://github.com/htizhang/queue-agent-plugin). Public visibility was authorized on 2026-10-24, following review of the published files and Git history.
 - Use English for all repository content.
-- Release original repository content under the [MIT license](../LICENSE), as
-  authorized on 2026-10-24. Preserve the separate copyright notices and license
-  terms for bundled and adapted third-party material.
-- Discuss one workflow step at a time. Once confirmed, record it here and implement the agreed scope.
-- The repository contains the overview, references, skill source files, and compact Discovery Lab cases, not an installable Plugin. It does not import the earlier agent framework or full experiment archives.
+- Release original repository content under the [MIT license](../LICENSE).
+  Bundled and adapted third-party material keeps its own copyright notices and
+  license terms.
 - Provide an English visual guide and workflow diagrams for readers. Keep them
   separate from runtime skill instructions: they explain the available routes,
   not a compulsory sequence or a new orchestration layer. The guide runs locally
   without a build step or external assets; the SVG diagrams also render on GitHub.
-- Public repository access is separate from host packaging, a hosted website,
-  and marketplace submission. No automatic installation or service connection is
-  introduced by this documentation release.
+
+### Packaging and installation
+
+- The repository root is one package, `queue-agent`, version `0.1.0`. It has a
+  portable root `plugin.json`, compatibility manifests in
+  `.claude-plugin/plugin.json` and `.codex-plugin/plugin.json`, and native
+  catalogs in `.claude-plugin/marketplace.json` and
+  `.agents/plugins/marketplace.json`. It provides six skills and a SessionStart
+  hook, with no MCP server, app, or separate service.
+- Each catalog selects the repository root (`./`). Skills, literature notes, and
+  Discovery Lab resources stay together, so their relative links work in the
+  installed cache. Packaging does not change when an agent may read the
+  Discovery Lab.
+- Users install with each host's native marketplace-add and plugin-install
+  commands, combined into one copyable shell line. There is no custom installer,
+  new runtime dependency, or host configuration overlay. See
+  [Getting started](getting-started.md) for the installation and lifecycle
+  commands.
+- Each host discovers `hooks/hooks.json` at its default location. The manifests
+  do not also declare it, because Claude adds declared hook paths to the default
+  file rather than replacing it. The hook needs `python3`; explicit skill
+  selection works without it. Codex hook trust is separate from plugin
+  enablement.
+- Validate manifests and installation in isolated host profiles, not in a
+  developer's working configuration. Installation and component-discovery
+  checks do not establish the quality of an agent's research results.
+- Bump all three manifest versions together for each published package change.
+  Claude caches releases by version, so a catalog refresh alone does not replace
+  an installed release whose version is unchanged.
+- Distribution uses these repository catalogs. It is separate from a hosted
+  website or an official host directory listing.
+
+References: [OpenAI packaging and catalog format](https://developers.openai.com/plugins/build/plugins),
+[Claude manifest and component paths](https://code.claude.com/docs/en/plugins/manifest-reference),
+[Claude marketplace paths](https://code.claude.com/docs/en/plugin-marketplaces),
+and [Claude installation](https://code.claude.com/docs/en/discover-plugins).
 
 ### Two-Stage overview
 
-Users interact with their own coding agent, with Claude Code and Codex as the intended hosts:
+Users work with their own coding agent; Claude Code and Codex are the intended
+hosts.
 
-- **Stage 1 — Queue modeling:** deliver a documented queue model and its corresponding executable simulator from data and a system description, with replaceable policies and checks that the implementation matches the model.
-- **Stage 2 — Policy design:** confirm the queue family, objective, and constraints with the user, then select, evaluate, tune, or design policies according to their needs. Keep that problem definition fixed unless the user explicitly authorizes a change.
+- **Stage 1, queue modeling:** deliver a documented queue model and its
+  corresponding executable simulator from data and a system description, with
+  replaceable policies and checks that the implementation matches the model.
+- **Stage 2, policy design:** confirm the queue family, objective, and
+  constraints with the user, then select, evaluate, tune, or design policies
+  according to their needs. Keep that problem definition fixed unless the user
+  explicitly authorizes a change.
 
-The Plugin first gives the agent this task map: **data → queue model → policy**. The user's current task determines where to start; not every request must run both Stages.
+The Plugin first gives the agent this task map: **data → queue model → policy**.
+The user's current task determines where to start; not every request runs both
+Stages.
 
-Research direction remains with the user and host agent. The Plugin supplies reusable domain knowledge, methods, tools, and cases rather than a separate, fixed agent framework. The queueing community can contribute additional capabilities and knowledge.
+The user and the host agent direct the research. The Plugin supplies reusable
+domain knowledge, methods, tools, and cases, and the host agent organizes the
+work with its own tools and delegation. The queueing community can contribute
+further knowledge and capabilities.
 
-### Overall entry and task routing
+### Entry and task routing
 
-- Implement [queue-agent](../skills/queue-agent/SKILL.md) as the overall entry
-  skill. Select the current task from the latest request and available artifacts,
-  rather than storing one Stage for the whole session.
+- [queue-agent](../skills/queue-agent/SKILL.md) is the entry skill. It selects
+  the current task from the latest request and the available artifacts, rather
+  than storing one Stage for the whole session.
 - A usable model, simulator, or specified model family can start directly at
   Stage 2. Building its evaluator does not itself require Stage 1 inference from
   historical data. Requests to assess or revise model-data agreement use Stage 1.
 - Literature questions and discussion are valid standalone tasks; the overview
   does not automatically start implementation or experiments.
-- Add a short SessionStart orientation that points to the entry skill. Keep
-  detailed guidance in skills, with no fixed workflow engine or persistent Stage
-  state. This is source content only: packaging, installation, and host hook
-  approval remain separate.
+- A short SessionStart orientation points to the entry skill. Detailed guidance
+  stays in the skills, with no workflow engine or persistent Stage state. Host
+  hook approval remains separate.
 
-### Stage 1 modeling capability
+### Stage 1 modeling
 
-- Implement [queue-modeling](../skills/queue-modeling/SKILL.md) as guidance for
-  building, calibrating, and validating a queue model and its corresponding
-  executable simulator from data and a system description.
+- [queue-modeling](../skills/queue-modeling/SKILL.md) guides building,
+  calibrating, and validating a queue model and its corresponding executable
+  simulator from data and a system description.
 - Deliver both a self-contained model description and a runnable implementation.
   The description states the structure, dynamics, stochastic mechanisms,
   parameters, assumptions, and policy decision interface. Keep it consistent
@@ -69,15 +110,13 @@ Research direction remains with the user and host agent. The Plugin supplies reu
   and revises the model.
 - Leave the representation, simulation tools, agent allocation, and iteration
   schedule to the host agent and the user's task.
-- Reuse the existing queue-literature skill and its local knowledge. Keep runtime
-  instructions focused on the modeling task and useful resources.
-- Add skill source content and behavioral checks; host packaging and installation
-  remain separate steps.
+- Reuse queue-literature and its local knowledge. Keep runtime instructions
+  focused on the modeling task and useful resources.
 
-### Stage 2 policy capability
+### Stage 2 policy design
 
-- Implement [queue-policy](../skills/queue-policy/SKILL.md) as the overall Stage 2
-  skill, not a workflow limited to discovering new algorithms.
+- [queue-policy](../skills/queue-policy/SKILL.md) is the overall Stage 2 skill,
+  not a workflow limited to discovering new algorithms.
 - Before execution, summarize the queue family, objective, and constraints from
   the Stage 1 handoff, user input, and conversation. Ask only about unresolved
   decisions, then obtain explicit user confirmation of the problem definition.
@@ -106,8 +145,8 @@ Research direction remains with the user and host agent. The Plugin supplies reu
   reached from queue-policy, rather than a separate skill. Development subagents
   own autonomous inner iterations; the main agent integrates evidence, adapts
   research directions and support in outer iterations, and verifies results.
-  Reuse useful trials without fixing team sizes, round counts, tools, or a
-  historical experiment's workflow. Both loops retain the confirmed definition.
+  Reuse useful trials without fixing team sizes, round counts, or tools. Both
+  loops retain the confirmed definition.
 - Refine promising policies through task-appropriate simplification, component
   ablation, and parameter sensitivity checks. Prefer simpler rules when evaluation
   supports practically negligible performance differences; retain useful complexity
@@ -117,9 +156,9 @@ Research direction remains with the user and host agent. The Plugin supplies reu
   baseline implementations, justified parameter selection, and evidence from the
   final evaluated version. Keep explanations aligned with the evaluated code and
   parameter values, and explain mechanisms and important result patterns for
-  readers outside the development process. These extend the existing skill and
-  discovery reference, not a mandatory research campaign for every Stage 2 task.
-  See the [refinement checks](../tests/queue-policy/refinement-scenarios.md).
+  readers outside the development process. These checks belong to the skill and
+  its discovery reference; they do not make every Stage 2 task a research
+  campaign. See the [refinement checks](../tests/queue-policy/refinement-scenarios.md).
 - Use shared queue-literature knowledge and an optional external pointer to
   [SimOpt](https://github.com/simopt-admin/simopt) and its
   [solver documentation](https://simopt.readthedocs.io/en/latest/solvers.html) for
@@ -128,66 +167,78 @@ Research direction remains with the user and host agent. The Plugin supplies reu
 - Deliver the requested policy or recommendation, applicable family, parameters,
   and performance evidence, plus implementation/evaluator artifacts when those
   are part of the task. Host tools, delegation, and iteration remain flexible.
-- Add source instructions and behavioral checks only; do not install the skill
-  or alter the user's agent or tool configuration.
 
-### Shared literature capability
+### Shared literature
 
-- Implement [queue-literature](../skills/queue-literature/SKILL.md) as one shared skill for both Stages, not a separate literature agent.
-- Adapt the useful search, synthesis, and citation guidance from existing open-source skills; preserve upstream attribution and licensing. Add queue-specific guidance about model assumptions, observations, policies, objectives, baseline applicability, and theoretical results.
-- Use the host's available search and reading tools. Paper Search MCP is an optional candidate when academic retrieval is missing; Zotero is optional for an existing library. These are not fixed dependencies.
-- Scale the work to the question; do not require figures, a complete report, a fixed backend, or running both Stages.
-- This step adds source files only. Do not install the skill or alter local agent/MCP configuration. Existing CC and Kiro sessions may be used for temporary behavioral tests without installing the Plugin.
+- [queue-literature](../skills/queue-literature/SKILL.md) is one shared skill
+  for both Stages, not a separate literature agent.
+- Adapt useful search, synthesis, and citation guidance from existing
+  open-source skills, preserving upstream attribution and licensing. Add
+  queue-specific guidance about model assumptions, observations, policies,
+  objectives, baseline applicability, and theoretical results.
+- Use the host's available search and reading tools. Paper Search MCP is an
+  optional candidate when academic retrieval is missing; Zotero is optional for
+  an existing library. Neither is a fixed dependency.
+- Scale the work to the question; do not require figures, a complete report, a
+  fixed backend, or running both Stages.
 
-Implementation sources, adaptation details, and the upstream MIT notice are recorded in the skill's [attribution](../skills/queue-literature/NOTICE.md). See [optional tool references](../skills/queue-literature/references/tool-options.md) and [test scenarios](../tests/queue-literature/scenarios.md).
+The skill's [attribution](../skills/queue-literature/NOTICE.md) records the
+upstream sources, adaptations, and MIT notice. See also the
+[optional tool references](../skills/queue-literature/references/tool-options.md)
+and [review cases](../tests/queue-literature/scenarios.md).
 
-### Shared writing capability
+### Shared writing
 
-- Include [asd-ste100](../skills/asd-ste100/SKILL.md) as an independent shared
-  skill for English model descriptions, policy explanations, and reports in
-  both Stages. Keep it separate from queue-literature.
+- [asd-ste100](../skills/asd-ste100/SKILL.md) is an independent shared skill
+  for English model descriptions, policy explanations, and reports in both
+  Stages, separate from queue-literature.
 - Default these deliverables to STE-flavored prose. Preserve technical terms,
   equations, assumptions, numerical results, citations, and claim strength.
   Explain the system and decision for readers outside the development process.
 - Point to it from the overall entry and both Stage delivery steps. Do not add
-  a hook that rewrites every response or install it in local agent directories.
+  a hook that rewrites every response.
 - Preserve the upstream license and record the pinned source and adaptations in
   [NOTICE.md](../skills/asd-ste100/NOTICE.md). Use the included linter as optional
   language feedback, not as proof of scientific correctness or readability.
-- This adds source content, not host packaging or deployment. The writing skill
-  does not expand either Stage's research scope.
+- The writing skill does not expand either Stage's research scope.
 
-### Knowledge reuse: current scope
+### Local knowledge
 
-- Migrate a small, source-checked slice of the earlier knowledge base under the
-  existing `queue-literature` skill, shared by Stage 1 and Stage 2.
-- Store scientific content as focused Markdown handbook notes, with a short topic
-  map and one JSON source registry. JSON keeps integrity checks dependency-free;
-  there is no duplicate YAML copy of the notes.
+- Keep local knowledge under queue-literature, shared by both Stages: focused
+  Markdown handbook notes, a topic map in the skill, and one JSON source
+  registry. JSON keeps the integrity checks dependency-free. Other skills link
+  to the same files inside the package instead of keeping their own copies; a
+  plugin-root directory would need path handling in each consuming skill, and a
+  separate knowledge skill would add discovery and routing.
+- Ship the knowledge inside the package, with links that stay within it. The
+  installed copy is versioned content; task findings belong in the user's
+  workspace.
 - Use ordinary host file reading and keyword search. Do not introduce a vector
-  knowledge base, embeddings, or a new retrieval service.
+  knowledge base, embeddings, or a new retrieval service; add a search helper
+  only if observed lookup failures justify one.
 - Keep Stage and topic discovery in the skill's topic map. Notes use handbook
   prose for assumptions, results, limitations, and citations rather than
   per-note IDs, aliases, review status, dates, or migration origin.
-- Keep stable note paths and source IDs. Limit runtime source records to
-  bibliographic identity, useful claim locators, and a concise version qualifier
-  when citation identity requires it. Preserve scientifically meaningful
-  unverified or secondhand scope in the note prose.
-- Rewrite overbroad claims rather than treating old confidence labels as
-  verification. Do not import the old runtime, experiments, or agent framework.
-- Do not install the Plugin or change local agent/MCP configuration. Use existing
-  local CC and codex-x for source-loaded checks and independent review.
+- Keep stable note paths and source IDs. Limit source records to bibliographic
+  identity, useful claim locators, and a concise version qualifier when citation
+  identity requires it. Preserve scientifically meaningful unverified or
+  secondhand scope in the note prose.
+- State each claim at the strength that its source supports. Confidence labels
+  inherited from earlier material do not count as verification.
 
-See [migration and provenance](knowledge-base-migration.md) for the implemented
-slice, legacy audit findings, and deferred material. Host packaging remains a
-separate step.
+The standards define where supporting files live and how a skill links them,
+not a schema for scientific notes; the note format is this project's choice.
+The small index with deeper files follows the pattern, not the schema or
+behavior, of Anthropic's memory-management skill. References:
+[Agent Skills](https://agentskills.io/specification),
+[Claude skills](https://code.claude.com/docs/en/skills),
+[Agent Plugins](https://agent-plugins.org/specification),
+[Claude plugin root and data directories](https://code.claude.com/docs/en/plugins/manifest-reference),
+and the [memory-management skill](https://github.com/anthropics/knowledge-work-plugins/blob/da38ec1ee89d41e5380e652a97382695003396e7/productivity/skills/memory-management/SKILL.md).
 
-The user also approved knowledge construction through multiple local CC research
-leads using `research` and `research-deep`, with parent interaction, external
-source supplementation, and codex-x review when available. These are development
-tools, not required dependencies of the delivered skill. See the
-[first expansion](knowledge-base-expansion.md) for the prepared additions and
-remaining verification scope.
+The [local knowledge collection](knowledge-base-expansion.md) describes the
+current coverage and checks, and [sources and provenance](knowledge-base-migration.md)
+describes where the notes' content and adapted guidance come from.
 
 ### Community contributions and Discovery Lab
 
@@ -234,16 +285,17 @@ Contribution is separate from Stage 1 and Stage 2 execution. Completing research
 does not automatically publish user data, code, or findings. Preparing a requested
 contribution is not permission to use Discovery Lab as default research knowledge.
 
-**Implementation status:** the source tree includes a plain
-[`discovery-lab/`](../discovery-lab/index.md) resource directory with the two
-existing cases, their portable policy implementations, compact archived evidence,
-and executable checks. Each entry has `policy.md`, implementation, and evaluation
-material; no shared simulator interface or new runtime service is imposed.
-The research-time access rule lives in `queue-policy`; `queue-literature` searches
-its own references, and `queue-agent` routes requested contributions to
-[`queue-contribute`](../skills/queue-contribute/SKILL.md). Source-level and
-behavioral checks cover these boundaries. Host packaging, installation, and
-publication remain separate steps.
+#### Layout and boundaries
+
+[`discovery-lab/`](../discovery-lab/index.md) is a plain resource directory with
+two entries. Each entry has `policy.md`, a portable implementation, and compact
+archived evidence with runnable checks; there is no shared simulator interface
+or runtime service. The research-time access rule lives in `queue-policy`;
+`queue-literature` searches only its own references, and `queue-agent` routes
+requested contributions to [`queue-contribute`](../skills/queue-contribute/SKILL.md).
+The [Lab access](../tests/queue-policy/lab-access-scenarios.md) and
+[contribution](../tests/queue-contribute/scenarios.md) review cases cover these
+boundaries.
 
 ## 2. Official standards
 
@@ -292,17 +344,19 @@ source. It adds task guidance, not authority to override the host or the user.
 [Claude hooks](https://code.claude.com/docs/en/hooks#sessionstart),
 [Codex hooks](https://learn.chatgpt.com/docs/hooks#sessionstart)
 
-The source command accepts `CLAUDE_PLUGIN_ROOT` or `PLUGIN_ROOT`, quotes the
+The hook command accepts `CLAUDE_PLUGIN_ROOT` or `PLUGIN_ROOT`, quotes the
 resolved path, and requires `python3`. Claude documents the former; Codex
-documents its own root variable and the Claude-compatible alias. This checks a
-portable source path, not automatic activation: packaging, platform support, and
-hook trust still need host-level verification.
+documents its own root variable and the Claude-compatible alias. The source
+checks cover this portable path, not automatic activation: platform support and
+hook trust still determine whether the installed hook runs.
 [Claude Plugin reference](https://code.claude.com/docs/en/plugins-reference),
 [OpenAI Plugin packaging](https://developers.openai.com/plugins/build/plugins)
 
 ## 4. Creation, testing, and distribution references
 
-These commands are references for future implementation; they have not been used to create or install this Plugin.
+Native packaging and isolated installation checks use the references below.
+Model-call evaluations and official directory submission are separate tasks;
+the supported user commands are in [Getting started](getting-started.md).
 
 | Task | Official entry point | Distinction |
 | --- | --- | --- |
@@ -333,9 +387,9 @@ For community governance, inspect enforced workflows rather than README invitati
 
 Check licenses and dependencies per skill or resource. K-Dense, for example, documents separate terms for vendored Anthropic document skills. [K-Dense README](https://github.com/K-Dense-AI/scientific-agent-skills#readme)
 
-Upstream HEADs at review: K-Dense `49c6e97775ea`, Hugging Face `80f9fa530e46`, Knowledge Work Plugins `da38ec1ee89d`, AutoResearchClaw `be4ba4755bf1`. AutoResearchClaw's [host-facing skill](https://github.com/aiming-lab/AutoResearchClaw/blob/be4ba4755bf1b52220f25e13b2293b5956590070/.claude/skills/researchclaw/SKILL.md) invokes a separate runtime: a skill entry point does not itself imply a Plugin-centered architecture.
+Reviewed revisions: K-Dense `49c6e97775ea`, Hugging Face `80f9fa530e46`, Knowledge Work Plugins `da38ec1ee89d`, AutoResearchClaw `be4ba4755bf1`. AutoResearchClaw's [host-facing skill](https://github.com/aiming-lab/AutoResearchClaw/blob/be4ba4755bf1b52220f25e13b2293b5956590070/.claude/skills/researchclaw/SKILL.md) invokes a separate runtime: a skill entry point does not itself imply a Plugin-centered architecture.
 
-### Documentation patterns reviewed for public release (2026-10-24)
+### Documentation patterns
 
 Three established repositories informed the presentation, not the research
 workflow. The linked revisions identify the material reviewed.
@@ -346,30 +400,21 @@ workflow. The linked revisions identify the material reviewed.
 | [Superpowers](https://github.com/obra/superpowers/tree/2ce8aa15d05bd57213e6f746f953aafb7ded7a8b) | An overview that explains the workflow before sending readers to focused guidance. | Queue Agent keeps task-dependent entry points, not a mandatory development sequence. |
 | [Compound Engineering](https://github.com/EveryInc/compound-engineering-plugin/tree/1522cc36e14b5c2c44afcdb5793370bd4ac8d418) | A readable skill map and separate contribution and detailed-use documentation. | No import of its orchestration, tools, configuration, or agent count. |
 
-These are organizational references. Their source code and visual assets are not
-bundled. Queue Agent's guide illustrates the agreed skills and links to their
-source; it does not run simulations or add a host integration. See the
-[getting-started guide](getting-started.md) for the supported source-use path.
+These are organizational references; their source code and visual assets are
+not bundled.
 
-### Remote literature MCP review (2026-09-26)
+### Remote literature retrieval options
 
-The next requested integration is remote academic retrieval, without requiring
-users to install a local MCP server. The options below are research findings,
-not a decision to replace Paper Search MCP or to deploy a new service.
+These findings, as of 2026-09-26, concern remote academic retrieval that would
+not require users to install a local MCP server. They are research findings, not
+a decision to replace Paper Search MCP or to deploy a service; the package
+configures no MCP server.
 
 | Option | Evidence and access | Implication for the Plugin |
 | --- | --- | --- |
 | [Paper Search MCP](https://github.com/openags/paper-search-mcp) | MIT; unreleased `main` supports Streamable HTTP, but released PyPI 0.1.4 is stdio-only. Neither supplies native bearer-token/OAuth authorization. Its [Smithery listing](https://smithery.ai/servers/openags/paper-search-mcp) advertises an older hosted deployment. | HTTP support does not itself supply a maintained public endpoint. Keep it as an option, but do not bundle the advertised URL as a verified working default. |
 | [Ai2 Asta Scientific Corpus MCP](https://allenai.org/asta/resources/mcp) | Official hosted endpoint: `https://asta-tools.allen.ai/mcp/v1`. A live anonymous check completed initialization, listed eight tools, and successfully called `search_paper_by_title` for a known paper. Ai2 documents optional API keys for higher rate limits. | Lowest-friction **tested** alternative for discovery, citation lookup, and available text snippets. A hosted service is not proof that its server implementation is open source; that license was not established. |
 | [Official OpenAlex MCP](https://github.com/ourresearch/openalex-mcp-server) | MIT; publishes `https://mcp.openalex.org/mcp`. Current source requires OAuth and uses the consenting user's OpenAlex account/budget. No authenticated end-to-end check was performed. | Strong candidate when open-source implementation and first-party hosting both matter. It requires user sign-in, not local server installation. |
-
-**Paper Search diagnosis.** The earlier direct request returned Cloudflare Error
-1010, not an MCP authentication challenge. This establishes an edge denial, not
-that the service is offline or that self-hosting is necessary. Do not attempt to
-bypass that denial. The public Smithery metadata advertises 13 tools, compared
-with 57 registered in current upstream source; listing metadata is not a live
-health check. [Cloudflare explanation](https://developers.cloudflare.com/support/troubleshooting/http-status-codes/cloudflare-1xxx-errors/error-1010/),
-[upstream source](https://github.com/openags/paper-search-mcp/blob/808e462a824ce6b26fdccbed352b4bf47d7b84cb/paper_search_mcp/server.py)
 
 Remote file handling also needs care: Paper Search download tools return paths
 on the server, not files on the user's machine. Its supported `read_*` tools
@@ -397,15 +442,13 @@ retrieval capabilities, not authorize account/profile changes. Source inspection
 does not establish which revision is deployed. [Auth implementation](https://github.com/ourresearch/openalex-mcp-server/blob/aab76e65ba44a57e9dd3023a737df61d737c126a/src/index.ts),
 [tool registration](https://github.com/ourresearch/openalex-mcp-server/blob/aab76e65ba44a57e9dd3023a737df61d737c126a/src/server.ts)
 
-No Plugin manifest, MCP configuration, local installation, account registration,
-or deployment was added during this review. Connection success above is a direct
-MCP canary, not an installed-Plugin compatibility test.
+The Asta check was a direct MCP call, not a test through an installed Plugin.
 
 ## 6. Testing whether the Plugin helps
 
 Test **activation** separately from **task quality**. Cover direct and indirect requests, incomplete inputs, requests that should not activate the skill, and edge cases. [OpenAI skill testing](https://developers.openai.com/plugins/build/skills#test-the-skill)
 
-Possible applications to Queue Agent, not yet an agreed test plan:
+Possible applications to Queue Agent, not an adopted test plan:
 
 1. **Behavior:** discussion-only requests should not launch experiments; modeling and evaluation requests should locate relevant guidance and tools.
 2. **Computation:** check simulations, policy feasibility, and metrics on small known cases, separately from language quality.
@@ -418,14 +461,16 @@ Claude's official eval tool supplies a with/without-Plugin comparison by default
 
 ## 7. Open design questions
 
-- Validate both hosts initially, or start with one while preserving the other's adaptation boundary?
-- Which capabilities should be independently callable in each Stage, and what model and evidence should pass between them?
 - Which computations need local scripts, and which benefit from MCP?
+- Which remote literature service, if any, should the package configure?
+  Section 5 compares the current options.
+- How should task quality be compared with and without the Plugin? Section 6
+  lists possible checks.
 
-We will discuss these individually. Shared content with host-specific adaptation is a supported direction, not a finalized layout, skill catalog, or execution workflow.
+## Source notes
 
-## Review scope
-
-The review combined Exa search, Firecrawl and official-document retrieval, and Context7 cross-checks. Three local agents covered Claude documentation, cross-host standards, and upstream examples; two Firecrawl Pro tasks covered interoperability and testing/maintenance. Their completed results were reconciled against primary sources.
-
-Official documentation and upstream files take precedence over snippets and generated suggestions. Compatibility findings are documentation-based, not installation tests. Unpinned links may change after the review date.
+External sources in this file were consulted between 2026-09-25 and 2026-10-24.
+Official documentation and upstream files take precedence over search snippets
+and generated summaries. Pinned links identify the revisions reviewed; unpinned
+pages may have changed since. Section 3 summarizes host documentation; it does
+not test every behavior that it describes.

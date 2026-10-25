@@ -3,7 +3,8 @@
 Use these requests to test the source-loaded skill. Give the evaluator only the
 requests and skill path, not the reviewer checks. Ask for its intended next
 action and deliverables; do not run the hypothetical experiments. This tests
-instruction interpretation, not installed-host discovery or policy quality.
+instruction interpretation, not the scientific claims in responses,
+installed-host discovery, or policy quality.
 
 ## Requests
 
@@ -73,7 +74,9 @@ vary. What is your first step?
   weights. Tuning changes the weights, not the arrival load or processor count.
   SimOpt may be consulted, but is not presumed installed or required.
 - C builds an evaluator against the supplied model within Stage 2; it neither
-  demands operational logs nor invents a new policy-discovery assignment.
+  demands operational logs nor invents a new policy-discovery assignment. It
+  checks model-implementation agreement and action feasibility on small cases
+  before relying on the comparison, not only before any optimization.
 - D exploits shared structure and evaluates representative allowed instances.
   It separates the reusable decision rule from instance-specific tuning and
   delivers performance evidence, not a theorem/formalization workflow.
@@ -87,9 +90,6 @@ vary. What is your first step?
 - H identifies the missing family boundary and asks a focused question rather
   than inventing arbitrary distribution classes or parameter ranges.
 
-Source-loaded response checks do not demonstrate execution of a solver, simulator
-construction, statistical validity of an experiment, or installed-host behavior.
-
 ## Confirmation requests
 
 Use this supplied model description for I-P: nonpreemptive rigid jobs on 16 or 32
@@ -100,7 +100,9 @@ capacity, no preemption, and no rejecting jobs. A matching simulator is availabl
 This description is an artifact, not evidence of user confirmation. Give only
 the description and the individual case to the evaluator, without the reviewer
 checks. Ask for the next user-facing response and immediate action, not for
-execution of the hypothetical task.
+execution of the hypothetical task. These cases test responses to supplied
+conversation histories, not a live question tool or runtime enforcement of the
+confirmation step.
 
 ### I. Complete artifact, no confirmation yet
 
@@ -169,42 +171,3 @@ instance." The objective and all constraints are unchanged.
 - P changes policy weights within the confirmed scope rather than changing
   the model family, objective, or constraints. No new scope confirmation is
   needed for this already-authorized tuning task.
-
-## Verification record: 2026-09-26
-
-- Before the explicit confirmation step was added, CC and codex-x each read the
-  skill sources and answered the earlier A-H requests without the
-  reviewer checks. Kiro answered the same requests with copies of the three
-  workflow skills embedded in its prompt; it made no tool calls. All three
-  responses met the workflow criteria above, including preserving the family in
-  E, updating the evaluator after F, and asking for the missing boundary in H.
-- CC reported `claude-opus-5-5[1m]`, with max effort requested. codex-x was
-  invoked with `openai.gpt-5.6-sol` and max effort; its result did not independently
-  identify the served model. Kiro completed successfully, but warned that setting
-  `claude-opus-5.5` failed and reported reasoning control unavailable. Its actual
-  model and effort are unverified; this is not an Opus/max comparison across hosts.
-- No blocking inconsistency was found. A CC wording suggestion was adopted:
-  small-case simulator checks now precede reliance on simulation results, not
-  only optimization. That wording edit received static checks, not another
-  live-agent test.
-- Three skill-format checks, three hook tests, seven knowledge tests, Ruff
-  lint/format, `ty check`, local Markdown links, and whitespace checks passed.
-- These tests check proposed actions, not scientific claims in the responses,
-  solver execution, simulator construction, or automatic Plugin loading. Nothing
-  was installed. Local prompts and results are in the ignored
-  `output/queue-policy-check/` directory.
-
-## Confirmation-step verification: 2026-09-26
-
-- A fresh source-loaded codex-x review answered I-P from the supplied conversation
-  contexts without seeing the reviewer checks. All eight responses met those
-  checks: I/L waited, J asked only about the objective, K/P continued without
-  reconfirmation, M/N preserved the definition, and O applied the authorized change.
-- The invocation requested `openai.gpt-5.6-sol` with max effort. It completed
-  without reported tool errors; the result did not independently identify the
-  served model. Artifacts are in the ignored `output/queue-policy-confirmation/`.
-- Three skill-format checks, ten existing automated tests, Ruff lint/format,
-  `ty check`, Markdown local links, and whitespace checks passed.
-- This checks intended responses and actions from supplied histories, not live
-  question-widget behavior, installed-host loading, or runtime enforcement.
-  No Plugin was installed and no hypothetical policy experiments were executed.
