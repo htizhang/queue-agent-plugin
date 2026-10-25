@@ -141,7 +141,7 @@ The [Discovery Lab](discovery-lab/index.md) holds policies discovered through
 LLM-agent research, separate from established literature. Its entries are
 [queue-aware optimistic backfilling](discovery-lab/queue-aware-backfilling/policy.md)
 for multiserver jobs with simultaneous resource requirements, and
-[congestion-priced lookahead](discovery-lab/congestion-priced-lookahead/policy.md)
+[bottleneck-work block planning](discovery-lab/bottleneck-work-block-planning/policy.md)
 for reentrant networks with sequence-dependent setups. Each entry has a method
 description, portable code, and compact evaluation evidence with runnable
 checks.

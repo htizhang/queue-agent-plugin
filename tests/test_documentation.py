@@ -15,6 +15,7 @@ DOCS = [
     ROOT / "docs/getting-started.md",
     ROOT / "docs/references.md",
     ROOT / "docs/guide.html",
+    *sorted((ROOT / "discovery-lab").rglob("*.md")),
 ]
 
 
