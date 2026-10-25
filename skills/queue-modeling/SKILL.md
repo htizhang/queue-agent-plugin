@@ -92,6 +92,9 @@ literature workflow when the available evidence leaves a material question open.
 
 ## Deliver the queue model and its simulator
 
+For English model explanations and reports, use the shared
+[asd-ste100](../asd-ste100/SKILL.md) writing skill.
+
 Provide both:
 
 1. **Queue model:** a self-contained mathematical or structured description of

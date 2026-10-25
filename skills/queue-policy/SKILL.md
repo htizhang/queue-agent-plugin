@@ -101,14 +101,32 @@ An applicable analytical evaluation can suffice for a simpler request.
 For new or improved policy development, read
 [Policy Discovery](references/policy-discovery.md) before delegating research or
 implementing candidates. It guides independent subagent development and the main
-agent's research iterations. Adoption, comparison, and fixed-policy tuning do
+agent's research iterations, including candidate simplification and a literature
+check of the final algorithm. Adoption, comparison, and fixed-policy tuning do
 not require this discovery workflow.
 
 Compare policies using the same objective, feasible actions, and information
-assumptions. Account for stochastic noise with repeated runs and shared random
-inputs where appropriate; the literature skill's evaluation note explains paired
-comparisons. Use fresh evaluation replications after tuning when needed to avoid
-mistaking search noise for improvement. Report which instances were tested.
+assumptions:
+
+- State which inputs are available at each decision, distinguishing known
+  quantities, estimates, and future realizations. Check the policy code against
+  this information boundary, not only its description. Equal access does not
+  require every policy to use every observable.
+- Check published baseline implementations and parameter definitions against
+  their sources; repair defects before using the results. A claim against a
+  published rule requires a source-faithful implementation using its required
+  available inputs. Label intentional adaptations as separate comparators, not
+  replacements for that rule.
+- Describe how candidate and baseline parameters were chosen. Give applicable
+  baselines a justified tuning setup rather than comparing a tuned candidate
+  against arbitrary defaults; disclose differences that affect the comparison.
+
+Account for stochastic noise with repeated runs and shared random inputs where
+appropriate; the literature skill's evaluation note explains paired comparisons.
+Use fresh evaluation replications after tuning when needed to avoid mistaking
+search noise for improvement. Rerun affected comparisons after policy or
+evaluator changes, and tie reported results to the final code and parameter
+values. Report which instances were tested.
 
 Keep policy structure distinct from parameter values. A family-level policy can
 retain the same decision logic while its parameters are tuned for a particular
@@ -129,14 +147,26 @@ feedback within that definition.
 
 ## Deliver the policy and performance evidence
 
+For English policy explanations and reports, use the shared
+[asd-ste100](../asd-ste100/SKILL.md) writing skill.
+
 Return the policy or recommendation at the level requested, its applicable
-family, parameter meanings and chosen values, and the evidence supporting its
-use. For implementation tasks, include runnable policy code or a reusable
-implementation reference, concise execution instructions, and any new or revised
-simulator. Explain the decision logic and relevant performance comparisons,
-including material limitations for the target use.
+family, and the evidence supporting its use. For implementation tasks, include
+runnable policy code or a reusable implementation reference, concise execution
+instructions, and any new or revised simulator. Explain the decision logic and
+relevant performance comparisons, including material limitations for the target use.
+
+Make the explanation self-contained for a reader outside the development process.
+For each major component, explain the decision it affects, the problem it
+addresses, and why it might help. Define parameter meanings, units where
+applicable, chosen values, and how they were selected. Use a checked example or
+pseudocode when it clarifies the mechanism. Keep the explanation, examples, and
+pseudocode consistent with the evaluated code and parameter values.
+Explain important patterns in the results, distinguishing measured effects from
+proposed explanations. Use descriptive names and explain the policy without
+requiring access to trial history; retain version identifiers where useful for
+reproducibility. Match the depth and format to the request.
 
 Finish when the requested recommendation, comparison, tuning, or implementation
 is supported by the checks performed. Distinguish simulated performance from
-established published guarantees. Deriving new theoretical results and formal
-proofs is outside this skill's scope.
+established published guarantees.

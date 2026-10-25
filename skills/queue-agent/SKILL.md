@@ -23,6 +23,7 @@ and the available artifacts to determine the current task.
 | Infer a queue model from observations, or revise its mechanisms or calibration against data | Stage 1: use [queue-modeling](../queue-modeling/SKILL.md). |
 | Select, evaluate, tune, or design policies for an existing model, simulator, or specified model family | Stage 2: use [queue-policy](../queue-policy/SKILL.md), beginning with its problem-definition confirmation step. |
 | Answer a literature question, explain queueing concepts, or discuss a research direction | Address that question; use [queue-literature](../queue-literature/SKILL.md) when domain evidence is needed. |
+| Write or clarify an English model description, policy explanation, or report | Use the shared [asd-ste100](../asd-ste100/SKILL.md) writing skill. Editing a deliverable does not itself start modeling or policy experiments. |
 | Contribute knowledge or an agent-discovered method to the Plugin | When the user asks to contribute, use [queue-contribute](../queue-contribute/SKILL.md); this is separate from running either Stage. |
 
 A specified mathematical model may still need an executable evaluator for
@@ -49,3 +50,11 @@ needed local notes first and seek external sources when they leave a material ga
 
 Use the host agent's available tools and delegation. This overview does not
 prescribe a simulator, model schema, or separate orchestration framework.
+
+## Write for the user
+
+Deliver explanations that a reader can understand without the development
+conversation. When writing or revising English explanations and reports for
+either Stage, use [asd-ste100](../asd-ste100/SKILL.md). It defaults to
+STE-flavored prose and preserves scientific meaning. The Stage skills still
+own the required deliverables and evidence checks.
