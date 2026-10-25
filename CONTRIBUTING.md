@@ -15,6 +15,7 @@ the [README](README.md).
 | A policy discovered through LLM-agent research | An entry in `discovery-lab/` | [Agent-discovered policies](#agent-discovered-policies) |
 | The behavior of a skill | `skills/<name>/` and its review cases in `tests/<name>/` | [Workflow changes](#workflow-changes) |
 | The README, getting-started guide, visual guide, or diagrams | `README.md`, `docs/`, and `docs/assets/` | [Documentation and visuals](#documentation-and-visuals) |
+| The plugin manifests, catalogs, or package version | `plugin.json`, `.claude-plugin/`, `.codex-plugin/`, and `.agents/plugins/` | [Packaging and releases](#packaging-and-releases) |
 
 Provenance decides the path, not publication status. An agent-discovered policy
 stays in the Discovery Lab after publication. If a discovered policy matches a
@@ -61,10 +62,11 @@ from checks that you ran for the contribution.
 ## Workflow changes
 
 The skills are runtime instructions, so a change to a skill changes agent
-behavior. The project develops one confirmed workflow step at a time. Open an
-issue to discuss a workflow change before a large edit.
+behavior. Propose one workflow change at a time, and open an issue to discuss
+it before a large edit.
 
-- Keep these agreed boundaries, unless the change explicitly revises them:
+- Keep these design boundaries unless the change explicitly proposes to revise
+  them:
   - The two Stages are capabilities, not a required sequence.
   - Stage 2 confirms the queue family, objective, and constraints, and keeps
     them fixed until the user changes them.
@@ -79,8 +81,9 @@ issue to discuss a workflow change before a large edit.
 - When you change adapted upstream material, such as `asd-ste100` or the
   general guidance in `queue-literature`, update the local changes that its
   `NOTICE.md` records.
-- Record each agreed decision in [docs/references.md](docs/references.md),
-  apart from external references and open questions.
+- Record each design decision and its reason in
+  [docs/references.md](docs/references.md), apart from external references and
+  open questions.
 - [AGENTS.md](AGENTS.md) gives the same rules to coding agents that work on this
   repository.
 
@@ -95,6 +98,20 @@ describe it.
   assets. Its content stays readable without JavaScript.
 - Keep each SVG diagram self-contained, with a title and a description, so that
   it renders on GitHub.
+
+## Packaging and releases
+
+- Keep the `queue-agent` name and the version identical in `plugin.json`,
+  `.claude-plugin/plugin.json`, and `.codex-plugin/plugin.json`. Keep the
+  catalog names in `.claude-plugin/marketplace.json` and
+  `.agents/plugins/marketplace.json` aligned with that name.
+- Bump all three manifest versions for a published package change. Claude uses
+  the version to detect updates; refreshing the catalog is not a replacement
+  for a version bump.
+- Before a release, validate the manifests with the current native CLIs and
+  test installation and loading for both hosts in isolated host profiles.
+  Record the commands and results without changing personal host
+  configuration.
 
 ## Requirements for every contribution
 
@@ -123,13 +140,16 @@ later and its standard library.
 python3 -m unittest discover -s tests/queue-literature -p 'test_*.py'
 python3 -m unittest discover -s tests/queue-agent -p 'test_*.py'
 python3 -m unittest discover -s tests/asd-ste100 -p 'test_*.py'
+python3 -m unittest discover -s tests -p test_packaging.py
 python3 -m unittest discover -s tests -p 'test_documentation.py'
 ```
 
 These check the literature-note contract and reference integrity, the startup
-hook from source, the bundled writing skill and linter, and documentation links
-and structure. They do not establish theorem correctness, reader comprehension,
-or installed-host compatibility.
+hook from source, the bundled writing skill and linter, package identity and
+contents, and documentation links and structure. They do not establish theorem
+correctness, reader comprehension, or installed-host compatibility. Before a
+release, also run the native validation in
+[Packaging and releases](#packaging-and-releases).
 
 Each Discovery Lab entry documents a policy smoke test and an archived-evidence
 check in its evaluation note:

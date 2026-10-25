@@ -9,7 +9,7 @@ For research, the [Stage 2 access rule](../skills/queue-policy/SKILL.md#discover
 determines when to explore this collection. For a requested contribution, read
 the [contribution guide](CONTRIBUTING.md).
 
-## Starting entries
+## Entries
 
 | Method | Model family and objective | Mechanism |
 | --- | --- | --- |

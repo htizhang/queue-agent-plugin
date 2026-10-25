@@ -49,21 +49,9 @@ execute the hypothetical research tasks or install anything.
 root-variable convention, from an unrelated working directory and a Plugin path
 containing spaces. It checks the JSON context envelope, the entry-skill path,
 and that lifecycle inputs do not select or persist task state. These checks do
-not establish host discovery, hook trust, or Windows shell support.
+not cover the orientation wording, host discovery, hook trust, or Windows shell
+support.
 
-## Verification record: 2026-09-26
-
-- Skill format validation, Ruff lint/format, `ty check`, Markdown local-link
-  checks, three hook tests, and seven existing knowledge tests passed.
-- A source-loaded CC review used `claude-opus-5-5[1m]` with max effort requested.
-  Its eight responses matched the routing checks above, including direct Stage 2
-  evaluator construction without logs, model repair despite an existing
-  simulator, discussion-only work, and the unrelated request. This checked
-  proposed next actions, not execution or scientific quality of those tasks.
-- The reviewer identified two ambiguities in the short hook text. It now says
-  Stage 1 works from data and a system description, and describes the Stages as
-  capabilities rather than a mandatory sequence. Automated checks were rerun
-  after those edits; the wording revision was not a second live-agent test.
-- No Plugin was installed or enabled. Automatic skill discovery and host-managed
-  hook loading remain untested. Local review artifacts are in the ignored
-  `output/queue-agent-entry/` directory.
+When the orientation wording changes, review it against the entry skill. It
+should describe Stage 1 as working from data and a system description, and
+present the Stages as capabilities rather than a mandatory sequence.

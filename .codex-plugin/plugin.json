@@ -1,0 +1,34 @@
+{
+  "name": "queue-agent",
+  "version": "0.1.0",
+  "description": "Queueing research from data to executable models and policies, with shared literature and writing workflows.",
+  "author": {
+    "name": "htizhang"
+  },
+  "homepage": "https://github.com/htizhang/queue-agent-plugin#readme",
+  "repository": "https://github.com/htizhang/queue-agent-plugin",
+  "license": "MIT",
+  "keywords": [
+    "queueing",
+    "simulation",
+    "research",
+    "scheduling",
+    "policy-design"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Queue Agent",
+    "shortDescription": "Queue models and policies",
+    "longDescription": "Queueing research from data to executable models and policies, with shared literature and writing workflows.",
+    "developerName": "htizhang",
+    "category": "Productivity",
+    "capabilities": [
+      "Interactive"
+    ],
+    "defaultPrompt": [
+      "Use Queue Agent to build a queue model and simulator from my data.",
+      "Use Queue Agent to compare policies for my existing queue model.",
+      "Use Queue Agent to explain a queueing concept with sources."
+    ]
+  }
+}

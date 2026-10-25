@@ -1,6 +1,7 @@
 # Queue Contribute: Behavioral Checks
 
-These are source-loaded instruction tests, not installed-host discovery tests.
+These are source-loaded instruction tests. They do not test installed-host
+discovery, Git hosting, or the scientific quality of a contribution.
 Give the evaluator the source path `skills/queue-contribute/SKILL.md`, the shared
 context, and one request, without the reviewer checks. Ask for its next
 response, intended actions, and the repository files it would read or change.
@@ -182,12 +183,3 @@ model: improve its mean waiting time."
   evidence, and asks before pushing. The second request is ordinary Stage 2 work
   under the clinic definition and reads no Discovery Lab file: neither a generic
   improvement request nor the earlier contribution authorizes research use.
-
-## Verification status
-
-On 2026-09-27, a metadata-only check passed all nine routing requests in E.
-Two additional source-loaded probes covered literature-only and Discovery Lab
-draft requests; only the latter read Lab files, and neither published anything.
-The remaining scenario matrix has not been exhaustively executed. These checks
-test instruction interpretation, not Git hosting, installed-host behavior, or
-the scientific quality of a contribution.

@@ -761,7 +761,7 @@ code, .path { font-family: var(--mono); font-size: 0.86em; }
       </div>
       <div>
         <p class="lead">These skills guide your coding agent from data to a queue model to a policy. The two Stages are capabilities, not a pipeline that you must run from end to end. Bring logs, a model, a simulator, or a question, and the entry skill helps your agent choose where to begin.</p>
-        <p class="status"><span class="label">Status: source preview</span>This repository holds skill and hook source files. It is not yet a packaged plugin that a host can install. To try the skills from a local copy, read <a class="xref" href="getting-started.md">Getting started</a>.</p>
+        <p class="status"><span class="label">Install</span>Queue Agent 0.1.0 installs in Claude Code or Codex with a one-line command. <a class="xref" href="getting-started.md">Getting started</a> gives the commands, how to start the entry skill in each host, and a source-use fallback.</p>
       </div>
     </div>
   </div>
@@ -1215,12 +1215,12 @@ code, .path { font-family: var(--mono); font-size: 0.86em; }
     <div class="about-body">
       <p class="kicker">About this page</p>
       <h2 id="about-title">What this guide is</h2>
-      <p class="lede lede--after-title">This page is documentation. It does not run a simulator, evaluate a policy, or report performance results. It opens from a local copy without a network connection or build step.</p>
-      <p>The repository is a source preview. It contains skill sources, a startup-orientation hook source, reference notes, and Discovery Lab entries. It is not yet a packaged plugin that a host can install, so this guide gives no install commands. Host packaging, installation, and hook enablement are separate future steps.</p>
-      <p>The hook source in <a class="path" href="../hooks/hooks.json">hooks/hooks.json</a> gives a short startup orientation that points to the entry skill. It does not choose or store a Stage, and adding these files enables nothing on your machine.</p>
+      <p class="lede lede--after-title">This page explains the skills and how they connect. It opens from a local copy without a network connection or build step.</p>
+      <p>The repository is the Queue Agent plugin package. It contains six skills, a startup hook, reference notes, Discovery Lab entries, and the plugin manifests and catalogs for Claude Code and Codex. See <a class="xref" href="getting-started.md">Getting started</a> for installation, maintenance, host loading, and source-use instructions.</p>
+      <p>The hook in <a class="path" href="../hooks/hooks.json">hooks/hooks.json</a> gives a short startup orientation that points to the entry skill. It does not choose or store a Stage. Host permissions still control execution; explicit skill selection also works without the hook.</p>
     </div>
     <ul class="links">
-      <li><a class="xref" href="getting-started.md">Getting started</a>: use the skills from a local copy.</li>
+      <li><a class="xref" href="getting-started.md">Getting started</a>: install the plugin, start a task, and see example requests.</li>
       <li><a class="xref" href="../README.md">README</a>: the skill map and project status.</li>
       <li><a class="xref" href="references.md">Design decisions and references</a>: why the workflow is shaped this way.</li>
       <li><a class="xref" href="../CONTRIBUTING.md">Contributing</a>: how to propose literature notes, discovered policies, or workflow changes.</li>

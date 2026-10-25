@@ -22,7 +22,8 @@ Use one canonical source record per work/version used. Keep bibliographic identi
 and useful locators in the registry, with a concise version qualifier only when
 the citation would otherwise be ambiguous. State secondhand or unverified limits
 in the prose when they constrain the claim. Do not add construction history,
-review dates, reading-depth labels, or legacy identifiers to the delivered note.
+review dates, reading-depth labels, or identifiers from other collections to the
+delivered note.
 Do not upgrade a metadata check into a verified theorem, copy long passages, or
 bundle copyrighted papers. Identify new interpretations as such.
 

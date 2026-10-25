@@ -24,14 +24,11 @@ No upstream scripts, model services, or additional skills are bundled or require
 
 ## Local knowledge
 
-The bundled knowledge notes are original, source-grounded summaries seeded by the
-earlier QueueResearcher topic inventory. They do not copy textbook or paper text,
-and they import no legacy runtime code. Original scientific sources and
-version-specific locators are listed in
-[the source registry](references/sources.json); the
-[migration record](../../docs/knowledge-base-migration.md) maps legacy origins.
-The MIT notice below covers the adapted K-Dense guidance, not the cited papers
-or the rest of this repository.
+The bundled knowledge notes are original, source-grounded summaries. They do not
+copy textbook or paper text. Original scientific sources and version-specific
+locators are listed in [the source registry](references/sources.json). The MIT
+notice below covers the adapted K-Dense guidance, not the cited papers or the
+rest of this repository.
 
 ## Upstream MIT License
 

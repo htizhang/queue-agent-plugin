@@ -7,8 +7,12 @@ only the relevant request and source cards below, without the reviewer checks.
 Keep the host read-only and write any run artifacts outside the skill directory.
 
 For a separate routing check, expose only the skill name and description, then
-ask whether it fits each request. Explicit loading does not test automatic
-discovery. Host packaging and live retrieval need separate tests when implemented.
+ask whether it fits each request.
+
+A passing case meets its listed checks. It does not verify every other deduction
+in the answer. The cases are not a literature benchmark or an estimate of the
+skill's benefit, and they do not test automatic discovery, installed-host
+behavior, or live retrieval.
 
 ## A. Stage 1: observations and model choice
 
@@ -121,6 +125,10 @@ time for this system? What would need adapting?
 - Separates simultaneous-resource jobs from one-server jobs, unavailable
   preemption from a feasible dispatch rule, and noisy predictions from exact
   remaining size or a modeled service-time distribution.
+- Keeps the Gittins card's distinctions in any explanation: nonclairvoyant
+  means using only the declared current and past states, not necessarily
+  unknown sizes, and jobs with equal attained service can have different
+  indices under different class-conditional size laws.
 - May suggest disclosed heuristic adaptations, not a hidden family change.
 
 ## F. Local knowledge: a genuine Stage 1 coverage gap
@@ -237,63 +245,3 @@ specify how stations dispatch jobs?
 - Includes equality in the release condition.
 - Separates the release gate and external priority from station dispatch.
 - Describes the cited comparisons as simulation evidence, not universal dominance.
-
-The revised F and added H-M are pending live-agent checks. Historical records
-below describe the earlier card collection and earlier version of F.
-
-## Verification record: original skill, 2026-09-25
-
-The skill-creator format validator, local Markdown link checks, English-content
-scan, upstream MIT-notice comparison, and `git diff --check` passed.
-
-| Host | Mode | Outcome against the reviewer checks |
-| --- | --- | --- |
-| CC 2.1.282.979, resolved Opus 5.5, requested max effort | Explicit file read; separate sessions for A and B | Both cases passed the core checks. A separated sojourn time from service; B identified the upper-bound assumption, the P3 mismatch, and unresolved P4 overlap. |
-| CC, same configuration | Metadata only, case C | All four routing decisions matched the expected scope. No tools were called. |
-| Kiro CLI 2.24.0, v2 engine | Explicit file read | A passed the core checks. B initially equated duration estimates with upper bounds; after clarifying this distinction in the skill, a fresh B session identified the missing assumption or adaptation. |
-| Kiro CLI 2.24.0, v3 engine | Skill supplied inline | An additional B check identified the information mismatch and unresolved prior art. This was an instruction test, not file discovery. |
-
-The task prompts contained the request and fictional cards, but not the reviewer
-checks. Outputs were manually checked against the listed criteria; passing these
-checks is not a claim that every additional deduction in an answer was verified.
-Only targeted file reads occurred in the explicit-loading cases; no experiments,
-searches, installations, or model-authored file edits occurred.
-
-Host limitations: Kiro v2 did not apply the requested model override, so its
-effective model/effort was not verified. A v3 file-read attempt was blocked by
-non-interactive tool permissions; the inline test supplied the skill as task
-context without broadening permissions. The CC startup generated an import-only
-`CLAUDE.md` in the repo; that temporary file was removed after testing.
-
-No Plugin was installed and no skill/MCP configuration was added. Automatic host
-discovery, packaged Plugin compatibility, live literature retrieval, and
-with/without-skill quality comparisons remain untested. This record establishes
-small behavioral smoke checks, not a literature benchmark or a causal estimate
-of the skill's benefit.
-
-## Verification record: local knowledge migration, 2026-09-25
-
-- `python3 -m unittest discover -s tests/queue-literature -p 'test_*.py'`:
-  all four tests passed, including negative fixtures for duplicate identities,
-  dangling sources, missing claim links/locators, and broken or escaping paths.
-  The integration test first failed on the three missing cards, then passed
-  after the complete slice was assembled.
-- Ruff lint and formatting, `ty check` on the test file, the skill format
-  validator, English-content and relative-link checks, and `git diff --check`
-  passed. No new dependency was added.
-- A source-loaded codex-x run, requested `openai.gpt-5.6-sol` at max effort,
-  passed the reviewer checks for D-G. It read all five bundled cards and the
-  source registry, answered the known topic offline, rejected the theorem
-  transfer, recognized the Stage 1 gap, and declined to certify novelty.
-  It explicitly distinguished reading cards from reading primary papers.
-- An earlier CC Opus 5.5/max run correctly rejected the transfer in E but added
-  overbroad Gittins explanations: it equated nonclairvoyance with unknown sizes
-  and inferred that equal attained service forces equal indices. The final
-  cards clarify both distinctions. The complete-slice check above used these
-  revised files; the earlier response is not treated as verified scientific content.
-
-One codex-x attempt could not reach the files through its project-scoped reader
-while shell reads were forbidden. Retrying with task-authorized local read-only
-file commands succeeded; no installation, permission bypass, or host configuration
-change was needed. These are explicit source-loading checks, not automatic
-discovery or installed-Plugin compatibility tests.

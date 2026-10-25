@@ -35,7 +35,7 @@ agreement, use Stage 1.
 Inspect the supplied artifacts enough to establish what is usable. Clarify only
 missing information that would materially change the next step. For an
 end-to-end request, build on what is already available and move between Stages
-as needed; do not repeat completed modeling work merely to follow the diagram.
+as needed, without repeating completed modeling work to follow the Stage order.
 
 ## Keep the task aligned
 
@@ -53,8 +53,8 @@ prescribe a simulator, model schema, or separate orchestration framework.
 
 ## Write for the user
 
-Deliver explanations that a reader can understand without the development
-conversation. When writing or revising English explanations and reports for
+Deliver explanations that a reader who did not participate in the work can
+understand. When writing or revising English explanations and reports for
 either Stage, use [asd-ste100](../asd-ste100/SKILL.md). It defaults to
 STE-flavored prose and preserves scientific meaning. The Stage skills still
 own the required deliverables and evidence checks.

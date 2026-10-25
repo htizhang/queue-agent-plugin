@@ -1,8 +1,8 @@
 # Queue Agent Plugin
 
 Interactive queueing research with your own coding agent:
-**data → queue model → policy**. Claude Code and Codex are the intended
-hosts.
+**data → queue model → policy**. Queue Agent is a plugin for Claude Code and
+Codex.
 
 - **Stage 1, queue modeling:** build a documented queue model and a
   corresponding executable simulator from data and a system description.
@@ -10,22 +10,16 @@ hosts.
   constraints with you, then select, evaluate, tune, or design policies.
 
 You choose the task, and not every task needs both Stages. The agent works with
-the tools that your host provides.
-
-> **Status: source preview.** You can use the skills now by asking your agent
-> to read them from a local clone. There is no Plugin manifest, marketplace
-> entry, or installation command yet. See
-> [Getting started](docs/getting-started.md) and
-> [Project status](#project-status).
+the tools that your host provides. To install the plugin with a one-line
+command, see the [Quick start](#quick-start).
 
 ![Entry routes diagram. Your request goes to the queue-agent entry skill, which chooses a starting point. Data and a system description lead to Stage 1, queue modeling, which returns a documented model and its simulator. A model, simulator, or family can go directly to Stage 2, policy design, which returns a policy or recommendation with evidence. The Discovery Lab opens only for explicit new-algorithm requests. Literature questions and writing go to shared skills, and contribution is opt-in.](docs/assets/overview.svg)
 
 The diagrams for [Stage 1](docs/assets/stage-1.svg) and
 [Stage 2](docs/assets/stage-2.svg) also render on GitHub. The
 [visual guide](docs/guide.html) is a static HTML page, which GitHub shows as
-source code. To read it, clone or download this repository and open
-`docs/guide.html` in a web browser. It needs no server, build step, or network
-connection.
+source code. To read it, open `docs/guide.html` from a local copy of this
+repository in a web browser.
 
 ## What you supply and what you get
 
@@ -38,29 +32,60 @@ connection.
 | A draft model description, policy explanation, or report | Clearer English with the same equations, results, and claim strength | [asd-ste100](skills/asd-ste100/SKILL.md) |
 | Research that you choose to share | A checked contribution, submitted as a pull request only when you authorize it | [queue-contribute](skills/queue-contribute/SKILL.md) |
 
-## Try it from source
+## Quick start
 
-1. Clone this repository
-   (`git clone https://github.com/htizhang/queue-agent-plugin.git`), or
-   download it as a ZIP file from GitHub.
-2. Start your coding agent in your research workspace, not in the clone.
-3. Start the session with a request that names the entry skill by its absolute
-   path:
+You need Git and an installed Claude Code or Codex CLI, with your usual login
+and model already set up. These one-line examples are for macOS and Linux;
+PowerShell 7 also supports `&&`, and older shells can run the two commands
+separately.
 
-```text
-Read /absolute/path/to/queue-agent-plugin/skills/queue-agent/SKILL.md and
-follow it for this task. Resolve its relative links inside that clone, and read
-the linked files when you need them. Keep all outputs in this workspace.
+For Claude Code:
 
-Task: Build a queue model and a simulator from data/events.csv and
-notes/system.md, so that we can compare dispatch rules later.
+```sh
+claude plugin marketplace add htizhang/queue-agent-plugin && claude plugin install queue-agent@queue-agent
 ```
 
-This is manual source use, not an installation. It changes no settings on your
-machine, and your host's file access and permissions stay under your control.
-Behavior can differ between hosts and models. The
-[getting-started guide](docs/getting-started.md) gives more examples and the
-limits of this mode.
+Start a new session in your research workspace, or run `/reload-plugins` in the
+current session. Invoke the entry skill with `/queue-agent:queue-agent`.
+
+For Codex:
+
+```sh
+codex plugin marketplace add htizhang/queue-agent-plugin && codex plugin add queue-agent@queue-agent
+```
+
+Start a new session in your research workspace. Choose `queue-agent` in the
+skills menu, or ask: `Use the queue-agent skill to <describe the task>.`
+
+In either host, state the result you want and the files to use, for example:
+
+```text
+Build a queue model and a simulator from data/events.csv and notes/system.md,
+so that we can compare dispatch rules later.
+```
+
+[Getting started](docs/getting-started.md#3-describe-the-task) has more example
+requests and the commands to update or remove the plugin.
+
+Both hosts install to user scope by default. Keep task inputs and generated
+results in your research workspace, not in the plugin installation cache.
+
+The package contains the six skills and a startup hook,
+[hooks/hooks.json](hooks/hooks.json). At session start, the hook adds a short
+orientation and the local path of the entry skill to the agent's context. It
+needs `python3`, uses no network, writes no state, and does not choose a Stage.
+In Codex, trusting the hook is a separate decision from installing the plugin;
+review the hook before you trust it. Without the hook, select the `queue-agent`
+entry skill explicitly; all skills still work.
+
+### Source-use fallback
+
+If your host cannot install plugins, clone this repository or download its ZIP
+file. Start your agent in your research workspace and ask it to read
+`skills/queue-agent/SKILL.md` from the clone by its absolute path.
+[Getting started](docs/getting-started.md#source-use-fallback) gives the
+exact request. This reads the skills from source; it installs nothing and does
+not run the startup hook.
 
 ## How the work proceeds
 
@@ -103,7 +128,7 @@ limits of this mode.
 | [queue-modeling](skills/queue-modeling/SKILL.md) | **Stage 1.** Builds, calibrates, and validates a queue model and its simulator, with independent, executable feedback. The agent chooses the representation and tools. | [Modeling](tests/queue-modeling/scenarios.md) |
 | [queue-policy](skills/queue-policy/SKILL.md) | **Stage 2.** Confirms the problem definition, prepares an evaluator when needed, then adopts, compares, tunes, or designs policies. New policy work follows its [Policy Discovery](skills/queue-policy/references/policy-discovery.md) reference. [SimOpt](https://github.com/simopt-admin/simopt) is an optional external resource, not a bundled backend. | [Policy](tests/queue-policy/scenarios.md), [discovery](tests/queue-policy/discovery-scenarios.md), [refinement](tests/queue-policy/refinement-scenarios.md) |
 | [queue-literature](skills/queue-literature/SKILL.md) | **Shared.** Source-grounded literature work for both Stages, with the search tools of your host. Local notes cover model abstraction, state and dynamics, validation, arrival and service inference, incomplete logs, and censoring. They also cover classical scheduling, network control, backfilling, and paired evaluation. | [Literature](tests/queue-literature/scenarios.md) |
-| [asd-ste100](skills/asd-ste100/SKILL.md) | **Shared.** English writing guidance for model descriptions, policy explanations, and reports. It uses STE-flavored prose and keeps scientific meaning and necessary terms. Its optional, dependency-free linter checks language patterns, not scientific correctness. No hook applies it automatically. | [Writing](tests/asd-ste100/scenarios.md) |
+| [asd-ste100](skills/asd-ste100/SKILL.md) | **Shared.** English writing guidance for model descriptions, policy explanations, and reports. It uses STE-flavored prose and keeps scientific meaning and necessary terms. Its optional, dependency-free linter checks language patterns, not scientific correctness. | [Writing](tests/asd-ste100/scenarios.md) |
 | [queue-contribute](skills/queue-contribute/SKILL.md) | **Optional.** When you ask to contribute, prepares a literature note, a Discovery Lab entry, or both. It publishes only within the scope that you authorize. | [Contribution](tests/queue-contribute/scenarios.md) |
 
 A review case is a request with expected behaviors. An agent reads the skill
@@ -134,34 +159,24 @@ prepare an entry or update; see [Contributing](CONTRIBUTING.md).
 
 ## Project status
 
-- **Available:** six skills, a startup-hook source, local literature notes, two
-  Discovery Lab entries, review cases, and dependency-free checks.
-- **Not available yet:** a Plugin manifest, a marketplace entry, or an
-  installation command for any host. Host packaging will be designed
-  separately. Cloning this repository installs or enables nothing.
-- **Startup hook:** [hooks/hooks.json](hooks/hooks.json) defines a short
-  SessionStart orientation that points to the entry skill. It does not choose
-  or store a Stage. When enabled, it includes the local entry-skill path in the
-  agent's context. It needs only Python 3, uses no network, and writes no
-  state files. It follows the hook output format that Claude Code and Codex
-  document. Packaging, hook approval, and installed-host tests are separate
-  steps.
-- **Tested so far:** automated source checks, and source-loaded reviews in
-  which an agent reads a skill and proposes its next actions. These do not
-  establish automatic skill discovery, hook loading, installed-host
-  compatibility, or the quality of research results.
-- **Development:** one confirmed workflow step at a time. The
-  [design decisions](docs/references.md) record each agreed step.
+Version `0.1.0`, released under the MIT License. The plugin has a portable
+Agent Plugins 1.0 manifest and native manifests for Claude Code and Codex; the
+plugin and both native catalogs are named `queue-agent`. The repository holds
+six skills, the startup hook, local literature notes, two Discovery Lab entries,
+review cases, and dependency-free checks. Manifest validation and installation
+tests for both hosts in isolated profiles are release checks; see
+[Packaging and releases](CONTRIBUTING.md#packaging-and-releases).
 
 ## Checks
 
 The repository checks need only Python 3.10 or later and its standard library.
-They cover the literature-note contract and reference integrity, the hook from
-source, and the writing skill and its linter. Other checks cover documentation
-links, the Discovery Lab fixtures, and the archived comparisons. They do not
-establish theorem correctness, reader comprehension, or installed-host
-compatibility. The Lab checks do not rerun the original simulation campaigns.
-See [the commands](CONTRIBUTING.md#run-the-checks).
+They cover package identity and contents, the literature-note contract and
+reference integrity, the hook from source, and the writing skill and its
+linter. Other checks cover documentation links, the Discovery Lab fixtures,
+and the archived comparisons. They do not establish theorem correctness,
+reader comprehension, installed-host compatibility, or research quality. The
+Lab checks do not rerun the original simulation campaigns. See
+[the commands](CONTRIBUTING.md#run-the-checks).
 
 ## Contributing
 
@@ -172,14 +187,14 @@ Lab. Workflow, documentation, and visual changes have their own paths. See
 
 ## Documentation
 
-- [Getting started](docs/getting-started.md): source use, example requests, and
-  limits.
+- [Getting started](docs/getting-started.md): installation, updates and
+  removal, the source-use fallback, and example requests.
 - [Visual guide](docs/guide.html), opened locally, and the
   [overview](docs/assets/overview.svg), [Stage 1](docs/assets/stage-1.svg), and
   [Stage 2](docs/assets/stage-2.svg) diagrams.
 - [References and design decisions](docs/references.md).
-- [Local knowledge collection](docs/knowledge-base-expansion.md) and
-  [knowledge migration and provenance](docs/knowledge-base-migration.md).
+- [Local knowledge collection](docs/knowledge-base-expansion.md) and its
+  [provenance](docs/knowledge-base-migration.md).
 - [Contributing](CONTRIBUTING.md), and the
   [instructions for coding agents](AGENTS.md) that develop this repository.
 

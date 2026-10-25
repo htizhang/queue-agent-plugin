@@ -1,0 +1,14 @@
+{
+  "name": "queue-agent",
+  "owner": {
+    "name": "htizhang"
+  },
+  "plugins": [
+    {
+      "name": "queue-agent",
+      "source": "./",
+      "description": "Queueing research from data to executable models and policies, with shared literature and writing workflows."
+    }
+  ],
+  "description": "Queue Agent skills for queueing models and policies."
+}

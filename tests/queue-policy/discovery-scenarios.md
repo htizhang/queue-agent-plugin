@@ -72,19 +72,10 @@ handle that request?
   user, not implemented under the authorization to improve policies.
 - E treats refinement or combination as hypotheses rather than automatic gains;
   preserves useful candidates and verifies comparisons across the agreed family.
+  Gains confined to light or heavy loads do not support an improvement claim
+  for the whole family.
 - F discloses the limitation and performs development and review sequentially;
   it neither pretends to have workers nor installs an orchestration framework.
 - G uses the main skill's tuning branch without imposing policy discovery or
   changing decision logic, family, objective, or constraints. It may ask which
   supplied service distribution defines the target instance.
-
-## Verification: 2026-09-26
-
-- A source-loaded codex-x check answered A-G without the reviewer checks. All
-  seven met the criteria. G identified the missing target service distribution;
-  E distinguished per-regime gains from a claim across the family.
-- Skill validation, ten existing automated tests, local Markdown links and
-  anchors, and whitespace checks passed. Existing unrelated edits were preserved.
-- This checks proposed actions, not executed research or installed-host behavior.
-  No Plugin was installed. Review artifacts are local under the ignored
-  `output/queue-policy-discovery/` directory.
