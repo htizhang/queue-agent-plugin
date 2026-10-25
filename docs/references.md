@@ -1,6 +1,6 @@
 # Queue Agent Plugin: References and Design Decisions
 
-Last updated: 2026-09-27. Confirmed decisions, external references, and open
+Last updated: 2026-10-24. Confirmed decisions, external references, and open
 questions are kept separate. Upstream examples are not automatically our
 implementation plan.
 
@@ -8,10 +8,20 @@ implementation plan.
 
 ### Repository and development
 
-- Develop incrementally in the standalone, private [queue-agent-plugin repository](https://github.com/htizhang/queue-agent-plugin).
+- Develop incrementally in the standalone [queue-agent-plugin repository](https://github.com/htizhang/queue-agent-plugin). Public visibility was authorized on 2026-10-24, following review of the published files and Git history.
 - Use English for all repository content.
+- Release original repository content under the [MIT license](../LICENSE), as
+  authorized on 2026-10-24. Preserve the separate copyright notices and license
+  terms for bundled and adapted third-party material.
 - Discuss one workflow step at a time. Once confirmed, record it here and implement the agreed scope.
 - The repository contains the overview, references, skill source files, and compact Discovery Lab cases, not an installable Plugin. It does not import the earlier agent framework or full experiment archives.
+- Provide an English visual guide and workflow diagrams for readers. Keep them
+  separate from runtime skill instructions: they explain the available routes,
+  not a compulsory sequence or a new orchestration layer. The guide runs locally
+  without a build step or external assets; the SVG diagrams also render on GitHub.
+- Public repository access is separate from host packaging, a hosted website,
+  and marketplace submission. No automatic installation or service connection is
+  introduced by this documentation release.
 
 ### Two-Stage overview
 
@@ -98,6 +108,18 @@ Research direction remains with the user and host agent. The Plugin supplies reu
   research directions and support in outer iterations, and verifies results.
   Reuse useful trials without fixing team sizes, round counts, tools, or a
   historical experiment's workflow. Both loops retain the confirmed definition.
+- Refine promising policies through task-appropriate simplification, component
+  ablation, and parameter sensitivity checks. Prefer simpler rules when evaluation
+  supports practically negligible performance differences; retain useful complexity
+  without a fixed parameter limit. Check the final algorithm against the closest
+  literature, including changes introduced by simplification or combination.
+- Make comparison checks concrete: decision-time information access, faithful
+  baseline implementations, justified parameter selection, and evidence from the
+  final evaluated version. Keep explanations aligned with the evaluated code and
+  parameter values, and explain mechanisms and important result patterns for
+  readers outside the development process. These extend the existing skill and
+  discovery reference, not a mandatory research campaign for every Stage 2 task.
+  See the [refinement checks](../tests/queue-policy/refinement-scenarios.md).
 - Use shared queue-literature knowledge and an optional external pointer to
   [SimOpt](https://github.com/simopt-admin/simopt) and its
   [solver documentation](https://simopt.readthedocs.io/en/latest/solvers.html) for
@@ -106,9 +128,6 @@ Research direction remains with the user and host agent. The Plugin supplies reu
 - Deliver the requested policy or recommendation, applicable family, parameters,
   and performance evidence, plus implementation/evaluator artifacts when those
   are part of the task. Host tools, delegation, and iteration remain flexible.
-- Derivation of new theoretical results and formal proofs belongs to the
-  paper's research showcases, not this Plugin capability. Reading published
-  guarantees to assess an existing method's applicability remains literature work.
 - Add source instructions and behavioral checks only; do not install the skill
   or alter the user's agent or tool configuration.
 
@@ -121,6 +140,22 @@ Research direction remains with the user and host agent. The Plugin supplies reu
 - This step adds source files only. Do not install the skill or alter local agent/MCP configuration. Existing CC and Kiro sessions may be used for temporary behavioral tests without installing the Plugin.
 
 Implementation sources, adaptation details, and the upstream MIT notice are recorded in the skill's [attribution](../skills/queue-literature/NOTICE.md). See [optional tool references](../skills/queue-literature/references/tool-options.md) and [test scenarios](../tests/queue-literature/scenarios.md).
+
+### Shared writing capability
+
+- Include [asd-ste100](../skills/asd-ste100/SKILL.md) as an independent shared
+  skill for English model descriptions, policy explanations, and reports in
+  both Stages. Keep it separate from queue-literature.
+- Default these deliverables to STE-flavored prose. Preserve technical terms,
+  equations, assumptions, numerical results, citations, and claim strength.
+  Explain the system and decision for readers outside the development process.
+- Point to it from the overall entry and both Stage delivery steps. Do not add
+  a hook that rewrites every response or install it in local agent directories.
+- Preserve the upstream license and record the pinned source and adaptations in
+  [NOTICE.md](../skills/asd-ste100/NOTICE.md). Use the included linter as optional
+  language feedback, not as proof of scientific correctness or readability.
+- This adds source content, not host packaging or deployment. The writing skill
+  does not expand either Stage's research scope.
 
 ### Knowledge reuse: current scope
 
@@ -299,6 +334,72 @@ For community governance, inspect enforced workflows rather than README invitati
 Check licenses and dependencies per skill or resource. K-Dense, for example, documents separate terms for vendored Anthropic document skills. [K-Dense README](https://github.com/K-Dense-AI/scientific-agent-skills#readme)
 
 Upstream HEADs at review: K-Dense `49c6e97775ea`, Hugging Face `80f9fa530e46`, Knowledge Work Plugins `da38ec1ee89d`, AutoResearchClaw `be4ba4755bf1`. AutoResearchClaw's [host-facing skill](https://github.com/aiming-lab/AutoResearchClaw/blob/be4ba4755bf1b52220f25e13b2293b5956590070/.claude/skills/researchclaw/SKILL.md) invokes a separate runtime: a skill entry point does not itself imply a Plugin-centered architecture.
+
+### Documentation patterns reviewed for public release (2026-10-24)
+
+Three established repositories informed the presentation, not the research
+workflow. The linked revisions identify the material reviewed.
+
+| Source | Pattern used here | Boundary |
+| --- | --- | --- |
+| [Anthropic Skills](https://github.com/anthropics/skills/tree/dbd4588f9e1033efb41dad4bef2f7947c8993d44) | Small skill folders with instructions and supporting resources; separate explanations of source content and host use. | No assumption that one host's installation route works in another. |
+| [Superpowers](https://github.com/obra/superpowers/tree/2ce8aa15d05bd57213e6f746f953aafb7ded7a8b) | An overview that explains the workflow before sending readers to focused guidance. | Queue Agent keeps task-dependent entry points, not a mandatory development sequence. |
+| [Compound Engineering](https://github.com/EveryInc/compound-engineering-plugin/tree/1522cc36e14b5c2c44afcdb5793370bd4ac8d418) | A readable skill map and separate contribution and detailed-use documentation. | No import of its orchestration, tools, configuration, or agent count. |
+
+These are organizational references. Their source code and visual assets are not
+bundled. Queue Agent's guide illustrates the agreed skills and links to their
+source; it does not run simulations or add a host integration. See the
+[getting-started guide](getting-started.md) for the supported source-use path.
+
+### Remote literature MCP review (2026-09-26)
+
+The next requested integration is remote academic retrieval, without requiring
+users to install a local MCP server. The options below are research findings,
+not a decision to replace Paper Search MCP or to deploy a new service.
+
+| Option | Evidence and access | Implication for the Plugin |
+| --- | --- | --- |
+| [Paper Search MCP](https://github.com/openags/paper-search-mcp) | MIT; unreleased `main` supports Streamable HTTP, but released PyPI 0.1.4 is stdio-only. Neither supplies native bearer-token/OAuth authorization. Its [Smithery listing](https://smithery.ai/servers/openags/paper-search-mcp) advertises an older hosted deployment. | HTTP support does not itself supply a maintained public endpoint. Keep it as an option, but do not bundle the advertised URL as a verified working default. |
+| [Ai2 Asta Scientific Corpus MCP](https://allenai.org/asta/resources/mcp) | Official hosted endpoint: `https://asta-tools.allen.ai/mcp/v1`. A live anonymous check completed initialization, listed eight tools, and successfully called `search_paper_by_title` for a known paper. Ai2 documents optional API keys for higher rate limits. | Lowest-friction **tested** alternative for discovery, citation lookup, and available text snippets. A hosted service is not proof that its server implementation is open source; that license was not established. |
+| [Official OpenAlex MCP](https://github.com/ourresearch/openalex-mcp-server) | MIT; publishes `https://mcp.openalex.org/mcp`. Current source requires OAuth and uses the consenting user's OpenAlex account/budget. No authenticated end-to-end check was performed. | Strong candidate when open-source implementation and first-party hosting both matter. It requires user sign-in, not local server installation. |
+
+**Paper Search diagnosis.** The earlier direct request returned Cloudflare Error
+1010, not an MCP authentication challenge. This establishes an edge denial, not
+that the service is offline or that self-hosting is necessary. Do not attempt to
+bypass that denial. The public Smithery metadata advertises 13 tools, compared
+with 57 registered in current upstream source; listing metadata is not a live
+health check. [Cloudflare explanation](https://developers.cloudflare.com/support/troubleshooting/http-status-codes/cloudflare-1xxx-errors/error-1010/),
+[upstream source](https://github.com/openags/paper-search-mcp/blob/808e462a824ce6b26fdccbed352b4bf47d7b84cb/paper_search_mcp/server.py)
+
+Remote file handling also needs care: Paper Search download tools return paths
+on the server, not files on the user's machine. Its supported `read_*` tools
+return extracted text instead. A local-server configuration cannot simply be
+relabelled as remote while assuming identical file access.
+
+Smithery documents a separate authenticated Connect flow. For registry servers,
+create a connection with `server: "openags/paper-search-mcp"`, rather than
+hard-coding its deployment URL. The resulting endpoint belongs to a user's
+namespace/connection; it is not one anonymous URL for every Plugin user. This
+route remains untested without Smithery authorization. A connection in mock mode
+does not test the real upstream server. [Connect guide](https://smithery.ai/docs/use/connect),
+[connection API](https://smithery.ai/docs/api-reference/connect/create-or-update-connection)
+
+**Selection guidance, not an adopted dependency:** prefer Asta for the smallest
+currently demonstrated remote setup; prefer official OpenAlex if an open-source
+server is required and one-time OAuth is acceptable. Retain Paper Search as an
+optional multi-source connector. None guarantees access to every paper's full
+text; discovery and snippets do not replace reading the cited source.
+
+OpenAlex's README contains stale claims about anonymous access and all tools
+being read-only. The pinned source requires an account and also registers
+profile-curation tools. A literature integration should use only the required
+retrieval capabilities, not authorize account/profile changes. Source inspection
+does not establish which revision is deployed. [Auth implementation](https://github.com/ourresearch/openalex-mcp-server/blob/aab76e65ba44a57e9dd3023a737df61d737c126a/src/index.ts),
+[tool registration](https://github.com/ourresearch/openalex-mcp-server/blob/aab76e65ba44a57e9dd3023a737df61d737c126a/src/server.ts)
+
+No Plugin manifest, MCP configuration, local installation, account registration,
+or deployment was added during this review. Connection success above is a direct
+MCP canary, not an installed-Plugin compatibility test.
 
 ## 6. Testing whether the Plugin helps
 

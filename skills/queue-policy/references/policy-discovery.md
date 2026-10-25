@@ -28,6 +28,9 @@ Supply each development subagent with:
   vary across instances and what the policy can observe and control.
 - The model, runnable evaluator and policy interface, applicable baselines, and
   instructions for reproducing comparisons under the common evaluation setup.
+- The parent's [comparison guidance](../SKILL.md#evaluate-and-improve-policies)
+  and, for refinement work, the [checks below](#refine-promising-candidates),
+  supplied as instructions or accessible references.
 - Relevant existing candidates, results, and explanations of unsuccessful
   attempts, with paths to the artifacts needed to continue them.
 - Useful knowledge or literature pointers, available tools, and any user-set
@@ -58,6 +61,47 @@ At useful checkpoints, return the strongest candidates with reproducible
 evidence, relevant failures, remaining questions, and a proposed next direction.
 Raise blockers or discoveries that affect other workers when they arise.
 
+## Refine promising candidates
+
+Treat simplification as policy development, not just code cleanup. Once a
+candidate is promising, let workers test removing components, consolidating
+rules, or fixing parameters whose tuning may be unnecessary. Preserve the
+original for comparison. Use representative instances within the confirmed
+family, including regimes where each mechanism is expected to matter.
+
+Choose checks that answer the unresolved question:
+
+- **Component ablation:** remove or replace a mechanism to assess its contribution.
+  State whether the remaining parameters were held fixed or retuned; these test
+  different questions. Check combinations when interactions could explain the gain.
+- **Parameter sensitivity:** vary values over a relevant range to see where
+  performance changes. A flat response near one value in one instance does not
+  establish that the parameter can be fixed across the family. Compare fixed and
+  tuned values over the intended operating range before making that claim.
+
+Prefer the simpler policy when performance differences are practically negligible
+for the task and the evaluation supports that conclusion. Account for noise using
+the parent skill's comparison guidance; an inconclusive comparison alone does
+not establish equivalence. Retain a component when its supported benefit warrants
+the complexity, and explain that tradeoff. Let the evidence determine the useful
+parameter count. Keep these checks proportional to the uncertainty and task,
+rather than requiring an exhaustive ablation grid or sensitivity sweep.
+
+## Check the final algorithm against literature
+
+For new or improved policies, use [queue-literature](../../queue-literature/SKILL.md)
+to compare the final decision rule with the closest applicable methods. Revisit
+the comparison after simplification or combination changes the rule; an early
+search about a different candidate is not a check of the delivered algorithm.
+
+Compare mechanisms, inputs, parameterizations, and applicability, including
+whether different-looking formulas make the same decisions. Cite sources for
+borrowed components and describe the specific modification or combination.
+Improvements can build on established methods; every component need not be new.
+If the final rule matches a known method, report that relation and its measured
+performance. Distinguish a supported difference from an unverified novelty claim;
+an unsuccessful search alone does not establish novelty.
+
 ## Outer iterations: the main agent steers the research
 
 Review findings across workers and instances. Ask what is limiting progress:
@@ -76,6 +120,8 @@ Adapt the next research step to that diagnosis. Useful options include:
   operating regime while retaining evaluation across the agreed scope.
 - Asking workers to test whether complementary ideas combine well, or obtaining
   an independent check of a promising result.
+- Assigning a simplification or mechanism-checking task when a promising policy
+  has accumulated rules whose contributions are unclear.
 
 These are options, not a mandatory sequence. Share findings that help workers
 without turning every inner iteration into a main-agent approval step. Repair
@@ -87,7 +133,10 @@ before relying on them.
 The main agent owns the final comparison: reproduce promising results under a
 consistent evaluation setup, check feasibility, and assess performance across
 the requested family rather than only the cases selected by a worker. Apply the
-parent skill's treatment of stochastic noise and post-tuning evaluation.
+parent skill's [comparison guidance](../SKILL.md#evaluate-and-improve-policies)
+to the final implementation and chosen values, including any simplifications.
+Bring the supported component and parameter findings and the final
+literature comparison into the handoff at the depth the user requested.
 
 Continue while there is a concrete, useful next investigation within the user's
 scope and available resources. Conclude when the requested outcome has adequate

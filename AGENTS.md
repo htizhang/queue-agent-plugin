@@ -25,7 +25,7 @@ authorizes a change.
 - Keep reusable workflows in skills, established knowledge in `queue-literature`,
   and agent-discovered methods in `discovery-lab/`. Keep research-time Lab access
   conditional on explicit new-algorithm intent, as defined in `queue-policy`.
-- Preserve private visibility unless the user explicitly requests a change.
+- Preserve the repository's visibility unless the user explicitly requests a change.
 - Verify changed behavior with the smallest applicable checks; land changes
   through a pull request to `main`.
 

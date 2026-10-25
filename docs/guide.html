@@ -1,0 +1,1300 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<meta name="description" content="A visual guide to Queue Agent Plugin: where to start, what Stage 1 queue modeling and Stage 2 policy design deliver, and how the shared literature, writing, and contribution skills fit in.">
+<title>Queue Agent Plugin · Visual guide</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23EFF3EC'/%3E%3Cpath d='M3.5 10.5H16V21.5H3.5' fill='none' stroke='%2317232A' stroke-width='2.2'/%3E%3Cpath d='M7.7 10.5V21.5M11.8 10.5V21.5' stroke='%2317232A' stroke-width='1.6'/%3E%3Ccircle cx='23' cy='16' r='5.5' fill='none' stroke='%232343A0' stroke-width='2.4'/%3E%3C/svg%3E">
+<style>
+/* Queue Agent Plugin visual guide.
+   Tokens: engineering-pad paper, technical-pen ink, cobalt routes, red-pencil loops.
+   System fonts only; no network resources. */
+:root {
+  --paper: #EFF3EC;
+  --sheet: #F9FBF7;
+  --ink: #17232A;
+  --graphite: #4B5A55;
+  --grid: #DCE5D8;
+  --rule: #C5D2C1;
+  --cobalt: #2343A0;
+  --cobalt-tint: #E5EBF6;
+  --pencil: #B23A2E;
+
+  --display: "DIN Alternate", Bahnschrift, "Roboto Condensed", "Helvetica Neue", Arial, sans-serif;
+  --body: Charter, "Bitstream Charter", "Sitka Text", Cambria, "Noto Serif", Georgia, serif;
+  --mono: ui-monospace, "SF Mono", "Cascadia Mono", "Segoe UI Mono", Menlo, Consolas, "Liberation Mono", monospace;
+
+  --wrap: 76rem;
+  --measure: 42rem;
+  --gutter: clamp(1.1rem, 4vw, 3rem);
+  --radius: 10px;
+  --axis: 1.6rem;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scroll-behavior: smooth;
+  scroll-padding-top: 1rem;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font: 400 1.125rem/1.6 var(--body);
+  font-kerning: normal;
+  overflow-wrap: break-word;
+}
+
+h1, h2, h3, h4 {
+  margin: 0;
+  font-family: var(--display);
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -0.005em;
+}
+h1 { font-size: clamp(2.7rem, 1.5rem + 5.2vw, 5.4rem); line-height: 0.96; letter-spacing: -0.018em; }
+h2 { font-size: clamp(2.05rem, 1.35rem + 2.5vw, 3.15rem); line-height: 1; }
+h3 { font-size: 1.32rem; line-height: 1.15; }
+p { margin: 0 0 1rem; }
+ul, ol { margin: 0; }
+strong { font-weight: 700; }
+
+a { color: var(--cobalt); text-decoration-thickness: 1px; text-underline-offset: 0.18em; }
+a:hover { text-decoration-thickness: 2px; }
+:focus-visible { outline: 3px solid var(--cobalt); outline-offset: 3px; border-radius: 3px; }
+
+code, .path { font-family: var(--mono); font-size: 0.86em; }
+
+.vh {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  margin: -1px; padding: 0; border: 0;
+  overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.skip {
+  position: absolute; left: 0.75rem; top: -4rem; z-index: 10;
+  padding: 0.6rem 0.95rem;
+  background: var(--ink); color: var(--sheet);
+  border-radius: 6px;
+  font: 700 0.95rem/1 var(--display);
+  text-decoration: none;
+}
+.skip:focus { top: 0.75rem; }
+
+.wrap { max-width: var(--wrap); margin-inline: auto; padding-inline: var(--gutter); }
+
+/* Shared labels */
+.kicker {
+  margin: 0 0 0.55rem;
+  font: 700 0.8rem/1.2 var(--display);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--cobalt);
+}
+.label {
+  display: block;
+  margin: 0 0 0.55rem;
+  font: 700 0.76rem/1.2 var(--display);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--graphite);
+}
+
+.glyph { display: block; flex: none; color: var(--ink); overflow: visible; }
+
+/* Masthead */
+.masthead { border-bottom: 1px solid var(--rule); }
+.masthead-in {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+  gap: 0.5rem 2rem; padding-block: 0.85rem;
+}
+.wordmark { display: flex; align-items: center; gap: 0.65rem; margin: 0; font: 700 1.06rem/1 var(--display); }
+.wordmark .glyph { width: 44px; height: 22px; }
+.wordmark span { color: var(--graphite); font-size: 0.8rem; letter-spacing: 0.14em; text-transform: uppercase; }
+.site-nav ul { list-style: none; display: flex; flex-wrap: wrap; gap: 0.15rem 1.15rem; padding: 0; }
+.site-nav a {
+  display: inline-block; padding-block: 0.35rem;
+  font: 700 0.78rem/1.2 var(--display); letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--ink); text-decoration: none;
+  border-bottom: 2px solid transparent;
+}
+.site-nav a:hover { color: var(--cobalt); border-bottom-color: var(--cobalt); }
+
+/* Hero */
+.hero { padding-block: clamp(2.6rem, 6vw, 5rem) clamp(1.6rem, 3vw, 2.6rem); }
+.hero-grid { display: grid; gap: 1.6rem 3.5rem; align-items: end; }
+.hero h1 { max-width: 12ch; }
+.lead { max-width: 36rem; font-size: clamp(1.16rem, 1rem + 0.5vw, 1.36rem); line-height: 1.5; }
+.status {
+  display: block; max-width: 36rem; margin: 0;
+  padding: 0.8rem 1rem 0.85rem;
+  background: var(--sheet);
+  border: 1px solid var(--rule); border-left: 4px solid var(--ink); border-radius: 6px;
+  font-size: 0.98rem; line-height: 1.45;
+}
+.status .label { margin: 0 0 0.2rem; color: var(--ink); }
+@media (min-width: 62rem) {
+  .hero-grid { grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); }
+  .hero-copy { padding-bottom: 0.4rem; }
+}
+
+/* Route map: the signature */
+.routes {
+  position: relative;
+  margin: 0;
+  padding: clamp(1.25rem, 3vw, 2.4rem) clamp(1rem, 3vw, 2.4rem) clamp(1.25rem, 2.5vw, 2rem);
+  background-color: var(--paper);
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 24px 24px;
+  background-position: -1px -1px;
+  border: 1px solid var(--rule);
+  border-radius: 16px;
+}
+.routes-caption {
+  display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline;
+  gap: 0.3rem 1.5rem; margin-bottom: 1.5rem;
+}
+.routes-caption .kicker { margin: 0; }
+.routes-caption p { margin: 0; color: var(--graphite); font-size: 0.95rem; }
+
+.source {
+  display: inline-block; margin: 0 0 2rem;
+  padding: 0.65rem 1rem 0.7rem;
+  background: var(--sheet);
+  border: 2px solid var(--ink); border-radius: 8px;
+}
+.source b { display: block; font: 700 1.26rem/1.15 var(--display); }
+.source span { display: block; color: var(--graphite); font-size: 0.96rem; line-height: 1.35; }
+
+.dispatch { position: relative; display: flex; align-items: center; gap: 0.95rem; }
+.dispatch::before {
+  content: ""; position: absolute;
+  left: calc(var(--axis) - 1px); top: -2rem;
+  width: 2px; height: calc(2rem - 8px);
+  background: var(--ink);
+}
+.dispatch::after {
+  content: ""; position: absolute;
+  left: calc(var(--axis) - 6px); top: -10px;
+  border-style: solid; border-width: 9px 6px 0; border-color: var(--ink) transparent transparent;
+}
+.node {
+  flex: none; display: grid; place-items: center;
+  width: calc(var(--axis) * 2); height: calc(var(--axis) * 2);
+  background: var(--sheet);
+  border: 2px solid var(--ink); border-radius: 50%;
+}
+.node .glyph { width: 62%; height: 62%; }
+.dispatch-label { margin: 0; line-height: 1.3; }
+.dispatch-label a { font: 1.06rem/1.2 var(--mono); }
+.dispatch-label span { display: block; color: var(--graphite); font-size: 0.95rem; }
+
+.route-list {
+  position: relative; list-style: none;
+  margin: 1.5rem 0 0 calc(var(--axis) - 1px); padding: 0;
+  display: grid; grid-auto-rows: 1fr;
+}
+.route-list::before {
+  content: ""; position: absolute; left: 0; top: -1.5rem;
+  width: 2px; height: 1.5rem; background: var(--ink);
+}
+.route {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(12.5rem, 1.08fr) minmax(14rem, 1fr) minmax(10.5rem, 0.82fr);
+  grid-template-areas: "cond station returns";
+  align-items: center;
+  padding-block: 0.95rem;
+}
+.cond { grid-area: cond; }
+.station { grid-area: station; }
+.returns { grid-area: returns; }
+.handoff { grid-area: station; position: relative; align-self: stretch; margin: 0; pointer-events: none; }
+.route::before {
+  content: ""; position: absolute; left: 0; top: 0; bottom: 0;
+  width: 2px; background: var(--ink);
+}
+.route:last-child::before { bottom: 50%; }
+
+.cond {
+  position: relative; align-self: stretch;
+  display: grid; grid-template-rows: 1fr 1fr;
+  margin: 0;
+  padding: 0 1.7rem 0 1.25rem;
+}
+.cond::before {
+  content: ""; position: absolute; left: 0; right: 9px; top: calc(50% - 1px);
+  height: 2px; background: var(--ink);
+  transform-origin: left center;
+}
+.cond::after {
+  content: ""; position: absolute; right: 0; top: 50%; transform: translateY(-50%);
+  border-style: solid; border-width: 6px 0 6px 10px;
+  border-color: transparent transparent transparent var(--ink);
+}
+.route--optin .cond::before {
+  background: repeating-linear-gradient(90deg, var(--ink) 0 2px, transparent 2px 8px);
+}
+.cond-main { align-self: end; padding-bottom: 0.45rem; font-size: 1.02rem; line-height: 1.3; }
+.cond-note { align-self: start; padding-top: 0.5rem; color: var(--graphite); font-size: 0.92rem; line-height: 1.3; }
+.cond-when { display: none; }
+.job {
+  position: absolute; left: 0.4rem; top: 50%;
+  width: 11px; height: 11px; margin-top: -5.5px;
+  background: var(--cobalt); border-radius: 50%;
+  opacity: 0;
+  transition: left 0.55s cubic-bezier(0.3, 0.7, 0.2, 1), opacity 0.2s ease;
+}
+
+.station { position: relative; align-self: stretch; display: flex; align-items: center; gap: 0.75rem; min-width: 0; }
+.station > .glyph { width: 58px; height: 29px; }
+.station-card {
+  flex: 1; min-width: 0;
+  display: grid; gap: 0.15rem;
+  padding: 0.55rem 0.8rem 0.6rem;
+  background: var(--sheet);
+  border: 1.5px solid var(--ink); border-radius: 8px;
+}
+.route--stage .station-card { border-width: 2px; }
+.route--optin .station-card { border: 2.5px dotted var(--graphite); }
+.station-kicker { font: 700 0.7rem/1.1 var(--display); letter-spacing: 0.14em; text-transform: uppercase; color: var(--cobalt); }
+.station-name {
+  justify-self: start;
+  font: 700 1.38rem/1.12 var(--display);
+  color: var(--ink);
+  text-decoration: underline; text-decoration-color: var(--rule);
+  text-decoration-thickness: 2px; text-underline-offset: 0.2em;
+}
+.station-name:hover { color: var(--cobalt); text-decoration-color: currentColor; }
+.station-src { justify-self: start; font: 0.8rem/1.3 var(--mono); overflow-wrap: anywhere; }
+
+.handoff-line {
+  position: absolute; left: 43px; top: calc(50% + 12px);
+  width: 2px; height: calc(100% + 1.9rem - 26px);
+  background: repeating-linear-gradient(180deg, var(--ink) 0 7px, transparent 7px 12px);
+}
+.handoff-line::after {
+  content: ""; position: absolute; left: -5px; bottom: -2px;
+  border-style: solid; border-width: 8px 6px 0; border-color: var(--ink) transparent transparent;
+}
+.handoff-tag {
+  position: absolute; left: 54px; top: calc(100% + 0.95rem); transform: translateY(-50%);
+  padding: 0 0.35rem;
+  background: var(--paper);
+  font: 700 0.68rem/1.4 var(--display); letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--graphite);
+  white-space: nowrap;
+}
+.handoff-long { display: none; }
+
+.returns { position: relative; margin: 0; padding-left: 2.5rem; font-size: 0.98rem; line-height: 1.35; }
+.returns::before {
+  content: ""; position: absolute; left: 0.45rem; top: 50%; margin-top: -1px;
+  width: 1.15rem; height: 2px; background: var(--ink);
+}
+.returns::after {
+  content: ""; position: absolute; left: 1.45rem; top: 50%; transform: translateY(-50%);
+  border-style: solid; border-width: 6px 0 6px 10px;
+  border-color: transparent transparent transparent var(--ink);
+}
+.returns .label { margin-bottom: 0.15rem; font-size: 0.68rem; }
+.lab-tag {
+  display: inline-block; margin-top: 0.45rem;
+  padding: 0.2rem 0.5rem;
+  border: 2px dotted var(--graphite); border-radius: 6px;
+  font-size: 0.86rem; line-height: 1.3; color: var(--ink);
+}
+
+.route:hover .cond::before,
+.route:focus-within .cond::before { background: var(--cobalt); }
+.route--optin:hover .cond::before,
+.route--optin:focus-within .cond::before { background: repeating-linear-gradient(90deg, var(--cobalt) 0 2px, transparent 2px 8px); }
+.route:hover .cond::after,
+.route:focus-within .cond::after { border-left-color: var(--cobalt); }
+.route:hover .station > .glyph,
+.route:focus-within .station > .glyph { color: var(--cobalt); }
+.route:hover .job,
+.route:focus-within .job { left: calc(100% - 1.45rem); opacity: 1; }
+
+@media (prefers-reduced-motion: no-preference) and (min-width: 50rem) {
+  .cond::before { animation: route-draw 0.65s cubic-bezier(0.3, 0.7, 0.2, 1) both; animation-delay: calc(var(--i, 0) * 85ms + 120ms); }
+  .cond::after { animation: route-tip 0.25s ease-out both; animation-delay: calc(var(--i, 0) * 85ms + 650ms); }
+}
+@keyframes route-draw { from { transform: scaleX(0); } }
+@keyframes route-tip { from { opacity: 0; } }
+
+/* Narrow screens: the map becomes a vertical tree */
+@media (max-width: 49.99rem) {
+  .route-list { grid-auto-rows: auto; }
+  .route {
+    grid-template-columns: 1fr;
+    grid-template-areas: "station" "cond" "returns" "handoff";
+    row-gap: 0.5rem;
+    padding: 0.8rem 0 1.15rem 1.55rem;
+  }
+  .route::after {
+    content: ""; position: absolute; left: 0; top: calc(0.8rem + 1.35rem - 1px);
+    width: 1.55rem; height: 2px; background: var(--ink);
+  }
+  .route--optin::after { background: repeating-linear-gradient(90deg, var(--ink) 0 2px, transparent 2px 7px); }
+  .route:last-child::before { bottom: auto; height: calc(0.8rem + 1.35rem); }
+  .station { grid-area: station; align-self: auto; align-items: flex-start; gap: 0.5rem; }
+  .station > .glyph { width: 44px; height: 22px; margin-top: calc(1.35rem - 11px); }
+  .station-card { padding: 0.5rem 0.7rem 0.55rem; }
+  .station-name { font-size: 1.22rem; }
+  .cond { grid-area: cond; display: block; padding: 0 0 0 0.15rem; line-height: 1.45; }
+  .cond::before, .cond::after, .job { display: none; }
+  .cond-main, .cond-note { display: inline; padding: 0; font-size: 0.96rem; }
+  .cond-main::after { content: ", "; }
+  .cond-when { display: inline; font: 700 0.68rem/1 var(--display); letter-spacing: 0.12em; text-transform: uppercase; color: var(--graphite); margin-right: 0.35rem; }
+  .returns { grid-area: returns; padding-left: 0.15rem; }
+  .returns::before, .returns::after { display: none; }
+  .handoff { grid-area: handoff; position: static; }
+  .handoff-line, .handoff-short { display: none; }
+  .handoff-tag {
+    position: static; transform: none;
+    display: block; margin-top: 0.1rem; padding: 0; background: none;
+    white-space: normal; line-height: 1.5;
+  }
+  .handoff-tag::before { content: "⇣ "; }
+  .handoff-long { display: inline; }
+}
+
+.map-foot {
+  display: block;
+  margin: 1.4rem 0 0 calc(var(--axis) - 1px); padding: 0.6rem 0.85rem;
+  background: var(--sheet);
+  border: 2.5px dotted var(--graphite); border-radius: 8px;
+  font-size: 0.95rem; line-height: 1.4;
+}
+.map-foot-key { display: inline-block; margin-right: 0.55rem; font: 700 0.68rem/1.3 var(--display); letter-spacing: 0.13em; text-transform: uppercase; color: var(--graphite); }
+.nowrap { white-space: nowrap; }
+
+/* Notes under the map */
+.notes { display: grid; gap: 1rem 2rem; margin: 2rem 0 0; padding: 0; list-style: none; }
+@media (min-width: 46rem) { .notes { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 72rem) { .notes { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+.notes li { border-top: 2px solid var(--ink); padding-top: 0.7rem; font-size: 0.98rem; line-height: 1.5; }
+.notes h3 { font-size: 1.05rem; margin-bottom: 0.35rem; }
+.notes p { margin: 0; }
+
+/* Sections */
+.section { padding-block: clamp(3.6rem, 7vw, 6rem); border-top: 1px solid var(--rule); }
+.section-head {
+  display: grid; grid-template-columns: auto minmax(0, 1fr);
+  column-gap: 1.1rem; row-gap: 0.15rem; align-items: center;
+  margin-bottom: 1.5rem;
+}
+.section-head > .glyph { grid-row: 1 / span 2; width: 74px; height: 37px; }
+.section-head > .glyph--loop { width: 40px; height: 40px; color: var(--pencil); }
+.section-head .kicker { grid-column: 2; margin: 0; align-self: end; }
+.section-head h2 { grid-column: 2; }
+.section-head .src { grid-column: 1 / -1; margin: 0.85rem 0 0; font-size: 0.95rem; }
+.lede { max-width: var(--measure); font-size: clamp(1.14rem, 1rem + 0.4vw, 1.3rem); line-height: 1.5; }
+.measure { max-width: var(--measure); }
+.subhead { margin: 2.6rem 0 1rem; font-size: 1.5rem; }
+.back { margin: 2.2rem 0 0; font: 700 0.8rem/1 var(--display); letter-spacing: 0.12em; text-transform: uppercase; }
+.back a { text-decoration: none; }
+.back a::before { content: "↑ "; }
+
+.sheet {
+  background: var(--sheet);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  padding: 1.15rem 1.3rem 1.2rem;
+}
+.sheet > :last-child { margin-bottom: 0; }
+
+/* In, service, out */
+.ledger { display: grid; gap: 1rem; margin: 2rem 0 0; }
+.ledger .sheet { position: relative; }
+.ledger ul { padding-left: 1.15rem; }
+.ledger li { margin-bottom: 0.55rem; font-size: 1.02rem; line-height: 1.5; }
+.ledger li:last-child { margin-bottom: 0; }
+.ledger .sheet--out { border: 2px solid var(--ink); }
+@media (min-width: 58rem) {
+  .ledger { grid-template-columns: 0.8fr 1.3fr 1.1fr; gap: 1.6rem; }
+  .ledger .sheet:not(:last-child)::after {
+    content: ""; position: absolute; right: -1.25rem; top: 2.1rem;
+    border-style: solid; border-width: 7px 0 7px 11px;
+    border-color: transparent transparent transparent var(--ink);
+  }
+}
+
+.diagram { margin: 2.6rem 0 0; }
+.diagram img { display: block; width: 100%; max-width: 1200px; height: auto; border-radius: 16px; }
+.diagram figcaption {
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.3rem 1.5rem;
+  margin-top: 0.75rem; max-width: 1200px;
+  color: var(--graphite); font-size: 0.92rem; line-height: 1.45;
+}
+
+/* Stage 1 feedback panel */
+.loop-panel {
+  position: relative; margin-top: 2.8rem;
+  padding: 1.9rem clamp(1.1rem, 3vw, 1.9rem) 1.5rem;
+  background: var(--sheet);
+  border: 2px solid var(--pencil); border-radius: 20px;
+}
+.loop-badge {
+  position: absolute; top: -0.95rem; left: 1.2rem;
+  display: flex; align-items: center; gap: 0.45rem;
+  padding: 0 0.55rem;
+  background: var(--paper);
+  font: 700 0.8rem/1.9 var(--display); letter-spacing: 0.13em; text-transform: uppercase;
+  color: var(--pencil);
+}
+.loop-badge .glyph { width: 20px; height: 20px; color: var(--pencil); }
+.loop-panel h3 { font-size: 1.5rem; margin-bottom: 0.6rem; }
+.checks { display: grid; gap: 0.9rem 1.6rem; margin: 1.3rem 0; }
+@media (min-width: 46rem) { .checks { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.checks div { border-left: 3px solid var(--cobalt); padding-left: 0.85rem; }
+.checks dt { font: 700 1.02rem/1.25 var(--display); }
+.checks dd { margin: 0.2rem 0 0; font-size: 0.98rem; line-height: 1.45; }
+.integrate { display: flex; gap: 0.75rem; align-items: flex-start; margin: 0; padding-top: 1rem; border-top: 1px solid var(--rule); }
+.integrate .glyph { width: 22px; height: 22px; margin-top: 0.2rem; color: var(--pencil); }
+.done { margin-top: 1.8rem; }
+.done strong { font-family: var(--display); }
+
+/* Stage 2 */
+.enter { display: grid; gap: 1rem; margin-top: 2rem; }
+@media (min-width: 46rem) { .enter { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.enter .sheet h3 { font-size: 1.15rem; margin-bottom: 0.3rem; }
+.enter .sheet p { font-size: 1rem; line-height: 1.45; }
+
+.gate { margin-top: 2.2rem; background: var(--sheet); border: 2.5px solid var(--cobalt); border-radius: 12px; overflow: hidden; }
+.gate-head {
+  margin: 0; padding: 0.7rem 1.3rem;
+  background: var(--cobalt); color: #fff;
+  font: 700 0.86rem/1.3 var(--display); letter-spacing: 0.13em; text-transform: uppercase;
+}
+.gate-body { padding: 1.3rem; }
+.parts { display: grid; gap: 0.9rem; margin: 0 0 1.2rem; }
+@media (min-width: 50rem) { .parts { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.parts div { padding: 0.85rem 1rem 0.95rem; background: var(--paper); border: 1px solid var(--ink); border-radius: 8px; }
+.parts dt { font: 700 1.2rem/1.2 var(--display); margin-bottom: 0.3rem; }
+.parts dd { margin: 0; font-size: 0.98rem; line-height: 1.45; }
+.gate-body > p { max-width: 54rem; }
+.gate-body > p:last-child { margin: 0; }
+
+.fixed {
+  display: flex; gap: 0.9rem; align-items: flex-start;
+  margin-top: 1rem; padding: 1rem 1.2rem 1.05rem;
+  background: var(--cobalt-tint);
+  border-left: 5px solid var(--cobalt); border-radius: 0 10px 10px 0;
+}
+.fixed .glyph { width: 26px; height: 26px; margin-top: 0.15rem; color: var(--cobalt); }
+.fixed h3 { font-size: 1.15rem; margin-bottom: 0.3rem; }
+.fixed p { margin: 0; font-size: 1.02rem; line-height: 1.5; }
+
+.work { display: grid; gap: 1rem; margin: 0; padding: 0; list-style: none; }
+@media (min-width: 40rem) { .work { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 70rem) { .work { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+.work li { display: flex; flex-direction: column; padding: 1.05rem 1.15rem 1.15rem; background: var(--sheet); border: 2px solid var(--ink); border-radius: var(--radius); }
+.work h4 { font-size: 1.55rem; margin-bottom: 0.15rem; }
+.work .when { margin: 0 0 0.6rem; font: 700 0.74rem/1.3 var(--display); letter-spacing: 0.12em; text-transform: uppercase; color: var(--graphite); }
+.work p { font-size: 1rem; line-height: 1.5; }
+.work p:last-child { margin-bottom: 0; }
+.work .more { margin-top: auto; padding-top: 0.4rem; font: 700 0.8rem/1.2 var(--display); letter-spacing: 0.1em; text-transform: uppercase; }
+.combine { margin: 1rem 0 0; color: var(--graphite); font-size: 1rem; }
+
+.split { display: grid; gap: 1rem; margin-top: 1.4rem; }
+@media (min-width: 56rem) { .split { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.4rem; } }
+.sheet--dash { border: 2px dashed var(--ink); }
+.split h3 { margin-bottom: 0.5rem; }
+.split p, .split li { font-size: 1.02rem; line-height: 1.5; }
+.split ul { padding-left: 1.15rem; }
+.split li { margin-bottom: 0.45rem; }
+.out { margin-top: 1.4rem; border: 2px solid var(--ink); }
+.out ul { padding-left: 1.15rem; columns: 2 22rem; column-gap: 2rem; }
+.out li { margin-bottom: 0.45rem; break-inside: avoid; font-size: 1.02rem; line-height: 1.5; }
+.out .note { margin: 0.8rem 0 0; color: var(--graphite); font-size: 0.98rem; }
+
+/* Discovery loops */
+.loops {
+  position: relative; margin-top: 2.6rem;
+  padding: 2.1rem clamp(1rem, 3vw, 1.9rem) 1.6rem;
+  border: 2.5px solid var(--pencil); border-radius: 26px;
+}
+.loops-tag {
+  position: absolute; top: -0.95rem; left: 1.4rem;
+  display: flex; align-items: center; gap: 0.5rem;
+  margin: 0; padding: 0 0.55rem;
+  background: var(--paper);
+  font: 700 0.84rem/1.9 var(--display); letter-spacing: 0.13em; text-transform: uppercase;
+  color: var(--pencil);
+}
+.loops-tag .glyph { width: 22px; height: 22px; color: var(--pencil); }
+.outer-steps { display: grid; gap: 0.75rem; margin: 0 0 0.9rem; padding: 0; list-style: none; counter-reset: none; }
+@media (min-width: 52rem) {
+  .outer-steps { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2.2rem; }
+  .outer-steps li:not(:last-child)::after {
+    content: ""; position: absolute; right: -1.55rem; top: 1.15rem;
+    border-style: solid; border-width: 6px 0 6px 10px;
+    border-color: transparent transparent transparent var(--ink);
+  }
+}
+.outer-steps li { position: relative; padding: 0.75rem 0.95rem 0.85rem; background: var(--sheet); border: 2px solid var(--ink); border-radius: 8px; }
+.outer-steps b { display: block; font: 700 1.1rem/1.2 var(--display); margin-bottom: 0.2rem; }
+.outer-steps span { display: block; font-size: 0.96rem; line-height: 1.45; }
+.options { margin: 0 0 1.6rem; font-size: 0.98rem; line-height: 1.55; color: var(--graphite); }
+.options strong { color: var(--ink); }
+.workers { display: grid; gap: 1rem; margin: 0; padding: 0; list-style: none; }
+@media (min-width: 52rem) { .workers { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.2rem; } }
+.worker { padding: 0.95rem 1.1rem 1.05rem; background: var(--sheet); border: 1.5px solid var(--ink); border-radius: 14px; }
+.worker-tag { display: flex; align-items: center; gap: 0.45rem; margin: 0 0 0.7rem; font: 700 0.76rem/1.2 var(--display); letter-spacing: 0.13em; text-transform: uppercase; color: var(--pencil); }
+.worker-tag .glyph { width: 18px; height: 18px; color: var(--pencil); }
+.worker-note { margin: 0; font-size: 0.98rem; line-height: 1.45; }
+.team { margin: 1rem 0 0; padding: 0.75rem 1rem; border: 2px dashed var(--graphite); border-radius: 12px; font-size: 0.98rem; line-height: 1.45; }
+.team strong { font-family: var(--display); }
+.cycle {
+  position: relative; display: inline-flex; flex-wrap: wrap; gap: 0.3rem 0.2rem; max-width: 100%;
+  margin: 0 0 0.85rem; padding: 0 0 0.85rem 1.05rem; list-style: none;
+  font: 700 0.86rem/1.4 var(--display);
+}
+.cycle li:not(:last-child)::after { content: " →"; color: var(--graphite); }
+.cycle::after {
+  content: ""; position: absolute; left: 0.4rem; right: 0.4rem; bottom: 0;
+  height: 0.6rem;
+  border: 2px solid var(--pencil); border-top: 0; border-radius: 0 0 10px 10px;
+}
+.cycle::before {
+  content: ""; position: absolute; left: calc(0.4rem - 5px); bottom: 0.5rem;
+  border-style: solid; border-width: 0 6px 9px; border-color: transparent transparent var(--pencil);
+}
+
+.converge { display: grid; gap: 1rem; margin-top: 1.6rem; }
+@media (min-width: 56rem) { .converge { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.4rem; } }
+.converge h3 { margin-bottom: 0.45rem; }
+.converge p { font-size: 1.02rem; line-height: 1.5; }
+
+.finish { display: grid; gap: 0; margin-top: 1.6rem; }
+@media (min-width: 56rem) { .finish { grid-template-columns: 1.4fr auto 1fr; align-items: stretch; } }
+.finish-step { padding: 1.05rem 1.25rem 1.1rem; border: 2px solid var(--ink); border-radius: var(--radius); background: var(--sheet); }
+.finish-step h3 { margin-bottom: 0.4rem; }
+.finish-step p { margin: 0; font-size: 1.02rem; line-height: 1.5; }
+.finish-arrow { display: grid; place-items: center; min-height: 2rem; min-width: 2.6rem; }
+.finish-arrow::before {
+  content: ""; border-style: solid; border-width: 10px 7px 0; border-color: var(--ink) transparent transparent;
+}
+@media (min-width: 56rem) {
+  .finish-arrow::before { border-width: 7px 0 7px 11px; border-color: transparent transparent transparent var(--ink); }
+}
+.flex-note { margin: 1.4rem 0 0; color: var(--graphite); font-size: 1rem; }
+
+.lab {
+  margin-top: 2.6rem; padding: 1.4rem clamp(1.1rem, 3vw, 1.8rem) 1.5rem;
+  border: 3px dotted var(--graphite); border-radius: 16px;
+}
+.lab h3 { font-size: 1.55rem; margin-bottom: 0.7rem; }
+.lab-grid { display: grid; gap: 0.2rem 2rem; }
+@media (min-width: 56rem) { .lab-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.lab-grid p { font-size: 1.02rem; line-height: 1.5; }
+.lab-key { display: inline-block; margin-bottom: 0.7rem; padding: 0.15rem 0.55rem; background: var(--ink); color: var(--sheet); border-radius: 4px; font: 700 0.72rem/1.6 var(--display); letter-spacing: 0.13em; text-transform: uppercase; }
+
+/* Shared */
+.shared { display: grid; gap: 1.2rem; margin-top: 2rem; }
+@media (min-width: 56rem) { .shared { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.6rem; } }
+.shared .sheet { padding: 1.3rem 1.4rem 1.4rem; }
+.shared-head { display: flex; align-items: center; gap: 0.85rem; margin-bottom: 0.85rem; }
+.shared-head .glyph { width: 56px; height: 28px; }
+.shared h3 { font-size: 1.55rem; }
+.shared p { font-size: 1.02rem; line-height: 1.55; }
+.shared .src { margin: 0 0 0.9rem; font-size: 0.92rem; }
+.shared .aside-dotted { margin: 0; padding: 0.6rem 0.8rem; border: 2px dotted var(--graphite); border-radius: 8px; font-size: 0.96rem; line-height: 1.45; }
+
+/* Contribute */
+.fork { margin-top: 2.2rem; }
+.fork-root {
+  position: relative; max-width: 34rem; margin: 0 auto 2.4rem;
+  padding: 0.85rem 1.1rem; text-align: center;
+  background: var(--sheet); border: 2.5px dotted var(--graphite); border-radius: 10px;
+}
+.fork-root b { display: block; font: 700 1.25rem/1.2 var(--display); }
+.fork-root span { display: block; color: var(--graphite); font-size: 0.98rem; }
+.fork-paths { position: relative; display: grid; gap: 1.2rem; }
+.path-card { position: relative; padding: 1.2rem 1.3rem 1.3rem; background: var(--sheet); border: 2px solid var(--ink); border-radius: var(--radius); }
+.path-card h3 { font-size: 1.45rem; margin-bottom: 0.5rem; }
+.path-card p, .path-card dd { font-size: 1.01rem; line-height: 1.5; }
+.path-card dl { margin: 0.9rem 0 0; display: grid; gap: 0.6rem; }
+.path-card dt { font: 700 0.74rem/1.3 var(--display); letter-spacing: 0.13em; text-transform: uppercase; color: var(--graphite); }
+.path-card dd { margin: 0.1rem 0 0; }
+@media (min-width: 52rem) {
+  .fork-paths { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.6rem; }
+  .fork-root::after {
+    content: ""; position: absolute; left: 50%; top: 100%; width: 2px; height: 1.2rem; margin-left: -1px; background: var(--ink);
+  }
+  .fork-paths::before {
+    content: ""; position: absolute; left: calc(25% - 0.4rem); right: calc(25% - 0.4rem); top: -1.2rem; height: 1.2rem;
+    border: 2px solid var(--ink); border-bottom: 0; border-radius: 8px 8px 0 0;
+  }
+  .path-card::before {
+    content: ""; position: absolute; left: 50%; top: -9px; margin-left: -6px;
+    border-style: solid; border-width: 9px 6px 0; border-color: var(--ink) transparent transparent;
+  }
+}
+.publish { margin-top: 1.6rem; }
+.publish ul { padding-left: 1.15rem; }
+.publish li { margin-bottom: 0.45rem; font-size: 1.02rem; line-height: 1.5; }
+.scope { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0.4rem 0 1rem; padding: 0; list-style: none; }
+.scope li { margin: 0; padding: 0.3rem 0.7rem; border: 1.5px solid var(--ink); border-radius: 999px; background: var(--paper); font: 700 0.86rem/1.3 var(--display); }
+
+/* About and key */
+.about { display: grid; gap: 1.2rem 2.4rem; }
+@media (min-width: 56rem) { .about { grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); } }
+.about-body > p:not(.lede) { font-size: 1.04rem; line-height: 1.55; }
+.lede--after-title { margin-top: 1rem; }
+.links { margin: 0; padding: 0; list-style: none; }
+.links li { padding: 0.65rem 0; border-top: 1px solid var(--rule); font-size: 1.02rem; line-height: 1.45; }
+.links li:last-child { border-bottom: 1px solid var(--rule); }
+
+.legend { display: grid; gap: 0.2rem 2.4rem; margin: 1.6rem 0 0; }
+@media (min-width: 52rem) { .legend { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.legend div { display: grid; grid-template-columns: 4.6rem minmax(0, 1fr); gap: 1rem; align-items: center; padding: 0.75rem 0; border-top: 1px solid var(--rule); }
+.legend dt { display: grid; place-items: center start; }
+.legend dt svg { width: 4.4rem; height: 2rem; overflow: visible; }
+.legend dd { margin: 0; font-size: 1rem; line-height: 1.45; }
+.legend dd b { font-family: var(--display); }
+.files { display: grid; gap: 1rem; margin: 2.2rem 0 0; padding: 0; list-style: none; }
+@media (min-width: 56rem) { .files { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.files li { padding: 1rem 1.15rem 1.1rem; background: var(--sheet); border: 1px solid var(--rule); border-radius: var(--radius); font-size: 0.98rem; line-height: 1.5; }
+.files a { font-family: var(--mono); font-size: 0.92rem; }
+.files p { margin: 0.4rem 0 0; }
+
+.foot { padding-block: 2.2rem 3rem; border-top: 1px solid var(--rule); color: var(--graphite); font-size: 0.94rem; }
+.foot p { margin: 0 0 0.4rem; }
+
+@media (max-width: 30rem) {
+  body { font-size: 1.06rem; }
+  .section-head > .glyph { width: 56px; height: 28px; }
+  .section-head > .glyph--loop { width: 32px; height: 32px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+
+@media print {
+  @page { margin: 14mm 12mm; }
+  html { font-size: 10pt; scroll-behavior: auto; }
+  body { background: #fff; color: #000; }
+  .skip, .site-nav, .back, .job { display: none !important; }
+  .masthead { border-bottom: 1px solid #999; }
+  .routes { background: #fff; border-color: #999; }
+  .section { padding-block: 1.6rem; border-top: 1px solid #999; }
+  .section, .hero { break-inside: auto; }
+  h2, h3, h4, .section-head { break-after: avoid; }
+  .section-head, .cycle { break-inside: avoid; }
+  .route, .sheet, .notes li, .gate, .fixed, .work li, .loops, .outer-steps li, .worker, .finish-step,
+  .lab, .path-card, .files li, .legend div, .diagram, .loop-panel { break-inside: avoid; }
+  a { color: inherit; }
+  a.xref::after { content: " (" attr(href) ")"; font: 0.8em var(--mono); color: #333; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="g-station" viewBox="0 0 56 28">
+      <path d="M1.5 2.5H29V25.5H1.5" fill="none" stroke="currentColor" stroke-width="2.2"/>
+      <path d="M10.6 2.5V25.5M19.8 2.5V25.5" stroke="currentColor" stroke-width="1.6"/>
+      <circle cx="42.5" cy="14" r="11.4" stroke="currentColor" stroke-width="2.2" style="fill: var(--glyph-fill, #F9FBF7)"/>
+    </symbol>
+    <symbol id="g-fork" viewBox="0 0 24 24">
+      <path d="M12 1.5V9.5M12 9.5L5 20.5M12 9.5V22.5M12 9.5L19 20.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+      <circle cx="12" cy="9.5" r="2.4" fill="currentColor"/>
+    </symbol>
+    <symbol id="g-loop" viewBox="0 0 24 24">
+      <path d="M20 12A8 8 0 1 1 12 4" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
+      <path d="M10.6 0.6L17.2 4L10.6 7.4Z" fill="currentColor"/>
+    </symbol>
+    <symbol id="g-lock" viewBox="0 0 24 24">
+      <path d="M7.5 10.5V7.5A4.5 4.5 0 0 1 16.5 7.5V10.5" fill="none" stroke="currentColor" stroke-width="2.2"/>
+      <rect x="4.5" y="10.5" width="15" height="11" rx="2" fill="currentColor"/>
+      <circle cx="12" cy="15.4" r="1.6" fill="#E5EBF6"/>
+    </symbol>
+  </defs>
+</svg>
+
+<header class="masthead">
+  <div class="wrap masthead-in">
+    <p class="wordmark">
+      <svg class="glyph" viewBox="0 0 56 28" aria-hidden="true" focusable="false"><use href="#g-station"/></svg>
+      Queue Agent Plugin <span>Visual guide</span>
+    </p>
+    <nav class="site-nav" aria-label="On this page">
+      <ul>
+        <li><a href="#routes">Entry routes</a></li>
+        <li><a href="#stage-1">Stage 1</a></li>
+        <li><a href="#stage-2">Stage 2</a></li>
+        <li><a href="#discovery">Discovery</a></li>
+        <li><a href="#shared">Shared skills</a></li>
+        <li><a href="#contribute">Contribute</a></li>
+        <li><a href="#key">Diagram key</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="hero" aria-labelledby="page-title">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <p class="kicker">Queueing research in your coding agent</p>
+        <h1 id="page-title">Start where your work already is.</h1>
+      </div>
+      <div>
+        <p class="lead">These skills guide your coding agent from data to a queue model to a policy. The two Stages are capabilities, not a pipeline that you must run from end to end. Bring logs, a model, a simulator, or a question, and the entry skill helps your agent choose where to begin.</p>
+        <p class="status"><span class="label">Status: source preview</span>This repository holds skill and hook source files. It is not yet a packaged plugin that a host can install. To try the skills from a local copy, read <a class="xref" href="getting-started.md">Getting started</a>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="routes" aria-labelledby="routes-title">
+  <div class="wrap">
+    <figure class="routes" aria-labelledby="routes-title">
+      <figcaption class="routes-caption">
+        <h2 id="routes-title" class="kicker">Entry routes</h2>
+        <p>Each route ends at a skill. Choose by what you have and what you need next.</p>
+      </figcaption>
+
+      <div class="routes-head">
+        <p class="source"><b>Your request</b><span>and the artifacts you already have</span></p>
+        <div class="dispatch">
+          <span class="node" aria-hidden="true"><svg class="glyph" viewBox="0 0 24 24" focusable="false"><use href="#g-fork"/></svg></span>
+          <p class="dispatch-label">
+            <a href="../skills/queue-agent/SKILL.md"><span class="vh">Entry skill source: </span>queue-agent</a>
+            <span>The entry skill. It chooses the starting point from your latest request and the available artifacts.</span>
+          </p>
+        </div>
+      </div>
+
+      <ul class="route-list">
+        <li class="route route--stage" style="--i:0">
+          <p class="cond"><span class="cond-main"><span class="cond-when">When you have</span>Data and a system description</span><span class="cond-note">or a model or simulator to check against data</span><span class="job" aria-hidden="true"></span></p>
+          <div class="station">
+            <svg class="glyph" viewBox="0 0 56 28" aria-hidden="true" focusable="false"><use href="#g-station"/></svg>
+            <div class="station-card">
+              <span class="station-kicker">Stage 1</span>
+              <a class="station-name" href="#stage-1">Queue modeling</a>
+              <a class="station-src" href="../skills/queue-modeling/SKILL.md"><span class="vh">Skill source: </span>queue-modeling</a>
+            </div>
+          </div>
+          <p class="returns"><span class="label">You get back</span>A documented queue model and its simulator</p>
+          <p class="handoff"><span class="handoff-line" aria-hidden="true"></span><span class="handoff-tag"><span class="handoff-short" aria-hidden="true">Optional handoff</span><span class="handoff-long">Optional handoff to Stage 2, only when you request policy work</span></span></p>
+        </li>
+
+        <li class="route route--stage" style="--i:1">
+          <p class="cond"><span class="cond-main"><span class="cond-when">When you have</span>A model, simulator, or model family</span><span class="cond-note">a simulator is optional at entry</span><span class="job" aria-hidden="true"></span></p>
+          <div class="station">
+            <svg class="glyph" viewBox="0 0 56 28" aria-hidden="true" focusable="false"><use href="#g-station"/></svg>
+            <div class="station-card">
+              <span class="station-kicker">Stage 2</span>
+              <a class="station-name" href="#stage-2">Policy design</a>
+              <a class="station-src" href="../skills/queue-policy/SKILL.md"><span class="vh">Skill source: </span>queue-policy</a>
+            </div>
+          </div>
+          <p class="returns"><span class="label">You get back</span>A policy or recommendation, with its evidence</p>
+        </li>
+
+        <li class="route" style="--i:2">
+          <p class="cond"><span class="cond-main"><span class="cond-when">When you have</span>A literature question</span><span class="cond-note">or a question about prior work</span><span class="job" aria-hidden="true"></span></p>
+          <div class="station">
+            <svg class="glyph" viewBox="0 0 56 28" aria-hidden="true" focusable="false"><use href="#g-station"/></svg>
+            <div class="station-card">
+              <span class="station-kicker">Shared</span>
+              <a class="station-name" href="#literature">Literature</a>
+              <a class="station-src" href="../skills/queue-literature/SKILL.md"><span class="vh">Skill source: </span>queue-literature</a>
+            </div>
+          </div>
+          <p class="returns"><span class="label">You get back</span>A source-grounded answer</p>
+        </li>
+
+        <li class="route" style="--i:3">
+          <p class="cond"><span class="cond-main"><span class="cond-when">When you have</span>Text to write or clarify</span><span class="cond-note">model descriptions, explanations, reports</span><span class="job" aria-hidden="true"></span></p>
+          <div class="station">
+            <svg class="glyph" viewBox="0 0 56 28" aria-hidden="true" focusable="false"><use href="#g-station"/></svg>
+            <div class="station-card">
+              <span class="station-kicker">Shared</span>
+              <a class="station-name" href="#writing">Writing</a>
+              <a class="station-src" href="../skills/asd-ste100/SKILL.md"><span class="vh">Skill source: </span>asd-ste100</a>
+            </div>
+          </div>
+          <p class="returns"><span class="label">You get back</span>English a reader outside the work can follow</p>
+        </li>
+
+        <li class="route route--optin" style="--i:4">
+          <p class="cond"><span class="cond-main"><span class="cond-when">When you make</span>A request to contribute</span><span class="cond-note">opt-in, never automatic</span><span class="job" aria-hidden="true"></span></p>
+          <div class="station">
+            <svg class="glyph" viewBox="0 0 56 28" aria-hidden="true" focusable="false"><use href="#g-station"/></svg>
+            <div class="station-card">
+              <span class="station-kicker">Opt-in</span>
+              <a class="station-name" href="#contribute">Contribution</a>
+              <a class="station-src" href="../skills/queue-contribute/SKILL.md"><span class="vh">Skill source: </span>queue-contribute</a>
+            </div>
+          </div>
+          <p class="returns"><span class="label">You get back</span>A checked change, published only as far as you authorize</p>
+        </li>
+      </ul>
+      <p class="map-foot"><span class="map-foot-key">Research-time access</span> The <a href="#discovery-lab">Discovery Lab</a> is reached from Stage 2 only when you explicitly ask for a new algorithm. A separate contribution request can also use relevant Lab material.</p>
+    </figure>
+
+    <ul class="notes">
+      <li>
+        <h3>Straight to Stage 2</h3>
+        <p>A model that you specify can go directly to Stage 2. If the work needs simulation, the agent builds an evaluator for that model. That needs no new logs and no Stage 1.</p>
+      </li>
+      <li>
+        <h3>A simulator is not proof</h3>
+        <p>An existing simulator does not by itself show that it represents your system. To check or repair that agreement, start with Stage 1.</p>
+      </li>
+      <li>
+        <h3>Moving between Stages</h3>
+        <p>For an end-to-end request, the agent builds on what is already available and moves between Stages as needed. It does not repeat finished modeling work.</p>
+      </li>
+      <li>
+        <h3>Discussion stays discussion</h3>
+        <p>A discussion-only request does not start implementation or experiments. Unrelated tasks do not need either Stage.</p>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<section class="section" id="stage-1" aria-labelledby="stage-1-title">
+  <div class="wrap">
+    <header class="section-head">
+      <svg class="glyph" viewBox="0 0 56 28" aria-hidden="true" focusable="false"><use href="#g-station"/></svg>
+      <p class="kicker">Stage 1</p>
+      <h2 id="stage-1-title">Queue modeling</h2>
+      <p class="src"><a class="path" href="../skills/queue-modeling/SKILL.md"><span class="vh">Skill source: </span>skills/queue-modeling/SKILL.md</a></p>
+    </header>
+    <p class="lede">Stage 1 turns data and a system description into two matching deliverables: a documented queue model and an executable simulator that implements it. The simulator generates trajectories and evaluates the consequences of different policies.</p>
+
+    <figure class="diagram">
+      <img src="assets/stage-1.svg" width="1200" height="1064" alt="Stage 1 diagram. Observations and a system description lead to modeling the system and implementing a simulator. An independent validator checks the result against the original evidence and returns findings. Feedback revises the model, the implementation, or both. When checks support the intended use, you get a documented model and its matching simulator. A handoff to Stage 2 is optional.">
+      <figcaption><span>Stage 1 at a glance. The text below describes each step.</span><a class="path" href="assets/stage-1.svg">Open assets/stage-1.svg</a></figcaption>
+    </figure>
+
+    <div class="ledger">
+      <div class="sheet">
+        <h3 class="label">You bring</h3>
+        <ul>
+          <li>Data: event records, logs, or other observations.</li>
+          <li>A description of the system and how it operates.</li>
+          <li>Optionally, an existing model or simulator to check or revise against the data.</li>
+        </ul>
+      </div>
+      <div class="sheet">
+        <h3 class="label">The work</h3>
+        <ul>
+          <li><strong>Establish what the model represents:</strong> jobs, resources, routing, capacity, and the system boundary, plus when decisions occur and what a policy can observe.</li>
+          <li><strong>Read the records before fitting:</strong> event meanings, units, logging windows, missing events, and censoring. Arrival-to-departure time includes waiting, so it is not a service-time sample.</li>
+          <li><strong>Implement the simulator</strong> with system rules, fitted estimates, replaceable policies, and measurements kept separate. Configurations and random seeds are explicit, and a small case runs early.</li>
+        </ul>
+      </div>
+      <div class="sheet sheet--out">
+        <h3 class="label">You get back</h3>
+        <ul>
+          <li><strong>A queue model:</strong> a self-contained description of the boundary, jobs, resources, state and event dynamics, stochastic mechanisms, parameters, and assumptions. It states when the policy decides, what it observes, and which actions are feasible.</li>
+          <li><strong>The corresponding simulator:</strong> code with its fitted configuration and instructions to run it, set randomness, and supply a replaceable policy. It produces trajectories or event records.</li>
+          <li>Concise validation results and the remaining issues that affect use.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="loop-panel">
+      <p class="loop-badge"><svg class="glyph" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#g-loop"/></svg>Feedback loop</p>
+      <h3>Independent, executable feedback</h3>
+      <p class="measure">When the host supports delegation, the skill prefers a separate validation subagent. It receives the original data and system description, the observation definitions, the model description, the candidate simulator, and instructions to run it. It develops its own checks from that evidence instead of confirming the builder’s explanation. It runs the simulator and reports concrete discrepancies, with the observations or test outputs behind them and the steps to reproduce them.</p>
+      <dl class="checks">
+        <div><dt>Model–implementation agreement</dt><dd>The simulator’s dynamics, parameters, and policy interface implement the documented model.</dd></div>
+        <div><dt>Mechanics</dt><dd>Flow accounting, capacity, event order, routing, and action feasibility, with hand-checkable or analytical cases where they apply.</dd></div>
+        <div><dt>Data agreement</dt><dd>Simulated and observed quantities under matching observation windows, logging rules, and the historical policy, compared distributionally. Held-out data where feasible.</dd></div>
+        <div><dt>Policy use</dt><dd>Alternative feasible actions keep constraints and information boundaries valid. Supported behavior stays distinct from extrapolation.</dd></div>
+      </dl>
+      <p class="integrate"><svg class="glyph" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#g-loop"/></svg><span>The main agent owns integration. It resolves each finding against the evidence, revises the model, the implementation, or both, and reruns the affected checks.</span></p>
+    </div>
+
+    <p class="done measure"><strong>Done when</strong> both deliverables exist, the simulator runs through its documented interface, and checks support model–implementation agreement and the intended use. Unresolved failures are reported. Policy work is a separate task: when you request it, the model and simulator go to <a href="#stage-2">Stage 2</a>.</p>
+    <p class="back"><a href="#routes">Back to entry routes</a></p>
+  </div>
+</section>
+
+<section class="section" id="stage-2" aria-labelledby="stage-2-title">
+  <div class="wrap">
+    <header class="section-head">
+      <svg class="glyph" viewBox="0 0 56 28" aria-hidden="true" focusable="false"><use href="#g-station"/></svg>
+      <p class="kicker">Stage 2</p>
+      <h2 id="stage-2-title">Policy design</h2>
+      <p class="src"><a class="path" href="../skills/queue-policy/SKILL.md"><span class="vh">Skill source: </span>skills/queue-policy/SKILL.md</a></p>
+    </header>
+    <p class="lede">Stage 2 finds a policy suited to your queue and objective. It first confirms the problem with you, then does the work that problem needs. Designing a new algorithm is one possible task, not the default.</p>
+
+    <figure class="diagram">
+      <img src="assets/stage-2.svg" width="1200" height="1316" alt="Stage 2 diagram. You enter with a Stage 1 handoff or with your own model, simulator, or family. A simulator is optional. The agent first confirms the queue family, objective, and constraints with you, and reuses a prior explicit confirmation. The confirmed definition stays fixed unless you authorize a change. The agent then chooses to adopt, compare, tune, or design, prepares an evaluator only when needed, and verifies the final version before it delivers a policy or recommendation with evidence.">
+      <figcaption><span>Stage 2 at a glance. The text below describes each step.</span><a class="path" href="assets/stage-2.svg">Open assets/stage-2.svg</a></figcaption>
+    </figure>
+
+    <div class="enter">
+      <div class="sheet">
+        <h3>Enter with a Stage 1 handoff</h3>
+        <p>A documented model and its simulator, from earlier modeling work.</p>
+      </div>
+      <div class="sheet">
+        <h3>Or enter directly</h3>
+        <p>Your own model, simulator, or specified model family. A simulator is optional at entry, and Stage 2 needs no new logs.</p>
+      </div>
+    </div>
+
+    <section class="gate" aria-labelledby="gate-title">
+      <h3 class="gate-head" id="gate-title">First, confirm the problem definition</h3>
+      <div class="gate-body">
+        <dl class="parts">
+          <div><dt>Queue family</dt><dd>The shared structure and mechanisms, the permitted variation and ranges, and any target instance. One instance does not define a range of other systems.</dd></div>
+          <div><dt>Objective</dt><dd>The performance measure and its direction, with any weights or aggregation that decide what counts as better.</dd></div>
+          <div><dt>Constraints</dt><dd>Decision timing, observable information, feasible actions, and the operational requirements that the policy must satisfy.</dd></div>
+        </dl>
+        <p>The agent summarizes what the artifacts and conversation establish, asks short questions about the gaps, and asks whether to proceed. All three parts need your explicit confirmation.</p>
+        <p>A confirmation that you already gave is reused while the definition is unchanged. An unanswered question stays pending, including in unattended runs. Discussion and reading the inputs can continue, but implementation and experiments wait.</p>
+      </div>
+    </section>
+
+    <div class="fixed">
+      <svg class="glyph" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#g-lock"/></svg>
+      <div>
+        <h3>Fixed unless you authorize a change</h3>
+        <p>Policy redesign and parameter tuning stay inside the confirmed definition. Poor results and worker suggestions do not change the family, objective, or constraints. The agent can propose a change and wait for your decision. After you authorize one, it updates the affected evaluator mechanics, metrics, and baselines, and does not reopen the unchanged decisions.</p>
+      </div>
+    </div>
+
+    <h3 class="subhead">Then choose the work the problem needs</h3>
+    <ul class="work">
+      <li>
+        <h4>Adopt</h4>
+        <p class="when">An established policy meets the need</p>
+        <p>Adopt or explain that policy, and check that it applies to your queue.</p>
+      </li>
+      <li>
+        <h4>Compare</h4>
+        <p class="when">Several applicable policies</p>
+        <p>Evaluate them on your objective and select among them.</p>
+      </li>
+      <li>
+        <h4>Tune</h4>
+        <p class="when">Fixed structure, open values</p>
+        <p>Tune the parameter values for the target queue or the requested operating range. For simulation-based tuning, the skill points to the external <a href="https://github.com/simopt-admin/simopt">SimOpt</a> project as an optional resource, not a bundled dependency.</p>
+      </li>
+      <li>
+        <h4>Design</h4>
+        <p class="when">A new or improved method</p>
+        <p>Improve existing methods or design a new policy within the fixed family.</p>
+        <p class="more"><a href="#discovery">See policy discovery</a></p>
+      </li>
+    </ul>
+    <p class="combine">Approaches can be combined. A family definition does not turn an adoption or tuning request into a broad discovery campaign.</p>
+
+    <div class="split">
+      <div class="sheet sheet--dash">
+        <span class="label">Only when needed</span>
+        <h3>Prepare an evaluator</h3>
+        <p>If simulation is needed and no simulator exists, the agent builds one for the specified model. This is evaluator preparation, not Stage 1, and it needs no new logs.</p>
+        <p>An existing simulator is first checked against the model, the policy interface, the observable information, and the measurements, with small cases. If a check fails, the implementation is repaired against the fixed model. An applicable analytical evaluation can suffice for a simpler request.</p>
+      </div>
+      <div class="sheet">
+        <span class="label">Whenever policies are compared</span>
+        <h3>Evaluate on equal terms</h3>
+        <ul>
+          <li>Every policy gets the same objective, feasible actions, and information assumptions, checked in the code.</li>
+          <li>Published baselines follow their sources, and parameterized baselines get a justified tuning setup.</li>
+          <li>Repeated runs use shared random inputs where appropriate, with fresh replications after tuning when needed.</li>
+          <li>Reported results come from the final code and parameter values, and name the instances tested.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="sheet out">
+      <span class="label">You get back</span>
+      <ul>
+        <li>The policy or recommendation, the family it applies to, and the evidence that supports it.</li>
+        <li>For implementation tasks, runnable policy code, concise run instructions, and any new or revised simulator.</li>
+        <li>A self-contained explanation of the decision logic, parameter meanings and units, chosen values and how they were selected, and the important result patterns.</li>
+        <li>Simulated performance kept distinct from established published guarantees.</li>
+      </ul>
+      <p class="note">The handoff matches the depth that you request.</p>
+    </div>
+    <p class="back"><a href="#routes">Back to entry routes</a></p>
+  </div>
+</section>
+
+<section class="section" id="discovery" aria-labelledby="discovery-title">
+  <div class="wrap">
+    <header class="section-head">
+      <svg class="glyph glyph--loop" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#g-loop"/></svg>
+      <p class="kicker">Stage 2 · design branch</p>
+      <h2 id="discovery-title">Policy discovery</h2>
+      <p class="src"><a class="path" href="../skills/queue-policy/references/policy-discovery.md"><span class="vh">Reference source: </span>skills/queue-policy/references/policy-discovery.md</a></p>
+    </header>
+    <p class="lede">Discovery is for new or improved policies. It starts after the problem definition is confirmed and any needed evaluator is ready. Adoption, comparison, and fixed-policy tuning do not need it. The confirmed definition governs both loops below.</p>
+
+    <div class="loops">
+      <p class="loops-tag"><svg class="glyph" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#g-loop"/></svg>Outer loop · main agent</p>
+      <ol class="outer-steps">
+        <li><b>Review</b><span>Read the findings across workers and instances.</span></li>
+        <li><b>Diagnose</b><span>Ask what limits progress: the mechanism, missing context, an evaluator or baseline defect, noisy comparisons, or an exhausted direction.</span></li>
+        <li><b>Adapt</b><span>Choose the next research step from the evidence.</span></li>
+      </ol>
+      <p class="options"><strong>Options, not a fixed sequence:</strong> let a productive worker continue, supply missing details or a relevant paper, redirect effort, test whether ideas combine, get an independent check, or assign a simplification task. Disappointing results alone do not show that the problem is impossible or that it needs a new definition.</p>
+
+      <ul class="workers">
+        <li class="worker">
+          <p class="worker-tag"><svg class="glyph" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#g-loop"/></svg>Inner loop · development subagent</p>
+          <ol class="cycle"><li>Hypothesize</li><li>Implement</li><li>Evaluate</li><li>Inspect</li><li>Revise</li></ol>
+          <p class="worker-note">Owns an iterative research task and revises its approach without waiting for the main agent after every trial.</p>
+        </li>
+        <li class="worker">
+          <p class="worker-tag"><svg class="glyph" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#g-loop"/></svg>Inner loop · another subagent</p>
+          <ol class="cycle"><li>Hypothesize</li><li>Implement</li><li>Evaluate</li><li>Inspect</li><li>Revise</li></ol>
+          <p class="worker-note">Can test a different hypothesis or continue an earlier candidate, at its own pace and in its own files.</p>
+        </li>
+      </ul>
+      <p class="team"><strong>Team size is the host’s choice.</strong> The host chooses how many workers, which tools, and when to review. Without delegation, the agent performs the same roles in sequence and says so.</p>
+    </div>
+    <p class="flex-note measure">At useful checkpoints, workers return their strongest candidates with reproducible evidence, relevant failures, open questions, and a proposed next direction.</p>
+
+    <div class="converge">
+      <div class="sheet">
+        <span class="label">For promising candidates</span>
+        <h3>Refine by simplifying</h3>
+        <p>Simplification is policy development. Workers test removing components, consolidating rules, or fixing parameters, and keep the original for comparison. Ablation checks what changes when a component is removed; sensitivity analysis checks what changes when a parameter varies. A flat response in one instance does not show that a parameter can be fixed across the family.</p>
+        <p>The simpler policy is preferred when the performance difference is practically negligible and the evaluation supports that conclusion.</p>
+      </div>
+      <div class="sheet">
+        <span class="label">For the final rule</span>
+        <h3>Check it against literature</h3>
+        <p>The final decision rule is compared with the closest applicable methods, again after simplification or combination changes it. Borrowed components are cited, and the specific modification is described.</p>
+        <p>If the rule matches a known method, the report says so. An unsuccessful search alone does not establish novelty.</p>
+      </div>
+    </div>
+
+    <div class="finish">
+      <div class="finish-step">
+        <span class="label">Before delivery</span>
+        <h3>Final verification</h3>
+        <p>The main agent reproduces promising results under one consistent evaluation setup, checks feasibility, and assesses performance across the requested family, not only the cases a worker chose.</p>
+      </div>
+      <div class="finish-arrow" aria-hidden="true"></div>
+      <div class="finish-step">
+        <span class="label">Then</span>
+        <h3>Delivery</h3>
+        <p>The Stage 2 policy-and-evidence handoff. If gains remain unconvincing, it reports the best supported result, what was tried, and the open obstacle.</p>
+      </div>
+    </div>
+
+    <aside class="lab" id="discovery-lab" aria-labelledby="lab-title">
+      <span class="lab-key">Explicit request only</span>
+      <h3 id="lab-title">Discovery Lab: opened only for new-algorithm design</h3>
+      <div class="lab-grid">
+        <div>
+          <p>The <a href="../discovery-lab/index.md">Discovery Lab</a> holds agent-discovered policies with runnable implementations and bounded evidence. Its entries are research leads, not established recommendations. The Lab is not part of the agent’s default knowledge or of literature retrieval.</p>
+          <p>The agent reads the Lab index, then only the relevant entries, when you explicitly ask it to design a new algorithm. It keeps that intent for the rest of the new-design task.</p>
+        </div>
+        <div>
+          <p>Adoption, comparison, fixed-policy tuning, a general request to improve performance, adopting a specified candidate, and suggestions from the agent or its workers do not open the Lab. If you later limit the task to established methods, the agent stops using it.</p>
+          <p>Lab policies are evaluated under your confirmed definition like any other candidate. Reading the Lab does not authorize writing results back to it. This gate concerns research use: a separate, requested contribution may read the relevant entry to prepare an update.</p>
+        </div>
+      </div>
+    </aside>
+    <p class="back"><a href="#routes">Back to entry routes</a></p>
+  </div>
+</section>
+
+<section class="section" id="shared" aria-labelledby="shared-title">
+  <div class="wrap">
+    <header class="section-head">
+      <svg class="glyph" viewBox="0 0 56 28" aria-hidden="true" focusable="false"><use href="#g-station"/></svg>
+      <p class="kicker">Shared by both Stages</p>
+      <h2 id="shared-title">Literature and writing</h2>
+    </header>
+    <p class="lede">Both Stages use these skills, and each also works on its own: a literature question or a writing task does not start modeling or policy experiments.</p>
+
+    <div class="shared">
+      <article class="sheet" id="literature" aria-labelledby="literature-title">
+        <div class="shared-head">
+          <svg class="glyph" viewBox="0 0 56 28" aria-hidden="true" focusable="false"><use href="#g-station"/></svg>
+          <h3 id="literature-title">Literature</h3>
+        </div>
+        <p class="src"><a class="path" href="../skills/queue-literature/SKILL.md"><span class="vh">Skill source: </span>skills/queue-literature/SKILL.md</a></p>
+        <p>Source-grounded answers for modeling and policy decisions. The agent reads the relevant bundled note and its source records first, and searches further only when a material question remains open.</p>
+        <p>For Stage 1, the topic map covers system primitives, state and dynamics, log semantics, identifiability, statistical fitting, and model validation. For Stage 2, it covers policies such as <span class="nowrap">c-mu</span>, <span class="nowrap">generalized c-mu</span>, SRPT, Gittins, load balancing, maximum pressure, backfilling, and reentrant-line control, plus paired evaluation with common random numbers.</p>
+        <p class="aside-dotted">The local notes are a starting point, not a claim of complete <span class="nowrap">prior-art</span> coverage. The Discovery Lab is not part of this retrieval.</p>
+      </article>
+      <article class="sheet" id="writing" aria-labelledby="writing-title">
+        <div class="shared-head">
+          <svg class="glyph" viewBox="0 0 56 28" aria-hidden="true" focusable="false"><use href="#g-station"/></svg>
+          <h3 id="writing-title">Writing</h3>
+        </div>
+        <p class="src"><a class="path" href="../skills/asd-ste100/SKILL.md"><span class="vh">Skill source: </span>skills/asd-ste100/SKILL.md</a></p>
+        <p>English model descriptions, policy explanations, and reports for a reader who did not take part in the work. The skill uses STE-flavored prose, based on the ASD-STE100 rules for Simplified Technical English.</p>
+        <p>It keeps equations, numerical results, citations, assumptions, scope, and claim strength. A wording edit does not change the queue family, objective, constraints, or policy.</p>
+        <p class="aside-dotted">The optional linter checks some language patterns. It does not check scientific correctness or reader understanding.</p>
+      </article>
+    </div>
+    <p class="back"><a href="#routes">Back to entry routes</a></p>
+  </div>
+</section>
+
+<section class="section" id="contribute" aria-labelledby="contribute-title">
+  <div class="wrap">
+    <header class="section-head">
+      <svg class="glyph" viewBox="0 0 56 28" aria-hidden="true" focusable="false"><use href="#g-station"/></svg>
+      <p class="kicker">Opt-in</p>
+      <h2 id="contribute-title">Contribute, only when you ask</h2>
+      <p class="src"><a class="path" href="../skills/queue-contribute/SKILL.md"><span class="vh">Skill source: </span>skills/queue-contribute/SKILL.md</a></p>
+    </header>
+    <p class="lede">Contribution starts from your request. Finished research, good results, and saved artifacts stay in your workspace unless you ask to contribute them. Contribution is separate from running either Stage.</p>
+
+    <div class="fork">
+      <p class="fork-root"><b>Your request to contribute</b><span>The material’s provenance decides the path, not its publication status.</span></p>
+      <div class="fork-paths">
+        <article class="path-card" aria-labelledby="path-lit">
+          <span class="label">From published work</span>
+          <h3 id="path-lit">Literature knowledge</h3>
+          <p>Published or classical methods, modeling and identification methods, assumptions and applicability conditions, citations, and source-supported practice.</p>
+          <dl>
+            <div><dt>Home</dt><dd>A note and its source records under <code>skills/queue-literature/references/</code>, with a topic-map row for a new note.</dd></div>
+            <div><dt>Checks</dt><dd>Each substantive claim is checked against its cited source, and the knowledge checks run.</dd></div>
+          </dl>
+        </article>
+        <article class="path-card" aria-labelledby="path-lab">
+          <span class="label">From agent research</span>
+          <h3 id="path-lab">Agent-discovered policy</h3>
+          <p>A new policy found through LLM-agent research. It stays on this path after publication or peer review.</p>
+          <dl>
+            <div><dt>Home</dt><dd>An entry under <code>discovery-lab/</code> with a method description, implementation, and evaluation evidence. See the <a href="../discovery-lab/CONTRIBUTING.md">Lab contribution guide</a>.</dd></div>
+            <div><dt>Checks</dt><dd>The method is related to the closest known methods, and the cases where baselines win are reported as well.</dd></div>
+          </dl>
+        </article>
+      </div>
+    </div>
+
+    <div class="sheet publish">
+      <span class="label">Publication, only as far as you authorize</span>
+      <ul class="scope" aria-label="Possible scopes">
+        <li>Local draft</li><li>Local commit</li><li>Pushed branch</li><li>Pull request</li>
+      </ul>
+      <ul>
+        <li>The agent works on a new branch in a Git checkout of the destination, and stages only the contribution’s files.</li>
+        <li>Before it publishes anything, it inspects the change for unrelated files, private data, credentials, absolute local paths, and bulky artifacts.</li>
+        <li>When the scope is open, it prepares the draft and asks before it pushes.</li>
+        <li>It does not merge or turn on automatic merging. Maintainers decide, and their review is not scientific peer review.</li>
+      </ul>
+    </div>
+    <p class="back"><a href="#routes">Back to entry routes</a></p>
+  </div>
+</section>
+
+<section class="section" id="about" aria-labelledby="about-title">
+  <div class="wrap about">
+    <div class="about-body">
+      <p class="kicker">About this page</p>
+      <h2 id="about-title">What this guide is</h2>
+      <p class="lede lede--after-title">This page is documentation. It does not run a simulator, evaluate a policy, or report performance results. It opens from a local copy without a network connection or build step.</p>
+      <p>The repository is a source preview. It contains skill sources, a startup-orientation hook source, reference notes, and Discovery Lab entries. It is not yet a packaged plugin that a host can install, so this guide gives no install commands. Host packaging, installation, and hook enablement are separate future steps.</p>
+      <p>The hook source in <a class="path" href="../hooks/hooks.json">hooks/hooks.json</a> gives a short startup orientation that points to the entry skill. It does not choose or store a Stage, and adding these files enables nothing on your machine.</p>
+    </div>
+    <ul class="links">
+      <li><a class="xref" href="getting-started.md">Getting started</a>: use the skills from a local copy.</li>
+      <li><a class="xref" href="../README.md">README</a>: the skill map and project status.</li>
+      <li><a class="xref" href="references.md">Design decisions and references</a>: why the workflow is shaped this way.</li>
+      <li><a class="xref" href="../CONTRIBUTING.md">Contributing</a>: how to propose literature notes, discovered policies, or workflow changes.</li>
+      <li><a class="xref" href="../skills/queue-agent/SKILL.md">Entry skill</a>: the instructions that choose a starting point.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="section" id="key" aria-labelledby="key-title">
+  <div class="wrap">
+    <p class="kicker">Reading the diagrams</p>
+    <h2 id="key-title">Diagram key</h2>
+    <p class="lede lede--after-title">The diagrams borrow the notation of queueing networks. Each skill is a station, and your request is routed to the station that fits.</p>
+    <dl class="legend">
+      <div>
+        <dt><svg viewBox="0 0 70 32" aria-hidden="true" focusable="false"><svg x="4" y="2" width="56" height="28" viewBox="0 0 56 28"><use href="#g-station"/></svg></svg></dt>
+        <dd><b>Station.</b> A skill, drawn as a queueing station: a buffer and a server.</dd>
+      </div>
+      <div>
+        <dt><svg viewBox="0 0 70 32" aria-hidden="true" focusable="false"><circle cx="20" cy="16" r="13" fill="#F9FBF7" stroke="#17232A" stroke-width="2"/><svg x="10" y="6" width="20" height="20" viewBox="0 0 24 24"><use href="#g-fork"/></svg></svg></dt>
+        <dd><b>Dispatcher.</b> The entry skill, queue-agent. It chooses a route from your request and the artifacts you have.</dd>
+      </div>
+      <div>
+        <dt><svg viewBox="0 0 70 32" aria-hidden="true" focusable="false"><path d="M4 16H56" stroke="#17232A" stroke-width="2.5"/><path d="M54 10L65 16L54 22Z" fill="#17232A"/></svg></dt>
+        <dd><b>Solid arrow.</b> A route or the main flow of work.</dd>
+      </div>
+      <div>
+        <dt><svg viewBox="0 0 70 32" aria-hidden="true" focusable="false"><path d="M4 16H56" stroke="#17232A" stroke-width="2.5" stroke-dasharray="8 6"/><path d="M54 10L65 16L54 22Z" fill="#17232A"/></svg></dt>
+        <dd><b>Dashed line.</b> Optional, used only when the task needs it: the Stage 1 handoff, an existing model to check, or evaluator preparation.</dd>
+      </div>
+      <div>
+        <dt><svg viewBox="0 0 70 32" aria-hidden="true" focusable="false"><path d="M4 16H60" stroke="#4B5A55" stroke-width="3" stroke-linecap="round" stroke-dasharray="0.1 7"/></svg></dt>
+        <dd><b>Dotted line or outline.</b> Opened only on your explicit request: the Discovery Lab and contribution.</dd>
+      </div>
+      <div>
+        <dt><svg viewBox="0 0 70 32" aria-hidden="true" focusable="false"><path d="M6 22C6 4 50 4 56 18" fill="none" stroke="#B23A2E" stroke-width="2.6" stroke-linecap="round"/><path d="M50 15L58 24L61 13Z" fill="#B23A2E"/></svg></dt>
+        <dd><b>Red-pencil arrow.</b> Feedback or iteration: validation findings in Stage 1, and the inner and outer loops of policy discovery.</dd>
+      </div>
+      <div>
+        <dt><svg viewBox="0 0 70 32" aria-hidden="true" focusable="false"><rect x="4" y="5" width="60" height="22" rx="4" fill="#E5EBF6" stroke="#2343A0" stroke-width="2.4"/><svg x="25" y="7" width="18" height="18" viewBox="0 0 24 24" style="color:#2343A0"><use href="#g-lock"/></svg></svg></dt>
+        <dd><b>Cobalt frame.</b> The confirmed problem definition. It stays fixed unless you authorize a change.</dd>
+      </div>
+      <div>
+        <dt><svg viewBox="0 0 70 32" aria-hidden="true" focusable="false"><circle cx="10" cy="16" r="5.5" fill="#2343A0"/><path d="M20 16H56" stroke="#2343A0" stroke-width="2.5"/><path d="M54 10L65 16L54 22Z" fill="#2343A0"/></svg></dt>
+        <dd><b>Moving dot.</b> When you point to or focus a route on this page, it turns cobalt and a dot moves along it. With reduced motion, the dot appears without moving.</dd>
+      </div>
+    </dl>
+
+    <h3 class="subhead">Diagram files</h3>
+    <ul class="files">
+      <li>
+        <a href="assets/overview.svg">assets/overview.svg</a>
+        <p>Entry routes. It shows the same routes as the map at the top of this page, which is its text alternative.</p>
+      </li>
+      <li>
+        <a href="assets/stage-1.svg">assets/stage-1.svg</a>
+        <p>Stage 1: inputs, modeling and implementation, independent validation, feedback, and the two deliverables. Its text alternative is the <a href="#stage-1">Stage 1 section</a>.</p>
+      </li>
+      <li>
+        <a href="assets/stage-2.svg">assets/stage-2.svg</a>
+        <p>Stage 2: entry, confirmation, the fixed definition, the four kinds of work, the optional evaluator, discovery, verification, and delivery. Its text alternatives are the <a href="#stage-2">Stage 2</a> and <a href="#discovery">discovery</a> sections.</p>
+      </li>
+    </ul>
+    <p class="flex-note measure">The SVG files render directly on GitHub. Each includes a title and a text description for screen readers, and none loads external resources.</p>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <p>Queue Agent Plugin · Visual guide.</p>
+    <p>File links open the sources in this copy of the repository. A browser can show Markdown files as plain text. GitHub and most editors render them.</p>
+  </div>
+</footer>
+</body>
+</html>

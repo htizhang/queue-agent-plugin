@@ -1,0 +1,189 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1316" viewBox="0 0 1200 1316" role="img" aria-labelledby="s2-title s2-desc">
+  <title id="s2-title">Stage 2, policy design: confirm the problem, then choose the work it needs</title>
+  <desc id="s2-desc">You enter with a Stage 1 handoff, or with your own model, simulator, or model family. A simulator is optional at entry. First, the agent confirms the problem definition: the queue family, the objective, and the constraints. It summarizes, asks about gaps, and waits for your explicit confirmation of all three. A prior explicit confirmation is reused, and an unanswered question keeps work pending. The confirmed definition then stays fixed unless you authorize a change. Only the changed part is updated and confirmed; unchanged decisions are not reopened. Inside it, the agent chooses the work by need, combining approaches when useful: adopt an established policy, compare applicable policies, tune the parameter values of a fixed structure, or design a new method or improve existing ones. An evaluator is prepared only when needed: the agent checks an existing simulator or builds one for the specified model, and analysis can suffice. Adoption checks that the policy applies. Whenever policies are compared, including in design work, they are evaluated on equal terms. Design uses policy discovery, where workers iterate on their own and the main agent steers. The Discovery Lab is opened only for explicit new-algorithm design. Before delivery, results must come from the final code and values, and the checks performed must support them. You get back a policy or recommendation, the family it applies to, and its evidence, plus runnable code, run instructions, and a self-contained explanation for implementation tasks.</desc>
+  <defs>
+    <style>
+      .d { font-family: "DIN Alternate", Bahnschrift, "Roboto Condensed", "Helvetica Neue", Arial, "Liberation Sans", sans-serif; font-weight: 700; fill: #17232A; }
+      .s { font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Liberation Sans", sans-serif; fill: #17232A; }
+      .m { font-family: ui-monospace, "SF Mono", Menlo, Consolas, "Cascadia Mono", "Liberation Mono", "DejaVu Sans Mono", monospace; fill: #4B5A55; }
+      .eb { font-size: 15px; letter-spacing: 1.8px; fill: #2343A0; }
+      .lab { font-size: 15px; letter-spacing: 1.8px; fill: #4B5A55; }
+      .wh { fill: #FFFFFF; }
+      .gr { fill: #4B5A55; }
+      .co { fill: #2343A0; }
+      .ln { fill: none; stroke: #17232A; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+      .lc { fill: none; stroke: #2343A0; stroke-width: 2.4; stroke-linecap: butt; stroke-dasharray: 8 6; }
+      .dash { stroke-dasharray: 9 7; stroke-linecap: butt; }
+      .dot { stroke-dasharray: 0.1 7; stroke-linecap: round; stroke-width: 3; }
+      .card { fill: #F9FBF7; stroke: #17232A; stroke-width: 1.5; }
+      .part { fill: #EFF3EC; stroke: #17232A; stroke-width: 1.2; }
+      .card-dash { fill: #F9FBF7; stroke: #17232A; stroke-width: 1.8; stroke-dasharray: 9 7; }
+      .card-dot { fill: #F9FBF7; stroke: #4B5A55; stroke-width: 2.4; stroke-dasharray: 0.1 6; stroke-linecap: round; }
+    </style>
+    <pattern id="s2-grid" width="24" height="24" patternUnits="userSpaceOnUse">
+      <path d="M24 0H0V24" fill="none" stroke="#DCE5D8" stroke-width="1"/>
+    </pattern>
+    <marker id="s2-ah" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="12" markerHeight="12" markerUnits="userSpaceOnUse" orient="auto">
+      <path d="M1 1.2 L11.5 6 L1 10.8 Z" fill="#17232A"/>
+    </marker>
+    <marker id="s2-ah-c" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="12" markerHeight="12" markerUnits="userSpaceOnUse" orient="auto">
+      <path d="M1 1.2 L11.5 6 L1 10.8 Z" fill="#2343A0"/>
+    </marker>
+    <marker id="s2-ah-r" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="12" markerHeight="12" markerUnits="userSpaceOnUse" orient="auto">
+      <path d="M1 1.2 L11.5 6 L1 10.8 Z" fill="#B23A2E"/>
+    </marker>
+    <g id="s2-loop">
+      <path d="M7 0A7 7 0 1 1 0 -7" fill="none" stroke="#B23A2E" stroke-width="2.3" stroke-linecap="round"/>
+      <path d="M-1.5 -10.8L4.2 -7L-1.5 -3.2Z" fill="#B23A2E"/>
+    </g>
+  </defs>
+
+  <rect width="1200" height="1316" rx="18" fill="#EFF3EC"/>
+  <rect width="1200" height="1316" rx="18" fill="url(#s2-grid)"/>
+  <rect x="0.75" y="0.75" width="1198.5" height="1314.5" rx="17.5" fill="none" stroke="#C5D2C1" stroke-width="1.5"/>
+
+  <!-- Header -->
+  <text class="d eb" x="56" y="60">STAGE 2 · POLICY DESIGN</text>
+  <text class="d" x="56" y="102" font-size="34">Confirm the problem, then choose the work it needs</text>
+  <text class="m" x="56" y="134" font-size="17">skills/queue-policy/SKILL.md</text>
+
+  <!-- Legend (two rows) -->
+  <line class="ln" x1="760" y1="32" x2="796" y2="32" marker-end="url(#s2-ah)"/>
+  <text class="s gr" x="808" y="37" font-size="15.5">main flow</text>
+  <line class="ln dash" x1="924" y1="32" x2="960" y2="32" marker-end="url(#s2-ah)"/>
+  <text class="s gr" x="972" y="37" font-size="15.5">optional</text>
+  <use href="#s2-loop" x="778" y="56"/>
+  <text class="s gr" x="808" y="61" font-size="15.5">iteration</text>
+  <line class="ln dot" x1="924" y1="56" x2="962" y2="56"/>
+  <text class="s gr" x="972" y="61" font-size="15.5">explicit request</text>
+
+  <!-- Enter with -->
+  <text class="d lab" x="56" y="178">ENTER WITH</text>
+  <rect class="card" x="72" y="190" width="488" height="66" rx="8"/>
+  <text class="d" x="96" y="218" font-size="21">A Stage 1 handoff</text>
+  <text class="s gr" x="96" y="242" font-size="16.5">a documented model and its simulator</text>
+  <rect class="card" x="640" y="190" width="488" height="66" rx="8"/>
+  <text class="d" x="664" y="218" font-size="21">Your model, simulator, or family</text>
+  <text class="s gr" x="664" y="242" font-size="16.5">a simulator is optional at entry</text>
+  <line class="ln" x1="316" y1="256" x2="316" y2="298" marker-end="url(#s2-ah)"/>
+  <line class="ln" x1="884" y1="256" x2="884" y2="298" marker-end="url(#s2-ah)"/>
+
+  <!-- Gate: confirm the problem definition -->
+  <rect x="72" y="300" width="1056" height="222" rx="10" fill="#F9FBF7" stroke="#2343A0" stroke-width="2.5"/>
+  <path d="M82 300H1118A10 10 0 0 1 1128 310V340H72V310A10 10 0 0 1 82 300Z" fill="#2343A0"/>
+  <text class="d wh" x="96" y="327" font-size="16" letter-spacing="2">CONFIRM THE PROBLEM DEFINITION FIRST</text>
+
+  <rect class="part" x="92" y="354" width="328" height="106" rx="7"/>
+  <text class="d" x="112" y="382" font-size="21">Queue family</text>
+  <text class="s gr" x="112" y="406" font-size="15.5">shared structure, permitted</text>
+  <text class="s gr" x="112" y="427" font-size="15.5">variation and ranges, any</text>
+  <text class="s gr" x="112" y="448" font-size="15.5">target instance</text>
+
+  <rect class="part" x="436" y="354" width="328" height="106" rx="7"/>
+  <text class="d" x="456" y="382" font-size="21">Objective</text>
+  <text class="s gr" x="456" y="406" font-size="15.5">the performance measure,</text>
+  <text class="s gr" x="456" y="427" font-size="15.5">its direction, and any</text>
+  <text class="s gr" x="456" y="448" font-size="15.5">weights or aggregation</text>
+
+  <rect class="part" x="780" y="354" width="328" height="106" rx="7"/>
+  <text class="d" x="800" y="382" font-size="21">Constraints</text>
+  <text class="s gr" x="800" y="406" font-size="15.5">decision timing, observable</text>
+  <text class="s gr" x="800" y="427" font-size="15.5">information, feasible</text>
+  <text class="s gr" x="800" y="448" font-size="15.5">actions, requirements</text>
+
+  <text class="s" x="600" y="486" font-size="16.5" text-anchor="middle">Summarize, ask about gaps, then wait for your explicit confirmation of all three.</text>
+  <text class="s gr" x="600" y="508" font-size="16.5" text-anchor="middle">A prior explicit confirmation is reused. An unanswered question keeps work pending.</text>
+
+  <!-- Gate <-> fixed band -->
+  <line class="ln" x1="600" y1="522" x2="600" y2="562" marker-end="url(#s2-ah)"/>
+  <text class="s gr" x="614" y="549" font-size="15.5">confirmed</text>
+  <line class="lc" x1="120" y1="564" x2="120" y2="525" marker-end="url(#s2-ah-c)"/>
+  <text class="s co" x="134" y="549" font-size="15.5">change only if you authorize it</text>
+
+  <!-- Fixed band -->
+  <rect x="72" y="564" width="1056" height="604" rx="12" fill="none" stroke="#2343A0" stroke-width="2.2"/>
+  <path d="M84 564H548V598H72V576A12 12 0 0 1 84 564Z" fill="#2343A0"/>
+  <text class="d wh" x="96" y="587" font-size="15" letter-spacing="1.6">FIXED UNLESS YOU AUTHORIZE A CHANGE</text>
+
+  <text class="d lab" x="96" y="636">CHOOSE THE WORK BY NEED</text>
+  <text class="s gr" x="372" y="636" font-size="15.5">combine approaches when useful</text>
+
+  <rect class="card" x="96" y="652" width="240" height="100" rx="8" stroke-width="2"/>
+  <text class="d" x="114" y="686" font-size="23">Adopt</text>
+  <text class="s gr" x="114" y="712" font-size="15.5">an established policy</text>
+  <text class="s gr" x="114" y="733" font-size="15.5">meets the need</text>
+
+  <rect class="card" x="352" y="652" width="240" height="100" rx="8" stroke-width="2"/>
+  <text class="d" x="370" y="686" font-size="23">Compare</text>
+  <text class="s gr" x="370" y="712" font-size="15.5">several applicable</text>
+  <text class="s gr" x="370" y="733" font-size="15.5">policies to rank</text>
+
+  <rect class="card" x="608" y="652" width="240" height="100" rx="8" stroke-width="2"/>
+  <text class="d" x="626" y="686" font-size="23">Tune</text>
+  <text class="s gr" x="626" y="712" font-size="15.5">fixed structure,</text>
+  <text class="s gr" x="626" y="733" font-size="15.5">open parameter values</text>
+
+  <rect class="card" x="864" y="652" width="240" height="100" rx="8" stroke-width="2"/>
+  <text class="d" x="882" y="686" font-size="23">Design</text>
+  <text class="s gr" x="882" y="712" font-size="15.5">a new method, or</text>
+  <text class="s gr" x="882" y="733" font-size="15.5">improve existing ones</text>
+
+  <line class="ln" x1="216" y1="752" x2="216" y2="782" marker-end="url(#s2-ah)"/>
+  <line class="ln" x1="472" y1="752" x2="472" y2="782" marker-end="url(#s2-ah)"/>
+  <line class="ln" x1="728" y1="752" x2="728" y2="782" marker-end="url(#s2-ah)"/>
+  <line class="ln" x1="984" y1="752" x2="984" y2="782" marker-end="url(#s2-ah)"/>
+
+  <!-- Evaluator: only when needed -->
+  <rect class="card-dash" x="96" y="784" width="1008" height="62" rx="8"/>
+  <text class="d" x="120" y="810" font-size="15" letter-spacing="1.6">EVALUATOR · ONLY WHEN NEEDED</text>
+  <text class="s gr" x="120" y="834" font-size="16">Check an existing simulator, or build one for the specified model. Analysis can suffice.</text>
+
+  <line class="ln" x1="216" y1="846" x2="216" y2="868" marker-end="url(#s2-ah)"/>
+  <line class="ln" x1="472" y1="846" x2="472" y2="868" marker-end="url(#s2-ah)"/>
+  <line class="ln" x1="728" y1="846" x2="728" y2="868" marker-end="url(#s2-ah)"/>
+  <line class="ln" x1="984" y1="846" x2="984" y2="868" marker-end="url(#s2-ah)"/>
+
+  <!-- Adopt path -->
+  <rect class="card" x="96" y="870" width="240" height="180" rx="8"/>
+  <text class="d" x="114" y="900" font-size="20">Check the fit</text>
+  <text class="s gr" x="114" y="926" font-size="15.5">explain the policy and</text>
+  <text class="s gr" x="114" y="948" font-size="15.5">check that it applies</text>
+  <text class="s gr" x="114" y="970" font-size="15.5">to your queue</text>
+
+  <!-- Compare and tune path -->
+  <rect class="card" x="352" y="870" width="496" height="180" rx="8"/>
+  <text class="d" x="372" y="900" font-size="20">Evaluate on equal terms</text>
+  <text class="s gr" x="372" y="926" font-size="15.5">• same objective, actions, and information</text>
+  <text class="s gr" x="372" y="948" font-size="15.5">• baselines faithful to their sources</text>
+  <text class="s gr" x="372" y="970" font-size="15.5">• a justified tuning setup for baselines</text>
+  <text class="s gr" x="372" y="992" font-size="15.5">• repeated runs, shared random inputs</text>
+  <text class="s gr" x="372" y="1014" font-size="15.5">• fresh replications after tuning</text>
+
+  <!-- Design path -->
+  <rect class="card" x="864" y="870" width="240" height="180" rx="8"/>
+  <text class="d" x="882" y="900" font-size="20">Policy discovery</text>
+  <use href="#s2-loop" x="891" y="921"/>
+  <text class="s" x="910" y="926" font-size="15.5">workers iterate</text>
+  <use href="#s2-loop" x="891" y="943"/>
+  <text class="s" x="910" y="948" font-size="15.5">main agent steers</text>
+  <rect class="card-dot" x="878" y="964" width="212" height="74" rx="7"/>
+  <text class="d" x="892" y="987" font-size="16.5">Discovery Lab</text>
+  <text class="s gr" x="892" y="1008" font-size="14.5">only for explicit</text>
+  <text class="s gr" x="892" y="1028" font-size="14.5">new-algorithm design</text>
+
+  <line class="ln" x1="216" y1="1050" x2="216" y2="1076" marker-end="url(#s2-ah)"/>
+  <line class="ln" x1="600" y1="1050" x2="600" y2="1076" marker-end="url(#s2-ah)"/>
+  <line class="ln" x1="984" y1="1050" x2="984" y2="1076" marker-end="url(#s2-ah)"/>
+
+  <!-- Verify before delivery -->
+  <rect class="card" x="96" y="1078" width="1008" height="66" rx="8" stroke-width="2"/>
+  <text class="d" x="120" y="1104" font-size="15" letter-spacing="1.6">VERIFY BEFORE DELIVERY</text>
+  <text class="s gr" x="120" y="1128" font-size="16">Check final code and parameters. Apply the same comparison rules to every route.</text>
+
+  <!-- Deliver -->
+  <line class="ln" x1="600" y1="1168" x2="600" y2="1200" marker-end="url(#s2-ah)"/>
+  <rect class="card" x="72" y="1202" width="1056" height="88" rx="8" stroke-width="2.2"/>
+  <text class="d lab" x="96" y="1229">YOU GET BACK</text>
+  <text class="s" x="96" y="1255" font-size="18">A policy or recommendation, the family it applies to, and the evidence for it.</text>
+  <text class="s gr" x="96" y="1279" font-size="16">For implementation tasks: runnable code, run instructions, and a self-contained explanation.</text>
+</svg>
