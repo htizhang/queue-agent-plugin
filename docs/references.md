@@ -17,10 +17,15 @@ not adopted as a whole.
   separate from runtime skill instructions: they explain the available routes,
   not a compulsory sequence or a new orchestration layer. The guide runs locally
   without a build step or external assets; the SVG diagrams also render on GitHub.
+- Address the workflow diagrams to operations research and operations management
+  readers. Show model validation and the policy-development loop, including
+  mechanism explanation, simplification, and reevaluation. Leave installation,
+  file management, and tool calls to the usage documentation so the research
+  process remains visible.
 
 ### Packaging and installation
 
-- The repository root is one package, `queue-agent`, version `0.1.0`. It has a
+- The repository root is one package, `queue-agent`. It has a
   portable root `plugin.json`, compatibility manifests in
   `.claude-plugin/plugin.json` and `.codex-plugin/plugin.json`, and native
   catalogs in `.claude-plugin/marketplace.json` and
@@ -195,11 +200,26 @@ and [review cases](../tests/queue-literature/scenarios.md).
 - Default these deliverables to STE-flavored prose. Preserve technical terms,
   equations, assumptions, numerical results, citations, and claim strength.
   Explain the system and decision for readers outside the development process.
+  The imported skill addressed agent-parsed text, so its introduction now names
+  these human research readers as the primary audience. Agent-facing text, such
+  as tool descriptions, remains a secondary use.
 - Point to it from the overall entry and both Stage delivery steps. Do not add
   a hook that rewrites every response.
 - Preserve the upstream license and record the pinned source and adaptations in
   [NOTICE.md](../skills/asd-ste100/NOTICE.md). Use the included linter as optional
   language feedback, not as proof of scientific correctness or readability.
+- Run the shared [reader check](../skills/asd-ste100/references/reader-check.md)
+  before delivering a substantial model description, policy explanation,
+  report, or handoff. A fresh reader, preferably an uninvolved subagent, sees
+  only the document, its audience and task, and neutral questions. The author
+  compares the answers with the sources, repairs the explanation, and reports
+  evidence gaps. Without delegation, a labeled self-review takes its place.
+  Reports could meet the existing requirements for definitions, intuition,
+  parameters, and examples and still be hard to follow. An author who knows the
+  intended meaning fills gaps without noticing them. Both Stages already load
+  this skill, so one conditional reference serves them without a new skill or
+  duplicated protocols. The check does not certify human comprehension, and
+  actual reader feedback takes priority.
 - The writing skill does not expand either Stage's research scope.
 
 ### Local knowledge

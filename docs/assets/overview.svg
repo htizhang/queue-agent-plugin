@@ -1,147 +1,114 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="984" viewBox="0 0 1200 984" role="img" aria-labelledby="ov-title ov-desc">
-  <title id="ov-title">Queue Agent Plugin: entry routes</title>
-  <desc id="ov-desc">Your request, with the artifacts you already have, goes to the queue-agent entry skill. The entry skill chooses a starting point from the request; the Stages are capabilities, not a mandatory sequence. Data and a system description, or a model to check against data, route to Stage 1, queue modeling, which returns a documented model and its simulator. A model, simulator, or model family routes directly to Stage 2, policy design. A simulator is optional at entry. Stage 2 returns a policy or recommendation with evidence. Stage 1 can hand off to Stage 2 as an optional step. During research, the Discovery Lab, attached to Stage 2, opens only on explicit requests to design a new algorithm. A separate contribution request may also read relevant Lab material. A literature question routes to the shared queue-literature skill. Text to write or clarify routes to the shared asd-ste100 writing skill. A request to contribute routes to the opt-in queue-contribute skill, which publishes a checked change only as far as you authorize.</desc>
+<svg xmlns="http://www.w3.org/2000/svg" width="1084" height="512" viewBox="0 0 1084 512" role="img" aria-labelledby="ov-title ov-desc">
+  <title id="ov-title">Queue Agent Plugin research workflow: from data to a queue model to a policy</title>
+  <desc id="ov-desc">The figure reads from left to right: data, a queue model, and a policy. Stage 1, queue modeling, starts from event records and a system description. It formulates and calibrates the model, builds the simulator, and validates both independently, revising them as needed. Stage 1 delivers two matching results: a documented queue model and the simulator that implements it. An optional handoff passes them to Stage 2. Stage 2 can also start from your own model or model family, and it builds a simulator if one is needed. Stage 2, policy design, first confirms the problem with you. It then adopts, compares, tunes, or designs a policy, evaluates it, and explains the result. New designs also go through mechanism analysis, simplification, and reevaluation. Stage 2 delivers a policy with its explanation and evidence. Either Stage can be used on its own. Both Stages use queueing literature, and a reader outside the work checks their written explanations.</desc>
   <defs>
     <style>
-      .d { font-family: "DIN Alternate", Bahnschrift, "Roboto Condensed", "Helvetica Neue", Arial, "Liberation Sans", sans-serif; font-weight: 700; fill: #17232A; }
-      .s { font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Liberation Sans", sans-serif; fill: #17232A; }
-      .m { font-family: ui-monospace, "SF Mono", Menlo, Consolas, "Cascadia Mono", "Liberation Mono", "DejaVu Sans Mono", monospace; fill: #4B5A55; }
-      .eb { font-size: 15px; letter-spacing: 1.8px; fill: #2343A0; }
-      .gr { fill: #4B5A55; }
-      .ln { fill: none; stroke: #17232A; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
-      .dash { stroke-dasharray: 9 7; stroke-linecap: butt; }
-      .dot { stroke-dasharray: 0.1 7; stroke-linecap: round; stroke-width: 3; }
-      .card { fill: #F9FBF7; stroke: #17232A; stroke-width: 1.5; }
-      .card-dot { fill: #F9FBF7; stroke: #4B5A55; stroke-width: 2.6; stroke-dasharray: 0.1 6.5; stroke-linecap: round; }
-      .glyph { fill: none; stroke: #17232A; stroke-width: 2.2; }
-      .slot { stroke: #17232A; stroke-width: 1.6; }
-      .server { fill: #F9FBF7; stroke: #17232A; stroke-width: 2.2; }
+      text { font-family: Helvetica, Arial, "Liberation Sans", "Nimbus Sans", sans-serif; fill: #3B4752; }
+      .tag { font-size: 14px; font-weight: 700; letter-spacing: 1.4px; }
+      .h1 { font-size: 20px; font-weight: 700; fill: #1D2731; }
+      .h2 { font-size: 16px; font-weight: 700; fill: #1D2731; }
+      .b { font-size: 16px; }
+      .s { font-size: 15px; fill: #5A6672; }
+      .blue { fill: #2B5480; }
+      .amber { fill: #9A5512; }
+      .slate { fill: #5A6672; }
+      .card { fill: #F3F5F7; stroke: #A7B1BA; stroke-width: 1.2; }
+      .sub { fill: #FFFFFF; stroke: #A7B1BA; stroke-width: 1.2; }
+      .stage { fill: #EEF3F9; stroke: #34618F; stroke-width: 1.8; }
+      .rule { stroke: #C3D2E2; stroke-width: 1.2; }
+      .ar { fill: none; stroke: #1D2731; stroke-width: 2; }
+      .ar-step { fill: none; stroke: #34618F; stroke-width: 1.6; }
+      .ar-loop { fill: none; stroke: #B0661C; stroke-width: 2.2; stroke-linejoin: round; }
+      .ar-opt { fill: none; stroke: #5A6672; stroke-width: 2; stroke-dasharray: 7 5; }
     </style>
-    <pattern id="ov-grid" width="24" height="24" patternUnits="userSpaceOnUse">
-      <path d="M24 0H0V24" fill="none" stroke="#DCE5D8" stroke-width="1"/>
-    </pattern>
-    <marker id="ov-ah" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="12" markerHeight="12" markerUnits="userSpaceOnUse" orient="auto">
-      <path d="M1 1.2 L11.5 6 L1 10.8 Z" fill="#17232A"/>
+    <marker id="ov-ink" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto">
+      <path d="M0 0.6 L10 5 L0 9.4 Z" fill="#1D2731"/>
     </marker>
-    <marker id="ov-ah-g" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="12" markerHeight="12" markerUnits="userSpaceOnUse" orient="auto">
-      <path d="M1 1.2 L11.5 6 L1 10.8 Z" fill="#4B5A55"/>
+    <marker id="ov-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" markerUnits="userSpaceOnUse" orient="auto">
+      <path d="M0 0.6 L10 5 L0 9.4 Z" fill="#34618F"/>
     </marker>
-    <g id="ov-station">
-      <path class="glyph" d="M0 -17H36V17H0"/>
-      <path class="slot" d="M12 -17V17M24 -17V17"/>
-      <circle class="server" cx="55" cy="0" r="17"/>
-    </g>
+    <marker id="ov-amber" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto">
+      <path d="M0 0.6 L10 5 L0 9.4 Z" fill="#B0661C"/>
+    </marker>
+    <marker id="ov-slate" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto">
+      <path d="M0 0.6 L10 5 L0 9.4 Z" fill="#5A6672"/>
+    </marker>
   </defs>
 
-  <rect width="1200" height="984" rx="18" fill="#EFF3EC"/>
-  <rect width="1200" height="984" rx="18" fill="url(#ov-grid)"/>
-  <rect x="0.75" y="0.75" width="1198.5" height="982.5" rx="17.5" fill="none" stroke="#C5D2C1" stroke-width="1.5"/>
+  <rect x="0.5" y="0.5" width="1083" height="511" rx="14" fill="#FFFFFF" stroke="#D5DBE1"/>
+  <text class="tag slate" x="24" y="40">QUEUE AGENT PLUGIN · RESEARCH WORKFLOW</text>
 
-  <!-- Header -->
-  <text class="d eb" x="56" y="60">QUEUE AGENT PLUGIN · ENTRY ROUTES</text>
-  <text class="d" x="56" y="102" font-size="36">Start where your work already is</text>
-  <text class="s gr" x="56" y="136" font-size="20">The Stages are capabilities, not a mandatory sequence.</text>
+  <!-- Data -->
+  <rect class="card" x="24" y="160" width="144" height="120" rx="10"/>
+  <text class="h1" x="40" y="190">Data</text>
+  <text class="b" x="40" y="216">event records</text>
+  <text class="b" x="40" y="236">and a system</text>
+  <text class="b" x="40" y="256">description</text>
+  <line class="ar" x1="168" y1="220" x2="194" y2="220" marker-end="url(#ov-ink)"/>
 
-  <!-- Source and dispatcher -->
-  <rect class="card" x="56" y="166" width="364" height="66" rx="8" stroke-width="2"/>
-  <text class="d" x="78" y="195" font-size="23">Your request</text>
-  <text class="s gr" x="78" y="220" font-size="17">and the artifacts you already have</text>
-  <line class="ln" x1="110" y1="232" x2="110" y2="262" marker-end="url(#ov-ah)"/>
-  <circle cx="110" cy="300" r="36" fill="#F9FBF7" stroke="#17232A" stroke-width="2.5"/>
-  <path class="ln" d="M110 276V295M110 295L93 320M110 295V325M110 295L127 320" stroke-width="2.4"/>
-  <circle cx="110" cy="295" r="3.4" fill="#17232A"/>
-  <text class="m" x="164" y="295" font-size="20" style="fill:#17232A">queue-agent</text>
-  <text class="s gr" x="164" y="321" font-size="17">entry skill: chooses the starting point</text>
+  <!-- Stage 1 -->
+  <rect class="stage" x="196" y="72" width="216" height="292" rx="12"/>
+  <text class="tag blue" x="214" y="102">STAGE 1</text>
+  <text class="h1" x="214" y="130">Queue modeling</text>
+  <line class="rule" x1="214" y1="146" x2="394" y2="146"/>
+  <text class="b" x="214" y="176">Formulate and</text>
+  <text class="b" x="214" y="196">calibrate the model</text>
+  <line class="ar-step" x1="222" y1="206" x2="222" y2="226" marker-end="url(#ov-blue)"/>
+  <text class="b" x="214" y="248">Build the simulator</text>
+  <line class="ar-step" x1="222" y1="258" x2="222" y2="278" marker-end="url(#ov-blue)"/>
+  <text class="b" x="214" y="300">Validate</text>
+  <text class="b" x="214" y="320">independently</text>
+  <path class="ar-loop" d="M378 306 H396 V170 H382" marker-end="url(#ov-amber)"/>
+  <text class="s amber" x="388" y="273" text-anchor="end">revise</text>
+  <line class="ar" x1="412" y1="220" x2="438" y2="220" marker-end="url(#ov-ink)"/>
 
-  <!-- Trunk -->
-  <line class="ln" x1="110" y1="336" x2="110" y2="866"/>
+  <!-- Queue model -->
+  <rect class="card" x="440" y="124" width="172" height="192" rx="10"/>
+  <text class="h1" x="456" y="154">Queue model</text>
+  <rect class="sub" x="452" y="168" width="148" height="62" rx="7"/>
+  <text class="h2" x="466" y="194">Documented</text>
+  <text class="h2" x="466" y="214">model</text>
+  <rect class="sub" x="452" y="242" width="148" height="62" rx="7"/>
+  <text class="h2" x="466" y="268">Matching</text>
+  <text class="h2" x="466" y="288">simulator</text>
+  <line class="ar-opt" x1="612" y1="220" x2="680" y2="220" marker-end="url(#ov-slate)"/>
+  <text class="s" x="647" y="208" text-anchor="middle">optional</text>
 
-  <!-- Route 1: Stage 1 -->
-  <line class="ln" x1="110" y1="396" x2="451" y2="396" marker-end="url(#ov-ah)"/>
-  <text class="s" x="136" y="384" font-size="19">Data and a system description</text>
-  <text class="s gr" x="136" y="420" font-size="16.5">or a model to check against data</text>
-  <use href="#ov-station" x="454" y="396"/>
-  <rect class="card" x="544" y="358" width="356" height="76" rx="8" stroke-width="2.2"/>
-  <text class="d eb" x="566" y="386">STAGE 1</text>
-  <text class="m" x="880" y="386" font-size="17" text-anchor="end">queue-modeling</text>
-  <text class="d" x="566" y="419" font-size="26">Queue modeling</text>
-  <line class="ln" x1="900" y1="396" x2="933" y2="396" marker-end="url(#ov-ah)"/>
-  <text class="s" x="946" y="390" font-size="18">Documented model</text>
-  <text class="s" x="946" y="413" font-size="18">+ its simulator</text>
+  <!-- Second entry -->
+  <text class="tag slate" x="440" y="352">OR START WITH</text>
+  <rect class="card" x="440" y="362" width="172" height="74" rx="10"/>
+  <text class="h2" x="456" y="391">Your own model</text>
+  <text class="b" x="456" y="414">or model family</text>
+  <path class="ar" d="M612 399 H726 V366" marker-end="url(#ov-ink)"/>
+  <text class="s" x="742" y="396">Stage 2 builds a</text>
+  <text class="s" x="742" y="416">simulator if needed</text>
 
-  <!-- Optional handoff Stage 1 -> Stage 2 -->
-  <line class="ln dash" x1="620" y1="434" x2="620" y2="472" marker-end="url(#ov-ah)"/>
-  <text class="s gr" x="636" y="459" font-size="16">optional handoff</text>
+  <!-- Stage 2 -->
+  <rect class="stage" x="682" y="72" width="216" height="292" rx="12"/>
+  <text class="tag blue" x="700" y="102">STAGE 2</text>
+  <text class="h1" x="700" y="130">Policy design</text>
+  <line class="rule" x1="700" y1="146" x2="880" y2="146"/>
+  <text class="b" x="700" y="176">Confirm the problem</text>
+  <text class="b" x="700" y="196">with you</text>
+  <line class="ar-step" x1="708" y1="206" x2="708" y2="226" marker-end="url(#ov-blue)"/>
+  <text class="b" x="700" y="248">Adopt, compare,</text>
+  <text class="b" x="700" y="268">tune, or design</text>
+  <line class="ar-step" x1="708" y1="278" x2="708" y2="298" marker-end="url(#ov-blue)"/>
+  <text class="b" x="700" y="320">Evaluate and explain</text>
+  <text class="b" x="700" y="340">Refine new designs</text>
+  <path class="ar-loop" d="M864 326 H882 V254 H868" marker-end="url(#ov-amber)"/>
+  <text class="s amber" x="874" y="293" text-anchor="end">iterate</text>
+  <line class="ar" x1="898" y1="220" x2="924" y2="220" marker-end="url(#ov-ink)"/>
 
-  <!-- Route 2: Stage 2 -->
-  <line class="ln" x1="110" y1="512" x2="451" y2="512" marker-end="url(#ov-ah)"/>
-  <text class="s" x="136" y="500" font-size="19">A model, simulator, or family</text>
-  <text class="s gr" x="136" y="536" font-size="16.5">a simulator is optional at entry</text>
-  <use href="#ov-station" x="454" y="512"/>
-  <rect class="card" x="544" y="474" width="356" height="76" rx="8" stroke-width="2.2"/>
-  <text class="d eb" x="566" y="502">STAGE 2</text>
-  <text class="m" x="880" y="502" font-size="17" text-anchor="end">queue-policy</text>
-  <text class="d" x="566" y="535" font-size="26">Policy design</text>
-  <line class="ln" x1="900" y1="512" x2="933" y2="512" marker-end="url(#ov-ah)"/>
-  <text class="s" x="946" y="495" font-size="17.5">Policy or</text>
-  <text class="s" x="946" y="516" font-size="17.5">recommendation</text>
-  <text class="s" x="946" y="537" font-size="17.5">+ evidence</text>
+  <!-- Policy -->
+  <rect class="card" x="926" y="160" width="134" height="120" rx="10"/>
+  <text class="h1" x="942" y="190">Policy</text>
+  <text class="b" x="942" y="216">with its</text>
+  <text class="b" x="942" y="236">explanation</text>
+  <text class="b" x="942" y="256">and evidence</text>
 
-  <!-- Discovery Lab: explicit request only -->
-  <line class="ln dot" x1="620" y1="553" x2="620" y2="570" stroke="#4B5A55" style="stroke:#4B5A55"/>
-  <rect class="card-dot" x="600" y="574" width="300" height="84" rx="8"/>
-  <text class="d" x="620" y="601" font-size="18">Discovery Lab · research use</text>
-  <text class="s gr" x="620" y="624" font-size="16">only for explicit requests to</text>
-  <text class="s gr" x="620" y="645" font-size="16">design a new algorithm</text>
-
-  <!-- Route 3: Literature -->
-  <line class="ln" x1="110" y1="706" x2="451" y2="706" marker-end="url(#ov-ah)"/>
-  <text class="s" x="136" y="694" font-size="19">A literature question</text>
-  <text class="s gr" x="136" y="730" font-size="16.5">or a question about prior work</text>
-  <use href="#ov-station" x="454" y="706"/>
-  <rect class="card" x="544" y="670" width="356" height="72" rx="8"/>
-  <text class="d eb" x="566" y="697">SHARED</text>
-  <text class="m" x="880" y="697" font-size="17" text-anchor="end">queue-literature</text>
-  <text class="d" x="566" y="728" font-size="25">Literature</text>
-  <line class="ln" x1="900" y1="706" x2="933" y2="706" marker-end="url(#ov-ah)"/>
-  <text class="s" x="946" y="700" font-size="18">Source-grounded</text>
-  <text class="s" x="946" y="723" font-size="18">answer</text>
-
-  <!-- Route 4: Writing -->
-  <line class="ln" x1="110" y1="786" x2="451" y2="786" marker-end="url(#ov-ah)"/>
-  <text class="s" x="136" y="774" font-size="19">Text to write or clarify</text>
-  <text class="s gr" x="136" y="810" font-size="16.5">model descriptions or reports</text>
-  <use href="#ov-station" x="454" y="786"/>
-  <rect class="card" x="544" y="750" width="356" height="72" rx="8"/>
-  <text class="d eb" x="566" y="777">SHARED</text>
-  <text class="m" x="880" y="777" font-size="17" text-anchor="end">asd-ste100</text>
-  <text class="d" x="566" y="808" font-size="25">Writing</text>
-  <line class="ln" x1="900" y1="786" x2="933" y2="786" marker-end="url(#ov-ah)"/>
-  <text class="s" x="946" y="780" font-size="18">Text for readers</text>
-  <text class="s" x="946" y="803" font-size="18">outside the work</text>
-
-  <!-- Route 5: Contribution (explicit request only) -->
-  <line class="ln dot" x1="110" y1="866" x2="449" y2="866"/>
-  <path d="M441 860.6 L452 866 L441 871.4 Z" fill="#17232A"/>
-  <text class="s" x="136" y="854" font-size="19">A request to contribute</text>
-  <text class="s gr" x="136" y="890" font-size="16.5">opt-in, never automatic</text>
-  <use href="#ov-station" x="454" y="866"/>
-  <rect class="card-dot" x="544" y="830" width="356" height="72" rx="8"/>
-  <text class="d eb" x="566" y="857">OPT-IN</text>
-  <text class="m" x="880" y="857" font-size="17" text-anchor="end">queue-contribute</text>
-  <text class="d" x="566" y="888" font-size="25">Contribution</text>
-  <line class="ln" x1="900" y1="866" x2="933" y2="866" marker-end="url(#ov-ah)"/>
-  <text class="s" x="946" y="860" font-size="18">A checked change,</text>
-  <text class="s" x="946" y="883" font-size="18">only as authorized</text>
-
-  <!-- Legend -->
-  <line x1="56" y1="922" x2="1144" y2="922" stroke="#C5D2C1" stroke-width="1.5"/>
-  <line class="ln" x1="56" y1="950" x2="100" y2="950" marker-end="url(#ov-ah)"/>
-  <text class="s gr" x="114" y="956" font-size="16.5">route or main flow</text>
-  <line class="ln dash" x1="318" y1="950" x2="362" y2="950" marker-end="url(#ov-ah)"/>
-  <text class="s gr" x="376" y="956" font-size="16.5">optional step</text>
-  <line class="ln dot" x1="548" y1="950" x2="594" y2="950"/>
-  <text class="s gr" x="608" y="956" font-size="16.5">explicit request only</text>
-  <use href="#ov-station" x="830" y="950" transform="translate(830 950) scale(0.72) translate(-830 -950)"/>
-  <text class="s gr" x="890" y="956" font-size="16.5">a skill: buffer and server</text>
+  <!-- Shared support -->
+  <rect x="196" y="452" width="702" height="40" rx="8" fill="#F3F5F7"/>
+  <text class="tag slate" x="214" y="477">BOTH STAGES</text>
+  <text class="s" x="352" y="477">queueing literature · document-only reader checks</text>
 </svg>

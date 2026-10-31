@@ -73,6 +73,12 @@ class DocumentationTests(unittest.TestCase):
         self.assertEqual(tags.count("h1"), 1)
         self.assertTrue(any(tag == "html" and attrs.get("lang") == "en" for tag, attrs in parser.elements))
         self.assertTrue(any(tag == "meta" and attrs.get("name") == "viewport" for tag, attrs in parser.elements))
+        for tag, attrs in parser.elements:
+            if tag == "img" and attrs.get("src", "").endswith(".svg"):
+                root = ET.parse(ROOT / "docs" / attrs["src"]).getroot()
+                with self.subTest(image=attrs["src"]):
+                    self.assertEqual(attrs["width"], root.attrib["width"])
+                    self.assertEqual(attrs["height"], root.attrib["height"])
 
     def test_guide_does_not_require_remote_assets(self):
         text = (ROOT / "docs/guide.html").read_text()
@@ -87,6 +93,21 @@ class DocumentationTests(unittest.TestCase):
                     with self.subTest(tag=tag, resource=attrs[key]):
                         self.assertFalse(urlsplit(attrs[key]).netloc)
         self.assertNotRegex(text, r"@import\b|url\(\s*['\"]?(?:https?:)?//")
+
+    def test_research_diagrams_omit_runtime_file_paths(self):
+        ns = {"svg": "http://www.w3.org/2000/svg"}
+        for path in (ROOT / "docs/assets").glob("*.svg"):
+            root = ET.parse(path).getroot()
+            visible = " ".join("".join(node.itertext()) for node in root.findall(".//svg:text", ns))
+            with self.subTest(diagram=path.name):
+                self.assertNotRegex(visible, r"SKILL\.md|skills/|hooks/|SessionStart")
+
+    def test_policy_diagram_shows_interpretation_and_refinement(self):
+        ns = {"svg": "http://www.w3.org/2000/svg"}
+        root = ET.parse(ROOT / "docs/assets/stage-2.svg").getroot()
+        visible = " ".join("".join(node.itertext()) for node in root.findall(".//svg:text", ns)).lower()
+        for topic in (r"family", r"objective", r"constraint", r"simplif", r"explain|interpret|mechanism"):
+            self.assertRegex(visible, topic)
 
     def test_svg_diagrams_are_standalone_and_described(self):
         ns = {"svg": "http://www.w3.org/2000/svg"}
