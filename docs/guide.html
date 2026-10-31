@@ -761,7 +761,7 @@ code, .path { font-family: var(--mono); font-size: 0.86em; }
       </div>
       <div>
         <p class="lead">These skills guide your coding agent from data to a queue model to a policy. The two Stages are capabilities, not a pipeline that you must run from end to end. Bring logs, a model, a simulator, or a question, and the entry skill helps your agent choose where to begin.</p>
-        <p class="status"><span class="label">Install</span>Queue Agent 0.1.0 installs in Claude Code or Codex with a one-line command. <a class="xref" href="getting-started.md">Getting started</a> gives the commands, how to start the entry skill in each host, and a source-use fallback.</p>
+        <p class="status"><span class="label">Install</span>Queue Agent installs in Claude Code or Codex with a one-line command. <a class="xref" href="getting-started.md">Getting started</a> gives the commands, how to start the entry skill in each host, and a source-use fallback.</p>
       </div>
     </div>
   </div>
@@ -888,8 +888,8 @@ code, .path { font-family: var(--mono); font-size: 0.86em; }
     <p class="lede">Stage 1 turns data and a system description into two matching deliverables: a documented queue model and an executable simulator that implements it. The simulator generates trajectories and evaluates the consequences of different policies.</p>
 
     <figure class="diagram">
-      <img src="assets/stage-1.svg" width="1200" height="1064" alt="Stage 1 diagram. Observations and a system description lead to modeling the system and implementing a simulator. An independent validator checks the result against the original evidence and returns findings. Feedback revises the model, the implementation, or both. When checks support the intended use, you get a documented model and its matching simulator. A handoff to Stage 2 is optional.">
-      <figcaption><span>Stage 1 at a glance. The text below describes each step.</span><a class="path" href="assets/stage-1.svg">Open assets/stage-1.svg</a></figcaption>
+      <img src="assets/stage-1.svg" width="1084" height="780" alt="Stage 1: data and a system description support model formulation, calibration, and simulator construction. Independent validation returns evidence for revision. A document-only reader check helps clarify the explanation. The deliverables are a documented queue model and its matching simulator. The handoff to Stage 2 is optional.">
+      <figcaption><span>Build and validate the model and simulator, then check that the explanation is clear.</span><a class="path" href="assets/stage-1.svg">Open Stage 1 diagram</a></figcaption>
     </figure>
 
     <div class="ledger">
@@ -948,8 +948,8 @@ code, .path { font-family: var(--mono); font-size: 0.86em; }
     <p class="lede">Stage 2 finds a policy suited to your queue and objective. It first confirms the problem with you, then does the work that problem needs. Designing a new algorithm is one possible task, not the default.</p>
 
     <figure class="diagram">
-      <img src="assets/stage-2.svg" width="1200" height="1316" alt="Stage 2 diagram. You enter with a Stage 1 handoff or with your own model, simulator, or family. A simulator is optional. The agent first confirms the queue family, objective, and constraints with you, and reuses a prior explicit confirmation. The confirmed definition stays fixed unless you authorize a change. The agent then chooses to adopt, compare, tune, or design, prepares an evaluator only when needed, and verifies the final version before it delivers a policy or recommendation with evidence.">
-      <figcaption><span>Stage 2 at a glance. The text below describes each step.</span><a class="path" href="assets/stage-2.svg">Open assets/stage-2.svg</a></figcaption>
+      <img src="assets/stage-2.svg" width="1120" height="1144" alt="Stage 2: confirm the queue family, objective, and constraints with the user. Check any evaluator against the model. Adopt, compare, or tune existing policies, or develop a new policy through coordinated agent iterations. New designs go through mechanism explanation, simplification, and reevaluation against fair baselines. Results guide further development. Check the final evidence and the clarity of the report before delivery.">
+      <figcaption><span>Policy development includes understanding the mechanism, simplifying the rule, and testing it again.</span><a class="path" href="assets/stage-2.svg">Open Stage 2 diagram</a></figcaption>
     </figure>
 
     <div class="enter">
@@ -1081,8 +1081,8 @@ code, .path { font-family: var(--mono); font-size: 0.86em; }
     <div class="converge">
       <div class="sheet">
         <span class="label">For promising candidates</span>
-        <h3>Refine by simplifying</h3>
-        <p>Simplification is policy development. Workers test removing components, consolidating rules, or fixing parameters, and keep the original for comparison. Ablation checks what changes when a component is removed; sensitivity analysis checks what changes when a parameter varies. A flat response in one instance does not show that a parameter can be fixed across the family.</p>
+        <h3>Understand and simplify the policy</h3>
+        <p>Explain which decisions each rule changes and why those changes may help. Simplification is policy development. Workers test removing components, consolidating rules, or fixing parameters, and keep the original for comparison. Ablation checks what changes when a component is removed; sensitivity analysis checks what changes when a parameter varies. A flat response in one instance does not show that a parameter can be fixed across the family.</p>
         <p>The simpler policy is preferred when the performance difference is practically negligible and the evaluation supports that conclusion.</p>
       </div>
       <div class="sheet">
@@ -1153,7 +1153,8 @@ code, .path { font-family: var(--mono); font-size: 0.86em; }
         <p class="src"><a class="path" href="../skills/asd-ste100/SKILL.md"><span class="vh">Skill source: </span>skills/asd-ste100/SKILL.md</a></p>
         <p>English model descriptions, policy explanations, and reports for a reader who did not take part in the work. The skill uses STE-flavored prose, based on the ASD-STE100 rules for Simplified Technical English.</p>
         <p>It keeps equations, numerical results, citations, assumptions, scope, and claim strength. A wording edit does not change the queue family, objective, constraints, or policy.</p>
-        <p class="aside-dotted">The optional linter checks some language patterns. It does not check scientific correctness or reader understanding.</p>
+        <p>For a substantial report or handoff, a <a href="../skills/asd-ste100/references/reader-check.md">reader check</a> tests whether the explanation stands on its own. A reviewer who did not draft it explains the system, the main idea, a small example, and what the evidence supports. The author checks those answers against the sources and repairs unclear passages. If independent review is unavailable, the author performs a document-only self-review.</p>
+        <p class="aside-dotted">Short edits stay short. A language-linter result or agent review is not a guarantee that human readers will understand the text.</p>
       </article>
     </div>
     <p class="back"><a href="#routes">Back to entry routes</a></p>
@@ -1233,7 +1234,7 @@ code, .path { font-family: var(--mono); font-size: 0.86em; }
   <div class="wrap">
     <p class="kicker">Reading the diagrams</p>
     <h2 id="key-title">Diagram key</h2>
-    <p class="lede lede--after-title">The diagrams borrow the notation of queueing networks. Each skill is a station, and your request is routed to the station that fits.</p>
+    <p class="lede lede--after-title">The page's entry map draws skills as queueing stations. The separate workflow diagrams show the research steps: blue boxes for construction and design, amber for validation and feedback, and neutral boxes for inputs and deliverables.</p>
     <dl class="legend">
       <div>
         <dt><svg viewBox="0 0 70 32" aria-hidden="true" focusable="false"><svg x="4" y="2" width="56" height="28" viewBox="0 0 56 28"><use href="#g-station"/></svg></svg></dt>
@@ -1249,19 +1250,19 @@ code, .path { font-family: var(--mono); font-size: 0.86em; }
       </div>
       <div>
         <dt><svg viewBox="0 0 70 32" aria-hidden="true" focusable="false"><path d="M4 16H56" stroke="#17232A" stroke-width="2.5" stroke-dasharray="8 6"/><path d="M54 10L65 16L54 22Z" fill="#17232A"/></svg></dt>
-        <dd><b>Dashed line.</b> Optional, used only when the task needs it: the Stage 1 handoff, an existing model to check, or evaluator preparation.</dd>
+        <dd><b>Dashed line.</b> An optional route, such as a handoff or a proposed problem change. The adjacent label names the condition.</dd>
       </div>
       <div>
         <dt><svg viewBox="0 0 70 32" aria-hidden="true" focusable="false"><path d="M4 16H60" stroke="#4B5A55" stroke-width="3" stroke-linecap="round" stroke-dasharray="0.1 7"/></svg></dt>
         <dd><b>Dotted line or outline.</b> Opened only on your explicit request: the Discovery Lab and contribution.</dd>
       </div>
       <div>
-        <dt><svg viewBox="0 0 70 32" aria-hidden="true" focusable="false"><path d="M6 22C6 4 50 4 56 18" fill="none" stroke="#B23A2E" stroke-width="2.6" stroke-linecap="round"/><path d="M50 15L58 24L61 13Z" fill="#B23A2E"/></svg></dt>
-        <dd><b>Red-pencil arrow.</b> Feedback or iteration: validation findings in Stage 1, and the inner and outer loops of policy discovery.</dd>
+        <dt><svg viewBox="0 0 70 32" aria-hidden="true" focusable="false"><path d="M6 22C6 4 50 4 56 18" fill="none" stroke="#B0661C" stroke-width="2.6" stroke-linecap="round"/><path d="M50 15L58 24L61 13Z" fill="#B0661C"/></svg></dt>
+        <dd><b>Amber arrow.</b> Evidence feeds back into model revision or policy development. Circular arrows indicate repeated trials.</dd>
       </div>
       <div>
-        <dt><svg viewBox="0 0 70 32" aria-hidden="true" focusable="false"><rect x="4" y="5" width="60" height="22" rx="4" fill="#E5EBF6" stroke="#2343A0" stroke-width="2.4"/><svg x="25" y="7" width="18" height="18" viewBox="0 0 24 24" style="color:#2343A0"><use href="#g-lock"/></svg></svg></dt>
-        <dd><b>Cobalt frame.</b> The confirmed problem definition. It stays fixed unless you authorize a change.</dd>
+        <dt><svg viewBox="0 0 70 32" aria-hidden="true" focusable="false"><rect x="4" y="5" width="60" height="22" rx="4" fill="#FFFFFF" stroke="#1D2731" stroke-width="2.4"/><svg x="25" y="7" width="18" height="18" viewBox="0 0 24 24" style="color:#2343A0"><use href="#g-lock"/></svg></svg></dt>
+        <dd><b>Problem frame.</b> The confirmed family, objective, and constraints bound the policy work. Only you can approve a change.</dd>
       </div>
       <div>
         <dt><svg viewBox="0 0 70 32" aria-hidden="true" focusable="false"><circle cx="10" cy="16" r="5.5" fill="#2343A0"/><path d="M20 16H56" stroke="#2343A0" stroke-width="2.5"/><path d="M54 10L65 16L54 22Z" fill="#2343A0"/></svg></dt>
@@ -1273,15 +1274,15 @@ code, .path { font-family: var(--mono); font-size: 0.86em; }
     <ul class="files">
       <li>
         <a href="assets/overview.svg">assets/overview.svg</a>
-        <p>Entry routes. It shows the same routes as the map at the top of this page, which is its text alternative.</p>
+        <p>The research workflow: data to a queue model and simulator, then to a policy. Either Stage can also be used on its own.</p>
       </li>
       <li>
         <a href="assets/stage-1.svg">assets/stage-1.svg</a>
-        <p>Stage 1: inputs, modeling and implementation, independent validation, feedback, and the two deliverables. Its text alternative is the <a href="#stage-1">Stage 1 section</a>.</p>
+        <p>Stage 1: formulation, calibration, simulator construction, independent validation, and a reader check before handoff. See the <a href="#stage-1">Stage 1 section</a>.</p>
       </li>
       <li>
         <a href="assets/stage-2.svg">assets/stage-2.svg</a>
-        <p>Stage 2: entry, confirmation, the fixed definition, the four kinds of work, the optional evaluator, discovery, verification, and delivery. Its text alternatives are the <a href="#stage-2">Stage 2</a> and <a href="#discovery">discovery</a> sections.</p>
+        <p>Stage 2: problem confirmation, policy selection or development, mechanism explanation, simplification, reevaluation, and delivery. See the <a href="#stage-2">Stage 2</a> and <a href="#discovery">discovery</a> sections.</p>
       </li>
     </ul>
     <p class="flex-note measure">The SVG files render directly on GitHub. Each includes a title and a text description for screen readers, and none loads external resources.</p>

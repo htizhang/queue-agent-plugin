@@ -31,6 +31,7 @@ class WritingSkillTests(unittest.TestCase):
     def test_runtime_assets_are_bundled_without_a_nested_plugin(self):
         for relative in (
             "references/writing-rules.md",
+            "references/reader-check.md",
             "examples/before-after.md",
             "examples/linter-edge-cases.md",
             "scripts/ste-lint.py",
@@ -40,6 +41,10 @@ class WritingSkillTests(unittest.TestCase):
         self.assertFalse((SKILL / ".claude-plugin").exists())
         self.assertFalse((SKILL / ".git").exists())
         self.assertFalse((SKILL / "hooks").exists())
+
+    def test_reader_check_is_reachable_from_the_shared_skill(self):
+        source = (SKILL / "SKILL.md").read_text()
+        self.assertIn("(references/reader-check.md)", source)
 
     def test_entry_and_both_stages_reach_the_shared_skill(self):
         for name in ("queue-agent", "queue-modeling", "queue-policy"):

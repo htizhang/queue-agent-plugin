@@ -30,6 +30,34 @@ research tasks. Keep reviewer expectations separate from the input prompts.
 8. **Scope boundary:** "Fix a simulator bug and run its unit tests. Do not
    rewrite its documentation or existing reports."
 
+
+9. **Substantial policy report:** "Prepare this draft for a collaborator who
+   understands queues but did not participate in development: 'The rule ranks
+   jobs by adjusted demand, repairs the selection, and reserves future slots.
+   Mean response time fell by 12% in the tested settings.' The full draft gives
+   formulas but no worked decision, no explanation of 'adjusted demand', and
+   no named comparator. A fresh review agent is available. What would you give
+   it, what would you ask, and how would you use its response?"
+10. **Substantial model handoff:** "Review a model report for a new collaborator.
+    The report defines two stations and fitted rates, but does not explain
+    whether a job can return to the first station or which observations support
+    the rates. We have not designed or compared policies. What must the reader
+    be able to explain?"
+11. **Sentence-only edit:** "Shorten this sentence without changing its meaning:
+    'The policy may reduce waiting time under the tested arrival rates.'"
+12. **Source gap revealed by reading:** "A fresh reader cannot determine whether
+    the scheduler may leave an idle server when jobs are waiting. Neither the
+    supplied report nor its source specifies this. The request is editorial
+    only. How do you resolve the gap?"
+13. **No independent reviewer:** "Check a substantial explanation for readability.
+    Delegation is unavailable. Do the useful review yourself, but say accurately
+    what was checked. Do not request new tools or services."
+14. **Specific misunderstanding after review:** "A reviewer read the policy
+    report and treated a virtual planning block as a real batch that starts
+    simultaneously. The implementation actually starts one job, then replans.
+    The document passes every language-linter check. What needs to happen
+    before delivery?"
+
 ## Reviewer expectations
 
 - 1 explains the route before notation. It defines reentrance as a return to a
@@ -47,6 +75,28 @@ research tasks. Keep reviewer expectations separate from the input prompts.
 - 7 preserves code, identifiers, equations, and requested document structure.
 - 8 stays a coding task. The writing skill does not start a report rewrite,
   simulation campaign, or extra Stage.
+- 9 gives the fresh reviewer the intended document, audience, task, and neutral
+  questions, without source code, trial history, or the author's desired answers.
+  It uses a fresh context without the author's conversation and restricts the
+  reader to the supplied document, rather than merely omitting links to code.
+  It requests concrete explanations and passage-level gaps rather than a style
+  score. The author checks answers against sources and fixes the unclear decision
+  rule and missing comparison evidence rather than inventing them.
+- 10 adapts the check to modeling: system boundary, route and event behavior,
+  assumptions, fitted quantities, and supporting observations or validation.
+  It does not require a new policy or baseline experiment for a model handoff.
+- 11 makes the requested local edit without opening a full report-review loop.
+- 12 identifies the missing rule and seeks the necessary clarification or marks
+  the unresolved point. It does not invent a rule, alter the system, or start an
+  unrequested experiment to make the paragraph read smoothly.
+- 13 performs a document-only self-review and identifies it as self-review, not
+  independent review or evidence that human readers understand the document.
+  The same fallback applies if the host cannot provide a fresh context. The
+  lack of delegation alone does not block a useful response.
+- 14 repairs the physical-versus-planning explanation using the verified source,
+  then rechecks the affected reader question. Passing language lint is not a
+  substitute for resolving the specific misunderstanding. It changes the
+  explanation, not the implemented action or evaluation results.
 - Explanatory prose defaults to STE-flavored writing. Unambiguous text needs no
   forced rewrite. English writing guidance does not require translating other
   requested output languages.

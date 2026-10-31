@@ -1,150 +1,125 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1064" viewBox="0 0 1200 1064" role="img" aria-labelledby="s1-title s1-desc">
-  <title id="s1-title">Stage 1, queue modeling: a documented model and its matching simulator</title>
-  <desc id="s1-desc">You bring observations, such as event records, and a system description, and optionally an existing model or simulator to check against the data. The main agent models the system: jobs, resources, routing, the system boundary, decision timing, and information. It implements a simulator that keeps system rules, fitted estimates, the replaceable policy, and measurements separate, with explicit seeds and an early small run. The model description, the simulator, and the original evidence go to an independent validator, a separate subagent when the host supports one. The validator writes and runs its own checks: model and implementation agreement, mechanics, data agreement, and policy use. It returns findings with evidence to reproduce them. The main agent integrates this feedback against the evidence. Feedback can revise the model, the implementation, or both, and the affected checks are rerun. When checks support the intended use, you get back two consistent deliverables: a documented, self-contained queue model and the corresponding simulator, plus concise validation results and remaining issues. A handoff to Stage 2 is optional and happens only when you request policy work.</desc>
+<svg xmlns="http://www.w3.org/2000/svg" width="1084" height="780" viewBox="0 0 1084 780" role="img" aria-labelledby="s1-title s1-desc">
+  <title id="s1-title">Stage 1, queue modeling: a documented queue model and its matching simulator</title>
+  <desc id="s1-desc">Stage 1 starts from data, such as event records, and a system description. Model construction has two steps. The first step formulates and calibrates the queue model. It defines the jobs, resources, routing, and capacity, and it states when decisions occur and what information is available at those times. It fits stochastic inputs to the data and keeps observed quantities separate from latent ones. The second step builds an executable simulator that implements the documented model, runs any feasible policy, and generates trajectories. Independent validation follows. A separate validator receives the model, the simulator, and the original data and description, and builds its own checks. The checks ask whether the model and simulator agree, whether the mechanics are right on small cases that can be checked by hand, whether the simulator agrees with the observed data, and whether behavior stays valid under other policies. Each finding comes with reproducible evidence. Findings lead to revisions of the model, the simulator, or both, and the affected checks run again. When the checks support the intended use, a reader check follows: a reader outside the work explains the model from the document alone. Unclear passages are revised. This step checks the explanation and is separate from model validation. Stage 1 delivers a documented queue model and the matching simulator, with validation evidence and the remaining issues. A handoff to Stage 2 is optional and happens only if policy work follows.</desc>
   <defs>
     <style>
-      .d { font-family: "DIN Alternate", Bahnschrift, "Roboto Condensed", "Helvetica Neue", Arial, "Liberation Sans", sans-serif; font-weight: 700; fill: #17232A; }
-      .s { font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Liberation Sans", sans-serif; fill: #17232A; }
-      .m { font-family: ui-monospace, "SF Mono", Menlo, Consolas, "Cascadia Mono", "Liberation Mono", "DejaVu Sans Mono", monospace; fill: #4B5A55; }
-      .eb { font-size: 15px; letter-spacing: 1.8px; fill: #2343A0; }
-      .lab { font-size: 15px; letter-spacing: 1.8px; fill: #4B5A55; }
-      .gr { fill: #4B5A55; }
-      .rd { fill: #B23A2E; }
-      .ln { fill: none; stroke: #17232A; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
-      .lr { fill: none; stroke: #B23A2E; stroke-width: 2.8; stroke-linecap: round; stroke-linejoin: round; }
-      .dash { stroke-dasharray: 9 7; stroke-linecap: butt; }
-      .card { fill: #F9FBF7; stroke: #17232A; stroke-width: 1.5; }
-      .card-dash { fill: #F9FBF7; stroke: #17232A; stroke-width: 1.8; stroke-dasharray: 9 7; }
-      .val { fill: #E5EBF6; stroke: #2343A0; stroke-width: 2.2; }
-      .chip { fill: #F9FBF7; stroke: #2343A0; stroke-width: 1.3; }
+      text { font-family: Helvetica, Arial, "Liberation Sans", "Nimbus Sans", sans-serif; fill: #3B4752; }
+      .tag { font-size: 13px; font-weight: 700; letter-spacing: 1.4px; }
+      .h1 { font-size: 19px; font-weight: 700; fill: #1D2731; }
+      .h2 { font-size: 17px; font-weight: 700; fill: #1D2731; }
+      .b { font-size: 16px; }
+      .s { font-size: 15px; fill: #5A6672; }
+      .blue { fill: #2B5480; }
+      .amber { fill: #9A5512; }
+      .slate { fill: #5A6672; }
+      .card { fill: #F3F5F7; stroke: #A7B1BA; stroke-width: 1.2; }
+      .sub { fill: #FFFFFF; stroke: #A7B1BA; stroke-width: 1.2; }
+      .lane-c { fill: #F3F7FB; }
+      .lane-v { fill: #FCF7F0; }
+      .build { fill: #FFFFFF; stroke: #34618F; stroke-width: 1.8; }
+      .check { fill: #FFFFFF; stroke: #B0661C; stroke-width: 1.8; }
+      .quiet { fill: #FFFFFF; stroke: #8C97A1; stroke-width: 1.4; }
+      .opt { fill: #FFFFFF; stroke: #5A6672; stroke-width: 1.4; stroke-dasharray: 6 4; }
+      .ar { fill: none; stroke: #1D2731; stroke-width: 2; stroke-linejoin: round; }
+      .ar-loop { fill: none; stroke: #B0661C; stroke-width: 2.2; stroke-linejoin: round; }
+      .ar-opt { fill: none; stroke: #5A6672; stroke-width: 2; stroke-dasharray: 7 5; }
+      .dot-a { fill: #B0661C; }
     </style>
-    <pattern id="s1-grid" width="24" height="24" patternUnits="userSpaceOnUse">
-      <path d="M24 0H0V24" fill="none" stroke="#DCE5D8" stroke-width="1"/>
-    </pattern>
-    <marker id="s1-ah" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="12" markerHeight="12" markerUnits="userSpaceOnUse" orient="auto">
-      <path d="M1 1.2 L11.5 6 L1 10.8 Z" fill="#17232A"/>
+    <marker id="s1-ink" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto">
+      <path d="M0 0.6 L10 5 L0 9.4 Z" fill="#1D2731"/>
     </marker>
-    <marker id="s1-ah-r" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto">
-      <path d="M1 1.2 L11.5 6 L1 10.8 Z" fill="#B23A2E"/>
+    <marker id="s1-amber" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto">
+      <path d="M0 0.6 L10 5 L0 9.4 Z" fill="#B0661C"/>
+    </marker>
+    <marker id="s1-slate" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto">
+      <path d="M0 0.6 L10 5 L0 9.4 Z" fill="#5A6672"/>
     </marker>
   </defs>
 
-  <rect width="1200" height="1064" rx="18" fill="#EFF3EC"/>
-  <rect width="1200" height="1064" rx="18" fill="url(#s1-grid)"/>
-  <rect x="0.75" y="0.75" width="1198.5" height="1062.5" rx="17.5" fill="none" stroke="#C5D2C1" stroke-width="1.5"/>
+  <rect x="0.5" y="0.5" width="1083" height="779" rx="14" fill="#FFFFFF" stroke="#D5DBE1"/>
+  <text class="tag slate" x="24" y="40">STAGE 1 · QUEUE MODELING</text>
 
-  <!-- Header -->
-  <text class="d eb" x="56" y="60">STAGE 1 · QUEUE MODELING</text>
-  <text class="d" x="56" y="102" font-size="34">A documented model and its matching simulator</text>
-  <text class="m" x="56" y="134" font-size="17">skills/queue-modeling/SKILL.md</text>
+  <!-- Lane backgrounds (drawn first) -->
+  <rect class="lane-c" x="200" y="64" width="860" height="210" rx="12"/>
+  <rect class="lane-v" x="200" y="334" width="860" height="210" rx="12"/>
 
-  <!-- Legend -->
-  <line class="ln" x1="734" y1="56" x2="770" y2="56" marker-end="url(#s1-ah)"/>
-  <text class="s gr" x="782" y="61" font-size="15.5">main flow</text>
-  <line class="ln dash" x1="880" y1="56" x2="916" y2="56" marker-end="url(#s1-ah)"/>
-  <text class="s gr" x="928" y="61" font-size="15.5">optional</text>
-  <line class="lr" x1="1014" y1="56" x2="1050" y2="56" marker-end="url(#s1-ah-r)"/>
-  <text class="s gr" x="1062" y="61" font-size="15.5">feedback</text>
+  <!-- Inputs -->
+  <rect class="card" x="24" y="120" width="152" height="120" rx="10"/>
+  <text class="h1" x="40" y="150">Data</text>
+  <text class="b" x="40" y="176">event records</text>
+  <text class="b" x="40" y="196">and a system</text>
+  <text class="b" x="40" y="216">description</text>
+  <line class="ar" x1="176" y1="180" x2="216" y2="180" marker-end="url(#s1-ink)"/>
+  <path class="ar" d="M100 240 V450 H216" marker-end="url(#s1-ink)"/>
+  <text class="s" x="112" y="300">original data</text>
+  <text class="s" x="112" y="318">and description</text>
 
-  <!-- You bring -->
-  <text class="d lab" x="56" y="186">YOU BRING</text>
-  <rect class="card" x="72" y="198" width="320" height="66" rx="8"/>
-  <text class="d" x="94" y="226" font-size="21">Observations</text>
-  <text class="s gr" x="94" y="250" font-size="16.5">event records or other data</text>
-  <rect class="card" x="412" y="198" width="320" height="66" rx="8"/>
-  <text class="d" x="434" y="226" font-size="21">System description</text>
-  <text class="s gr" x="434" y="250" font-size="16.5">resources, routing, and rules</text>
-  <rect class="card-dash" x="752" y="198" width="376" height="66" rx="8"/>
-  <text class="d" x="774" y="226" font-size="20">Existing model or simulator</text>
-  <text class="s gr" x="774" y="250" font-size="16.5">optional, to check against data</text>
+  <!-- Model construction lane -->
+  <text class="tag blue" x="218" y="90">MODEL CONSTRUCTION</text>
+  <rect class="build" x="218" y="104" width="330" height="152" rx="10"/>
+  <text class="h1" x="236" y="134">Formulate and calibrate</text>
+  <text class="b" x="236" y="162">jobs, resources, routing, capacity</text>
+  <text class="b" x="236" y="184">decision times and information</text>
+  <text class="b" x="236" y="206">stochastic inputs fitted to data</text>
+  <text class="b" x="236" y="228">observed versus latent quantities</text>
+  <line class="ar" x1="548" y1="180" x2="606" y2="180" marker-end="url(#s1-ink)"/>
+  <rect class="build" x="608" y="104" width="330" height="152" rx="10"/>
+  <text class="h1" x="626" y="134">Executable simulator</text>
+  <text class="b" x="626" y="162">implements the documented model</text>
+  <text class="b" x="626" y="184">runs any feasible policy</text>
+  <text class="b" x="626" y="206">generates trajectories</text>
 
-  <line class="ln" x1="232" y1="264" x2="232" y2="330" marker-end="url(#s1-ah)"/>
-  <path class="ln" d="M572 264V298H400V330" marker-end="url(#s1-ah)"/>
-  <line class="ln dash" x1="940" y1="264" x2="940" y2="330" marker-end="url(#s1-ah)"/>
+  <!-- Between lanes -->
+  <path class="ar-loop" d="M460 374 V258" marker-end="url(#s1-amber)"/>
+  <text class="s amber" x="472" y="310">revise the model</text>
+  <path class="ar-loop" d="M680 374 V258" marker-end="url(#s1-amber)"/>
+  <text class="s amber" x="692" y="310">revise the simulator</text>
+  <line class="ar" x1="900" y1="256" x2="900" y2="372" marker-end="url(#s1-ink)"/>
+  <text class="s" x="912" y="300">model and</text>
+  <text class="s" x="912" y="318">simulator</text>
 
-  <!-- A: model the system -->
-  <rect class="card" x="72" y="332" width="424" height="116" rx="8" stroke-width="2"/>
-  <text class="d" x="96" y="368" font-size="23">Model the system</text>
-  <text class="s gr" x="96" y="394" font-size="16.5">jobs, resources, routing, boundary</text>
-  <text class="s gr" x="96" y="416" font-size="16.5">decision timing and information</text>
-  <text class="s gr" x="96" y="438" font-size="16.5">observed data vs. latent mechanisms</text>
+  <!-- Independent validation lane -->
+  <text class="tag amber" x="218" y="360">INDEPENDENT VALIDATION</text>
+  <rect class="check" x="218" y="374" width="824" height="152" rx="10"/>
+  <text class="h1" x="236" y="404">Validation checks</text>
+  <text class="s" x="236" y="428">a separate validator builds its own checks from the original evidence</text>
+  <rect class="dot-a" x="236" y="453" width="8" height="8" rx="1.5"/>
+  <text class="b" x="254" y="462">model and simulator agree</text>
+  <rect class="dot-a" x="236" y="483" width="8" height="8" rx="1.5"/>
+  <text class="b" x="254" y="492">agreement with observed data</text>
+  <rect class="dot-a" x="624" y="453" width="8" height="8" rx="1.5"/>
+  <text class="b" x="642" y="462">mechanics on small, checkable cases</text>
+  <rect class="dot-a" x="624" y="483" width="8" height="8" rx="1.5"/>
+  <text class="b" x="642" y="492">valid behavior under other policies</text>
+  <text class="s amber" x="1024" y="512" text-anchor="end">each finding comes with reproducible evidence</text>
 
-  <!-- B: implement the simulator -->
-  <rect class="card" x="704" y="332" width="424" height="116" rx="8" stroke-width="2"/>
-  <text class="d" x="728" y="368" font-size="23">Implement the simulator</text>
-  <text class="s gr" x="728" y="394" font-size="16.5">system rules, fitted estimates,</text>
-  <text class="s gr" x="728" y="416" font-size="16.5">replaceable policy, measurements</text>
-  <text class="s gr" x="728" y="438" font-size="16.5">explicit seeds, a small case first</text>
+  <!-- Exit and delivery -->
+  <line class="ar" x1="334" y1="526" x2="334" y2="604" marker-end="url(#s1-ink)"/>
+  <text class="s" x="346" y="568">when the checks support</text>
+  <text class="s" x="346" y="586">the intended use</text>
 
-  <line class="ln" x1="496" y1="390" x2="702" y2="390" marker-end="url(#s1-ah)"/>
+  <rect class="quiet" x="218" y="606" width="232" height="150" rx="10"/>
+  <text class="h2" x="234" y="634">Reader check</text>
+  <text class="s" x="234" y="658">a reader outside the work</text>
+  <text class="s" x="234" y="678">explains the model from</text>
+  <text class="s" x="234" y="698">the document alone</text>
+  <text class="s" x="234" y="724">clarify unclear passages</text>
+  <text class="s" x="234" y="742">separate from validation</text>
+  <line class="ar" x1="450" y1="676" x2="484" y2="676" marker-end="url(#s1-ink)"/>
 
-  <!-- B -> C -->
-  <line class="ln" x1="1000" y1="448" x2="1000" y2="538" marker-end="url(#s1-ah)"/>
-  <text class="s gr" x="988" y="486" font-size="16" text-anchor="end">model, simulator, and</text>
-  <text class="s gr" x="988" y="508" font-size="16" text-anchor="end">the original evidence</text>
+  <rect class="card" x="486" y="596" width="380" height="146" rx="10"/>
+  <text class="tag slate" x="502" y="620">DELIVERED</text>
+  <rect class="sub" x="500" y="632" width="168" height="70" rx="7"/>
+  <text class="h2" x="514" y="660">Documented</text>
+  <text class="h2" x="514" y="682">queue model</text>
+  <rect class="sub" x="684" y="632" width="168" height="70" rx="7"/>
+  <text class="h2" x="698" y="660">Matching</text>
+  <text class="h2" x="698" y="682">simulator</text>
+  <text class="s" x="502" y="728">with validation evidence and open issues</text>
 
-  <!-- C: independent validation -->
-  <rect class="val" x="704" y="540" width="424" height="196" rx="10"/>
-  <text class="d" x="728" y="568" font-size="14" letter-spacing="1.4" style="fill:#2343A0">SEPARATE SUBAGENT, WHEN AVAILABLE</text>
-  <text class="d" x="728" y="598" font-size="23">Independent validation</text>
-  <text class="s" x="728" y="623" font-size="16.5">writes and runs its own checks</text>
-  <text class="s" x="728" y="645" font-size="16.5">from the original evidence</text>
-  <rect class="chip" x="728" y="662" width="232" height="28" rx="14"/>
-  <text class="s" x="844" y="681" font-size="15" text-anchor="middle">Model ↔ implementation</text>
-  <rect class="chip" x="970" y="662" width="112" height="28" rx="14"/>
-  <text class="s" x="1026" y="681" font-size="15" text-anchor="middle">Mechanics</text>
-  <rect class="chip" x="728" y="700" width="156" height="28" rx="14"/>
-  <text class="s" x="806" y="719" font-size="15" text-anchor="middle">Data agreement</text>
-  <rect class="chip" x="894" y="700" width="116" height="28" rx="14"/>
-  <text class="s" x="952" y="719" font-size="15" text-anchor="middle">Policy use</text>
-
-  <!-- D: integrate the feedback -->
-  <rect class="card" x="72" y="580" width="424" height="116" rx="8" stroke-width="2"/>
-  <text class="d lab" x="96" y="608" font-size="14" letter-spacing="1.4">MAIN AGENT</text>
-  <text class="d" x="96" y="636" font-size="23">Integrate the feedback</text>
-  <text class="s gr" x="96" y="661" font-size="16.5">resolve findings against evidence,</text>
-  <text class="s gr" x="96" y="683" font-size="16.5">then rerun the affected checks</text>
-
-  <!-- C -> D findings (feedback) -->
-  <line class="lr" x1="704" y1="638" x2="499" y2="638" marker-end="url(#s1-ah-r)"/>
-  <text class="s rd" x="600" y="626" font-size="16" text-anchor="middle">findings with</text>
-  <text class="s rd" x="600" y="662" font-size="16" text-anchor="middle">evidence to reproduce</text>
-
-  <!-- D -> A and D -> B (feedback) -->
-  <line class="lr" x1="160" y1="580" x2="160" y2="451" marker-end="url(#s1-ah-r)"/>
-  <text class="s rd" x="174" y="521" font-size="17">revise the model</text>
-  <path class="lr" d="M440 580V502H760V451" marker-end="url(#s1-ah-r)"/>
-  <text class="s rd" x="600" y="490" font-size="17" text-anchor="middle">revise the implementation</text>
-
-  <!-- Exit to deliverables -->
-  <line class="ln" x1="284" y1="696" x2="284" y2="804" marker-end="url(#s1-ah)"/>
-  <text class="s" x="298" y="752" font-size="17">when checks support the intended use</text>
-
-  <!-- You get back -->
-  <text class="d lab" x="56" y="790">YOU GET BACK</text>
-  <rect class="card" x="72" y="806" width="448" height="144" rx="8" stroke-width="2.2"/>
-  <text class="d" x="96" y="838" font-size="23">Queue model</text>
-  <text class="s gr" x="96" y="864" font-size="16.5">a self-contained description of the</text>
-  <text class="s gr" x="96" y="886" font-size="16.5">boundary, jobs, resources, dynamics,</text>
-  <text class="s gr" x="96" y="908" font-size="16.5">stochastic mechanisms, parameters,</text>
-  <text class="s gr" x="96" y="930" font-size="16.5">assumptions, and policy interface</text>
-
-  <rect class="card" x="680" y="806" width="448" height="144" rx="8" stroke-width="2.2"/>
-  <text class="d" x="704" y="838" font-size="23">Corresponding simulator</text>
-  <text class="s gr" x="704" y="864" font-size="16.5">code implementing the model, with</text>
-  <text class="s gr" x="704" y="886" font-size="16.5">fitted configuration and run steps,</text>
-  <text class="s gr" x="704" y="908" font-size="16.5">seed control, a replaceable policy,</text>
-  <text class="s gr" x="704" y="930" font-size="16.5">and trajectory or event output</text>
-
-  <line class="ln" x1="600" y1="880" x2="523" y2="880" marker-end="url(#s1-ah)"/>
-  <line class="ln" x1="600" y1="880" x2="677" y2="880" marker-end="url(#s1-ah)"/>
-  <text class="s" x="600" y="866" font-size="15" text-anchor="middle">kept consistent</text>
-
-  <text class="s" x="72" y="1000" font-size="17">plus concise validation results and the remaining issues that affect use</text>
-
-  <!-- Optional handoff -->
-  <line class="ln dash" x1="994" y1="950" x2="994" y2="976" marker-end="url(#s1-ah)"/>
-  <rect class="card-dash" x="860" y="978" width="268" height="58" rx="8"/>
-  <text class="d" x="880" y="1003" font-size="17">Optional handoff</text>
-  <text class="s gr" x="880" y="1025" font-size="15.5">to Stage 2 on request</text>
+  <line class="ar-opt" x1="866" y1="670" x2="918" y2="670" marker-end="url(#s1-slate)"/>
+  <rect class="opt" x="920" y="630" width="140" height="84" rx="10"/>
+  <text class="h2" x="936" y="658">Stage 2</text>
+  <text class="s" x="936" y="680">if policy work</text>
+  <text class="s" x="936" y="698">follows</text>
 </svg>

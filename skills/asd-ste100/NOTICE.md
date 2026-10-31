@@ -11,6 +11,8 @@ preserved in [LICENSE](LICENSE).
 - `SKILL.md`: upstream instructions, with the local changes listed below.
 - `references/writing-rules.md`: upstream rule summary, with the short quotation
   of Rule 8.1 replaced by a paraphrase.
+- `references/reader-check.md`: Queue Agent addition, not part of the upstream
+  skill.
 - `examples/before-after.md`: unchanged upstream illustrations.
 - `examples/linter-edge-cases.md`: unchanged upstream linter fixture.
 - `scripts/ste-lint.py`: dependency-free linter and its self-tests, with two
@@ -23,13 +25,21 @@ This copy is a skill within Queue Agent, not a nested Plugin or a global install
 ## Local changes
 
 The skill description adds queue model explanations, policy explanations, and
-reports as activation cases. The new **Use in Queue Agent** section defaults
+reports, and readability review as activation cases. The new **Use in Queue Agent** section defaults
 these deliverables to STE-flavored writing. It preserves scientific meaning,
 technical distinctions, the requested language, and artifact format. It also
-requires checked examples and a source-to-rewrite comparison. Other upstream
-instructions are unchanged except that **Source and Scope** replaces the quoted
-ASD copyright passage with a short distinction between the skill's MIT license
-and the official standard. No standard or controlled dictionary is bundled.
+requires checked examples and a source-to-rewrite comparison, and it points
+substantial deliverables to the local reader check in
+`references/reader-check.md`.
+
+Four upstream passages also change. The introduction names human researchers
+and collaborators as the primary Queue Agent readers and keeps agent-facing
+text as a further use. **Process** step 5 completes an applicable reader check
+before output. **Output Format** permits a brief note about a material source
+gap. **Source and Scope** replaces the quoted ASD copyright passage
+with a short distinction between the skill's MIT license and the official
+standard. The other upstream instructions are unchanged. No standard or
+controlled dictionary is bundled.
 The upstream version field is stored as
 `metadata.upstream-version` for portable skill frontmatter validation.
 
@@ -43,5 +53,6 @@ review cases and source checks are in [tests/asd-ste100](../../tests/asd-ste100/
 
 This is a third-party adaptation, not the official ASD standard or a certified
 compliance checker. The upstream repository does not include the official
-controlled dictionary. A clean linter result does not establish meaning
-preservation, scientific correctness, or reader comprehension.
+controlled dictionary. Neither a clean linter result nor a passed reader check
+establishes meaning preservation, scientific correctness, or human
+comprehension.

@@ -1,6 +1,6 @@
 ---
 name: asd-ste100
-description: "Write or clarify English queue model descriptions, policy explanations, and reports for readers who did not participate in the work. Also use for STE100 rewrites and ambiguous technical instructions. Preserve scientific meaning while simplifying language. Not a modeling, policy-search, or creative-writing workflow."
+description: "Write, review, or clarify English queue model descriptions, policy explanations, and reports for readers who did not participate in the work. Also use for STE100 rewrites and ambiguous technical instructions. Preserve scientific meaning while simplifying language. Not a modeling, policy-search, or creative-writing workflow."
 metadata:
   upstream-version: "0.4.0"
 ---
@@ -34,11 +34,19 @@ linter checks some language patterns, not scientific correctness or reader
 understanding. Review its findings rather than deleting necessary terminology
 or conditions to obtain a clean score.
 
+Before you deliver a substantial model description, policy explanation, report,
+or handoff, run the [reader check](references/reader-check.md). A fresh reader
+explains the draft from the document alone, and you repair what the answers
+reveal. A narrow edit needs only the source comparison.
+
 See [NOTICE.md](NOTICE.md) for the pinned upstream source and local adaptations.
 
 ASD-STE100 is a controlled-language standard built by the aerospace and defense industry (ASD, the AeroSpace and Defense Industries Association of Europe) to stop maintenance technicians from misreading English instructions. The standard removes the two biggest sources of misreading: words with more than one meaning, and sentences with more than one possible structure.
 
-This skill borrows that same discipline for a different reader: an **AI agent or a downstream system** that has to parse an English string — an error message, a tool description, an inter-agent instruction, a status report — without a human in the loop to resolve ambiguity. If a maintenance technician can misread "close the valve" as an adjective ("the valve that is near") instead of a command, so can a language model.
+In Queue Agent, the primary readers are researchers and collaborators who did
+not take part in the work. Clear language should help them understand the
+model, follow a policy's decisions, and interpret its evidence. The same
+writing principles also apply to agent instructions and tool descriptions.
 
 ## When to Use This Skill
 
@@ -125,14 +133,17 @@ These six habits cover most of what makes machine-written English hard to parse.
 4. Rewrite each flagged sentence to fix the violation while preserving the original meaning exactly. If a rewrite would drop necessary precision (a safety condition, a scope qualifier, a number), keep the longer phrasing and flag it instead of silently simplifying.
    - **Check modality before you commit to a rewrite.** Hedges ("may", "could", "sometimes", "is likely to") carry the author's confidence, and confidence is content. A shorter sentence that upgrades a hedge to a fact is not a simplification — it is a different claim. This is the most common way a well-intentioned STE rewrite goes wrong, because hedges are exactly what a length cap tempts you to cut.
    - Never add a fact the source did not state. A rewrite that reads better because it supplies a cause, a frequency, or a mechanism has stopped being a rewrite.
-5. Output the rewritten text (see Output Format). Keep the mode choice and the rule analysis internal unless the user asked to see them.
+5. Before output, complete the reader check when it applies (see Use in Queue Agent), even if the text already complies. Then output the rewritten text (see Output Format). Keep the mode choice and the rule analysis internal unless the user asked to see them.
 6. If the input already complies, say so — do not force changes onto compliant text.
 
 ## Output Format
 
 **Default: the rewritten text, and nothing else.** Most callers want a result they can paste straight into a tool description, an error string, or a prompt. Print the simplified text on its own. Do not add a preamble about this skill, a mode announcement, a violation count, a summary of what changed, a rule table, or a closing offer to explain further.
 
-The one permitted addition: if step 4 kept a longer phrasing on purpose, add a single line after the text, prefixed `Kept as-is:`, naming the phrase and the precision that would have been lost. Omit the line when there is nothing to report.
+For a material source gap, add a brief `Unresolved:` note to the user rather than
+fill the gap with an unsupported claim. Do not add a review log to the deliverable.
+
+If step 4 kept a longer phrasing on purpose, add a single line after the text, prefixed `Kept as-is:`, naming the phrase and the precision that would have been lost. Omit the line when there is nothing to report.
 
 **On request: the rule table.** When the user asks to see the reasoning — "show the diff", "which rules did it break", "explain the changes", "before/after" — output this table instead:
 
